@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+
+body{
+    background:#020617;
+    color:white;
+    display:grid;
+    grid-template-columns:18% 82%;
+    grid-template-rows:100px auto 220px;
+    grid-template-areas:
+    "dos uno"
+    "dos tres"
+    "dos tres";
+    min-height:100vh;
+}
+header{
+    grid-area:uno;
+    background:#0f172a;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-bottom:3px solid rgb(118,158,203);
+}
+header h2{
+    color: white;
+    background: #143363;
+    width: 400px;
+    height: 50px;
+    display:flex;
+    flex-direction: row-reverse;
+    justify-content:center;
+    align-items: center;
+    border-radius: 15px;
+}
+header button{
+    color: white;
+    background: #143363;
+    width: 200px;
+    height: 50px;
+    display:flex;
+    flex-direction: column-reverse;
+    justify-content:center;
+    align-items: center;
+    border-radius: 15px;
+    border: none;
+}
+ button:hover{
+    background: #2563eb;
+    cursor: pointer;
+     transform:scale(1.05);
+}
+header h4{
+    color: white;
+}
+nav{
+    grid-area: dos;
+    background:linear-gradient(135deg, rgba(5,112,235,0.32), #2563eb) ;
+}
+section{
+    grid-area: tres;
+    background:#0f172a;
+      padding:40px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+     
+
+}
+section button{
+    color: white;
+    background: #143363;
+    width: 300px;
+    height: 50px;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    margin: 40px;
+}
+section h2{
+    color: white;
+    background: #133b92;
+    width: 400px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    border-radius: 30px;
+   
+
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h2>PANEL DEL ADMINISTRADOR</h2>
+        <h4><button>CERRAR SESION</button></h4>
+    </header>
+    <nav>
+        <h2>Sistemas del Administrador</h2>
+    </nav>
+    <section>
+        <button>Total de usuarios</button>
+        <button>Total de productos</button>
+        <button>Ventas del dia</button>
+        <button>Ventas del dia</button>
+        <h2>Resumen de Ventas</h2>
+        <h2>Ventas por categoría</h2>
+        <h2>Acciones rápidas</h2>
+    </section>
+</body>
+</html>
