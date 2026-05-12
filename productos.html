@@ -7,29 +7,40 @@
     <style>
 body{
         display: grid;
-            grid-template-rows:200px 200px 200px 200px;
-            grid-template-columns: 33.3% 33.3% 33.3%;
+            grid-template-rows:200px 450px 450px 450px;
+            grid-template-columns: 20% 20% 20%;
             grid-template-areas: 
             "uno uno uno"
             "dos tres cuatro"
-            "cinco seis siete";
-            gap: 50px;
+            "cinco seis siete"
+            " ocho ocho ocho";
+            gap: 100px;
             background: rgb(10, 10, 70);
         }
         p{
             display: flex;
             justify-content: center;
            align-items: flex-end;
+           font-size: 60px;
+           position: relative;
+           left: 300px;
         }
         h1{
-            position: absolute;
-            align-items: center;
+        
+        position: absolute;
+        left: 580px;
+        margin-top: 80px;
+        width: 800px;
+        height: 90px;
+        text-align: center;
+        font-size: 80px;
         }
 #uno{
     grid-area: uno;
     background: aqua;
     border-radius: 10%;
     
+            
 }
 #dos{
     grid-area: dos;
@@ -61,8 +72,17 @@ body{
     background: aqua;
     border-radius: 10%;
 }
+#ocho{
+    grid-area: ocho;
+    background: aqua;
+    width: 1898px;
+        height: 440px;
+        font-size: 50px;
+}
 </style>
+
 </head>
+
 <body>
     <nav>
         <H1 id="uno">Productos Dragon Ice</H1>
@@ -74,7 +94,10 @@ body{
     <p id="cinco">Café</p>
     <p id="seis">Menta</p>
     <p id="siete">Banana Split</p>
-    <p>la camila no trabaja</p>
-    <p>hay q hacer</p>
+    <h2 id="ocho">Telefono: 62622743<br><br><br>
+        Gmail: Frost@gmail.com<br><br><br>
+        Ubicacion: AV. HEROINAS Y LANZA #452 
+
+    </h2>
 </body>
 </html>
