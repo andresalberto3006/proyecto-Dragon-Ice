@@ -8,18 +8,16 @@
         header{
         background-color: aqua;
         grid-area: uno;
-        background-color: #0c79ac8c;
-        min-height: 50px;
-        display: flex;
-        justify-content:space-between;
-        align-items: center;
-        padding: 20px;
     }
         
-        /*main{
+        main{
             background-color: brown;
             grid-area: tres;
-        }*/
+        }
+        footer{
+            background-color: yellow;
+            grid-area: cua;
+        }
         body{
             display: grid;
             grid-template-rows: 200px 900px 200px;
@@ -28,24 +26,9 @@
             "uno "
             "tres"
             "cua";
-            gap: 0px;
+            gap: 5px;
               overflow-x: hidden;
         }
-        footer{
-            background-color: #83ccf7;
-            height: 310px;
-            grid-area: cua;
-        }
-         .map iframe{
-            height: 210px;
-            position: absolute;
-            right: 1px;
-            border: 0;
-            top:1165px;
-
-
-        }
-
         @media(max-width:700px){
             footer{
                 background-color: red;
@@ -59,6 +42,15 @@
     a {
         text-decoration: none;
         color: black;
+    }
+
+    header {
+        background-color: #0c79ac8c;
+        min-height: 70px;
+        display: flex;
+        justify-content:space-between;
+        align-items: center;
+        padding: 18px;
     }
 
     .logo {
@@ -126,7 +118,6 @@
 
         /* CARRUSEL */
         main {
-            grid-area: tres;
             width: 100vw;
             height: 100vh;
             display: flex;
@@ -141,7 +132,19 @@
             object-fit: cover;
             flex-shrink: 0;
         }
-          
+          footer{
+            background-color: #83ccf7;
+            height: 300px;
+            grid-area: cua;
+        }
+        .map iframe{
+            height: 200px;
+            position: absolute;
+            right: 200px;
+            border: 0;
+
+        }
+
        
 
         /* ANIMACION */
@@ -186,19 +189,13 @@
     
     
         <main>
-            <img src="helados-caseros-kHnD-U701168147896s1D-1200x840@diario_abc.webp" alt="">
-            <img src="pngtree-ice-cream-cones-in-various-flavors-background-image_17217867.jpg" alt="">
             <img src="pngtree-gourmet-ice-cream-scoops-with-nuts-chocolate-and-mint-image_17354654.jpg" alt="">
+            <img src="pngtree-ice-cream-cones-in-various-flavors-background-image_17217867.jpg" alt="">
+            <img src="helados-caseros-kHnD-U701168147896s1D-1200x840@diario_abc.webp" alt="">
         </main>
          <footer class="map">
-<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d293.73608440933623!2d-66.15378805869838!3d-17.391881616239434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1ses!2sbo!4v1778604530982!5m2!1ses!2sbo" width="500" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-   <h3>mision</h3>
-   <p></p>
-   <h3>vision</h3>
-
-</footer>
-
-    </section>
+         <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d615.3590111624675!2d-66.15389959642064!3d-17.39173143466908!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1ses!2sbo!4v1777933507710!5m2!1ses!2sbo&quot; width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </footer>
 
     
 </body>
