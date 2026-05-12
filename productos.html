@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+body{
+        display: grid;
+            grid-template-rows:200px 200px 200px 200px;
+            grid-template-columns: 33.3% 33.3% 33.3%;
+            grid-template-areas: 
+            "uno uno uno"
+            "dos tres cuatro"
+            "cinco seis siete";
+            gap: 50px;
+            background: rgb(10, 10, 70);
+        }
+        p{
+            display: flex;
+            justify-content: center;
+           align-items: flex-end;
+        }
+        h1{
+            position: absolute;
+            align-items: center;
+        }
+#uno{
+    grid-area: uno;
+    background: aqua;
+    border-radius: 10%;
+    
+}
+#dos{
+    grid-area: dos;
+    background: aqua;
+    border-radius: 10%;
+}
+#tres{
+    grid-area: tres;
+    background: aqua;
+    border-radius: 10%;
+}
+#cuatro{
+    grid-area: cuatro;
+    background: aqua;
+    border-radius: 10%;
+}
+#cinco{
+    grid-area: cinco;
+    background: aqua;
+    border-radius: 10%;
+}
+#seis{
+    grid-area: seis;
+    background: aqua;
+    border-radius: 10%;
+}
+#siete{
+    grid-area: siete;
+    background: aqua;
+    border-radius: 10%;
+}
+
+
+</style>
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+<body>
+    <nav>
+        <H1 id="uno">Productos Dragon Ice</H1>
+    </nav>
+    
+    <p id="dos">Frutilla</p>
+    <p id="tres">Durazno</p>
+    <p id="cuatro">Canela</p>
+    <p id="cinco">Café</p>
+    <p id="seis">Menta</p>
+    <p id="siete">Banana Split</p>
+</body>
+</html>
