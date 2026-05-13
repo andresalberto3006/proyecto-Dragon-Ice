@@ -32,6 +32,7 @@ header{
     justify-content:space-between;
     align-items:center;
     border-bottom:3px solid rgb(118,158,203);
+    gap: 25;
 }
 
 header h2{
@@ -39,8 +40,11 @@ header h2{
     background: #143363;
     width: 400px;
     height: 50px;
+    display:flex;
+    flex-direction: row-reverse;
+    justify-content:center;
+    align-items: center;
     border-radius: 15px;
-    border: none;
 }
 header button{
     color: white;
@@ -48,6 +52,9 @@ header button{
     width: 200px;
     height: 50px;
     display:flex;
+    flex-direction: column-reverse;
+    justify-content:center;
+    align-items: center;
     border-radius: 15px;
     border: none;
 }
@@ -66,12 +73,12 @@ nav{
 .yo{
     grid-area: tres;
     background:#0f172a;
-      padding:40px;
+    padding:40px;
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
     gap:25px;
 }
-article{
+.yyy{
    grid-template-areas: repeat(4, 1fr) ;
 
 }
@@ -79,11 +86,14 @@ article{
     grid-template-areas: repeat(3, 1fr);
     background: #143363;
     width: 250px;
-    height: 100px;
+    height: 350px;
     border-radius: 16px;
     display: flex;
     justify-content: center;
     padding: 20px;
+}
+.rrr{
+    grid-template-areas: repeat(1, 1fr);
 }
 .yo button{
     color: white;
@@ -117,14 +127,15 @@ footer{
         <h2>Sistemas del Administrador</h2>
     </nav>
     <section class="yo">
-        <article><button>Total de usuarios</button></article>
-        <article><button>Total de productos</button></article>
-        <article><button>Ventas del dia</button></article>
-        <article><button>Ventas del dia</button></article>
+        <article class="yyy"><button>Total de usuarios</button></article>
+        <article class="yyy"><button>Total de productos</button></article>
+        <article class="yyy"><button>Ventas del dia</button></article>
+        <article class="yyy"><button>Ventas del dia</button></article>
         <article class="ttt"><h2>Resumen de Ventas</h2></article>
         <article class="ttt"><h2>Ventas por categoría</h2></article>
         <article class="ttt"><h2>Acciones rápidas</h2></article>
-         <table>
+        <article class="rrr">
+             <table>
             <tr> <td></td>
             <td></td>
             <td></td>
@@ -136,6 +147,7 @@ footer{
             <tr></tr>
             <tr></tr>
         </table>
+        </article>
     </section>
 </body>
 </html>
