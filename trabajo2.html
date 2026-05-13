@@ -32,7 +32,9 @@ header{
     justify-content:space-between;
     align-items:center;
     border-bottom:3px solid rgb(118,158,203);
+    gap: 25;
 }
+
 header h2{
     color: white;
     background: #143363;
@@ -43,6 +45,7 @@ header h2{
     justify-content:center;
     align-items: center;
     border-radius: 15px;
+    border: none;
 }
 header button{
     color: white;
@@ -56,28 +59,33 @@ header button{
     border-radius: 15px;
     border: none;
 }
- button:hover{
-    background: #2563eb;
-    cursor: pointer;
-     transform:scale(1.05);
-}
-header h4{
-    color: white;
-}
-nav{
-    grid-area: dos;
-    background:linear-gradient(135deg, rgba(5,112,235,0.32), #2563eb) ;
-}
 .yo{
     grid-area: tres;
     background:#0f172a;
       padding:40px;
+    padding:40px;
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
     gap:25px;
 }
-article{
+.yyy article{
+   grid-template-areas: repeat(4, 1fr) ;
 
+}
+.ttt article{
+    grid-template-areas: repeat(3, 1fr);
+    background: #143363;
+    width: 250px;
+    height: 100px;
+    height: 350px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.rrr article{
+    grid-template-areas: repeat(1, 1fr);
 }
 .yo button{
     color: white;
@@ -85,7 +93,6 @@ article{
     width: 300px;
     height: 50px;
     display:flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
     border-radius: 15px;
@@ -112,7 +119,20 @@ footer{
         <h2>Sistemas del Administrador</h2>
     </nav>
     <section class="yo">
-        <table>
+        <article><button>Total de usuarios</button></article>
+        <article><button>Total de productos</button></article>
+        <article><button>Ventas del dia</button></article>
+        <article><button>Ventas del dia</button></article>
+        <article class="yyy"><button>Total de usuarios</button></article>
+        <article class="yyy"><button>Total de productos</button></article>
+        <article class="yyy"><button>Ventas del dia</button></article>
+        <article class="yyy"><button>Ventas del dia</button></article>
+        <article class="ttt"><h2>Resumen de Ventas</h2></article>
+        <article class="ttt"><h2>Ventas por categoría</h2></article>
+        <article class="ttt"><h2>Acciones rápidas</h2></article>
+         <table>
+        <article class="rrr">
+             <table>
             <tr> <td></td>
             <td></td>
             <td></td>
@@ -124,13 +144,9 @@ footer{
             <tr></tr>
             <tr></tr>
         </table>
-        <article><button>Total de usuarios</button></article>
-        <article><button>Total de productos</button></article>
-        <article><button>Ventas del dia</button></article>
-        <article><button>Ventas del dia</button></article>
-        <article><h2>Resumen de Ventas</h2></article>
-        <article><h2>Ventas por categoría</h2></article>
-        <article><h2>Acciones rápidas</h2></article>
+        </article>
+        <p>hola</p>
+        
     </section>
 </body>
 </html>
