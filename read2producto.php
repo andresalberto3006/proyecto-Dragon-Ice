@@ -13,8 +13,7 @@ $sql="SELECT *FROM personas WHERE id="$id";
 $resultado = $conexion->query($sql);
 if ($resultado->num_rows>0){
 while($fila=$resultado->fetch_assoc()){
-    $ciu=$fila[ciu];
-    $fila[nombre]."<br>".$fila[direccion]."<br>".$fila[celular]."<br>".$fila[rol];
+echo $fila['codigo']."<br>".$fila[nombre]."<br>".$fila[descripcion]."<br>".$fila[precio]."<br>".$fila[costo]."<br>".$fila[stock];
   }
 }
 ?>

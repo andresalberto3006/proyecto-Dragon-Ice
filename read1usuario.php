@@ -1,9 +1,10 @@
 <?php
-$nombre="localhost";
-$apellido="root";
-$descripcion="video";
+$direccion="localhost";
+$usuario="rout";
+$contraseña="";
+$nombreBase="dragon";
 
-$conexion= new mysqli($nombre,$apellido,$descripcion);
+$conexion= new mysqli($direccion,$usuario,$contraseña,$nombreBase);
 if($conexion->error){
     echo "hubo un error al conectar con la base de datos";
 }
@@ -12,7 +13,7 @@ $sql="SELECT *FROM personas WHERE id="$id";
 $resultado = $conexion->query($sql);
 if ($resultado->num_rows>0){
 while($fila=$resultado->fetch_assoc()){
-echo $fila['nombre']."<br>".$fila[apellido]."<br>".$fila[descripcion];
+echo $fila['ci']."<br>".$fila[nombre]."<br>".$fila[direccion]."<br>".$fila[celular]."<br>".$fila[rol];
   }
 }
 ?>
