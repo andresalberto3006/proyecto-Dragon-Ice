@@ -33,6 +33,7 @@ header{
     align-items:center;
     border-bottom:3px solid rgb(118,158,203);
 }
+
 header h2{
     color: white;
     background: #143363;
@@ -77,7 +78,18 @@ nav{
     gap:25px;
 }
 article{
+   grid-template-areas: repeat(4, 1fr) ;
 
+}
+.ttt{
+    grid-template-areas: repeat(3, 1fr);
+    background: #143363;
+    width: 250px;
+    height: 100px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
 }
 .yo button{
     color: white;
@@ -85,7 +97,6 @@ article{
     width: 300px;
     height: 50px;
     display:flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
     border-radius: 15px;
@@ -112,7 +123,14 @@ footer{
         <h2>Sistemas del Administrador</h2>
     </nav>
     <section class="yo">
-        <table>
+        <article><button>Total de usuarios</button></article>
+        <article><button>Total de productos</button></article>
+        <article><button>Ventas del dia</button></article>
+        <article><button>Ventas del dia</button></article>
+        <article class="ttt"><h2>Resumen de Ventas</h2></article>
+        <article class="ttt"><h2>Ventas por categoría</h2></article>
+        <article class="ttt"><h2>Acciones rápidas</h2></article>
+         <table>
             <tr> <td></td>
             <td></td>
             <td></td>
@@ -124,13 +142,6 @@ footer{
             <tr></tr>
             <tr></tr>
         </table>
-        <article><button>Total de usuarios</button></article>
-        <article><button>Total de productos</button></article>
-        <article><button>Ventas del dia</button></article>
-        <article><button>Ventas del dia</button></article>
-        <article><h2>Resumen de Ventas</h2></article>
-        <article><h2>Ventas por categoría</h2></article>
-        <article><h2>Acciones rápidas</h2></article>
     </section>
 </body>
 </html>
