@@ -45,6 +45,7 @@ header h2{
     justify-content:center;
     align-items: center;
     border-radius: 15px;
+    margin: 30px;
 }
 header button{
     color: white;
@@ -57,6 +58,7 @@ header button{
     align-items: center;
     border-radius: 15px;
     border: none;
+    margin: 30px;
 }
  button:hover{
     background: #2563eb;
@@ -78,22 +80,27 @@ nav{
     grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
     gap:25px;
 }
-.yyy article{
-   grid-template-areas: repeat(4, 1fr) ;
+.ttt:hover{
+     cursor: pointer;
+     transform:scale(1.05);
+}
+.yyy{
+   grid-template-areas: repeat(auto-fit,minmax(300px, 1fr)) ;
 
 }
-.ttt article{
-    grid-template-areas: repeat(3, 1fr);
+.ttt{
+    grid-template-areas: repeat();
     background: #143363;
-    width: 250px;
+    width: 400px;
     height: 350px;
     border-radius: 16px;
     display: flex;
     justify-content: center;
     padding: 20px;
+
 }
 
-.rrr article{
+.rrr{
     grid-template-areas: repeat(1, 1fr);
 }
 .yo button{
@@ -107,15 +114,6 @@ nav{
     border-radius: 15px;
     margin: 40px;
     border: none;
-}
-footer{
-    grid-area:cua;
-     background:#283f74;
-     display:flex;
-     justify-content:space-between;
-     flex-wrap: wrap;
-     align-items:center;
-     border-top:3px solid rgb(118,158,203);
 }
     </style>
 </head>
@@ -135,6 +133,10 @@ footer{
         <article class="ttt"><h2>Resumen de Ventas</h2></article>
         <article class="ttt"><h2>Ventas por categoría</h2></article>
         <article class="ttt"><h2>Acciones rápidas</h2></article>
+        <artivle class="uuu"><button>crear usuario</button></artivle>
+        <artivle class="uuu"><button>registrar productos</button></artivle>
+        <artivle class="uuu"><button>ver todas las ventas</button></artivle>
+        <artivle class="uuu"><button>Generar reporte</button></artivle>
         <article class="rrr">
              <table>
             <tr> <td></td>
