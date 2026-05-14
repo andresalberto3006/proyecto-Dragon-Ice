@@ -2,7 +2,7 @@
 $nombreServidor = "localhost";
 $usuario = "root";
 $contraseña = "";
-$basededatos = "QUINOVA";
+$basededatos = "dragon";
 
 $conexion = new mysqli($nombreServidor, $usuario, $contraseña, $basededatos);
 
