@@ -46,7 +46,9 @@ header h2{
     align-items: center;
     border-radius: 15px;
     border: none;
+    margin: 30px;
 }
+
 header button{
     color: white;
     background: #143363;
@@ -58,79 +60,84 @@ header button{
     align-items: center;
     border-radius: 15px;
     border: none;
+    margin: 30px;
+}
+header button:hover{
+    background:#2563eb;
+    transform: scale(1.05);
+}
+aside{
+    grid-area: dos;
+    background: #7692cf;
 }
 .yo{
     grid-area: tres;
     background:#0f172a;
-      padding:40px;
-    padding:40px;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:25px;
+    padding:30px;
+    gap: 1px;
+    display: grid;
+    grid-template-rows: repeat(1, 1r);
+    grid-template-columns: repeat(4, 1fr);
 }
+
 .yyy article{
-   grid-template-areas: repeat(4, 1fr) ;
+     color: white;
+    background: #143363;
+     width: 300px;
+    height: 50px;
+    border-radius: 15px;
+    margin: 15px;
+    border: none;
+    transition: 1s;
+
 
 }
-.ttt article{
-    grid-template-areas: repeat(3, 1fr);
+.yyy:hover{
+    transform: scale(1.05);
+}
+   .yo h2{
+    display: grid;
     background: #143363;
-    width: 250px;
-    height: 100px;
-    height: 350px;
-    border-radius: 16px;
-    display: flex;
-    justify-content: center;
-    padding: 20px;
+    width: 300px;
+    height: 400px;
+    border-radius: 15px;
 }
 
 .rrr article{
-    grid-template-areas: repeat(1, 1fr);
+    grid-template-columns: repeat(1, 1fr);
 }
 .yo button{
     color: white;
     background: #143363;
-    width: 300px;
+     width: 270px;
     height: 50px;
-    display:flex;
-    justify-content: center;
-    align-items: center;
     border-radius: 15px;
-    margin: 40px;
+    margin: 15px;
     border: none;
 }
-footer{
-    grid-area:cua;
-     background:#283f74;
-     display:flex;
-     justify-content:space-between;
-     flex-wrap: wrap;
-     align-items:center;
-     border-top:3px solid rgb(118,158,203);
-}
+
     </style>
 </head>
 <body>
     <header>
         <h2>PANEL DEL ADMINISTRADOR</h2>
         <h4><button>CERRAR SESION</button></h4>
-    </header>
-    <nav>
+    </aside>
         <h2>Sistemas del Administrador</h2>
-    </nav>
+    </aside>
     <section class="yo">
-        <article><button>Total de usuarios</button></article>
-        <article><button>Total de productos</button></article>
-        <article><button>Ventas del dia</button></article>
-        <article><button>Ventas del dia</button></article>
-        <article class="yyy"><button>Total de usuarios</button></article>
-        <article class="yyy"><button>Total de productos</button></article>
-        <article class="yyy"><button>Ventas del dia</button></article>
-        <article class="yyy"><button>Ventas del dia</button></article>
-        <article class="ttt"><h2>Resumen de Ventas</h2></article>
-        <article class="ttt"><h2>Ventas por categoría</h2></article>
-        <article class="ttt"><h2>Acciones rápidas</h2></article>
-         <table>
+       
+        <article class="yyy">
+        <button>Verntas del dia</button>
+        <button>Total de usuarios</button></article>
+        <button>Total de productos</button>
+        <button>Ventas del dia</button>
+    </article>
+        <article class="ttt">
+            <h2>Resumen de Ventas</h2></article>
+        <h2>Ventas por categoría</h2></article>
+        <h2>Acciones rápidas</h2>
+        </article>
         <article class="rrr">
              <table>
             <tr> <td></td>
@@ -145,8 +152,6 @@ footer{
             <tr></tr>
         </table>
         </article>
-        <p>hola</p>
-        
     </section>
 </body>
 </html>
