@@ -4,9 +4,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dragon Ice</title>
 </head>
 <style>
+    body {
+        font-family: sans-serif;
+        margin: 0;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    header {
+        background-color: #0c79ac8c;
+        min-height: 70px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px;
+    }
+
+    .logo {
+        display: flex;
+        margin-left: 90px;
+        align-items: center;
+    }
+
+    .logo img {
+        position: absolute;
+        margin-right: 10px;
+        top: 10px;
+        left: 10px;
+        width: 80px;
+        height: 80px;
+        border-radius: 70%;
+        border: 3px solid black;
+    }
+
+    nav a {
+        font-weight: 600;
+        padding-right: 10px;
+    }
+
+    nav a:hover {
+        color: white;
+    }
+
+    aside {
+        width: 100px;
+        height: 100px;
+        display: flex;
+        animation: carrusel 18s infinite;
+    }
+
+    aside img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        flex-shrink: 0;
+    }
+
     * {
         margin: 0;
         padding: 0;
@@ -119,5 +178,8 @@
             </ul>
 
         </section>
+    </header>
+
+</body>
 
 </html>
