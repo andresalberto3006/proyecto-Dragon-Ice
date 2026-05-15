@@ -1,9 +1,8 @@
 <?php
 $direccion="localhost";
-<<<<<<< HEAD
 $usuario-"root";
 $contrasena="";
-$nombreBase="";
+$nombreBase="dragonice";
 
 $conexion- new mysqli($direccion,$usuario,$contrasena,$nombreBase);
 if($conexion->error){
