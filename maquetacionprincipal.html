@@ -7,9 +7,8 @@
     <title>Document</title>
     <style>
         header {
-            background-color: aqua;
+            background-color: #0039B0;
             grid-area: uno;
-            background-color: #0c79ac8c;
             min-height: 30px;
             display: flex;
             height: 130px;
@@ -32,23 +31,6 @@
                 "cua";
             gap: 0px;
             overflow-x: hidden;
-        }
-
-        body {
-            grid-area: tres;
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            animation: carrusel 18s infinite;
-
-        }
-
-        body {
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover;
-            flex-shrink: 0;
-
         }
 
         footer {
@@ -148,14 +130,22 @@
         }
 
         /* CARRUSEL */
-        /*  main {
-            
-        }/*
+        main {
+            grid-area: tres;
+            width: 100vw;
+            height: 130vh;
+            display: flex;
+            animation: carrusel 18s infinite;
+
+        }
 
         /* IMAGENES */
-        /* main img {
-            
-        }*/
+        main img {
+            width: 100vw;
+            height: 1670xp;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
 
 
 
@@ -186,10 +176,6 @@
 </head>
 
 <body>
-    <img src="1 (1).png" alt="">
-    <img src="1 (3).png"">
-        <img src=" 1 (4).png" alt="">
-
     <header>
         <a href="" class="logo">
             <img src="xd.png" class="logo-img" alt="">
@@ -199,12 +185,18 @@
             <a href="" class="nav-link">Inicio</a>
             <a href="" class="nav-link">Sobre nosotros</a>
             <a href="" class="nav-link">Contacto</a>
+            <a href="" class="nav-link">Iniciar sesion</a>
+            <a href="" class="nav-link">Registrate</a>
         </nav>
 
     </header>
 
 
-
+    <main>
+        <img src="1 (1).png" alt="">
+        <img src="1 (3).png"">
+        <img src=" 1 (4).png" alt="">
+    </main>
     <footer class="map">
         <iframe
             src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d293.73608440933623!2d-66.15378805869838!3d-17.391881616239434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1ses!2sbo!4v1778604530982!5m2!1ses!2sbo"
