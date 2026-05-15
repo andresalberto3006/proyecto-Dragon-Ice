@@ -5,152 +5,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        *{
+    *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
-}
+    font-family:Arial, sans-serif;
+    }
+    body{
+        background:#020617;
+        color:white;
+        padding: 20px;
+    }
+    header, nav, aside, article, section, footer{
+        border: solid 3px white;
+        padding: 20px;
+        border-radius: 15px;
+        text-align: center;
+    }
+    header{
+        background-color: rgb(27, 97, 129);
+        height: 60px;
+        display: flex;
+        justify-content: space-between;
+    }
+    header h2{
+        background-color: greenyellow;
+        width: 80px;
+        height: 30px;
+        border-radius: 15px;
+    }
+       aside{
+        flex: 1;
+        background-color: aqua;
+        height:800px ;
+        flex-direction: column;
+    }
 
+    nav{
+        display: flex;
+        background-color: black;
+        height: 40px;
+    }
+    main{
+        display: flex;
+        padding: 10px;
+    }
+    article{
+        flex: 2;
+        background-color: blueviolet;
+        height: 800px;
+    }
+    section{
+        background-color: blue;
+        width: 1500px;
+        height: 670px;
+        margin-top: 20px;
+        display: flex;
+        text-align: center;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
 
-body{
-    background:#020617;
-    color:white;
-    display:grid;
-    grid-template-columns:18% 82%;
-    grid-template-rows:100px auto 220px;
-    grid-template-areas:
-    "dos uno"
-    "dos tres"
-    "dos tres";
-    min-height:100vh;
-}
-header{
-    grid-area:uno;
-    background:#0f172a;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-bottom:3px solid rgb(118,158,203);
-    gap: 25;
-}
-
-header h2{
-    color: white;
-    background: #143363;
-    width: 400px;
-    height: 50px;
-    display:flex;
-    flex-direction: row-reverse;
-    justify-content:center;
-    align-items: center;
-    border-radius: 15px;
-    margin: 30px;
-}
-header button{
-    color: white;
-    background: #143363;
-    width: 200px;
-    height: 50px;
-    display:flex;
-    flex-direction: column-reverse;
-    justify-content:center;
-    align-items: center;
-    border-radius: 15px;
-    border: none;
-    margin: 30px;
-}
- button:hover{
-    background: #2563eb;
-    cursor: pointer;
-     transform:scale(1.05);
-}
-header h4{
-    color: white;
-}
-nav{
-    grid-area: dos;
-    background:linear-gradient(135deg, rgba(5,112,235,0.32), #2563eb) ;
-}
-.yo{
-    grid-area: tres;
-    background:#0f172a;
-    padding:40px;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:25px;
-}
-.ttt:hover{
-     cursor: pointer;
-     transform:scale(1.05);
-}
-.yyy{
-   grid-template-areas: repeat(auto-fit,minmax(300px, 1fr)) ;
-
-}
-.ttt{
-    grid-template-areas: repeat();
-    background: #143363;
-    width: 400px;
-    height: 350px;
-    border-radius: 16px;
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-
-}
-
-.rrr{
-    grid-template-areas: repeat(1, 1fr);
-}
-.yo button{
-    color: white;
-    background: #143363;
-    width: 300px;
-    height: 50px;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 15px;
-    margin: 40px;
-    border: none;
-}
     </style>
 </head>
 <body>
     <header>
-        <h2>PANEL DEL ADMINISTRADOR</h2>
-        <h4><button>CERRAR SESION</button></h4>
+        <h2>ddfsc</h2>
+        <h2>fdsff</h2>
+        <h2>fadf</h2>
     </header>
-    <nav>
-        <h2>Sistemas del Administrador</h2>
-    </nav>
-    <section class="yo">
-        <article class="yyy"><button>Total de usuarios</button></article>
-        <article class="yyy"><button>Total de productos</button></article>
-        <article class="yyy"><button>Ventas del dia</button></article>
-        <article class="yyy"><button>Ventas del dia</button></article>
-        <article class="ttt"><h2>Resumen de Ventas</h2></article>
-        <article class="ttt"><h2>Ventas por categoría</h2></article>
-        <article class="ttt"><h2>Acciones rápidas</h2></article>
-        <artivle class="uuu"><button>crear usuario</button></artivle>
-        <artivle class="uuu"><button>registrar productos</button></artivle>
-        <artivle class="uuu"><button>ver todas las ventas</button></artivle>
-        <artivle class="uuu"><button>Generar reporte</button></artivle>
-        <article class="rrr">
-             <table>
-            <tr> <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td></tr>
-            <tr></tr>
-            <tr></tr>
-            <tr></tr>
-            <tr></tr>
-        </table>
+    <main>
+        <aside>gd
+    </aside>
+        <article>dfg
+             <nav>dsf</nav>
+            <section>
+                <h3>rgtewte</h3>
+                <h3>dsfsd</h3>
+                <h3>dfs</h3>
+            </section>
+            
         </article>
-    </section>
+    </main>
+
+    
 </body>
 </html>
