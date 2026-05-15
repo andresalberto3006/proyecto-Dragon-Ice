@@ -1,117 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        header{
-        background-color: aqua;
-        grid-area: uno;
-        background-color: #0c79ac8c;
-        min-height: 50px;
-        display: flex;
-        justify-content:space-between;
-        align-items: center;
-        padding: 20px;
-    }
-        
+        header {
+            background-color: #0039B0;
+            grid-area: uno;
+            min-height: 30px;
+            display: flex;
+            height: 130px;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+        }
+
         /*main{
             background-color: brown;
             grid-area: tres;
         }*/
-        body{
+        body {
             display: grid;
             grid-template-rows: 200px 900px 200px;
             grid-template-columns: 100%;
-            grid-template-areas: 
-            "uno "
-            "tres"
-            "cua";
+            grid-template-areas:
+                "uno "
+                "tres"
+                "cua";
             gap: 0px;
-              overflow-x: hidden;
+            overflow-x: hidden;
         }
-        footer{
+
+        footer {
             background-color: #83ccf7;
             height: 310px;
             grid-area: cua;
         }
-         .map iframe{
+
+        .map iframe {
             height: 210px;
             position: absolute;
             right: 1px;
             border: 0;
-            top:1165px;
+            top: 1165px;
 
 
         }
 
-        @media(max-width:700px){
-            footer{
+        @media(max-width:700px) {
+            footer {
                 background-color: red;
             }
         }
+
         body {
-        font-family: sans-serif;
-        margin: 0;
-    }
-
-    a {
-        text-decoration: none;
-        color: black;
-    }
-
-    .logo {
-        display: flex;
-        margin-left: 90px;
-        align-items: center;
-    }
-
-    .logo img {
-        position: absolute;
-        margin-right: 10px;
-        top: 10px;
-        left: 10px;
-        width: 80px;
-        height: 80px;
-        border-radius: 70%;
-        border: 3px solid black;
-    }
-
-    nav a {
-        font-weight: 600;
-        padding-right: 10px;
-    }
-
-    nav a:hover {
-        color: white;
-    }
-
-    aside {
-        width: 100px;
-        height: 100px;
-        display: flex;
-        animation: carrusel 18s infinite;
-    }
-
-    aside img {
-        width: 100px;
-        height: 100px;
-        object-fit: cover;
-        flex-shrink: 0;
-    }
-    
-    @media(max-width:700px) {
-        header {
-            flex-direction: column;
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
         }
 
-        nav {
-            padding: 10px 0px;
-            padding-left: 150px;
+        a {
+            text-decoration: none;
+            color: black;
         }
-    }
-    /*/////////carrucel/////////////
+
+        .logo {
+            display: flex;
+            margin-left: 90px;
+            align-items: center;
+        }
+
+        .logo img {
+            position: absolute;
+            margin-right: 10px;
+            top: 20px;
+            left: 10px;
+            width: 80px;
+            height: 80px;
+            border-radius: 70%;
+            border: 3px solid black;
+        }
+
+        nav a {
+            font-weight: 600;
+            padding-right: 10px;
+        }
+
+        nav a:hover {
+            color: white;
+        }
+
+        /*   aside {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            animation: carrusel 18s infinite;
+        }
+
+        aside img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }*/
+
+        @media(max-width:700px) {
+            header {
+                flex-direction: column;
+            }
+
+            nav {
+                padding: 10px 0px;
+                padding-left: 150px;
+            }
+        }
+
+        /*/////////carrucel/////////////
      body {
             overflow-x: hidden;
             font-family: Arial;
@@ -128,20 +133,19 @@
         main {
             grid-area: tres;
             width: 100vw;
-            height: 100vh;
+            height: 130vh;
             display: flex;
             animation: carrusel 18s infinite;
-          
+
         }
 
         /* IMAGENES */
         main img {
             width: 100vw;
-            height: 100vh;
+            height: 1670xp;
             object-fit: cover;
             flex-shrink: 0;
         }
-          
 
         /* ANIMACION */
         @keyframes carrusel {
@@ -166,12 +170,12 @@
             }
 
         }
-
     </style>
 </head>
+
 <body>
     <header>
-         <a href="" class="logo">
+        <a href="" class="logo">
             <img src="xd.png" class="logo-img" alt="">
             <h2 class="logo-nombre">DRAGON ICE</h2>
         </a>
@@ -179,26 +183,24 @@
             <a href="" class="nav-link">Inicio</a>
             <a href="" class="nav-link">Sobre nosotros</a>
             <a href="" class="nav-link">Contacto</a>
+            <a href="" class="nav-link">Iniciar sesion</a>
+            <a href="" class="nav-link">Registrate</a>
         </nav>
-         
-    </header>
-    
-    
-        <main>
-            <img src="helados-caseros-kHnD-U701168147896s1D-1200x840@diario_abc.webp" alt="">
-            <img src="pngtree-ice-cream-cones-in-various-flavors-background-image_17217867.jpg" alt="">
-            <img src="pngtree-gourmet-ice-cream-scoops-with-nuts-chocolate-and-mint-image_17354654.jpg" alt="">
-        </main>
-         <footer class="map">
-<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d293.73608440933623!2d-66.15378805869838!3d-17.391881616239434!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1ses!2sbo!4v1778604530982!5m2!1ses!2sbo" width="500" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-   <h3>mision</h3>
-   <p></p>
-   <h3>vision</h3>
 
-</footer>
+    </header>
+
+
+    <main>
+        <img src="1 (1).png" alt="">
+        <img src="1 (3).png"">
+        <img src=" 1 (4).png" alt="">
+    </main>
+
+    </footer>
 
     </section>
 
-    
+
 </body>
+
 </html>
