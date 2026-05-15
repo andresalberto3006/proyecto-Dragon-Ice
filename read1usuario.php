@@ -2,9 +2,9 @@
 $direccion="localhost";
 $usuario="rout";
 $contraseña="";
-$nombreBase="dragon";
+$nombrebase="dragonice";
 
-$conexion= new mysqli($direccion,$usuario,$contraseña,$nombreBase);
+$conexion= new mysqli($direccion,$usuario,$contraseña,$nombrebase);
 if($conexion->error){
     echo "hubo un error al conectar con la base de datos";
 }
@@ -13,7 +13,7 @@ $sql="SELECT *FROM personas WHERE id="$id";
 $resultado = $conexion->query($sql);
 if ($resultado->num_rows>0){
 while($fila=$resultado->fetch_assoc()){
-echo $fila['ci']."<br>".$fila[nombre]."<br>".$fila[direccion]."<br>".$fila[celular]."<br>".$fila[rol];
+echo $fila['ciu']."<br>".$fila[nombre]."<br>".$fila[direccion]."<br>".$fila[celular]."<br>".$fila[rol];
   }
 }
 ?>
