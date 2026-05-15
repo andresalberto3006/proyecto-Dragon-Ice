@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    form {
+      display: flex;
+      flex-direction: column; 
+      gap: 10px;
+      background: rgba(0,0,0,0.35); 
+      padding: 20px; 
+      border-radius: 5px;
+      width: 35%; 
+      box-shadow: 0 4px 8px rgba(0,0,0,0.5); 
+      margin-bottom: 20px;
+    }
+    form input {
+      padding: 10px; 
+      border-radius: 10px; 
+      border: none; 
+      outline: none; 
+      font-size: 14px;
+      
+    }
+    form button {
+      padding: 10px; 
+      border-radius: 10px; 
+      border: none;
+      background-color: #00bfff;
+      color: #003366; 
+      font-weight: bold; 
+      cursor: pointer; 
+      transition: all 0.3s ease;
+    }
+      @media (max-width: 900px) {
+      h1 { font-size: 28px; }
+      section, form { width: 95%; padding: 15px; }
+      .carusel img { width: 120px; height: 120px; }
+    }
+    
+</style>
+<body>
+  <div>
+    <fieldset>
+      <h2>Usuario</h2>
+    <form action="mailto:tuemail@dominio.com" method="post" enctype="text/plain">
+    <input type="text" name="nombre" placeholder="Nombre completo" required>
+    <input type="text" name="direccion" placeholder="direccion" required>
+    <input type="text" name="celular" placeholder="numero de celular" required>
+    <input type="text" name="rol" placeholder="rol" required>
+    <input type="password" name="Contraseña" placeholder="Contraseña" required>
+    <button type="submit">Enviar</button>
+  </form>
+</section>
+</div>
+ </fieldset>  
+</body>
+</html>
