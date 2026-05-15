@@ -1,173 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body {
-            display: grid;
-            grid-template-rows: 200px 455px 455px 450px;
-            grid-template-columns: 20% 20% 20%;
-            grid-template-areas:
-                "uno uno uno"
-                "dos tres cuatro"
-                "cinco seis siete"
-                " ocho ocho ocho";
-            gap: 100px;
-            background: rgb(10, 10, 70);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
 
-        p {
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            font-size: 40px;
-            position: relative;
-            left: 300px;
-        }
+<style>
 
-        h1 {
+body{
+    display: grid;
+    grid-template-rows:200px 455px 455px 450px;
+    grid-template-columns: 21% 21% 21%;
+    grid-template-areas: 
+    "uno uno uno"
+    "dos tres cuatro"
+    "cinco seis siete"
+    "ocho ocho ocho";
 
-            position: absolute;
-            left: 580px;
-            margin-top: 80px;
-            width: 800px;
-            height: 90px;
-            text-align: center;
-            font-size: 80px;
-        }
+    gap: 100px;
+    background: #0039B0;
+    justify-content: center;
+}
 
-        #uno {
-            grid-area: uno;
-            background: aqua;
-            border-radius: 10%;
+div{
+    background: rgb(139, 226, 238);
+    border-radius: 10%;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+}
 
-        }
+#uno{ 
+    grid-area: uno; 
+    font-size: 50px;
+}
+#dos{
+     grid-area: dos; 
+    }
+#tres{ 
+    grid-area: tres;
+ }
+#cuatro{
+     grid-area: cuatro; 
+    }
+#cinco{
+     grid-area: cinco; 
+    }
+#seis{
+     grid-area: seis; 
+    }
+#siete{
+     grid-area: siete; 
+    }
 
-        #dos {
-            grid-area: dos;
-            background: aqua;
-            border-radius: 10%;
-        }
+#ocho{
+    grid-area: ocho;
+    font-size: 35px;
+    width: 1850px;
+        height: 440px;
+        font-family: Arial, Helvetica, sans-serif;
+}
 
-        #tres {
-            grid-area: tres;
-            background: aqua;
-            border-radius: 10%;
-        }
+img{
+    width: 250px;
+    height: 250px;
+    transition: 0.3s;
+    border-radius: 10%;
+}
 
-        #cuatro {
-            grid-area: cuatro;
-            background: aqua;
-            border-radius: 10%;
-        }
+img:hover{
+    transform: scale(1.05);
+    box-shadow: 4px 10px 6px #0039B0;
+    
+}
 
-        #cinco {
-            grid-area: cinco;
-            background: aqua;
-            border-radius: 10%;
-        }
+p{
+    font-size: 50px;
+    font-family:Arial, Helvetica, sans-serif ;
+}
+h2{
+    background-color: rgb(139, 226, 238);
+    position: relative;
+    right: 245px;
+}
+iframe{
+   position: relative;
+   bottom: 350px;
+left: 1230px;
 
-        #seis {
-            grid-area: seis;
-            background: aqua;
-            border-radius: 10%;
-        }
+}
+h1{
+    font-family: Arial, Helvetica, sans-serif;
+}
+@media(max-width:700px){
 
-        #siete {
-            grid-area: siete;
-            background: aqua;
-            border-radius: 10%;
-        }
+body{
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+    "uno"
+    "dos"
+    "tres"
+    "cuatro"
+    "cinco"
+    "seis"
+    "siete"
+    "ocho";
 
-        #ocho {
-            grid-area: ocho;
-            background: aqua;
-            width: 1898px;
-            height: 440px;
-            font-size: 35px;
-        }
+    gap: 30px;
+    padding: 20px;
+}
 
-        footer {
-            position: relative;
-            left: 710px;
-            top: 1450px;
+#uno{
+    font-size: 25px;
+    text-align: center;
+    padding: 20px;
+}
 
-        }
+div{
+    width: 100%;
+}
 
-        #helado1 {
-            position: relative;
-            top: 930px;
-            right: 595px;
+img{
+    width: 180px;
+    height: 180px;
+    border-radius: 10%;
+}
 
-            width: 250px;
-            height: 250px;
+p{
+    font-size: 30px;
+    text-align: center;
+}
 
-        }
+#ocho{
+    width: 100%;
+    height: auto;
+    font-size: 22px;
+    padding: 20px;
+    box-sizing: border-box;
+}
 
-        #helado2 {
-            position: relative;
-            left: 365px;
-            bottom: 1580px;
-            width: 250px;
-            height: 250px;
-        }
+h2{
+    right: 0;
+    text-align: center;
+}
 
-        #helado3 {
-            position: relative;
-            left: 365px;
-            bottom: 1580px;
-            width: 250px;
-            height: 250px;
-        }
+iframe{
+    position: static;
+    width: 100%;
+    height: 300px;
+    margin-top: 20px;
+}
 
-        #helado4 {
-            position: relative;
-            left: 365px;
-            bottom: 1580px;
-            width: 250px;
-            height: 250px;
-        }
-
-        #helado5 {
-            position: relative;
-            left: 835px;
-            ;
-            width: 250px;
-            height: 250px;
-        }
-    </style>
+}
+</style>
 </head>
 
 <body>
-    <nav>
-        <H1 id="uno">Productos Dragon Ice</H1>
-    </nav>
 
-    <p id="dos">Frutilla</p>
-    <img src="helado2.jpg" alt="aña2" id="helado2">
-    <p id="tres">Durazno</p>
-    <img src="helado3.jpg" alt="aña3" id="helado3">
-    <p id="cuatro">Canela</p>
-    <img src="helado4.jpg" alt="aña4" id="helado4">
-    <p id="cinco">Café</p>
-    <img src="Helado de cafe.avif" alt="aña" id="helado1">
-    <p id="seis">Menta</p>
-    <img src="helado5.jpg" alt="aña5" id="helado5">
-    <p id="siete">Banana Split</p>
-    <h2 id="ocho">Telefono: 62622743<br><br><br>
+<div id="uno">
+    <h1>Productos Dragon Ice</h1>
+</div>
+
+<div id="dos">
+    <img src="Helado de cafe.avif">
+    <p>Café</p>
+</div>
+
+<div id="tres">
+    <img src="helado2.jpg">
+    <p>Frutilla</p>
+</div>
+
+<div id="cuatro">
+    <img src="helado3.jpg">
+    <p>Durazno</p>
+</div>
+
+<div id="cinco">
+    <img src="helado4.jpg">
+    <p>Canela</p>
+</div>
+
+<div id="seis">
+    <img src="helado5.jpg">
+    <p>Menta</p>
+</div>
+
+<div id="siete">
+    <img src="helado.jpg">
+    <p>Banana Split</p>
+</div>
+
+<h2 id="ocho">
+    <br><br>Telefono: 62622743<br><br><br>
         Gmail: Frost@gmail.com<br><br><br>
-        Ubicacion: AV. HEROINAS Y LANZA #452
+        Ubicacion: AV. HEROINAS Y LANZA #452<br>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d334.02558114454735!2d-66.15382081570189!3d-17.39178135670349!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1ses!2sbo!4v1778812862789!5m2!1ses!2sbo" width="600" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</h2>
 
-    </h2>
-    <footer>
-        <iframe
-            src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d292.80660399676407!2d-66.1537623638055!3d-17.391841535242992!3m2!1i1024!2i768!4f13.1!5e1!3m2!1ses!2sbo!4v1778604417443!5m2!1ses!2sbo"
-            width="700" height="420" style="border:0;" allowfullscreen="" loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </footer>
+        
+
 </body>
-
 </html>
