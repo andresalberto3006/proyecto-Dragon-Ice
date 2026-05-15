@@ -32,13 +32,13 @@ ENGINE = InnoDB;
 -- Table `dragonice`.`productos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dragonice`.`productos` (
-  `Codigo` INT NULL AUTO_INCREMENT,
+  `codigo` INT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NULL,
   `descripcion` VARCHAR(45) NULL,
   `precio` INT NULL,
   `costo` INT NULL,
   `stock` INT NULL,
-  PRIMARY KEY (`Codigo`))
+  PRIMARY KEY (`codigo`))
 ENGINE = InnoDB;
 
 
