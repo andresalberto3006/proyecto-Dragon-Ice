@@ -4,7 +4,7 @@ $usuario="root";
 $contraseña="";
 $nombrebase="dragonice";
 
-$conn = new mysqli($servidor, $usuario, $contraseña, $nombrebase);
+$conexion= new mysqli($servidor, $usuario, $contraseña, $nombrebase);
 ?>  
 <!DOCTYPE html>
 <html lang="es">
@@ -144,13 +144,12 @@ if($conn->connect_error){
     echo '<div class="mensaje error">❌ CONEXION FALLIDA</div>';
 }
 
-$ciu = $_POST['ciu'] ?? '';
-$nombre = $_POST['nombre'] ?? '';
-$direccion= $_POST['direccion'] ?? '';
-$celular = $_POST['celular'] ?? '';
-$rol = $_POST['rol'] ?? '';
-$estado = $_POST['estado'] ?? '';    
- 
+$ciu = $_POST['ciu'] 
+$nombre = $_POST['nombre'] 
+$direccion= $_POST['direccion'] 
+$celular = $_POST['celular'] 
+$rol = $_POST['rol'] 
+$estado = $_POST['estado'] 
 
 if($ciu && $nombre && $direccion && $celular && $rol && $estado){
 
