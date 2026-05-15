@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario Heladería</title>
+    <title>Formulario Usuario</title>
 
     <style>
 
@@ -15,7 +15,7 @@
 
         body{
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #cfe9ff, #e8f4ff);
+            background: linear-gradient(135deg, #d9efff, #eef7ff);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -24,7 +24,7 @@
         }
 
         .formulario{
-            background: white;
+            background: #ffffff;
             width: 100%;
             max-width: 420px;
             padding: 35px;
@@ -35,8 +35,15 @@
         .formulario h2{
             text-align: center;
             color: #3498db;
-            margin-bottom: 25px;
+            margin-bottom: 10px;
             font-size: 30px;
+        }
+
+        .subtitulo{
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 25px;
+            font-size: 14px;
         }
 
         .grupo{
@@ -56,23 +63,23 @@
             border: 1px solid #cfd9e2;
             border-radius: 12px;
             font-size: 15px;
-            transition: 0.3s;
             background-color: #f8fbff;
+            transition: all 0.3s ease;
         }
 
         input:focus{
             border-color: #5dade2;
+            background-color: #ffffff;
             box-shadow: 0px 0px 8px rgba(93, 173, 226, 0.4);
             outline: none;
-            background-color: white;
         }
 
         .boton{
             width: 100%;
             padding: 14px;
-            background: linear-gradient(135deg, #5dade2, #3498db);
             border: none;
             border-radius: 12px;
+            background: linear-gradient(135deg, #5dade2, #3498db);
             color: white;
             font-size: 16px;
             font-weight: bold;
@@ -87,13 +94,6 @@
             box-shadow: 0px 5px 12px rgba(52, 152, 219, 0.4);
         }
 
-        .subtitulo{
-            text-align: center;
-            color: #7f8c8d;
-            margin-bottom: 25px;
-            font-size: 14px;
-        }
-
     </style>
 </head>
 
@@ -101,45 +101,45 @@
 
     <div class="formulario">
 
-        <h2>🍦 Registrar Producto</h2>
+        <h2>👤 Crear Cuenta</h2>
         <p class="subtitulo">
-            Complete los datos del producto de la heladería
+            Complete los datos del usuario
         </p>
 
         <form action="registro.php" method="POST">
 
             <div class="grupo">
-                <label for="ci">Código / CI</label>
-                <input type="text" id="ci" name="ci" placeholder="Ingrese el código">
+                <label for="ciu">CI</label>
+                <input type="text" id="ciu" name="ciu" placeholder="Ingrese su CI">
             </div>
 
             <div class="grupo">
                 <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre">
+                <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre">
             </div>
 
             <div class="grupo">
-                <label for="descripcion">Descripción</label>
-                <input type="text" id="descripcion" name="descripcion" placeholder="Descripción del producto">
+                <label for="direccion">Dirección</label>
+                <input type="text" id="direccion" name="direccion" placeholder="Ingrese su dirección">
             </div>
 
             <div class="grupo">
-                <label for="precio">Precio</label>
-                <input type="text" id="precio" name="precio" placeholder="Ingrese el precio">
+                <label for="celular">Celular</label>
+                <input type="text" id="celular" name="celular" placeholder="Ingrese su celular">
             </div>
 
             <div class="grupo">
-                <label for="costo">Costo</label>
-                <input type="text" id="costo" name="costo" placeholder="Ingrese el costo">
+                <label for="rol">Rol</label>
+                <input type="text" id="rol" name="rol" placeholder="Ingrese su rol">
             </div>
 
             <div class="grupo">
-                <label for="stock">Stock</label>
-                <input type="text" id="stock" name="stock" placeholder="Cantidad disponible">
+                <label for="estado">Estado</label>
+                <input type="text" id="estado" name="estado" placeholder="Ingrese su estado">
             </div>
 
             <button type="submit" class="boton">
-                Guardar Producto
+                
             </button>
 
         </form>

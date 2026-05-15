@@ -2,7 +2,7 @@
 $direccion="localhost";
 $usuario="rout";
 $contraseña="";
-$nombreBase="dragon";
+$nombreBase="dragonice";
 
 $conexion= new mysqli($direccion,$usuario,$contraseña,$nombreBase);
 if($conexion->error){
@@ -21,24 +21,3 @@ while($fila=$resultado->fetch_assoc()){
   }
 }
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
- <form action="registro.php" method="post";
-    <label for="">ciu</label>
-    <input type="text" name="ciu"><br>
-    <input type="text" name="direccion" placeholder="direccion" required>
-    <input type="text" name="celular" placeholder="numero de celular" required>
-    <input type="text" name="rol" placeholder="rol" required>
-    <input type="text" name="estado" placeholder="estado" required>
-    <input type="password" name="Contraseña" placeholder="Contraseña" required>
-    <button type="submit">Enviar</button>
-  </form>
-</body>
-</html>
