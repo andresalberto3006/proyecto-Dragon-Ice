@@ -140,16 +140,16 @@ $conexion= new mysqli($servidor, $usuario, $contraseña, $nombrebase);
       
 
 <?php
-if($conn->connect_error){
+if($conexion->connect_error){
     echo '<div class="mensaje error">❌ CONEXION FALLIDA</div>';
 }
 
-$ciu = $_POST['ciu'] 
-$nombre = $_POST['nombre'] 
-$direccion= $_POST['direccion'] 
-$celular = $_POST['celular'] 
-$rol = $_POST['rol'] 
-$estado = $_POST['estado'] 
+$ciu = $_POST['ciu'] ;
+$nombre = $_POST['nombre'] ;
+$direccion= $_POST['direccion'] ;
+$celular = $_POST['celular'] ;
+$rol = $_POST['rol'] ;
+$estado = $_POST['estado'] ;
 
 if($ciu && $nombre && $direccion && $celular && $rol && $estado){
 
@@ -161,16 +161,16 @@ if($ciu && $nombre && $direccion && $celular && $rol && $estado){
 
 
 
-    if ($conn->query($sql) === TRUE){
+    if ($conexion->query($sql) === TRUE){
         echo '<div class="mensaje exito">✔ USUARIO REGISTRADO CORRECTAMENTE</div>';
     } else {
-        echo '<div class="mensaje error">⚠ ERROR: '.$sql.'<br>'.$conn->error.'</div>';
+        echo '<div class="mensaje error">⚠ ERROR: '.$sql.'<br>'.$conexion->error.'</div>';
     }
 } else {
     echo '<div class="mensaje error">❌ Por favor complete todos los campos requeridos</div>';
 }
 
-$conn->close();
+$conexion->close();
 ?>
     </div>
 
