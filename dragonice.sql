@@ -15,20 +15,6 @@ CREATE SCHEMA IF NOT EXISTS `dragonice` DEFAULT CHARACTER SET utf8 ;
 USE `dragonice` ;
 
 -- -----------------------------------------------------
--- Table `dragonice`.`usuario`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dragonice`.`usuario` (
-  `ciu` INT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45) NULL,
-  `dirección` VARCHAR(45) NULL,
-  `celular` INT NULL,
-  `rol` VARCHAR(45) NULL,
-  `estado` VARCHAR(45) NULL,
-  PRIMARY KEY (`ciu`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `dragonice`.`producto`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dragonice`.`producto` (
@@ -39,6 +25,20 @@ CREATE TABLE IF NOT EXISTS `dragonice`.`producto` (
   `costo` INT NULL,
   `stock` INT NULL,
   PRIMARY KEY (`codigo`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `dragonice`.`usuario`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dragonice`.`usuario` (
+  `ciu` INT NOT NULL,
+  `nombre` VARCHAR(45) NULL,
+  `direccion` VARCHAR(45) NULL,
+  `celular` INT NULL,
+  `rol` VARCHAR(45) NULL,
+  `estado` VARCHAR(45) NULL,
+  PRIMARY KEY (`ciu`))
 ENGINE = InnoDB;
 
 
