@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maquetado Semántico</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#020617;
+    color:white;
+    padding:20px;
+    margin: -18px;
+}
+
+header, nav, article, section, aside, footer{   
+    border:2px solid  rgb(118,158,203);
+    border-radius:10px;
+    padding:20px;
+    text-align:center
+   
+}
+
+header{
+     background:#0f172a;
+    height:80px;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+}
+header h1{
+    background: rebeccapurple;
+    border-radius: 10px;
+    height: 50px;       
+    width: 350px;
+}
+ a {
+            text-decoration: none;
+            color: white
+}
+#cerrar{
+    border-radius: 10px;
+    height: 32px;
+    width: 10px;
+
+}
+nav{
+    height:90px;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+}
+
+main{
+    display:flex;
+    gap:2px;
+}
+
+article{
+    flex:2;
+    height:800px;
+   
+}
+nav h3{
+    background-color: white;
+    color: black;
+    border-radius: 15px;
+    width: 240px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+ 
+}
+
+section{
+    margin-top:20px;
+    height:470px;    
+    width: 1500px;       
+    background:#020617;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+section h2{
+     background:rgb(7,53,106);
+    border-radius: 15px;
+    width:370px;
+    margin: 10px;
+   
+}
+#ttt{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+ #ttt button{
+    margin: 20px;
+    height: 50px;
+    border-radius: 15px;
+    border: none;
+}
+
+aside{
+    background:linear-gradient(135deg, rgba(5,112,235,0.32), #2563eb);
+    flex:1;
+    height:800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+aside button{
+    background: #1e2a43;
+    height: 60px;
+    border-radius: 15px;
+    border: none;
+    margin: 30px;
+}
+button:hover{
+    background:#444 ;
+    transition: 0.5s;
+    transform:scale(1.05);
+}
+
+footer{
+    height:70px;
+}  
+</style>
+</head>
+<body>
+
+<header>
+    <h1>🛒Sistema de ventas</h1>
+    <h1>Panel de vendedor</h1>
+     <h1><a href=""class="nav-link">cerrar sesion</a></h1>
+</header>
+
+ 
+<main>
+
+    <aside class="v">
+        <button>ventas</button>
+        <button>productos</button>
+        <button>pedidos</button>
+        <button>historial</button>
+    </aside>
+    <article>
+        <nav>
+          <h3>hguhj</h3>
+       <h3>gfyj</h3>
+       <h3>hjgghj</h3>
+       <h3>hgvhg</h3>
+        </nav>
+        <section>
+            <h2>hjghj</h2>
+            <h2>hjghjg</h2>
+            <h2 id="ttt">nnbbkj
+        <button>dbf</button>
+        <button>fgsf</button>
+        <button>sdsv</button>
+        <button>vsfdb</button>
+            </h2>
+        </section>
+    </article>
+   
+</main>
+
+</body>
+</html>

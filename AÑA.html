@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Ventas - Panel de Vendedor</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #0d1b2a;
+            color: #ffffff;
+            padding: 15px;
+        }
+
+        /* --- HEADER --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #1b263b;
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .logo-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn-logout {
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* --- TOP CARDS (Estadísticas) --- */
+        .top-cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .card-stat {
+            background-color: #ffffff;
+            color: #0d1b2a;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .stat-info h3 {
+            font-size: 14px;
+            color: #415a77;
+        }
+
+        .stat-info p {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+
+        .stat-info a {
+            font-size: 12px;
+            color: #000814;
+            text-decoration: none;
+        }
+
+        /* --- MAIN CONTAINER --- */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 15px;
+        }
+
+        /* --- SIDEBAR --- */
+        nav {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .nav-section {
+            background-color: #415a77;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .nav-section h2 {
+            background-color: #778da9;
+            font-size: 16px;
+            padding: 10px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .nav-section ul {
+            list-style: none;
+        }
+
+        .nav-section ul li a {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-size: 14px;
+        }
+
+        .nav-section ul li a:hover {
+            background-color: #1b263b;
+        }
+
+        /* --- CONTENT AREA (Grid de 3 Columnas) --- */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .panel-box {
+            background-color: #1b263b;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .panel-box h2 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #e0e1dd;
+        }
+
+        /* Formulario Registrar Venta */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #a3b18a;
+        }
+
+        .form-group input, .form-group select {
+            width: 1fr;
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background-color: #ffffff;
+            color: #000;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: #2a9d8f;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Tablas (Historial y Stock) */
+        .table-container {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        th {
+            color: #a3b18a;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #415a77;
+        }
+
+        td {
+            padding: 8px 0;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo-title">
+            <h1>SISTEMA DE VENTAS</h1>
+            <span>| PANEL DE VENDEDOR</span>
+        </div>
+        <button class="btn-logout">CERRAR SESION</button>
+    </header>
+
+    <!-- ESTADÍSTICAS SUPERIORES -->
+    <section class="top-cards">
+        <div class="card-stat">
+            <div class="stat-info">
+                <h3>VENTAS DEL DÍA</h3>
+                <p>$ 170.000</p>
+                <a href="#">Ver detalle -></a>
+            </div>
+        </div>
+        <div class="card-stat">
+            <div class="stat-info">
+                <h3>Productos disponibles</h3>
+                <p>120</p>
+                <a href="#">Ver detalle -></a>
+            </div>
+        </div>
+        <div class="card-stat">
+            <div class="stat-info">
+                <h3>Pedidos pendientes</h3>
+                <p>15</p>
+                <a href="#">Ver detalle -></a>
+            </div>
+        </div>
+        <div class="card-stat">
+            <div class="stat-info">
+                <h3>Pedidos en proceso</h3>
+                <p>10</p>
+                <a href="#">Ver detalle -></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CUERPO PRINCIPAL -->
+    <main class="main-layout">
+        
+        <!-- MENU LATERAL -->
+        <nav>
+            <div class="nav-section">
+                <h2>Ventas</h2>
+                <ul>
+                    <li><a href="#">Registrar venta</a></li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <h2>Productos</h2>
+                <ul>
+                    <li><a href="#">Consultar Stock</a></li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <h2>Pedidos</h2>
+                <ul>
+                    <li><a href="#">Ver pedidos</a></li>
+                    <li><a href="#">Gestionar pedidos</a></li>
+                    <li><a href="#">Actualizar estado</a></li>
+                </ul>
+            </div>
+            <div class="nav-section">
+                <h2>Historial</h2>
+                <ul>
+                    <li><a href="#">Historial de ventas</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- PANELES DE CONTENIDO -->
+        <section class="content-grid">
+            
+            <!-- Bloque 1: Formulario -->
+            <div class="panel-box">
+                <h2>Registrar venta</h2>
+                <form>
+                    <div class="form-group">
+                        <label>Cliente</label>
+                        <select><option>Seleccionar cliente</option></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Producto</label>
+                        <select><option>Seleccionar producto</option></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Calidad</label>
+                        <input type="text" placeholder="Calidad">
+                    </div>
+                    <div class="form-group">
+                        <label>Total</label>
+                        <input type="text" value="$0.00" readonly>
+                    </div>
+                    <button type="submit" class="btn-submit">Guardar venta</button>
+                </form>
+            </div>
+
+            <!-- Bloque 2: Historial Reciente -->
+            <div class="panel-box">
+                <h2>Historial de ventas (recientes)</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID Venta</th>
+                                <th>Total</th>
+                                <th>Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>#0001</td><td>$5</td><td>18/05/2026</td></tr>
+                            <tr><td>#0002</td><td>$5</td><td>18/05/2026</td></tr>
+                            <tr><td>#0003</td><td>$4</td><td>18/05/2026</td></tr>
+                            <tr><td>#0004</td><td>$7</td><td>18/05/2026</td></tr>
+                            <tr><td>#0005</td><td>$5</td><td>18/05/2026</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Bloque 3: Stock de Productos -->
+            <div class="panel-box">
+                <h2>Stock de productos</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Stock</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Helado de café</td><td>4</td></tr>
+                            <tr><td>Helado de canela</td><td>1</td></tr>
+                            <tr><td>Helado de frutilla</td><td>2</td></tr>
+                            <tr><td>Banana split</td><td>4</td></tr>
+                            <tr><td>Helado de durazno</td><td>1</td></tr>
+                        </t0.body>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+</body>
+</html>

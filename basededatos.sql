@@ -18,9 +18,9 @@ USE `dragonice` ;
 -- Table `dragonice`.`usuario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dragonice`.`usuario` (
-  `ciu` INT NOT NULL AUTO_INCREMENT,
+  `ciu` INT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NULL,
-  `direccion` VARCHAR(45) NULL,
+  `dirección` VARCHAR(45) NULL,
   `celular` INT NULL,
   `rol` VARCHAR(45) NULL,
   `estado` VARCHAR(45) NULL,
@@ -29,10 +29,10 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `dragonice`.`productos`
+-- Table `dragonice`.`producto`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dragonice`.`productos` (
-  `codigo` INT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `dragonice`.`producto` (
+  `codigo` INT NOT NULL,
   `nombre` VARCHAR(45) NULL,
   `descripcion` VARCHAR(45) NULL,
   `precio` INT NULL,
