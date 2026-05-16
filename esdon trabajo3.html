@@ -21,11 +21,11 @@ body{
 }
 
 header, nav, article, section, aside, footer{
-    border:2px solid  rgb(118,158,203);
+    border:2px solid  rgb(94, 146, 205);
     border-radius:10px;
     padding:20px;
     text-align:center
-    
+   
 }
 
 header{
@@ -35,11 +35,23 @@ header{
     flex-direction: row;
     justify-content:space-between;
 }
-header h1{
-    background: rebeccapurple;
+header h1, header button{
+    color: azure;
+    background: rgb(4, 85, 167);
     border-radius: 10px;
     height: 50px;
     width: 100px;
+    border: none;
+}
+#mio{
+    background-color:  #85caec;
+    width: 400px;
+}
+#rex{
+    width: 550px;
+}
+#crack{
+    width: 150px
 }
 nav{
     height:90px;
@@ -56,7 +68,7 @@ main{
 article{
     flex:2;
     height:800px;
-    
+   
 }
 nav h3{
     background-color: white;
@@ -66,15 +78,15 @@ nav h3{
     height: 50px;
     display: flex;
     align-items: center;
-  
+ 
 }
 
 section{
     margin-top:20px;
-    height:470px;
+    height:630px;
     background:#020617;
     display: flex;
-    flex-direction: row;
+    flex-direction:row;
     justify-content: space-between;
 }
 section h2{
@@ -82,18 +94,42 @@ section h2{
     border-radius: 15px;
     width:370px;
     margin: 10px;
-    
+   
+}
+section h2:hover{
+    transition: 0.5s;
+    transform: scale(1.05);
 }
 #ttt{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    padding: 20px;
 }
- #ttt button{
+ 
+ form {
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    margin: 30px;
+}
+input{
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background: white;
+    color:white;
+}
+section button{
     margin: 20px;
     height: 50px;
     border-radius: 15px;
     border: none;
+    background:#0fa945;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
 }
 
 aside{
@@ -106,59 +142,187 @@ aside{
 
 }
 aside button{
-    background: #1e2a43;
+    background: #85caec;
     height: 60px;
     border-radius: 15px;
     border: none;
     margin: 30px;
+    font-size: 20px;
+    color: aliceblue;
 }
 button:hover{
-    background:#444 ;
+    background:#1a3e82 ;
     transition: 0.5s;
     transform:scale(1.05);
 }
+#yyy{
+ display: grid;
+ padding: 20px;
+    grid-template-columns: repeat(1,2fr);
+}
+#dd{
+    background-color: white;
+    width:345px;
+    display: flex;
+    color: black;
+    height: 440px;
+    justify-content: center;
+    border-radius: 15px;
+    font-size: 25px;
+    margin: -7px 
+}
+table{
+    border: none;
+}
+@media (max-width: 768px){
 
-footer{
-    height:70px;
+    main{
+        flex-direction: column;
+    }
+
+    aside{
+        width: 100%;
+        height: auto;
+    }
+
+    article{
+        width: 100%;
+        height: auto;
+    }
+
+    nav{
+        flex-direction: column;
+        height: auto;
+        gap: 10px;
+    }
+
+    nav h3{
+        width: 100%;
+    }
+
+    section{
+        flex-direction: column;
+        height: auto;
+        gap: 20px;
+    }
+
+    section h2{
+        width: 100%;
+    }
+
+    #dd{
+        width: 100%;
+        height: auto;
+        font-size: 18px;
+    }
+
+    header{
+        flex-direction: column;
+        height: auto;
+        gap: 10px;
+    }
+
+    header h1, header button{
+        width: 100%;
+    }
 }
 </style>
 </head>
 <body>
 
 <header>
-    <h1>gfh1</h1>
-    <h1>fyyyfu</h1>
-    <h1>hjgg</h1>
+    <h1 id="mio">Sistemas de Ventas</h1>
+    <h1 id="rex">Panel del Vendedor</h1>
+    <button id="crack">CERRAR SESION</button>
 </header>
 
  
 <main>
 
     <aside>
-        <button>fsdg</button>
-        <button>sfgsfg</button>
-        <button>fsgsg</button>
-        <button>sgsgs</button>
+        <button>VENTAS</button>
+        <button>PRODUCTOS</button>
+        <button>PEDIDOS</button>
+        <button>HISTORIAL</button>
     </aside>
     <article>
         <nav>
-          <h3>hguhj</h3>
-       <h3>gfyj</h3>
-       <h3>hjgghj</h3>
-       <h3>hgvhg</h3>
+          <h3>💰 Ventas del día
+            $170.000
+          </h3>
+       <h3>📦 Productos disponibles
+        120
+       </h3>
+       <h3>⏳ Pedidos pendientes
+        15
+       </h3>
+       <h3>🔄 Pedidos en proceso
+        10
+       </h3>
         </nav>
         <section>
-            <h2>hjghj</h2>
-            <h2>hjghjg</h2>
-            <h2 id="ttt">nnbbkj
-        <button>dbf</button>
-        <button>fgsf</button>
-        <button>sdsv</button>
-        <button>vsfdb</button>
+             <h2 id="ttt">Ordena Aquí
+
+        <form>
+
+            <label>Cliente</label>
+            <input type="text">
+
+            <label>Producto</label>
+            <input type="text">
+
+            <label>Calidad</label>
+            <input type="text">
+
+            <label>Total</label>
+            <input type="text">
+
+            <button >Guardar venta</button>
+
+        </form>
+        </h2>
+            <h2 id="yyy">
+            historial  
+                <table id="dd" border="4px solid">
+                    <tr>
+ <th>id Venta</th>
+ <th>total</th>
+ <th>fecha</th>
+ 
+                    </tr id="oo">
+            <tr><td>#0001</td><td>$5</td><td>18/05/2026</td></tr>
+            <tr><td>#0002</td><td>$5</td><td>18/05/2026</td></tr>
+            <tr><td>#0003</td><td>$4</td><td>18/05/2026</td></tr>
+             <tr><td>#0004</td><td>$7</td><td>18/05/2026</td></tr>
+            <tr><td>#0005</td><td>$5</td><td>18/05/2026</td></tr>
+            <tr><td>#0006</td><td>$5</td><td>18/05/2026</td></tr>
+            <tr><td>#0007</td><td>$7</td><td>18/05/2026</td></tr>
+            <tr><td>#0008</td><td>$10</td><td>18/05/2026</td></tr>
+            <tr><td>#0009</td><td>$6</td><td>18/05/2026</td></tr>
+             <tr>
+                   
+                </table>
             </h2>
+             <h2 id="yyy">
+            Stock de productos  
+            <table id="dd">
+                 <tr>
+                <th>Producto</th>
+                <th>Stock</th>
+            </tr>
+            <tr id="oo"><td>Helado de café</td><td>4</td></tr>
+            <tr><td>Helado de canela</td><td>1</td></tr>
+            <tr><td>Helado de frutilla</td><td>2</td></tr>
+            <tr><td>Banana split</td><td>4</td></tr>
+            <tr><td>Helado de durazno</td><td>1</td></tr>
+            <tr><td>Helado de leche</td><td>2</td></tr>
+            <tr><td>Helado de chocolate</td><td>3</td></tr>
+            <tr><td>Helado de vainilla</td><td>2</td></tr>
+        </table>
+ </h2>
         </section>
     </article>
-    
+   
 </main>
 
 </body>
