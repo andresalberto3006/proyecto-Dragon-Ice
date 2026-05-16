@@ -21,7 +21,6 @@ body{
 }
 
 header, nav, article, section, aside, footer{
-    border:2px solid  rgb(94, 146, 205);
     border-radius:10px;
     padding:20px;
     text-align:center
@@ -58,6 +57,10 @@ nav{
     display: flex;
     flex-direction: row;
     justify-content:space-between;
+}
+nav h3:hover{
+    transition: 0,9s;
+    transform: scale(1.05);
 }
 
 main{
@@ -131,6 +134,10 @@ section button{
     cursor:pointer;
     transition:0.3s;
 }
+form button:hover{
+    transition: 0.5s;
+    background-color:#0fa945;
+}
 
 aside{
     background:linear-gradient(135deg, rgba(5,112,235,0.32), #2563eb);
@@ -191,18 +198,24 @@ table{
     }
 
     nav{
+        display: flex;
         flex-direction: column;
+        justify-content: end;
+        padding: 50px;
         height: auto;
         gap: 10px;
+        height:500px ;
     }
 
     nav h3{
         width: 100%;
+        display: flex;
+
     }
 
     section{
         flex-direction: column;
-        height: auto;
+        height: 1400px;
         gap: 20px;
     }
 
@@ -217,13 +230,37 @@ table{
     }
 
     header{
-        flex-direction: column;
+        display: grid;
         height: auto;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 100%;
+        grid-template-areas: 
+        "uno tres"
+        "dos dos";
         gap: 10px;
-    }
 
-    header h1, header button{
-        width: 100%;
+    }
+    #mio{
+        width: auto;
+        height: 68px;
+        grid-area: uno;
+
+    }
+    #rex{
+        width: auto;
+        grid-area: dos;
+        display: flex;
+        position: absolute;
+        bottom: -45px;
+        left: 85px;
+    }
+    #crack{
+        width: auto;
+        height: 68px;
+        grid-area: tres;
+    }
+    #yyy{
+        height: 550px;
     }
 }
 </style>
@@ -266,18 +303,18 @@ table{
         <form>
 
             <label>Cliente</label>
-            <input type="text">
+            <input type="text" placeholder="Seleccionar cliente">
 
             <label>Producto</label>
-            <input type="text">
+            <input type="text" placeholder="Selccionar producto">
 
             <label>Calidad</label>
-            <input type="text">
+            <input type="text" placeholder="Calidad">
 
             <label>Total</label>
-            <input type="text">
+            <input type="text" placeholder="$0.00">
 
-            <button >Guardar venta</button>
+            <button >🛒Guardar venta</button>
 
         </form>
         </h2>
