@@ -1,176 +1,309 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maquetado Semántico</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
-}
+    <title>Dragon Ice</title>
 
-body{
-    background:#020617;
-    color:white;
-    padding:20px;
-    margin: -18px;
-}
+    <style>
+        /* RESET */
 
-header, nav, article, section, aside, footer{   
-    border:2px solid  rgb(118,158,203);
-    border-radius:10px;
-    padding:20px;
-    text-align:center
-   
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
 
-header{
-     background:#0f172a;
-    height:80px;
-    display: flex;
-    flex-direction: row;
-    justify-content:space-between;
-}
-header h1{
-    background: rebeccapurple;
-    border-radius: 10px;
-    height: 50px;       
-    width: 350px;
-}
- a {
+        /* VIDEO */
+
+        section {
+
+            position: relative;
+
+            width: 100%;
+
+            height: 100vh;
+
+            overflow: hidden;
+        }
+
+        video {
+
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+
+            transform: translate(-50%, -50%);
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+        /* HEADER */
+
+        header {
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+
+            height: 15px;
+
+            padding: 35px 40px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            background: rgba(255, 255, 255, 0.08);
+
+            backdrop-filter: blur(8px);
+
+            border-bottom: 2px solid white;
+
+            /* SOMBRA BONITA */
+
+            box-shadow:
+                0 0 10px rgba(0, 0, 0, 0.3),
+                0 0 25px rgba(0, 0, 0, 0.4),
+                0 0 45px rgba(0, 0, 0, 0.5),
+                0 0 70px rgba(0, 0, 0, 0.4);
+        }
+
+        /* LOGO */
+
+        aside {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+        aside img {
+
+            width: 42px;
+
+            height: 42px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+        }
+
+        /* TITULO */
+
+        aside h1 {
+
+            color: black;
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            text-shadow:
+                0 0 5px rgba(255, 255, 255, 0.7),
+                0 0 10px rgba(255, 255, 255, 0.6);
+        }
+
+        /* MENU */
+
+        nav {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 25px;
+        }
+
+        /* ENLACES */
+
+        nav a,
+        button {
+
+            color: black;
+
             text-decoration: none;
-            color: white
-}
-#cerrar{
-    border-radius: 10px;
-    height: 32px;
-    width: 10px;
 
-}
-nav{
-    height:90px;
-    display: flex;
-    flex-direction: row;
-    justify-content:space-between;
-}
+            font-size: 15px;
 
-main{
-    display:flex;
-    gap:2px;
-}
+            font-weight: bold;
 
-article{
-    flex:2;
-    height:800px;
-   
-}
-nav h3{
-    background-color: white;
-    color: black;
-    border-radius: 15px;
-    width: 240px;
-    height: 50px;
-    display: flex;
-    align-items: center;
- 
-}
+            background: none;
 
-section{
-    margin-top:20px;
-    height:470px;    
-    width: 1500px;       
-    background:#020617;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-section h2{
-     background:rgb(7,53,106);
-    border-radius: 15px;
-    width:370px;
-    margin: 10px;
-   
-}
-#ttt{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
- #ttt button{
-    margin: 20px;
-    height: 50px;
-    border-radius: 15px;
-    border: none;
-}
+            border: none;
 
-aside{
-    background:linear-gradient(135deg, rgba(5,112,235,0.32), #2563eb);
-    flex:1;
-    height:800px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+            cursor: pointer;
 
-}
-aside button{
-    background: #1e2a43;
-    height: 60px;
-    border-radius: 15px;
-    border: none;
-    margin: 30px;
-}
-button:hover{
-    background:#444 ;
-    transition: 0.5s;
-    transform:scale(1.05);
-}
+            text-shadow:
+                0 0 5px rgba(255, 255, 255, 0.7);
+        }
 
-footer{
-    height:70px;
-}  
-</style>
+        /* REGISTRARSE */
+
+        article {
+
+            position: relative;
+        }
+
+        /* MENU DESPLEGABLE */
+
+        ul {
+
+            position: absolute;
+
+            top: 45px;
+
+            left: 0;
+
+            background: white;
+
+            border-radius: 10px;
+
+            min-width: 180px;
+
+            overflow: hidden;
+
+            display: none;
+
+            box-shadow:
+                0 0 10px rgba(0, 0, 0, 0.3),
+                0 0 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* MOSTRAR MENU */
+
+        article:hover ul {
+
+            display: block;
+        }
+
+        /* OPCIONES */
+
+        li {
+
+            list-style: none;
+        }
+
+        li a {
+
+            display: block;
+
+            padding: 12px 15px;
+
+            color: black;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+        /* EFECTO */
+
+        li a:hover {
+
+            background: rgba(0, 0, 0, 0.08);
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width:700px) {
+
+            header {
+
+                height: auto;
+
+                padding: 20px;
+
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+            nav {
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+
+                gap: 15px;
+            }
+
+        }
+    </style>
 </head>
+
 <body>
 
-<header>
-    <h1>🛒Sistema de ventas</h1>
-    <h1>Panel de vendedor</h1>
-     <h1><a href=""class="nav-link">cerrar sesion</a></h1>
-</header>
+    <section>
 
- 
-<main>
+        <video autoplay muted loop playsinline>
 
-    <aside class="v">
-        <button>ventas</button>
-        <button>productos</button>
-        <button>pedidos</button>
-        <button>historial</button>
-    </aside>
-    <article>
-        <nav>
-          <h3>hguhj</h3>
-       <h3>gfyj</h3>
-       <h3>hjgghj</h3>
-       <h3>hgvhg</h3>
-        </nav>
-        <section>
-            <h2>hjghj</h2>
-            <h2>hjghjg</h2>
-            <h2 id="ttt">nnbbkj
-        <button>dbf</button>
-        <button>fgsf</button>
-        <button>sdsv</button>
-        <button>vsfdb</button>
-            </h2>
-        </section>
-    </article>
-   
-</main>
+            <source src="video.mp4" type="video/mp4">
+
+        </video>
+
+        <!-- HEADER -->
+
+        <header>
+
+            <!-- LOGO -->
+
+            <aside>
+
+                <img src="logo.png" alt="Logo">
+
+                <h1>Dragon Ice</h1>
+
+            </aside>
+
+            <nav>
+                <a href="">Inicio</a>
+
+                <article>
+
+                    <button> Registrarte </button>
+
+                    <ul>
+
+                        <li>
+                            <a href="">Administrador</a>
+                        </li>
+
+                        <li>
+                            <a href="">Vendedor</a>
+                        </li>
+
+                        <li>
+                            <a href="">Cliente</a>
+                        </li>
+
+                    </ul>
+
+                </article>
+
+                <a href="">Iniciar Sesión</a>
+
+            </nav>
+
+        </header>
+
+    </section>
 
 </body>
+
 </html>
