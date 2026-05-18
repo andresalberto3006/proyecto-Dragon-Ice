@@ -2,9 +2,8 @@
   $direccion="localhost";
    $usuario="root";
    $contraseña=""
-   $nombreBase="" 
+   $nombreBase="dragonice" 
 
-<<<<<<< Updated upstream
    $conexion= new mysql($direccion, $usuario, $contraseña, $nombre base)
 =======
    $conexion= new mysqli{$direccion,$usuario,$contraseña,$nombreBase};
@@ -27,5 +26,5 @@
     echo "se registro correctamente";
    }
 
->>>>>>> Stashed changes
+
 ?>
