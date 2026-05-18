@@ -4,5 +4,5 @@
    $contraseña=""
    $nombreBase="" 
 
-   $conexion= new
+   $conexion= new mysql($direccion, $usuario, $contraseña, $nombre base)
 ?>
