@@ -6,7 +6,7 @@ $celular= "root";
 $rol= "root";
 $estado= "root";
 $nombrebase= "dragonice";
-$conexion= new mysqli($ciu,$nombre,$direccion,$celular,$rol,$estado,$nombrebase);
+$conexion= new mysqli($ciu,$nombre,$direccion,$celular,$rol,$estado);
 if($conexion->error) {
     echo" Hubo un error al conectar a la base de datos";
 }

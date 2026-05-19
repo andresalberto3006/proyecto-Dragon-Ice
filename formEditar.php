@@ -17,7 +17,6 @@ echo $fila['id']."<br>".$fila['nombre']."<br>".$fila['apellido']."<br>".$fila['d
 $idPersona-$fila['id'];
 echo "<a href='persona.php?id=$id'><button >Mostrar</button></a><br>";
 }
-=======
 $usuario="rout";
 $contraseña="";
 $nombreBase="dragon";
