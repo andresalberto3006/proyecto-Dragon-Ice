@@ -16,6 +16,7 @@ while($fila=$resultado->fetch_assoc()){
     $idu=$fila['idp'];
     $nombreu=$fila[nombrep];
     $direccion=$fila[direccion];
+    $precio=$fila['precio']
     $celular=$fila[costo];
     $rol=$fila[stock];
   }
