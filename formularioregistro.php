@@ -51,7 +51,7 @@
 </style>
 
 <body>
-    <form action="regis.php" method="post" id="caja">
+    <form action="registroproducto.php" method="post" id="caja">
         <label for="">Id del Usuario</label>
         <input type="number" name="i"><br>
         <label for="">Nombre Completo:</label>
