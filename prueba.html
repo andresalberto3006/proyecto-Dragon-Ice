@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maquetado Semántico</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#111;
+    color:white;
+    padding:20px;
+}
+
+header, nav, article, section, aside, footer{
+    background:#333;
+    border:2px solid white;
+    border-radius:10px;
+    padding:20px;
+    text-align:center;
+    margin:10px ;
+}
+
+header{
+    height:80px;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+}
+header h1{
+    background: rebeccapurple;
+    border-radius: 10px;
+    height: 50px;
+    width: 100px;
+}
+nav{
+    height:60px;
+}
+
+main{
+    display:flex;
+    gap:20px;
+}
+
+article{
+    flex:2;
+    height:300px;
+}
+
+section{
+    margin-top:20px;
+    height:180px;
+    background:#444;
+}
+
+aside{
+    flex:1;
+    height:300px;
+}
+
+footer{
+    height:70px;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>gfh1</h1>
+    <h1>fyyyfu</h1>
+    <h1>hjgg</h1>
+</header>
+
+<nav>
+    &lt;nav&gt;
+</nav>
+
+<main>
+    <aside>
+        &lt;aside&gt;
+    </aside>
+    <article>
+        <h1>hghhhhj</h1>
+        <h1>vjhjhg</h1>
+        <section>
+            &lt;section&gt;
+        </section>
+    </article>
+
+    
+</main>
+
+<footer>
+    &lt;footer&gt;
+</footer>
+
+</body>
+</html>
