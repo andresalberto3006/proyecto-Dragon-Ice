@@ -6,7 +6,7 @@ function connection(){
 
     $bd = "dragonice";
 
-    $connect=mysqli_connect($host, $user, $pass);
+    $connect=mysqli_connect($ciu, $nombre, $direccion, $celular, $rol, $estado);
 
     mysqli_select_db($connect, $bd);
 
