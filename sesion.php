@@ -26,5 +26,4 @@
     echo "se registro correctamente";
    }
 
-
 ?>
