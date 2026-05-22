@@ -2,11 +2,10 @@
   $direccion="localhost";
    $usuario="root";
    $contraseña=""
-   $nombreBase="" 
+   $nombreBase="dragonice" 
 
-<<<<<<< Updated upstream
    $conexion= new mysql($direccion, $usuario, $contraseña, $nombre base)
-=======
+   
    $conexion= new mysqli{$direccion,$usuario,$contraseña,$nombreBase};
    if($conexion->error){
     echo "hubo un error al conectar a la base de datos";
@@ -27,5 +26,4 @@
     echo "se registro correctamente";
    }
 
->>>>>>> Stashed changes
 ?>
