@@ -1,45 +1,57 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Formulario Moderno</title>
+<title>Formulario</title>
 
-<!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-
-<!-- jQuery Validate -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
 
 <style>
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body{
-    font-family: Arial, Helvetica, sans-serif;
-    background: linear-gradient(135deg, #082158, #0f4c81);
-    height: 100vh;
+    font-family: Arial;
+    background-image: url("music-musical-instrument-guitar-two-dark-background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
     display: flex;
     justify-content: center;
     align-items: center;
+
+    height: 100vh;
+    margin: 0;
 }
 
 .container{
-    background: white;
-    width: 400px;
+
+    width: 330px;
+
     padding: 30px;
+
     border-radius: 15px;
-    box-shadow: 0px 0px 20px rgba(0,0,0,0.4);
+
+    background-color: rgba(59, 88, 128, 0.9);
+
+    border: 2px solid #6bb7ff;
+
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.4);
 }
 
 h1{
     text-align: center;
+    color: #fff3d6;
+    margin-bottom: 10px;
+}
+
+p{
+    text-align: center;
+    color: white;
+    font-size: 14px;
     margin-bottom: 20px;
-    color: #0f4c81;
 }
 
 .form-group{
@@ -47,25 +59,26 @@ h1{
 }
 
 label{
+    color: #fff3d6;
     display: block;
     margin-bottom: 5px;
-    font-weight: bold;
-    color: #333;
 }
 
 input{
+
     width: 100%;
+
     padding: 10px;
-    border: 2px solid #cfd8dc;
+
+    border: none;
     border-radius: 8px;
-    font-size: 15px;
-    transition: 0.3s;
+
+    background-color: #f2f2f2;
 }
 
 input:focus{
-    border-color: #0f4c81;
+    border: 2px solid #4da6ff;
     outline: none;
-    box-shadow: 0px 0px 5px rgba(15,76,129,0.5);
 }
 
 .buttons{
@@ -75,35 +88,44 @@ input:focus{
 }
 
 button{
+
     width: 48%;
+
     padding: 10px;
+
     border: none;
     border-radius: 8px;
-    font-size: 16px;
+
+    color: white;
+
     cursor: pointer;
-    transition: 0.3s;
+}
+.editar{
+    background-color: #1b7fa7a1;
 }
 
-.btn-enviar{
-    background-color: #0f4c81;
-    color: white;
+.editar:hover{
+    background-color: #003cace1;
 }
 
-.btn-enviar:hover{
-    background-color: #082158;
+.enviar{
+    background-color: #1e3852;
 }
 
-.btn-borrar{
-    background-color: #d32f2f;
-    color: white;
+.enviar:hover{
+    background-color: #005397;
 }
 
-.btn-borrar:hover{
-    background-color: #9a0007;
+.borrar{
+    background-color: #6c8fa7;
+}
+
+.borrar:hover{
+    background-color: #002049;
 }
 
 .error{
-    color: red;
+    color: #ffd6d6;
     font-size: 13px;
     margin-top: 5px;
 }
@@ -117,142 +139,40 @@ button{
 
     <h1>Formulario</h1>
 
-    <form id="miFormulario" action="formularios.html" method="post">
+    <p>Complete todos los datos</p>
+
+    <form id="miFormulario">
 
         <div class="form-group">
-            <label>Nombre</label>
-            <input type="text" name="nombre">
+            <label>Producto</label>
+            <input type="text" name="nombre del producto">
         </div>
 
         <div class="form-group">
-            <label>Apellido</label>
-            <input type="text" name="apellido">
-        </div>
-
-        <div class="form-group">
-            <label>Edad</label>
-            <input type="number" name="edad">
-        </div>
-
-        <div class="form-group">
-            <label>Dirección</label>
-            <input type="text" name="direccion">
-        </div>
-
-        <div class="form-group">
-            <label>Correo</label>
-            <input type="email" name="correo">
-        </div>
-
-        <div class="form-group">
-            <label>Contraseña</label>
-            <input type="password" name="contrasena">
-        </div>
-
-        <div class="form-group">
-            <label>Usuario</label>
-            <input type="text" name="usuario">
+            <label>Stock</label>
+            <input type="text" name="stock">
         </div>
 
         <div class="buttons">
-            <button type="reset" class="btn-borrar">Borrar</button>
-            <button type="submit" class="btn-enviar">Enviar</button>
+            <button type="reset" class="editar">
+                Editar
+            </button>
+
+            <button type="reset" class="borrar">
+                Borrar
+            </button>
+
+            <button type="submit" class="enviar">
+                Enviar
+            </button>
+
         </div>
 
     </form>
+    <a href=""></a>
 
 </div>
 
-<script>
-
-$(document).ready(function(){
-
-    $("#miFormulario").validate({
-
-        rules:{
-            nombre:{
-                required:true,
-                minlength:3
-            },
-
-            apellido:{
-                required:true,
-                minlength:3
-            },
-
-            edad:{
-                required:true,
-                number:true,
-                min:1
-            },
-
-            direccion:{
-                required:true
-            },
-
-            correo:{
-                required:true,
-                email:true
-            },
-
-            contrasena:{
-                required:true,
-                minlength:6
-            },
-
-            usuario:{
-                required:true,
-                minlength:4
-            }
-        },
-
-        messages:{
-            nombre:{
-                required:"Ingrese su nombre",
-                minlength:"Mínimo 3 caracteres"
-            },
-
-            apellido:{
-                required:"Ingrese su apellido",
-                minlength:"Mínimo 3 caracteres"
-            },
-
-            edad:{
-                required:"Ingrese su edad",
-                number:"Solo números",
-                min:"Edad inválida"
-            },
-
-            direccion:{
-                required:"Ingrese su dirección"
-            },
-
-            correo:{
-                required:"Ingrese su correo",
-                email:"Correo inválido"
-            },
-
-            contrasena:{
-                required:"Ingrese una contraseña",
-                minlength:"Mínimo 6 caracteres"
-            },
-
-            usuario:{
-                required:"Ingrese un usuario",
-                minlength:"Mínimo 4 caracteres"
-            }
-        },
-
-        submitHandler:function(form){
-            alert("Formulario enviado correctamente");
-            form.submit();
-        }
-
-    });
-
-});
-
-</script>
-
 </body>
+
 </html>
