@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,84 +15,99 @@
         }
 
         body{
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #cfe9ff, #e8f4ff);
+            font-family: Arial, Helvetica, sans-serif;
+
+            background-image: url("music-musical-instrument-guitar-two-dark-background.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+
             display: flex;
             justify-content: center;
             align-items: center;
+
             min-height: 100vh;
             padding: 20px;
         }
 
         .formulario{
-            background: white;
-            width: 100%;
-            max-width: 420px;
-            padding: 35px;
-            border-radius: 20px;
-            box-shadow: 0px 10px 25px rgba(0,0,0,0.12);
+
+            width: 330px;
+            padding: 30px;
+
+            border-radius: 15px;
+
+            background-color: rgba(24, 45, 75, 0.9);
+
+            border: 2px solid #6bb7ff;
+
+            box-shadow: 0 0 15px rgba(0,0,0,0.4);
         }
 
         .formulario h2{
             text-align: center;
-            color: #3498db;
-            margin-bottom: 25px;
-            font-size: 30px;
-        }
-
-        .grupo{
-            margin-bottom: 18px;
-        }
-
-        label{
-            display: block;
-            margin-bottom: 8px;
-            color: #2c3e50;
-            font-weight: 600;
-        }
-
-        input{
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #cfd9e2;
-            border-radius: 12px;
-            font-size: 15px;
-            transition: 0.3s;
-            background-color: #f8fbff;
-        }
-
-        input:focus{
-            border-color: #5dade2;
-            box-shadow: 0px 0px 8px rgba(93, 173, 226, 0.4);
-            outline: none;
-            background-color: white;
-        }
-
-        .boton{
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #5dade2, #3498db);
-            border: none;
-            border-radius: 12px;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-top: 10px;
-        }
-
-        .boton:hover{
-            background: linear-gradient(135deg, #3498db, #2e86c1);
-            transform: translateY(-2px);
-            box-shadow: 0px 5px 12px rgba(52, 152, 219, 0.4);
+            color: #fff3d6;
+            margin-bottom: 10px;
         }
 
         .subtitulo{
             text-align: center;
-            color: #7f8c8d;
-            margin-bottom: 25px;
+            color: #dcdcdc;
+            margin-bottom: 20px;
             font-size: 14px;
+        }
+
+        .grupo{
+            margin-bottom: 15px;
+        }
+
+        label{
+            display: block;
+            margin-bottom: 5px;
+
+            color: #fff3d6;
+
+            font-size: 15px;
+        }
+
+        input{
+            width: 100%;
+
+            padding: 10px;
+
+            border-radius: 8px;
+            border: none;
+
+            background-color: #f2f2f2;
+
+            outline: none;
+        }
+
+        input:focus{
+            border: 2px solid #4da6ff;
+        }
+
+        .boton{
+
+            width: 100%;
+
+            margin-top: 15px;
+            padding: 12px;
+
+            border: none;
+            border-radius: 10px;
+
+            background-color: #4da6ff;
+
+            color: white;
+
+            font-size: 16px;
+
+            cursor: pointer;
+        }
+
+        .boton:hover{
+            background-color: #ffae42;
         }
 
     </style>
@@ -102,8 +118,9 @@
     <div class="formulario">
 
         <h2>🍦 Registrar Producto</h2>
+
         <p class="subtitulo">
-            Complete los datos del producto de la heladería
+            Complete los datos del producto
         </p>
 
         <form action="registro.php" method="POST">
@@ -143,8 +160,10 @@
             </button>
 
         </form>
-
+        <a href="09.formadmin.html"></a>
+        
     </div>
 
 </body>
+
 </html>

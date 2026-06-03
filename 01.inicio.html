@@ -8,8 +8,6 @@
     <title>Dragon Ice</title>
 
     <style>
-        /* RESET */
-
         * {
             margin: 0;
             padding: 0;
@@ -17,109 +15,69 @@
             font-family: Arial, Helvetica, sans-serif;
         }
 
-        /* VIDEO */
-
         section {
-
             position: relative;
-
             width: 100%;
-
             height: 100vh;
-
             overflow: hidden;
         }
 
         video {
-
             position: absolute;
-
             top: 50%;
             left: 50%;
-
             transform: translate(-50%, -50%);
-
             width: 100%;
-
             height: 100%;
-
             object-fit: cover;
         }
 
-        /* HEADER */
-
         header {
-
             position: absolute;
-
             top: 0;
             left: 0;
-
             width: 100%;
-
             height: 15px;
-
             padding: 35px 40px;
-
             display: flex;
-
             justify-content: space-between;
-
             align-items: center;
-
-            background: rgba(255, 255, 255, 0.08);
-
+            background: rgba(255, 255, 255, 0.25);
             backdrop-filter: blur(8px);
-
             border-bottom: 2px solid white;
-
-            /* SOMBRA BONITA */
-
             box-shadow:
                 0 0 10px rgba(0, 0, 0, 0.3),
                 0 0 25px rgba(0, 0, 0, 0.4),
                 0 0 45px rgba(0, 0, 0, 0.5),
                 0 0 70px rgba(0, 0, 0, 0.4);
+
+            z-index: 10;
         }
 
-        /* LOGO */
-
-        aside {
-
+        .logo {
             display: flex;
-
             align-items: center;
-
             gap: 10px;
+            text-decoration: none;
         }
 
-        aside img {
-
+        .logo img {
             width: 42px;
-
             height: 42px;
-
             border-radius: 50%;
-
             object-fit: cover;
         }
 
-        /* TITULO */
-
-        aside h1 {
-
-            color: black;
-
+        .logo h1 {
+            color: white;
             font-size: 18px;
-
             font-weight: bold;
-
             text-shadow:
-                0 0 5px rgba(255, 255, 255, 0.7),
-                0 0 10px rgba(255, 255, 255, 0.6);
+                0 0 5px rgba(0, 0, 0, 0.7),
+                0 0 10px rgba(0, 0, 0, 0.6);
         }
 
-        /* MENU */
+
 
         nav {
 
@@ -130,117 +88,100 @@
             gap: 25px;
         }
 
-        /* ENLACES */
 
         nav a,
         button {
 
-            color: black;
-
+            color: white;
             text-decoration: none;
-
             font-size: 15px;
-
             font-weight: bold;
-
             background: none;
-
             border: none;
-
             cursor: pointer;
-
             text-shadow:
-                0 0 5px rgba(255, 255, 255, 0.7);
+                0 0 5px rgba(0, 0, 0, 0.7);
         }
-
-        /* REGISTRARSE */
 
         article {
 
             position: relative;
         }
 
-        /* MENU DESPLEGABLE */
-
         ul {
 
             position: absolute;
-
             top: 45px;
-
             left: 0;
-
             background: white;
-
             border-radius: 10px;
-
             min-width: 180px;
-
             overflow: hidden;
-
             display: none;
-
             box-shadow:
                 0 0 10px rgba(0, 0, 0, 0.3),
                 0 0 25px rgba(0, 0, 0, 0.2);
         }
 
-        /* MOSTRAR MENU */
-
         article:hover ul {
-
             display: block;
         }
 
-        /* OPCIONES */
-
         li {
-
             list-style: none;
         }
 
         li a {
 
             display: block;
-
             padding: 12px 15px;
-
             color: black;
-
             text-decoration: none;
-
             font-weight: bold;
         }
 
-        /* EFECTO */
-
         li a:hover {
-
             background: rgba(0, 0, 0, 0.08);
         }
 
-        /* RESPONSIVE */
+        main {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 5;
+        }
+
+        main h1 {
+
+            color: white;
+            font-size: 80px;
+            font-weight: bold;
+            letter-spacing: 10px;
+            text-shadow:
+                0 0 15px rgba(0, 0, 0, 0.8),
+                0 0 30px rgba(0, 0, 0, 0.7);
+        }
 
         @media(max-width:700px) {
 
             header {
-
                 height: auto;
-
                 padding: 20px;
-
                 flex-direction: column;
-
                 gap: 15px;
             }
 
             nav {
 
                 flex-wrap: wrap;
-
                 justify-content: center;
-
                 gap: 15px;
+            }
+
+            main h1 {
+                font-size: 45px;
+                text-align: center;
             }
 
         }
@@ -250,60 +191,41 @@
 <body>
 
     <section>
-
-        <video autoplay muted loop playsinline>
-
-            <source src="video.mp4" type="video/mp4">
+        <video autoplay muted loop muted>
+            <source src="download.mp4" type="video/mp4">
 
         </video>
-
-        <!-- HEADER -->
-
         <header>
-
-            <!-- LOGO -->
-
             <aside>
-
-                <img src="logo.png" alt="Logo">
-
-                <h1>Dragon Ice</h1>
-
+                <a href="" class="logo">
+                    <img src="xd.png" alt="Logo">
+                    <h1>Dragon Ice</h1>
+                </a>
             </aside>
-
             <nav>
                 <a href="">Inicio</a>
-
                 <article>
-
-                    <button> Registrarte </button>
-
+                    <button> Registrarte</button>
                     <ul>
-
                         <li>
-                            <a href="">Administrador</a>
+                            <a href="03.admin.html">Administrador</a>
+                            
                         </li>
-
                         <li>
-                            <a href="">Vendedor</a>
+                            <a href="05.vendedor.html">Vendedor</a>
                         </li>
-
                         <li>
-                            <a href="">Cliente</a>
+                            <a href="04.usuario.html">Cliente</a>
                         </li>
-
                     </ul>
-
                 </article>
-
                 <a href="">Iniciar Sesión</a>
-
             </nav>
-
         </header>
-
+        <main>
+            <h1>DRAGON ICE</h1>
+        </main>
     </section>
-
 </body>
 
 </html>

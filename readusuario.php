@@ -13,12 +13,7 @@ $sql="SELECT *FROM personas WHERE id="$id";
 $resultado = $conexion->query($sql);
 if ($resultado->num_rows>0){
 while($fila=$resultado->fetch_assoc()){
-    $idu=$fila['idp'];
-    $nombreu=$fila[nombrep];
-    $direccion=$fila[direccion];
-    $precio=$fila['precio']
-    $celular=$fila[costo];
-    $rol=$fila[stock];
+echo $fila['codigo']."<br>".$fila[nombre]."<br>".$fila[direccion]."<br>".$fila[]."<br>".$fila[costo]."<br>".$fila[stock];
   }
 }
 ?>

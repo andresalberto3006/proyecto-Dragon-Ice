@@ -2,7 +2,7 @@
 $direccion="localhost";
 $usuario="rout";
 $contraseña="";
-$nombreBase="dragon";
+$nombreBase="dragonice";
 
 $conexion= new mysqli($direccion,$usuario,$contraseña,$nombreBase);
 if($conexion->error){

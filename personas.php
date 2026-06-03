@@ -2,7 +2,7 @@
 $direccion="localhost";
 $usuario-"root";
 $contrasena="";
-$nombreBase="produccion";
+$nombreBase="dragonice";
 
 $conexion- new mysqli($nombre,$apellido,$descripcion,$produccion);
 if($conexion->error){
