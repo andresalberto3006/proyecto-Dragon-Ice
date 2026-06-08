@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -16,11 +17,11 @@
 
 body{
     font-family: Arial, Helvetica, sans-serif;
-    background-image: url("1 (4).png");
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center;
-    background-color: rgb(10,10,70);
+    background-image:url("1 (4).png");
+    background-size:cover;
+    background-attachment:fixed;
+    background-position:center;
+    background-color:rgb(10,10,70);
     color:white;
 }
 
@@ -52,31 +53,117 @@ body::after{
     z-index:-1;
 }
 
+/* MENU SUPERIOR */
+
+.menu-principal{
+    position:sticky;
+    top:0;
+    width:100%;
+    padding:20px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:rgba(255,255,255,0.2);
+    backdrop-filter:blur(8px);
+    border-bottom:2px solid white;
+    z-index:1000;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    text-decoration:none;
+}
+
+.logo img{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.logo h1{
+    color:white;
+    font-size:24px;
+}
+
+nav{
+    display:flex;
+    align-items:center;
+    gap:25px;
+}
+
+nav a,
+nav button{
+    color:white;
+    text-decoration:none;
+    font-size:16px;
+    font-weight:bold;
+    background:none;
+    border:none;
+    cursor:pointer;
+}
+
+article{
+    position:relative;
+}
+
+article ul{
+    position:absolute;
+    top:35px;
+    left:0;
+    background:white;
+    border-radius:10px;
+    min-width:180px;
+    overflow:hidden;
+    display:none;
+}
+
+article:hover ul{
+    display:block;
+}
+
+article li{
+    list-style:none;
+}
+
+article li a{
+    display:block;
+    padding:12px;
+    color:black;
+    text-decoration:none;
+}
+
+article li a:hover{
+    background:#f0f0f0;
+}
+
+/* CONTENIDO */
+
 .contenedor{
     width:90%;
     margin:auto;
     padding:40px 0;
 }
 
-/* HEADER */
-
-header{
+header.titulo{
     text-align:center;
     margin-bottom:60px;
 }
 
-header h1{
+header.titulo h1{
     font-size:70px;
     letter-spacing:3px;
     text-shadow:0 0 20px rgba(255,255,255,0.5);
-    background-color: rgb(125, 197, 197);
+    background-color:rgb(125,197,197);
     color:white;
     border-radius:25px;
     padding:20px;
     display:inline-block;
 }
 
-header p{
+header.titulo p{
     margin-top:15px;
     font-size:22px;
     color:#dbeafe;
@@ -91,7 +178,7 @@ header p{
 }
 
 .card{
-    background:rgb(125, 197, 197);
+    background:rgb(125,197,197);
     border-radius:25px;
     overflow:hidden;
     transition:0.4s;
@@ -133,7 +220,7 @@ header p{
 
 .contacto{
     margin-top:80px;
-    background:rgb(125, 197, 197);
+    background:rgb(125,197,197);
     border-radius:30px;
     padding:40px;
     display:grid;
@@ -164,7 +251,17 @@ iframe{
 
 @media(max-width:900px){
 
-    header h1{
+    .menu-principal{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    nav{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    header.titulo h1{
         font-size:45px;
     }
 
@@ -175,11 +272,11 @@ iframe{
 
 @media(max-width:600px){
 
-    header h1{
+    header.titulo h1{
         font-size:35px;
     }
 
-    header p{
+    header.titulo p{
         font-size:18px;
     }
 
@@ -203,12 +300,39 @@ iframe{
 </style>
 </head>
 
-<body style="background-image: url('1\ \(4\).png'); background-size: cover; background-attachment: fixed;">
+<body>
+
+<header class="menu-principal">
+
+    <a href="#" class="logo">
+        <img src="xd.png" alt="Logo">
+        <h1>Dragon Ice</h1>
+    </a>
+
+    <nav>
+
+        <a href="#">Inicio</a>
+
+        <article>
+            <button>Registrarte</button>
+
+            <ul>
+                <li><a href="trabajo2.html">Administrador</a></li>
+                <li><a href="esdon trabajo3.html">Vendedor</a></li>
+                <li><a href="edsontrabajo1.html">Cliente</a></li>
+            </ul>
+        </article>
+
+        <a href="#">Iniciar Sesión</a>
+
+    </nav>
+
+</header>
 
 <div class="contenedor">
 
-    <header>
-        <h1>🍦 Dragon Ice</h1>
+    <header class="titulo">
+        <h1>PRODUCTOS🍦</h1>
         <p>Los sabores más refrescantes y deliciosos</p>
     </header>
 
@@ -278,7 +402,7 @@ iframe{
         </div>
 
         <div>
-            <iframe 
+            <iframe
             src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d334.02558114454735!2d-66.15382081570189!3d-17.39178135670349!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1ses!2sbo!4v1778812862789!5m2!1ses!2sbo"
             allowfullscreen=""
             loading="lazy">
