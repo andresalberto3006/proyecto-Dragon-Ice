@@ -3,7 +3,7 @@
 $nombreServidor = "localhost";
 $usuario = "root";
 $contraseña = "";
-$basededatos = "QUINOVA";
+$basededatos = "dragonice";
 
 $conexion = new mysqli($nombreServidor, $usuario, $contraseña, $basededatos);
 
