@@ -8,11 +8,11 @@
     if ($conn->connect_error) {
         echo "hubo un error al conectar a las base de datos";
 }
-$id_productos=$_POST['ciu'];
-$id_pedidos=$_POST['nombre'];
-$cantidad=$_POST['direccion'];
-$costotal=$_POST['celular'];
-$sql ="INSERT INTO productos_has_pedidos(id_productos, id_pedidos, cantidad, costotal, rol, estado) VALUES ('$ciu', '$nombre', '$direccion', '$celular', '$rol', '$estado')";
+$id_productos=$_POST['id_producto'];
+$id_pedidos=$_POST['id_pedidos'];
+$cantidad=$_POST['cantidad'];
+$costotal=$_POST['costotal'];
+$sql ="INSERT INTO productos_has_pedidos(id_productos, id_pedidos, cantidad, costotal) VALUES ('$id_productos', '$id_pedidos', '$cantidad', '$costotal')";
 if ($conexion->query($sql)==TRUE){
   echo "Se registro correctamente";
 }
