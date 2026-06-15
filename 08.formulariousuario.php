@@ -121,25 +121,22 @@
             Complete los datos del usuario
         </p>
 
-        <form action="createusuario.php" method="POST">
+        <form action="registrousuario.php" method="POST">
 
-            <label for="nombre">codigo</label>
-            <input type="text" id="ciu" placeholder="Ingrese su contraseña">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" placeholder="Ingrese su nombre">
 
-            <label for="contraseña">nombre</label>
-            <input type="number" id="nombre" name="nombre" placeholder="Ingrese su nombre">
-
-            <label for="direccion"></label>
+            <label for="direccion">Direccion</label>
             <input type="text" id="ciu" placeholder="Ingrese su direccion">
 
-            <label for="celular">sesion</label>
-            <input type="text" id="ciu" placeholder="Ingrese su número de celular">
+            <label for="celular">Celular</label>
+            <input type="text" id="celular" placeholder="Ingrese su número de celular">
 
-            <label for="rol">sesion</label>
-            <input type="text" id="ciu" placeholder="Ingrese su rol personal">
+            <label for="rol">Rol</label>
+            <input type="text" id="rol" placeholder="Ingrese su rol personal">
 
-            <label for="estado">sesion</label>
-            <input type="text" id="ciu" placeholder="Ingrese su estado personal">
+            <label for="estado">Estado</label>
+            <input type="text" estado" placeholder="Ingrese su estado personal">
 
             <button type="submit" class="boton">
                 Crear Cuenta
