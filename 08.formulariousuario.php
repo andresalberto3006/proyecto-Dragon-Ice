@@ -121,7 +121,7 @@
             Complete los datos del usuario
         </p>
 
-        <form action="createusuario.php" method="POST">
+        <form action="registrousuario.php" method="POST">
 
 <label for="nombre">Nombre</label>
 <input type="text" id="nombre" name="nombre">

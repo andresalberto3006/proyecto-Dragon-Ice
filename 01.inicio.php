@@ -111,7 +111,7 @@
         ul {
 
             position: absolute;
-            top: 45px;
+            top: 35px;
             left: 0;
             background: white;
             border-radius: 10px;
@@ -125,6 +125,7 @@
 
         article:hover ul {
             display: block;
+            transform: scale(1.28);
         }
 
         li {
