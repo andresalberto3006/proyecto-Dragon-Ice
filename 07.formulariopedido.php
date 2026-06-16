@@ -1,27 +1,3 @@
-<?php
-    $direccion="localhost";
-    $usuario="root";
-    $contraseña="";
-    $nombreBase="dragonice";
-
-    $conexion= new mysql($direccion, $usuario, $contraseña, $nombreBase);
-    if($conexion->error){
-        echo "Hubo un error al conectar la base de datos";
-    }
-    $ciu=$_GET['ciu'];
-    $sql="SELECT * FROM usuario WHERE ciu='$ciu'";
-    $resultado = $conexion->query($sql);
-    if ($resultado->num_rows>0){
-        while($fila=$resultado->fetch_assoc()){
-            $nombre=$fila['nombre'];
-            $direccion=$fila['direccion'];
-            $celular=$fila['celular'];
-            $rol=$fila['rol'];
-            $estado=$fila['estado'];
-        }
-    }
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -30,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>;
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>;
-    <title>Compralo</title>
+    <title>Formulario Heladería</title>
 
     <style>
 
@@ -143,35 +119,41 @@
 
     <div class="formulario">
 
-        <h2>🍦 Registrar tu compra</h2>
+        <h2>🍦 Registrar Pedido</h2>
 
         <p class="subtitulo">
-            Complete los datos de la compra
+            Complete los datos del producto
         </p>
 
         <form action="" method="POST">
 
             <div class="grupo">
-                <label for="id_productos">Código del producto</label>
-                <input type="number" id="id_productos" name="id_productos" placeholder="Ingrese el código" value=<?=$id_productos?>>
+                <label for="id">Código</label>
+                <input type="number" id="id" name="id" placeholder="Ingrese el código">
             </div>
 
             <div class="grupo">
-                <label for="id_pedidos">Numero del pedido</label>
-                <input type="text" id="id_pedidos" name="id_pedidos" placeholder="Ingrese el número del pedido" value=<?=$id_pedidos?>>
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre">
             </div>
 
             <div class="grupo">
-                <label for="cantidad">Cantidad</label>
-                <input type="number" id="cantidad" name="cantidad" placeholder="Ingrese la cantidad" value=<?=$cantidad?>>
+                <label for="fecha">Fecha</label>
+                <input type="date" id="fecha" name="fecha">
             </div>
 
             <div class="grupo">
-                <label for="costotal">Costo total</label>
-                <input type="number" id="costotal" name="costotal" placeholder="Ingrese el costo total" value=<?=$costotal?>>
+                <label for="estado">Estado</label>
+                <input type="text" id="estado" name="estado" placeholder="Ingrese el estado">
             </div>
+
+            <div class="grupo">
+                <label for="nombrevendedor">Nombre del Vendedor</label>
+                <input type="text" id="nombrevendedor" name="nombrevendedor" placeholder="Ingrese el nombre del vendedor">
+            </div>
+
             <button type="submit" class="boton">
-                Registrar compra
+                Registrar Pedido
             </button>
 
         </form>

@@ -14,7 +14,8 @@
    $resultado = $conexion->query($sql);
    if ($resultado->num_rouws>0){
     while($fila=$rsultado->fetch_assoc()){
-        echo $fila['ciu']."<br>".$fila['nombre']."<br>".$fila['direccion']."<br>".$fila['celular']."<br>".$fila['rol']."<br>".$fila['estado'];   
+        echo $fila['ciu']."<br>".$fila['nombre']."<br>".$fila['direccion']."<br>".$fila['celular']."<br>".$fila['rol']."<br>".$fila['estado']; 
+          
     }
    }
 
