@@ -1,27 +1,3 @@
-<?php
-    $direccion="localhost";
-    $usuario="root";
-    $contraseña="";
-    $nombreBase="dragonice";
-
-    $conexion= new mysql($direccion, $usuario, $contraseña, $nombreBase);
-    if($conexion->error){
-        echo "Hubo un error al conectar la base de datos";
-    }
-    $ciu=$_GET['ciu'];
-    $sql="SELECT * FROM usuario WHERE ciu='$ciu'";
-    $resultado = $conexion->query($sql);
-    if ($resultado->num_rows>0){
-        while($fila=$resultado->fetch_assoc()){
-            $nombre=$fila['nombre'];
-            $direccion=$fila['direccion'];
-            $celular=$fila['celular'];
-            $rol=$fila['rol'];
-            $estado=$fila['estado'];
-        }
-    }
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -153,22 +129,22 @@
 
             <div class="grupo">
                 <label for="id_productos">Código del producto</label>
-                <input type="number" id="id_productos" name="id_productos" placeholder="Ingrese el código" value=<?=$id_productos?>>
+                <input type="number" id="id_productos" name="id_productos" placeholder="Ingrese el código">
             </div>
 
             <div class="grupo">
                 <label for="id_pedidos">Numero del pedido</label>
-                <input type="text" id="id_pedidos" name="id_pedidos" placeholder="Ingrese el número del pedido" value=<?=$id_pedidos?>>
+                <input type="text" id="id_pedidos" name="id_pedidos" placeholder="Ingrese el número del pedido">
             </div>
 
             <div class="grupo">
                 <label for="cantidad">Cantidad</label>
-                <input type="number" id="cantidad" name="cantidad" placeholder="Ingrese la cantidad" value=<?=$cantidad?>>
+                <input type="number" id="cantidad" name="cantidad" placeholder="Ingrese la cantidad">
             </div>
 
             <div class="grupo">
                 <label for="costotal">Costo total</label>
-                <input type="number" id="costotal" name="costotal" placeholder="Ingrese el costo total" value=<?=$costotal?>>
+                <input type="number" id="costotal" name="costotal" placeholder="Ingrese el costo total">
             </div>
             <button type="submit" class="boton">
                 Registrar compra

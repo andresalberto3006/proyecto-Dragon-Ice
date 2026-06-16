@@ -17,6 +17,7 @@ $stock=$_POST['stock'];
 $sql ="INSERT INTO producto(ci, nombre, descripcion, precio, costo, stock) VALUES ('$Codigo', '$nombre', '$descripcin', '$precio', '$costo', '$stock')";
 if ($conexion->query($sql)==TRUE){
   echo "Se registro correctamente";
+  header("Location: readproductoi.php");
 }
 else{
   echo $sql->error;
