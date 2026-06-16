@@ -125,7 +125,7 @@
             Complete los datos del producto
         </p>
 
-        <form action="registro.php" method="POST">
+        <form action="registroproducto.php" method="POST">
 
             <div class="grupo">
                 <label for="ci">Código / CI</label>
