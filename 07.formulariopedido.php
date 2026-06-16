@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario Heladeria</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>;
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>;
+    <title>Formulario Heladería</title>
 
     <style>
 
@@ -15,7 +17,7 @@
         }
 
         body{
-            font-family: Arial, sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
 
             background-image: url("music-musical-instrument-guitar-two-dark-background.png");
             background-size: cover;
@@ -44,7 +46,7 @@
             box-shadow: 0 0 15px rgba(0,0,0,0.4);
         }
 
-        h2{
+        .formulario h2{
             text-align: center;
             color: #fff3d6;
             margin-bottom: 10px;
@@ -57,10 +59,12 @@
             font-size: 14px;
         }
 
+        .grupo{
+            margin-bottom: 15px;
+        }
+
         label{
             display: block;
-
-            margin-top: 12px;
             margin-bottom: 5px;
 
             color: #fff3d6;
@@ -73,8 +77,8 @@
 
             padding: 10px;
 
-            border: none;
             border-radius: 8px;
+            border: none;
 
             background-color: #f2f2f2;
 
@@ -89,15 +93,15 @@
 
             width: 100%;
 
-            background-color: #4da6ff;
-            color: white;
-
+            margin-top: 15px;
             padding: 12px;
 
             border: none;
             border-radius: 10px;
 
-            margin-top: 20px;
+            background-color: #4da6ff;
+
+            color: white;
 
             font-size: 16px;
 
@@ -115,35 +119,45 @@
 
     <div class="formulario">
 
-        <h2>Crear Cuenta</h2>
+        <h2>🍦 Registrar Pedido</h2>
 
         <p class="subtitulo">
-            Complete los datos del usuario
+            Complete los datos del producto
         </p>
 
-        <form action="registrousuario.php" method="post">
+        <form action="" method="POST">
 
-<label for="nombre">Nombre:</label>
-<input type="text">
+            <div class="grupo">
+                <label for="id">Código</label>
+                <input type="number" id="id" name="id" placeholder="Ingrese el código">
+            </div>
 
-<label for="">Direccion:</label>
-<input type="text" >
+            <div class="grupo">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre">
+            </div>
 
-<label for="">Celular:</label>
-<input type="text" >
+            <div class="grupo">
+                <label for="fecha">Fecha</label>
+                <input type="date" id="fecha" name="fecha">
+            </div>
 
-<label for="">Rol:</label>
-<input type="text">
+            <div class="grupo">
+                <label for="estado">Estado</label>
+                <input type="text" id="estado" name="estado" placeholder="Ingrese el estado">
+            </div>
 
-<label for="">Estado:</label>
-<input type="text">
+            <div class="grupo">
+                <label for="nombrevendedor">Nombre del Vendedor</label>
+                <input type="text" id="nombrevendedor" name="nombrevendedor" placeholder="Ingrese el nombre del vendedor">
+            </div>
 
-<button type="submit" class="boton">
-Crear Cuenta
-</button>
+            <button type="submit" class="boton">
+                Registrar Pedido
+            </button>
 
-</form>
-
+        </form>
+        
     </div>
 
 </body>

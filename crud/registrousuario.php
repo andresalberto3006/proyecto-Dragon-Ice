@@ -16,6 +16,7 @@ $estado=$_POST['estado'];
 $sql ="INSERT INTO usuario(nombre, direccion, celular, rol, estado) VALUES ('$nombre', '$direccion', '$celular', '$rol', '$estado')";
 if ($conexion->query($sql)===TRUE){
   echo "Se registro correctamente";
+  header("Location: readusuario.php");
 }
 else{
   echo $sql->error;
