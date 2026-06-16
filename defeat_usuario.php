@@ -15,7 +15,6 @@
         <div class="encabezado">Cliente Eliminado</div>
 
         <div class="contenido">
-            <!-- Imagen en los otros ejemplos -->
 <img src="" alt="Usuario Eliminado" class="imagen">
 <?php
 if($conn->connect_error){

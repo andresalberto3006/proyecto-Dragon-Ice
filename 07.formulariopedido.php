@@ -119,17 +119,17 @@
 
     <div class="formulario">
 
-        <h2>🍦 Registrar Producto</h2>
+        <h2>🍦 Registrar Pedido</h2>
 
         <p class="subtitulo">
             Complete los datos del producto
         </p>
 
-        <form action="registro.php" method="POST">
+        <form action="" method="POST">
 
             <div class="grupo">
-                <label for="ci">Código / CI</label>
-                <input type="text" id="ci" name="ci" placeholder="Ingrese el código">
+                <label for="id">Código</label>
+                <input type="number" id="id" name="id" placeholder="Ingrese el código">
             </div>
 
             <div class="grupo">
@@ -138,31 +138,25 @@
             </div>
 
             <div class="grupo">
-                <label for="descripcion">Descripción</label>
-                <input type="text" id="descripcion" name="descripcion" placeholder="Descripción del producto">
+                <label for="fecha">Fecha</label>
+                <input type="date" id="fecha" name="fecha">
             </div>
 
             <div class="grupo">
-                <label for="precio">Precio</label>
-                <input type="text" id="precio" name="precio" placeholder="Ingrese el precio">
+                <label for="estado">Estado</label>
+                <input type="text" id="estado" name="estado" placeholder="Ingrese el estado">
             </div>
 
             <div class="grupo">
-                <label for="costo">Costo</label>
-                <input type="text" id="costo" name="costo" placeholder="Ingrese el costo">
-            </div>
-
-            <div class="grupo">
-                <label for="stock">Stock</label>
-                <input type="text" id="stock" name="stock" placeholder="Cantidad disponible">
+                <label for="nombrevendedor">Nombre del Vendedor</label>
+                <input type="text" id="nombrevendedor" name="nombrevendedor" placeholder="Ingrese el nombre del vendedor">
             </div>
 
             <button type="submit" class="boton">
-                Guardar Producto
+                Registrar Pedido
             </button>
 
         </form>
-        <a href="09.formadmin.html"></a>
         
     </div>
 

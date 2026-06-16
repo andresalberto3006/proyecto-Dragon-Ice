@@ -1,27 +1,3 @@
-<?php
-    $direccion="localhost";
-    $usuario="root";
-    $contraseña="";
-    $nombreBase="dragonice";
-
-    $conexion= new mysql($direccion, $usuario, $contraseña, $nombreBase);
-    if($conexion->error){
-        echo "Hubo un error al conectar la base de datos";
-    }
-    $ciu=$_GET['ciu'];
-    $sql="SELECT * FROM usuario WHERE ciu='$ciu'";
-    $resultado = $conexion->query($sql);
-    if ($resultado->num_rows>0){
-        while($fila=$resultado->fetch_assoc()){
-            $nombre=$fila['nombre'];
-            $direccion=$fila['direccion'];
-            $celular=$fila['celular'];
-            $rol=$fila['rol'];
-            $estado=$fila['estado'];
-        }
-    }
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -143,44 +119,50 @@
 
     <div class="formulario">
 
-        <h2>🍦 Registrar Pedido</h2>
+        <h2>🍦 Registrar Producto</h2>
 
         <p class="subtitulo">
             Complete los datos del producto
         </p>
 
-        <form action="" method="POST">
+        <form action="registroproducto.php" method="POST">
 
             <div class="grupo">
-                <label for="id">Código</label>
-                <input type="number" id="id" name="id" placeholder="Ingrese el código" value=<?=$stock?>><br>
+                <label for="ci">Código / CI</label>
+                <input type="text" id="ci" name="ci" placeholder="Ingrese el código">
             </div>
 
             <div class="grupo">
                 <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre" value=<?=$nombre?>>
+                <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre">
             </div>
 
             <div class="grupo">
-                <label for="fecha">Fecha</label>
-                <input type="date" id="fecha" name="fecha" value=<?=$fecha?>>
+                <label for="descripcion">Descripción</label>
+                <input type="text" id="descripcion" name="descripcion" placeholder="Descripción del producto">
             </div>
 
             <div class="grupo">
-                <label for="estado">Estado</label>
-                <input type="text" id="estado" name="estado" placeholder="Ingrese el estado" value=<?=$estado?>>
+                <label for="precio">Precio</label>
+                <input type="text" id="precio" name="precio" placeholder="Ingrese el precio">
             </div>
 
             <div class="grupo">
-                <label for="nombrevendedor">Nombre del Vendedor</label>
-                <input type="text" id="nombrevendedor" name="nombrevendedor" placeholder="Ingrese el nombre del vendedor" value=<?=$nombrevendedor?>>
+                <label for="costo">Costo</label>
+                <input type="text" id="costo" name="costo" placeholder="Ingrese el costo">
+            </div>
+
+            <div class="grupo">
+                <label for="stock">Stock</label>
+                <input type="text" id="stock" name="stock" placeholder="Cantidad disponible">
             </div>
 
             <button type="submit" class="boton">
-                Registrar Pedido
+                Guardar Producto
             </button>
 
         </form>
+        <a href="09.formadmin.html"></a>
         
     </div>
 

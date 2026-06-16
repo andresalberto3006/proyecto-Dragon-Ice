@@ -4,7 +4,7 @@
    $contraseña="";
    $nombreBase="dragonice";
 
-   $conexion= new mysql($direccion,$usuario,$contraseña,$nombreBase);
+   $conexion= new mysqli($direccion,$usuario,$contraseña,$nombreBase);
    if($conexion->error){
     echo "hubo un error al conectar a la base de datos";
    }
@@ -14,7 +14,8 @@
    $resultado = $conexion->query($sql);
    if ($resultado->num_rouws>0){
     while($fila=$rsultado->fetch_assoc()){
-        echo $fila['ciu']."<br>".$fila['nombre']."<br>".$fila['direccion']."<br>".$fila['celular']."<br>".$fila['rol']."<br>".$fila['estado'];   
+        echo $fila['ciu']."<br>".$fila['nombre']."<br>".$fila['direccion']."<br>".$fila['celular']."<br>".$fila['rol']."<br>".$fila['estado']; 
+          
     }
    }
 
