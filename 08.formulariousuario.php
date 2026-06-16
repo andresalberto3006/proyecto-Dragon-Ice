@@ -123,6 +123,8 @@
 
         <form action="registrousuario.php" method="POST">
 
+<label for="ciu">CI</label>
+<input type="number" id="ciu" name="ciu">
 <label for="nombre">Nombre</label>
 <input type="text" id="nombre" name="nombre">
 
