@@ -124,19 +124,19 @@
         <form action="registrousuario.php" method="post">
 
 <label for="nombre">Nombre:</label>
-<input type="text"  name="nombre">
+<input type="text">
 
-<label for="direccion">Direccion:</label>
-<input type="text" name="direccion">
+<label for="">Direccion:</label>
+<input type="text" >
 
-<label for="celular">Celular:</label>
-<input type="text" name="celular">
+<label for="">Celular:</label>
+<input type="text" >
 
-<label for="rol">Rol:</label>
-<input type="text"  name="rol">
+<label for="">Rol:</label>
+<input type="text">
 
-<label for="estado">Estado:</label>
-<input type="text" name="estado">
+<label for="">Estado:</label>
+<input type="text">
 
 <button type="submit" class="boton">
 Crear Cuenta
