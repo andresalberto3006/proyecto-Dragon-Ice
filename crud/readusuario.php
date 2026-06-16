@@ -4,7 +4,7 @@
    $contraseña="";
    $nombreBase="dragonice";
 
-   $conexion= new mysql($direccion,$usuario,$contraseña,$nombreBase);
+   $conexion= new mysqli($direccion,$usuario,$contraseña,$nombreBase);
    if($conexion->error){
     echo "hubo un error al conectar a la base de datos";
    }

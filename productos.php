@@ -56,54 +56,7 @@ body::after{
 
 /* MENU */
 
-.menu-principal{
-    position:sticky;
-    top:0;
-    width:100%;
-    padding:20px 40px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    background:rgba(255,255,255,0.2);
-    backdrop-filter:blur(8px);
-    border-bottom:2px solid white;
-    z-index:1000;
-}
 
-.logo{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    text-decoration:none;
-}
-
-.logo img{
-    width:50px;
-    height:50px;
-    border-radius:50%;
-    object-fit:cover;
-}
-
-.logo h1{
-    color:white;
-}
-
-nav{
-    display:flex;
-    align-items:center;
-    gap:25px;
-}
-
-nav a,
-nav button{
-    color:white;
-    text-decoration:none;
-    font-size:16px;
-    font-weight:bold;
-    background:none;
-    border:none;
-    cursor:pointer;
-}
 
 article{
     position:relative;
@@ -258,37 +211,10 @@ iframe{
 
 <header class="menu-principal">
 
-    <a href="#" class="logo">
-        <img src="logo.png" alt="Logo">
-        <h1>Dragon Ice</h1>
-    </a>
-
-    <nav>
-
-        <a href="#">Inicio</a>
-
-        <article>
-
-
-            <button id="btnRegistro">Registrarte ▼</button>
-
-            <ul id="menuRegistro">
-                <li><a href="trabajo2.html">Administrador</a></li>
-                <li><a href="esdon trabajo3.html">Vendedor</a></li>
-                <li><a href="edsontrabajo1.html">Cliente</a></li>
-
-            <ul>
-                <li><a href="03.admin.html">Administrador</a></li>
-                <li><a href="05.vendedor.html">Vendedor</a></li>
-                <li><a href="04.usuario.html">Cliente</a></li>
-
-            </ul>
-
-        </article>
-
-        <a href="#">Iniciar Sesión</a>
-
-    </nav>
+  <?php
+  include("menu.php")
+  
+  ?>
 
 </header>
 

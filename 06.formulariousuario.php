@@ -131,21 +131,21 @@
 <label for="direccion">Direccion:</label>
 <input type="text" name="direccion">
 
-<label for="celular">Celular:</label>
-<input type="text" name="celular">
+<label for="">Celular:</label>
+<input type="text" >
 
-<label for="rol">Rol:</label>
-<input type="text"  name="rol">
+<label for="">Rol:</label>
+<input type="text">
 
-<label for="estado">Estado:</label>
-<input type="text" name="estado">
+<label for="">Estado:</label>
+<input type="text">
 
 <button type="submit" class="boton">
 Crear Cuenta
 </button>
 
 </form>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script&gt;
     </div>
 
 </body>
