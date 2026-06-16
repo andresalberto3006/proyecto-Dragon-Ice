@@ -8,13 +8,13 @@
     if ($conn->connect_error) {
         echo "hubo un error al conectar a las base de datos";
 }
-$Codigo=$_POST['ci'];
+$id=$_POST['id'];
 $nombre=$_POST['nombre'];
-$descripcin=$_POST['descripcion'];
-$precio=$_POST['precio'];
-$costo=$_POST['costo'];
+$fecha=$_POST['fecha'];
+$estado=$_POST['estado'];
+$nombrevendedor=$_POST['nombrevendedor'];
 $stock=$_POST['stock'];
-$sql ="INSERT INTO producto(ci, nombre, descripcion, precio, costo, stock) VALUES ('$Codigo', '$nombre', '$descripcin', '$precio', '$costo', '$stock')";
+$sql ="INSERT INTO producto(id, nombre, fecha, estado, nombrevendedor) VALUES ('$id', '$nombre', '$fecha', '$estado', '$nombrevendedor', '$stock')";
 if ($conexion->query($sql)==TRUE){
   echo "Se registro correctamente";
   header("Location: readproductoi.php");

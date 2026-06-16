@@ -4,8 +4,8 @@
     $contraseña="";
     $nombreBase="dragonice";
 
-    $conexion= new mysql($direccion, $usuario, $contraseña, $nombreBase);
-    if($conexion->error){
+    $conexion= new mysqli($direccion, $usuario, $contraseña, $nombreBase);
+    if($conexion->connect_error){
         echo "Hubo un error al conectar la base de datos";
     }
     $ciu=$_GET['ciu'];
@@ -145,21 +145,23 @@
         </p>
 
         <form action="registrousuario.php" method="POST">
+            <label for="ciu">Codigo</label>
+            <input type="number" id="ciu" name="ciu" placeholder="Ingrese su codigo" value="<?=$ciu?>"><br>
 
             <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" placeholder="Ingrese su nombre" value=<?=$nombre?>><br>
+            <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre" value="<?=$nombre?>"><br>
 
             <label for="direccion">Direccion</label>
-            <input type="text" id="ciu" placeholder="Ingrese su direccion" value=<?=$ciu?>><br>>
+            <input type="text" id="direccion" name="direccion" placeholder="Ingrese su direccion" value="<?=$ciu?>"><br>
 
             <label for="celular">Celular</label>
-            <input type="text" id="celular" placeholder="Ingrese su número de celular" value=<?=$celular?>><br>>
+            <input type="text" id="celular" name="celular" placeholder="Ingrese su número de celular" value="<?=$celular?>"><br>
 
             <label for="rol">Rol</label>
-            <input type="text" id="rol" placeholder="Ingrese su rol personal" value=<?=$rol?>><br>>
+            <input type="text" id="rol" name="rol" placeholder="Ingrese su rol personal" value="<?=$rol?>"><br>
 
             <label for="estado">Estado</label>
-            <input type="text" estado" placeholder="Ingrese su estado personal" value=<?=$estado?>><br>>
+            <input type="text" id="estado" name="estado" placeholder="Ingrese su estado personal" value="<?=$estado?>"><br>
 
             <button type="submit" class="boton">
                 Crear Cuenta
