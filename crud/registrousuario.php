@@ -6,7 +6,7 @@
 
   $connect=new mysqli($direccion, $usuario, $contraseña, $nombreBase);
     if ($conn->connect_error) {
-        echo "hubo un error al conectar a las base de datos";
+        echo "Hubo un error al conectar a la base de datos";
 }
 $ciu=$_POST['ciu'];
 $nombre=$_POST['nombre'];
