@@ -15,6 +15,7 @@ $costotal=$_POST['costotal'];
 $sql ="INSERT INTO productos_has_pedidos(id_productos, id_pedidos, cantidad, costotal) VALUES ('$id_productos', '$id_pedidos', '$cantidad', '$costotal')";
 if ($conexion->query($sql)==TRUE){
   echo "Se registro correctamente";
+  header("Location: readcarrito.php");
 }
 else{
   echo $sql->error;
