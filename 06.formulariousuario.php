@@ -128,10 +128,6 @@
 <input type="number" id="ciu" name="ciu">
 <label for="nombre">Nombre</label>
 <input type="text" id="nombre" name="nombre">
-<label for="nombre">Nombre:</label>
-<input type="text"  name="nombre">
-
-
 <label for="direccion">Direccion:</label>
 <input type="text" name="direccion">
 
