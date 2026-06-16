@@ -121,23 +121,22 @@
             Complete los datos del usuario
         </p>
 
-        <form action="registrousuario.php" method="POST">
+        <form action="registrousuario.php" method="post">
 
-<label for="nombre">Nombre</label>
-<input type="text" id="nombre" name="nombre">
+<label for="nombre">Nombre:</label>
+<input type="text"  name="nombre">
 
-<label for="direccion">Direccion</label>
-<input type="text" id="direccion" name="direccion">
+<label for="direccion">Direccion:</label>
+<input type="text" name="direccion">
 
-<label for="celular">Celular</label>
-<input type="text" id="celular" name="celular">
+<label for="celular">Celular:</label>
+<input type="text" name="celular">
 
-<label for="rol">Rol</label>
-<input type="text" id="rol" name="rol">
+<label for="rol">Rol:</label>
+<input type="text"  name="rol">
 
-
-<label for="estado">Estado</label>
-<input type="text" id="estado" name="estado">
+<label for="estado">Estado:</label>
+<input type="text" name="estado">
 
 <button type="submit" class="boton">
 Crear Cuenta
