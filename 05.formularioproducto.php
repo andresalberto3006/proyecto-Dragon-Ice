@@ -125,11 +125,11 @@
             Complete los datos del producto
         </p>
 
-        <form action="registroproducto.php" method="POST">
+        <form action="crud/registroproducto.php" method="POST">
 
             <div class="grupo">
-                <label for="ci">Código / CI</label>
-                <input type="text" id="ci" name="ci" placeholder="Ingrese el código">
+                <label for="id">Código / CI</label>
+                <input type="text" id="id" name="id" placeholder="Ingrese el código">
             </div>
 
             <div class="grupo">

@@ -4,20 +4,30 @@
     $contraseña="";
     $nombreBase="dragonice";
 
-    $conexion= new mysql($direccion, $usuario, $contraseña, $nombreBase);
-    if($conexion->error){
+    $conexion= new mysqli($direccion, $usuario, $contraseña, $nombreBase);
+    if($conexion->connector_error){
         echo "Hubo un error al conectar la base de datos";
     }
-    $ciu=$_GET['ciu'];
-    $sql="SELECT * FROM usuario WHERE ciu='$ciu'";
+    $id= "";
+    $nombre = "";
+    $descripcion = "";
+    $precio = "";
+    $costo = "";
+    $stock = "";
+
+      if (isset($_GET['id'])) {
+
+    $id=$_GET['id'];
+    $sql="SELECT * FROM productos WHERE id='$id'";
     $resultado = $conexion->query($sql);
     if ($resultado->num_rows>0){
-        while($fila=$resultado->fetch_assoc()){
+        $fila=$resultado->fetch_assoc();
+            $id=$fila['id'];
             $nombre=$fila['nombre'];
-            $direccion=$fila['direccion'];
-            $celular=$fila['celular'];
-            $rol=$fila['rol'];
-            $estado=$fila['estado'];
+            $descripcion=$fila['descripcion'];
+            $precio=$fila['precio'];
+            $costo=$fila['costo'];
+            $stock=$fila['stock'];
         }
     }
 ?>
@@ -27,8 +37,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>;
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>;
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
     <title>Formulario Heladería</title>
 
     <style>
@@ -152,32 +162,32 @@
 
             <div class="grupo">
                 <label for="ci">Código / CI</label>
-                <input type="text" id="ci" name="ci" placeholder="Ingrese el código" value=<?=$ciu?>><br>>
+                <input type="text" id="ci" name="ci" placeholder="Ingrese el código" value=<?=$ciu?>><br>
             </div>
 
             <div class="grupo">
                 <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre" value=<?=$nombre?>><br>>
+                <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre" value=<?=$nombre?>><br>
             </div>
 
             <div class="grupo">
                 <label for="descripcion">Descripción</label>
-                <input type="text" id="descripcion" name="descripcion" placeholder="Descripción del producto" value=<?=$descripcion?>><br>>
+                <input type="text" id="descripcion" name="descripcion" placeholder="Descripción del producto" value=<?=$descripcion?>><br>
             </div>
 
             <div class="grupo">
                 <label for="precio">Precio</label>
-                <input type="text" id="precio" name="precio" placeholder="Ingrese el precio" value=<?=$precio?>><br>>
+                <input type="text" id="precio" name="precio" placeholder="Ingrese el precio" value=<?=$precio?>><br>
             </div>
 
             <div class="grupo">
                 <label for="costo">Costo</label>
-                <input type="text" id="costo" name="costo" placeholder="Ingrese el costo" value=<?=$costo?>><br>>
+                <input type="text" id="costo" name="costo" placeholder="Ingrese el costo" value=<?=$costo?>><br>
             </div>
 
             <div class="grupo">
                 <label for="stock">Stock</label>
-                <input type="text" id="stock" name="stock" placeholder="Cantidad disponible" value=<?=$stock?>><br>>
+                <input type="text" id="stock" name="stock" placeholder="Cantidad disponible" value=<?=$stock?>><br>
             </div>
 
             <button type="submit" class="boton">
@@ -185,7 +195,7 @@
             </button>
 
         </form>
-        <a href="09.formadmin.html"></a>
+        <a href=""></a>
         
     </div>
 

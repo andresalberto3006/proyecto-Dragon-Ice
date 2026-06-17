@@ -1,4 +1,4 @@
-<?php
+sss<?php
     $direccion="localhost";
     $usuario="root";
     $contraseña="";

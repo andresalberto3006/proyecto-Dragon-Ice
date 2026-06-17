@@ -125,7 +125,7 @@
             Complete los datos del producto
         </p>
 
-        <form action="" method="POST">
+        <form action="crud/registroproducto.php" method="POST">
 
             <div class="grupo">
                 <label for="id">Código</label>

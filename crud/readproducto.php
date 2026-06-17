@@ -9,12 +9,12 @@
     echo "hubo un error al conectar a la base de datos";
    }
 
-   $codigo=$_GET['codigo'];
-   $sql="SELECT * FROM producto WHERE codigo='$codigo";
+   $id=$_GET['id'];
+   $sql="SELECT * FROM productos WHERE id='$id'";
    $resultado = $conexion->query($sql);
-   if ($resultado->num_rouws>0){
-    while($fila=$rsultado->fetch_assoc()){
-        echo $fila['codigo']."<br>".$fila['nombre']."<br>".$fila['descripcion']."<br>".$fila['precio']."<br>".$fila['costo']."<br>".$fila['stock'];   
+   if ($resultado->num_rows>0){
+    while($fila=$resultado->fetch_assoc()){
+        echo $fila['id']."<br>".$fila['nombre']."<br>".$fila['descripcion']."<br>".$fila['precio']."<br>".$fila['costo']."<br>".$fila['stock'];   
     }
    }
 

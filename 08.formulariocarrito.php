@@ -125,7 +125,7 @@
             Complete los datos de la compra
         </p>
 
-        <form action="" method="POST">
+        <form action="crud/registrocarrito.php" method="POST">
 
             <div class="grupo">
                 <label for="id_productos">Código del producto</label>

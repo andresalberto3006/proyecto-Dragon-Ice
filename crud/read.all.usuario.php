@@ -13,8 +13,8 @@ $sql= "SELECT * FROM personas";
 $resultado = $conexion->query($sql);
 if ($resultado->num_rows>0){
 while($fila-$resultado->fetch_assoc()){
-echo $fila['ciu']."<br>".$fila['nombre']."<br>".$fila['direccion']."<br>".$fila['celular']."<br>".$fila['rol']."<br>".$fila['estado']."<br>";
-$idPersona-$fila['ciu'];
+echo $fila['ci']."<br>".$fila['nombre']."<br>".$fila['direccion']."<br>".$fila['celular']."<br>".$fila['rol']."<br>".$fila['estado']."<br>";
+$idPersona-$fila['ci'];
 echo "<a href=readusuario.php?id=$idusuario'><button >Mostrar</button></a><br>";
 echo "<a href=update.php?id=$idusuario'><button >Mostrar</button></a><br>";
 }

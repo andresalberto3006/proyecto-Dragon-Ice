@@ -112,39 +112,32 @@
 </head>
 
 <body>
-
     <div class="formulario">
-
         <h2>Crear Cuenta</h2>
-
         <p class="subtitulo">
             Complete los datos del usuario
         </p>
+        <form action="crud/registrousuario.php" method="POST">
+            <label for="ci">CI</label>
+            <input type="number" id="ci" name="ci">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre">
+            <label for="direccion">Direccion:</label>
+            <input type="text" name="direccion">
 
-        <form action="registrousuario.php" method="post">
+            <label for="">Celular:</label>
+            <input type="text" name="">
 
+            <label for="">Rol:</label>
+            <input type="text" name="">
 
-<label for="ciu">CI</label>
-<input type="number" id="ciu" name="ciu">
-<label for="nombre">Nombre</label>
-<input type="text" id="nombre" name="nombre">
-<label for="direccion">Direccion:</label>
-<input type="text" name="direccion">
+            <label for="">Estado:</label>
+            <input type="text" name="">
 
-<label for="">Celular:</label>
-<input type="text" >
-
-<label for="">Rol:</label>
-<input type="text">
-
-<label for="">Estado:</label>
-<input type="text">
-
-<button type="submit" class="boton">
-Crear Cuenta
-</button>
-
-</form>
+            <button type="submit" class="boton">
+            Crear Cuenta
+            </button>
+        </form>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script&gt;
     </div>
 

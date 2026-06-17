@@ -13,11 +13,10 @@ $nombre=$_POST['nombre'];
 $fecha=$_POST['fecha'];
 $estado=$_POST['estado'];
 $nombrevendedor=$_POST['nombrevendedor'];
-$stock=$_POST['stock'];
-$sql ="INSERT INTO producto(id, nombre, fecha, estado, nombrevendedor) VALUES ('$id', '$nombre', '$fecha', '$estado', '$nombrevendedor', '$stock')";
+$sql ="INSERT INTO pedidos(id, nombre, fecha, estado, nombrevendedor) VALUES ('$id', '$nombre', '$fecha', '$estado', '$nombrevendedor')";
 if ($conexion->query($sql)==TRUE){
   echo "Se registro correctamente";
-  header("Location: readproductoi.php");
+  header("Location: readpedido.php?id=$id");
 }
 else{
   echo $sql->error;
