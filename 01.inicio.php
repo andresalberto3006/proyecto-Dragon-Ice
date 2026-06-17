@@ -199,7 +199,7 @@
         <header>
             <aside>
                 <a href="" class="logo">
-                    <img src="xd.png" alt="Logo">
+                    <img src="logo.png" alt="Logo">
                     <h1>Dragon Ice</h1>
                 </a>
             </aside>
@@ -209,14 +209,14 @@
                     <button> Registrarte</button>
                     <ul>
                         <li>
-                            <a href="03.admin.html">Administrador</a>
+                            <a href="03.admin.php">Administrador</a>
                             
                         </li>
                         <li>
-                            <a href="05.vendedor.html">Vendedor</a>
+                            <a href="05.vendedor.php">Vendedor</a>
                         </li>
                         <li>
-                            <a href="04.usuario.html">Cliente</a>
+                            <a href="04.usuario.php">Cliente</a>
                         </li>
                     </ul>
                 </article>

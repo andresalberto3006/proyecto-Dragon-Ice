@@ -1,21 +1,55 @@
+<?php
+    $direccion="localhost";
+    $usuario="root";
+    $contraseña="";
+    $nombreBase="dragonice";
+
+    $conexion= new mysqli($direccion, $usuario, $contraseña, $nombreBase);
+    if($conexion->connector_error){
+        echo "Hubo un error al conectar la base de datos";
+    }
+    $id= "";
+    $nombre = "";
+    $descripcion = "";
+    $precio = "";
+    $costo = "";
+    $stock = "";
+
+      if (isset($_GET['id'])) {
+
+    $id=$_GET['id'];
+    $sql="SELECT * FROM productos WHERE id='$id'";
+    $resultado = $conexion->query($sql);
+    if ($resultado->num_rows>0){
+        $fila=$resultado->fetch_assoc();
+            $id=$fila['id'];
+            $nombre=$fila['nombre'];
+            $descripcion=$fila['descripcion'];
+            $precio=$fila['precio'];
+            $costo=$fila['costo'];
+            $stock=$fila['stock'];
+        }
+    }
+?>
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>;
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>;
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
     <title>Formulario Heladería</title>
 
     <style>
-        * {
+
+        *{
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
+        body{
             font-family: Arial, Helvetica, sans-serif;
 
             background-image: url("music-musical-instrument-guitar-two-dark-background.png");
@@ -31,7 +65,7 @@
             padding: 20px;
         }
 
-        .formulario {
+        .formulario{
 
             width: 330px;
             padding: 30px;
@@ -42,27 +76,27 @@
 
             border: 2px solid #6bb7ff;
 
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 15px rgba(0,0,0,0.4);
         }
 
-        .formulario h2 {
+        .formulario h2{
             text-align: center;
             color: #fff3d6;
             margin-bottom: 10px;
         }
 
-        .subtitulo {
+        .subtitulo{
             text-align: center;
             color: #dcdcdc;
             margin-bottom: 20px;
             font-size: 14px;
         }
 
-        .grupo {
+        .grupo{
             margin-bottom: 15px;
         }
 
-        label {
+        label{
             display: block;
             margin-bottom: 5px;
 
@@ -71,7 +105,7 @@
             font-size: 15px;
         }
 
-        input {
+        input{
             width: 100%;
 
             padding: 10px;
@@ -84,11 +118,11 @@
             outline: none;
         }
 
-        input:focus {
+        input:focus{
             border: 2px solid #4da6ff;
         }
 
-        .boton {
+        .boton{
 
             width: 100%;
 
@@ -107,9 +141,10 @@
             cursor: pointer;
         }
 
-        .boton:hover {
+        .boton:hover{
             background-color: #ffae42;
         }
+
     </style>
 </head>
 
@@ -127,32 +162,32 @@
 
             <div class="grupo">
                 <label for="ci">Código / CI</label>
-                <input type="text" id="ci" name="ci" placeholder="Ingrese el código">
+                <input type="text" id="ci" name="ci" placeholder="Ingrese el código" value=<?=$ciu?>><br>
             </div>
 
             <div class="grupo">
                 <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre">
+                <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre" value=<?=$nombre?>><br>
             </div>
 
             <div class="grupo">
                 <label for="descripcion">Descripción</label>
-                <input type="text" id="descripcion" name="descripcion" placeholder="Descripción del producto">
+                <input type="text" id="descripcion" name="descripcion" placeholder="Descripción del producto" value=<?=$descripcion?>><br>
             </div>
 
             <div class="grupo">
                 <label for="precio">Precio</label>
-                <input type="text" id="precio" name="precio" placeholder="Ingrese el precio">
+                <input type="text" id="precio" name="precio" placeholder="Ingrese el precio" value=<?=$precio?>><br>
             </div>
 
             <div class="grupo">
                 <label for="costo">Costo</label>
-                <input type="text" id="costo" name="costo" placeholder="Ingrese el costo">
+                <input type="text" id="costo" name="costo" placeholder="Ingrese el costo" value=<?=$costo?>><br>
             </div>
 
             <div class="grupo">
                 <label for="stock">Stock</label>
-                <input type="text" id="stock" name="stock" placeholder="Cantidad disponible">
+                <input type="text" id="stock" name="stock" placeholder="Cantidad disponible" value=<?=$stock?>><br>
             </div>
 
             <button type="submit" class="boton">
@@ -160,8 +195,8 @@
             </button>
 
         </form>
-        <a href="09.formadmin.html"></a>
-
+        <a href=""></a>
+        
     </div>
 
 </body>

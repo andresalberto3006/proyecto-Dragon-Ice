@@ -4,19 +4,19 @@
   $contraseña="";
   $nombreBase="dragonice";
 
-  $connect=new mysqli($direccion, $usuario, $contraseña, $nombreBase);
+  $conexion=new mysqli($direccion, $usuario, $contraseña, $nombreBase);
     if ($conn->connect_error) {
         echo "hubo un error al conectar a las base de datos";
 }
-$ciu=$_POST['ciu'];
+$id=$_POST['id'];
 $nombre=$_POST['nombre'];
-$direccion=$_POST['direccion'];
-$celular=$_POST['celular'];
-$rol=$_POST['rol'];
+$fecha=$_POST['fecha'];
 $estado=$_POST['estado'];
-$sql ="INSERT INTO usuario(ciu, nombre, direccion, celular, rol, estado) VALUES ('$ciu', '$nombre', '$direccion', '$celular', '$rol', '$estado')";
+$nombrevendedor=$_POST['nombrevendedor'];
+$sql ="INSERT INTO pedidos(id, nombre, fecha, estado, nombrevendedor) VALUES ('$id', '$nombre', '$fecha', '$estado', '$nombrevendedor')";
 if ($conexion->query($sql)==TRUE){
   echo "Se registro correctamente";
+  header("Location: readpedido.php?id=$id");
 }
 else{
   echo $sql->error;

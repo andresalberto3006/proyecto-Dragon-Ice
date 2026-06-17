@@ -1,30 +1,42 @@
 <?php
-$direccion="localhost";
-$usuario="rout";
-$contraseña="";
-$nombreBase="dragonice";
+    $direccion="localhost";
+    $usuario="root";
+    $contraseña="";
+    $nombreBase="dragonice";
 
-$conexion= new mysqli($direccion,$usuario,$contraseña,$nombreBase);
-if($conexion->error){
-    echo "hubo un error al conectar con la base de datos";
-}
-$id=$_GET['id']
-$sql="SELECT *FROM personas WHERE id="$id";
-$resultado = $conexion->query($sql);
-if ($resultado->num_rows>0){
-while($fila=$resultado->fetch_assoc()){
-echo $fila['codigo']."<br>".$fila['nombre']."<br>".$fila['descripcion']."<br>".$fila['precio']."<br>".$fila['costo']."<br>".$fila['stock'];
-  }
-}
+    $conexion= new mysqli($direccion, $usuario, $contraseña, $nombreBase);
+    if($conexion->connect_error){
+        echo "Hubo un error al conectar la base de datos";
+    }
+    $id = "";
+    $nombre = "";
+    $fecha = "";
+    $estado = "";
+    $nombrevendedor = "";
+
+if(isset($_GET['id'])){
+    $id=$_GET['id'];
+    $sql="SELECT * FROM pedidos WHERE id='$id'";
+    $resultado = $conexion->query($sql);
+    if ($resultado->num_rows > 0){
+            $fila=$resultado->fetch_assoc();
+            $id=$fila['id'];
+            $nombre=$fila['nombre'];
+            $fecha=$fila['fecha'];
+            $estado=$fila['estado'];
+            $nombrevendedor=$fila['nombrevendedor'];
+        }
+    }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>;
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>;
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
     <title>Formulario Heladería</title>
 
     <style>
@@ -138,57 +150,47 @@ echo $fila['codigo']."<br>".$fila['nombre']."<br>".$fila['descripcion']."<br>".$
 
     <div class="formulario">
 
-        <h2>🍦 Registrar Producto</h2>
+        <h2>🍦 Registrar Pedido</h2>
 
         <p class="subtitulo">
             Complete los datos del producto
         </p>
 
-        <form action="registro.php" method="POST">
+        <form action="" method="POST">
 
             <div class="grupo">
-                <label for="ci">Código / CI</label>
-                <input type="text" id="ci" name="ci" placeholder="Ingrese el código">
+                <label for="id">Código</label>
+                <input type="number" id="id" name="id" placeholder="Ingrese el código" value=<?=$stock?>><br>
             </div>
 
             <div class="grupo">
                 <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre">
+                <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre" value=<?=$nombre?>><br>
             </div>
 
             <div class="grupo">
-                <label for="descripcion">Descripción</label>
-                <input type="text" id="descripcion" name="descripcion" placeholder="Descripción del producto">
+                <label for="fecha">Fecha</label>
+                <input type="date" id="fecha" name="fecha" value=<?=$fecha?>><br>
             </div>
 
             <div class="grupo">
-                <label for="precio">Precio</label>
-                <input type="text" id="precio" name="precio" placeholder="Ingrese el precio">
+                <label for="estado">Estado</label>
+                <input type="text" id="estado" name="estado" placeholder="Ingrese el estado" value=<?=$estado?>><br>
             </div>
 
             <div class="grupo">
-                <label for="costo">Costo</label>
-                <input type="text" id="costo" name="costo" placeholder="Ingrese el costo">
-            </div>
-
-            <div class="grupo">
-                <label for="stock">Stock</label>
-                <input type="text" id="stock" name="stock" placeholder="Cantidad disponible">
+                <label for="nombrevendedor">Nombre del Vendedor</label>
+                <input type="text" id="nombrevendedor" name="nombrevendedor" placeholder="Ingrese el nombre del vendedor" value=<?=$nombrevendedor?>><br>
             </div>
 
             <button type="submit" class="boton">
-                Guardar Producto
+                Registrar Pedido
             </button>
 
         </form>
-        <a href="09.formadmin.html"></a>
         
-</div>
+    </div>
 
 </body>
 
 </html>
- <body>
-  <header>
-</header>
- </body>
