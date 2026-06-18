@@ -149,8 +149,6 @@
             <button type="submit" class="boton">
                 Registrar compra
             </button>
-
-        </form>
         
     </div>
 

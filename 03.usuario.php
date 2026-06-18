@@ -226,13 +226,10 @@ iframe{
 <header>
     <input type="text" placeholder="🔍 Buscar productos, pedidos e inventarios...">
 </header>
-
 <nav>
-
-    <img src="https://lh3.googleusercontent.com/drive-storage/AJQWtBOfi3WBTfU8Mryu9DbtL6848MMilNW8CntuIbUnL-GzCTaTFnIOL3rN8iGpBbBy9S97YWeAUzDpozkQbc-PlIJ6ndTrCGYwfycCqVRgXtShzPXG=h360"&gt;>
+   <img src="./imagenesproyecto/logo.png" alt="">
 
     <h2>DRAGON ICE</h2>
-
     <a href="#">Inicio</a>
     <a href="#">Productos</a>
     <a href="#">Inventarios</a>
@@ -281,7 +278,7 @@ iframe{
             <input type="date">
 
             <label>Celular</label>
-            <input type="tel">
+            <input type="number">
 
             <label>Dirección</label>
             <input type="text">
