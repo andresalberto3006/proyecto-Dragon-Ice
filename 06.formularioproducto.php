@@ -4,19 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>;
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>;
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
     <title>Formulario Heladería</title>
 
     <style>
-
-        *{
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body{
+        body {
             font-family: Arial, Helvetica, sans-serif;
 
             background-image: url("music-musical-instrument-guitar-two-dark-background.png");
@@ -32,7 +31,7 @@
             padding: 20px;
         }
 
-        .formulario{
+        .formulario {
 
             width: 330px;
             padding: 30px;
@@ -43,27 +42,27 @@
 
             border: 2px solid #6bb7ff;
 
-            box-shadow: 0 0 15px rgba(0,0,0,0.4);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
         }
 
-        .formulario h2{
+        .formulario h2 {
             text-align: center;
             color: #fff3d6;
             margin-bottom: 10px;
         }
 
-        .subtitulo{
+        .subtitulo {
             text-align: center;
             color: #dcdcdc;
             margin-bottom: 20px;
             font-size: 14px;
         }
 
-        .grupo{
+        .grupo {
             margin-bottom: 15px;
         }
 
-        label{
+        label {
             display: block;
             margin-bottom: 5px;
 
@@ -72,7 +71,7 @@
             font-size: 15px;
         }
 
-        input{
+        input {
             width: 100%;
 
             padding: 10px;
@@ -85,11 +84,11 @@
             outline: none;
         }
 
-        input:focus{
+        input:focus {
             border: 2px solid #4da6ff;
         }
 
-        .boton{
+        .boton {
 
             width: 100%;
 
@@ -108,10 +107,9 @@
             cursor: pointer;
         }
 
-        .boton:hover{
+        .boton:hover {
             background-color: #ffae42;
         }
-
     </style>
 </head>
 
@@ -162,7 +160,12 @@
             </button>
 
         </form>
+<<<<<<< HEAD:06.formularioproducto.php
         
+=======
+        <a href="09.formadmin.html"></a>
+
+>>>>>>> b29adac0053b6ee3bd543cb314f298d7ba775109:05.formularioproducto.php
     </div>
 
 </body>
