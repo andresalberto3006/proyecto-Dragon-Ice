@@ -8,6 +8,7 @@
     if ($conexion->error) {
         echo "hubo un error al conectar a las base de datos";
 }
+
 $id=$_POST['id'];
 $nombre=$_POST['nombre'];
 $descripcin=$_POST['descripcion'];

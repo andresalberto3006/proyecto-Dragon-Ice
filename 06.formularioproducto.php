@@ -160,12 +160,10 @@
             </button>
 
         </form>
-<<<<<<< HEAD:06.formularioproducto.php
-        
-=======
+
         <a href="09.formadmin.html"></a>
 
->>>>>>> b29adac0053b6ee3bd543cb314f298d7ba775109:05.formularioproducto.php
+
     </div>
 
 </body>

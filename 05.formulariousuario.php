@@ -125,16 +125,16 @@
             <label for="nombre">Nombre</label>
             <input type="text" id="nombre" name="nombre">
             <label for="direccion">Direccion:</label>
-            <input type="text" name="direccion">
+            <input type="text" id="direccion"name="direccion">
 
-            <label for="">Celular:</label>
-            <input type="text" name="">
+            <label for="celular">Celular:</label>
+            <input type="text"id="celular" name="celular">
 
-            <label for="">Rol:</label>
-            <input type="text" name="">
+            <label for="rol">Rol:</label>
+            <input type="text" id="rol"name="rol">
 
-            <label for="">Estado:</label>
-            <input type="text" name="">
+            <label for="estado">Estado:</label>
+            <input type="text"id="estado" name="estado">
 
             <button type="submit" class="boton">
             Crear Cuenta
