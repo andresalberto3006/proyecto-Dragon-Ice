@@ -119,9 +119,9 @@
         <p class="subtitulo">
             Complete los datos del usuario
         </p>
-
+        <form action="../crud/registrousuario.php" method="POST">
             <label for="ci">CI</label>
-            <input type="number" id="ciu" name="ciu">
+            <input type="number" id="ci" name="ci">
 
 
             <label for="nombre">Nombre</label>

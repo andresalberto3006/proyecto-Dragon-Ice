@@ -8,7 +8,7 @@
     if ($conn->error) {
       die("Conexión fallida: " . $conn->connect_error);
 }
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_POST["REQUEST_METHOD"] == "POST") {
 $Codigo=$_POST['Codigo'];
 $nombre=$_POST['nombre'];
 $descripcion=$_POST['descripcion'];
@@ -22,7 +22,6 @@ if ($conn->query($sql)===TRUE){
 }else{
        echo "Error: " . $sql . "<br>" . $conn->error;
 }
-
 
 }
 
