@@ -158,7 +158,6 @@ img{
 }
 
 aside{
-
     background:linear-gradient(135deg, rgba(5,112,235,0.32), #2563eb);
     flex:1;
     height:800px;
