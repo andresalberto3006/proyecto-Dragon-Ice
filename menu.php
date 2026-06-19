@@ -92,7 +92,7 @@
 <nav class="menu">
 
     <div class="logo">
-        <img src="logo.png" alt="Logo">
+        <img src="./imagenesproyecto/logo.png" alt="logo">
         <h2>Dragon Ice</h2>
     </div>
 
@@ -102,7 +102,7 @@
 
     <ul class="nav-links" id="navLinks">
         <li><a href="01.inicio.php">Inicio</a></li>
-        <li><a href="08.formulariousuario.php">Registrarte</a></li>
+        <li><a href="05.formulariousuario.php">Registrarte</a></li>
         <li><a href="login.php">Iniciar Sesión</a></li>
     </ul>
 
