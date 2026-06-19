@@ -158,10 +158,7 @@ img{
 }
 
 aside{
-<<<<<<< HEAD
 
-=======
->>>>>>> parent of d8e9036 (crud)
     background:linear-gradient(135deg, rgba(5,112,235,0.32), #2563eb);
     flex:1;
     height:800px;
@@ -180,15 +177,16 @@ aside button{
     color: aliceblue;
 }
 button:hover{
-<<<<<<< HEAD
      background:rgb(7,53,106);
     transform:scale(1.05);
     transition: 0.5s;
-=======
     background:#036e92 ;
     transition: 0.5s;
     transform:scale(1.05);
->>>>>>> parent of d8e9036 (crud)
+
+    background:#036e92 ;
+    transition: 0.5s;
+    transform:scale(1.05);
     border: 2px solid #ffffff;
 }
 
