@@ -277,25 +277,10 @@ iframe{
 
     </section>
 
-    <section class="contacto">
-
-        <div>
-            <h3>📞 Contacto</h3>
-
-            <p><strong>Teléfono:</strong> 62622743</p>
-
-            <p><strong>Correo:</strong> Frost@gmail.com</p>
-
-            <p><strong>Ubicación:</strong><br>
-            Av. Heroínas y Lanza #452</p>
-        </div>
-
-        <div>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d951.8538846511874!2d-66.15444203036925!3d-17.391834719174938!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e373f8a49eaf75%3A0xc9337e878bf0dab9!2sInternet%20y%20Cabinas%20EDGAR!5e0!3m2!1ses!2sbo!4v1781896843542!5m2!1ses!2sbo" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-
-    </section>
-
+    <?php
+  include("piedepagina.php")
+  
+  ?>
 </div>
 
 <script>
