@@ -176,13 +176,6 @@ aside button{
     color: aliceblue;
 }
 button:hover{
-     background:rgb(7,53,106);
-    transform:scale(1.05);
-    transition: 0.5s;
-    background:#036e92 ;
-    transition: 0.5s;
-    transform:scale(1.05);
-
     background:#036e92 ;
     transition: 0.5s;
     transform:scale(1.05);

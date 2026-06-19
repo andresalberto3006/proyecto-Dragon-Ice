@@ -8,7 +8,7 @@
     if ($conn->connect_error) {
         echo "hubo un error al conectar a las base de datos";
 }
- $id=$_POST['id'];
+$id=$_POST['id'];
 $nombre=$_POST['nombre'];
 $fecha=$_POST['fecha'];
 $estado=$_POST['estado'];
