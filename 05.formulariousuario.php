@@ -128,7 +128,7 @@
             <input type="text" id="direccion"name="direccion">
 
             <label for="celular">Celular:</label>
-            <input type="text"id="celular" name="celular">
+            <input type="number"id="celular" name="celular">
 
             <label for="rol">Rol:</label>
             <input type="text" id="rol"name="rol">
@@ -140,7 +140,6 @@
             Crear Cuenta
             </button>
         </form>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script&gt;
     </div>
 
 </body>

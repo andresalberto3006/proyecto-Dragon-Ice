@@ -4,24 +4,28 @@
   $contraseña="";
   $nombreBase="dragonice";
 
-  $conexion=new mysqli($direccion, $usuario, $contraseña, $nombreBase);
-    if ($conexion->error) {
-        echo "hubo un error al conectar a las base de datos";
+  $conn=new mysqli($direccion, $usuario, $contraseña, $nombreBase);
+    if ($conn->error) {
+      die("conexion fallida :" . $conn->connect_error);
 }
 
+if($_SERVER["REQUEST_METHOD"]=== "POST"){
 $id=$_POST['id'];
 $nombre=$_POST['nombre'];
-$descripcin=$_POST['descripcion'];
+$descripcion=$_POST['descripcion'];
 $precio=$_POST['precio'];
 $costo=$_POST['costo'];
 $stock=$_POST['stock'];
-$sql ="INSERT INTO productos(id, nombre, descripcion, precio, costo, stock) VALUES ('$id', '$nombre', '$fecha', '$precio', '$costo', '$stock')";
-if ($conexion->query($sql)===TRUE){
+$sql ="INSERT INTO productos (id, nombre, descripcion, precio, costo, stock) VALUES ('$id', '$nombre','$descripcion', '$precio', '$costo', '$stock')";
+
+if ($conn->query($sql)===TRUE){
   echo "Se registro correctamente";
-  header("Location: readproducto.php?id=$id");
+ // header("Location: readproducto.php?id=$id");
+}else{
+  echo "Error:" .$sql . "<br>" . $conn->error;
 }
-else{
-  echo $sql->error;
+
 }
+
 
 ?>

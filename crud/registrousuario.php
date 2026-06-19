@@ -4,24 +4,31 @@
   $contraseña="";
   $nombreBase="dragonice";
 
-  $conexion=new mysqli($direccion, $usuario, $contraseña, $nombreBase);
-    if ($conexion->error) {
+  $conn=new mysqli($direccion, $usuario, $contraseña, $nombreBase);
+    if ($conn->error) {
         echo "Hubo un error al conectar a la base de datos";
+          die("conexion fallida :" . $conn->connect_error);
 }
-
-$ci=$_POST['ci'];
+if($_SERVER["REQUEST_METHOD"]=== "POST"){
+  $ci=$_POST['ci'];
 $nombre=$_POST['nombre'];
 $direccion=$_POST['direccion'];
 $celular=$_POST['celular'];
 $rol=$_POST['rol'];
 $estado=$_POST['estado'];
 $sql ="INSERT INTO usuario(ci, nombre, direccion, celular, rol, estado) VALUES ('$ci','$nombre', '$direccion', '$celular', '$rol', '$estado')";
-if ($conexion->query($sql)===TRUE){
+if ($conn->query($sql)===TRUE){
   echo "Se registro correctamente";
-  header("Location: readusuario.php?ci=$ci");
+ // header("Location: readusuario.php?ci=$ci");
 }
 else{
-  echo $sql->error;
+    echo "Error:" .$sql . "<br>" . $conn->error;
 }
+
+
+}
+
+
+
 
 ?>

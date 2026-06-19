@@ -134,7 +134,7 @@
 
             <div class="grupo">
                 <label for="id_pedidos">Numero del pedido</label>
-                <input type="text" id="id_pedidos" name="id_pedidos" placeholder="Ingrese el número del pedido">
+                <input type="number" id="id_pedidos" name="id_pedidos" placeholder="Ingrese el número del pedido">
             </div>
 
             <div class="grupo">
