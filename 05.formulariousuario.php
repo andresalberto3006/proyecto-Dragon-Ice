@@ -121,9 +121,6 @@
         </p>
 
             <label for="ci">CI</label>
-            <input type="number" id="ci" name="ci">
-
-            <label for="ciu">CI</label>
             <input type="number" id="ciu" name="ciu">
 
 
@@ -132,9 +129,6 @@
 
             <label for="direccion">Direccion:</label>
             <input type="text"id="direccion"  name="direccion">
-
-            <label for="">Celular:</label>
-            <input type="" name="">
 
             <label for="celular">Celular:</label>
             <input type="number" id="celular" name="celular">
