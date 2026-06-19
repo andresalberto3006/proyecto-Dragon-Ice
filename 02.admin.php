@@ -18,10 +18,7 @@
         padding: 20px;
     }
     header, nav, aside, article, section, footer{
-<<<<<<< HEAD
-=======
         border: solid 3px white;
->>>>>>> parent of d8e9036 (crud)
         padding: 20px;
         border-radius: 15px;
         text-align: center;
@@ -52,13 +49,9 @@ body{
 }
 
 header, nav, article, section, aside, footer{
-<<<<<<< HEAD
-    border-radius:10px;
-=======
     border:2px solid  rgb(118,158,203);
     border-radius:10px;
     padding:20px;
->>>>>>> parent of d8e9036 (crud)
     text-align:center
     
 }
@@ -165,11 +158,8 @@ img{
 }
 
 aside{
-<<<<<<< HEAD
-     background: linear-gradient(135deg, rgba(5,112,235,0.32), #2563eb);
-=======
+
     background:linear-gradient(135deg, rgba(5,112,235,0.32), #2563eb);
->>>>>>> parent of d8e9036 (crud)
     flex:1;
     height:800px;
     display: flex;
@@ -187,15 +177,9 @@ aside button{
     color: aliceblue;
 }
 button:hover{
-<<<<<<< HEAD
      background:rgb(7,53,106);
     transform:scale(1.05);
     transition: 0.5s;
-=======
-    background:#036e92 ;
-    transition: 0.5s;
-    transform:scale(1.05);
->>>>>>> parent of d8e9036 (crud)
     border: 2px solid #ffffff;
 }
 
