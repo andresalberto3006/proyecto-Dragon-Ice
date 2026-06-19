@@ -9,16 +9,16 @@
         echo "Hubo un error al conectar a la base de datos";
 }
 
-$ci=$_POST['ci'];
+$ci=$_POST['ciu'];
 $nombre=$_POST['nombre'];
 $direccion=$_POST['direccion'];
 $celular=$_POST['celular'];
 $rol=$_POST['rol'];
 $estado=$_POST['estado'];
-$sql ="INSERT INTO usuario(ci, nombre, direccion, celular, rol, estado) VALUES ('$ci''$nombre', '$direccion', '$celular', '$rol', '$estado')";
+$sql ="INSERT INTO usuario(ciu nombre, direccion, celular, rol, estado) VALUES ('$ciu''$nombre', '$direccion', '$celular', '$rol', '$estado')";
 if ($conexion->query($sql)===TRUE){
   echo "Se registro correctamente";
-  header("Location: readusuario.php?ci=$ci");
+  header("Location: readusuario.php?ciu=$ciu");
 }
 else{
   echo $sql->error;
