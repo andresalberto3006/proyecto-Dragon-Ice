@@ -122,13 +122,15 @@
         <form action="crud/registrousuario.php" method="POST">
             <label for="ci">CI</label>
             <input type="number" id="ci" name="ci">
+
             <label for="nombre">Nombre</label>
             <input type="text" id="nombre" name="nombre">
+
             <label for="direccion">Direccion:</label>
             <input type="text" name="direccion">
 
             <label for="">Celular:</label>
-            <input type="text" name="">
+            <input type="" name="">
 
             <label for="">Rol:</label>
             <input type="text" name="">
