@@ -128,7 +128,7 @@
             <div class="grupo">
 
                 <label for="id">Código / CI</label>
-                <input type="number" id="id" name="id" placeholder="Ingrese el código">
+                <input type="number" id ="Codigo" name="Codigo" placeholder="Ingrese el código">
             </div>
 
             <div class="grupo">

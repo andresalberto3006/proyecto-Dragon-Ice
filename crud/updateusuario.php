@@ -8,12 +8,12 @@
     if($conexion->connect_error){
         echo "Hubo un error al conectar la base de datos";
     }
-    $ci=$_GET['ci'];
+    $ciu=$_GET['ciu'];
     $sql="SELECT * FROM usuario WHERE ci='$ci'";
     $resultado = $conexion->query($sql);
     if ($resultado->num_rows>0){
         while($fila=$resultado->fetch_assoc()){
-            $ci=$fila['ci'];
+            $ciu=$fila['ciu'];
             $nombre=$fila['nombre'];
             $direccion=$fila['direccion'];
             $celular=$fila['celular'];

@@ -4,24 +4,29 @@
   $contraseña="";
   $nombreBase="dragonice";
 
-  $conexion=new mysqli($direccion, $usuario, $contraseña, $nombreBase);
-    if ($conexion->error) {
-        echo "Hubo un error al conectar a la base de datos";
+  $conn=new mysqli($direccion, $usuario, $contraseña, $nombreBase);
+         if ($conn->error) {
+      die("Conexión fallida: " . $conn->connect_error);
+      
 }
-
-$ci=$_POST['ciu'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+$ciu=$_POST['ciu'];
 $nombre=$_POST['nombre'];
 $direccion=$_POST['direccion'];
 $celular=$_POST['celular'];
 $rol=$_POST['rol'];
 $estado=$_POST['estado'];
-$sql ="INSERT INTO usuario(ci, nombre, direccion, celular, rol, estado) VALUES ('$ci', '$nombre', '$direccion', '$celular', '$rol', '$estado')";
-if ($conexion->query($sql)===TRUE){
+$sql ="INSERT INTO usuario(ciu, nombre, direccion, celular, rol, estado) VALUES ('$ciu', '$nombre', '$direccion', '$celular', '$rol', '$estado')";
+if ($conn->query($sql)===TRUE){
   echo "Se registro correctamente";
-  header("Location: readusuario.php?ci=$ci");
+  //header("Location: readusuario.php?ci=$ci");
+}else{
+   echo "Error: " . $sql . "<br>" . $conn->error;
 }
-else{
-  echo $sql->error;
+
+
+
 }
+
 
 ?>
