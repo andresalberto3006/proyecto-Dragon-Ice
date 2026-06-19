@@ -112,6 +112,7 @@
 
             position: absolute;
             top: 35px;
+            top: 15px;
             left: 0;
             background: white;
             border-radius: 10px;
