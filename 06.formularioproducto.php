@@ -13,7 +13,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
+        }   
 
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -126,6 +126,9 @@
         <form action="crud/registroproducto.php" method="POST">
 
             <div class="grupo">
+
+                <label for="ci">Código / CI</label>
+                <input type="text" id="codigo" name="codigo" placeholder="Ingrese el código">
                 <label for="id">Código / CI</label>
                 <input type="text" id="id" name="id" placeholder="Ingrese el código">
             </div>
