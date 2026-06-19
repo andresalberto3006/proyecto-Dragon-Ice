@@ -5,24 +5,24 @@
   $nombreBase="dragonice";
 
   $conn=new mysqli($direccion, $usuario, $contraseña, $nombreBase);
-         if ($conn->error) {
-      die("Conexión fallida: " . $conn->connect_error);
+  if ($conn->error) {
+      die("Error de conexión: " . $conn->connect_error); 
       
 }
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-$ciu=$_POST['ciu'];
-$nombre=$_POST['nombre'];
-$direccion=$_POST['direccion'];
-$celular=$_POST['celular'];
-$rol=$_POST['rol'];
-$estado=$_POST['estado'];
-$sql ="INSERT INTO usuario(ciu, nombre, direccion, celular, rol, estado) VALUES ('$ciu', '$nombre', '$direccion', '$celular', '$rol', '$estado')";
-if ($conn->query($sql)===TRUE){
-  echo "Se registro correctamente";
-  //header("Location: readusuario.php?ci=$ci");
-}else{
-   echo "Error: " . $sql . "<br>" . $conn->error;
-}
+  $ci=$_POST['ci'];
+  $nombre=$_POST['nombre'];
+  $direccion=$_POST['direccion'];
+  $celular=$_POST['celular'];
+  $rol=$_POST['rol'];
+  $estado=$_POST['estado'];
+  $sql ="INSERT INTO usuario(ci, nombre, direccion, celular, rol, estado) VALUES ('$ci', '$nombre', '$direccion', '$celular', '$rol', '$estado')";
+  if ($conn->query($sql)===TRUE){
+    echo "Se registro correctamente";
+    //header("Location: readusuario.php?ci=$ci");
+  }else{
+    echo "Error: " . $sql . "<br>" . $conn->error;
+  }
 
 
 
