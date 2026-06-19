@@ -18,7 +18,6 @@
         padding: 20px;
     }
     header, nav, aside, article, section, footer{
-        border: solid 3px white;
         padding: 20px;
         border-radius: 15px;
         text-align: center;
@@ -49,9 +48,7 @@ body{
 }
 
 header, nav, article, section, aside, footer{
-    border:2px solid  rgb(118,158,203);
     border-radius:10px;
-    padding:20px;
     text-align:center
     
 }
@@ -158,7 +155,7 @@ img{
 }
 
 aside{
-    background:linear-gradient(135deg, rgba(5,112,235,0.32), #2563eb);
+     background: linear-gradient(135deg, rgba(5,112,235,0.32), #2563eb);
     flex:1;
     height:800px;
     display: flex;
@@ -176,9 +173,9 @@ aside button{
     color: aliceblue;
 }
 button:hover{
-    background:#036e92 ;
-    transition: 0.5s;
+     background:rgb(7,53,106);
     transform:scale(1.05);
+    transition: 0.5s;
     border: 2px solid #ffffff;
 }
 
