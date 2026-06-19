@@ -14,7 +14,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
+        }   
 
         body{
             font-family: Arial, Helvetica, sans-serif;
@@ -129,7 +129,7 @@
 
             <div class="grupo">
                 <label for="ci">Código / CI</label>
-                <input type="text" id="ci" name="ci" placeholder="Ingrese el código">
+                <input type="text" id="codigo" name="codigo" placeholder="Ingrese el código">
             </div>
 
             <div class="grupo">
