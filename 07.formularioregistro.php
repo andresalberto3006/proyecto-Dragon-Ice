@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+
+    <style>
+        body {
+            background-image: url("music-musical-instrument-guitar-two-dark-background.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            height: 100vh;
+            margin: 0;
+
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        #caja {
+            display: flex;
+            flex-direction: column;
+
+            width: 330px;
+            padding: 30px;
+
+            border-radius: 15px;
+
+            background-color: rgba(24, 45, 75, 0.9);
+
+            border: 2px solid #6bb7ff;
+
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+        }
+
+        #caja label {
+            color: #fff3d6;
+            margin-top: 8px;
+            margin-bottom: 5px;
+            font-size: 15px;
+        }
+
+        #caja input[type="text"],
+        #caja input[type="number"],
+        #caja input[type="date"] {
+
+            padding: 10px;
+
+            border-radius: 8px;
+            border: none;
+
+            background-color: #f2f2f2;
+
+            outline: none;
+        }
+
+        #caja input:focus {
+            border: 2px solid #4da6ff;
+        }
+
+        .radio {
+            color: white;
+            margin-top: 5px;
+        }
+
+        input[type="submit"] {
+            margin-top: 20px;
+
+            padding: 12px;
+
+            border: none;
+            border-radius: 10px;
+
+            background-color: #4da6ff;
+
+            color: white;
+
+            font-size: 16px;
+
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #ffae42;
+        }
+
+        label.error {
+            color: beige;
+            font-size: 14px;
+            margin-top: 5px;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form action="registroproducto.php" method="post" id="caja">
+
+        <label>Id del Usuario</label>
+        <input type="number" name="i">
+
+        <label>Nombre Completo</label>
+        <input type="text" name="NombreCompleto">
+
+        <label>Fecha De Nacimiento</label>
+        <input type="date" name="Fechadenacimiento">
+
+        <label>Curso</label>
+        <input type="number" name="Curso">
+
+        <label>Paralelo</label>
+        <input type="text" name="Paralelo">
+
+        <label>Codigo Rude</label>
+        <input type="number" name="CodigoRude">
+
+        <label>Carnet De Identidad</label>
+        <input type="text" name="Carnetdeidentidad">
+
+        <label>Telefono</label>
+        <input type="number" name="telefono">
+
+        <label>Direccion</label>
+        <input type="text" name="direccion">
+
+
+        <input type="submit" value="Registrar">
+
+    </form>
+
+</body>
+
+</html>
