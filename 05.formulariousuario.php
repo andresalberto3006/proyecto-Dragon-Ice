@@ -119,9 +119,13 @@
         <p class="subtitulo">
             Complete los datos del usuario
         </p>
-        <form action="crud/registrousuario.php" method="POST">
+
+            <label for="ci">CI</label>
+            <input type="number" id="ci" name="ci">
+
             <label for="ciu">CI</label>
             <input type="number" id="ciu" name="ciu">
+
 
             <label for="nombre">Nombre</label>
             <input type="text" id="nombre" name="nombre">
@@ -129,8 +133,12 @@
             <label for="direccion">Direccion:</label>
             <input type="text"id="direccion"  name="direccion">
 
+            <label for="">Celular:</label>
+            <input type="" name="">
+
             <label for="celular">Celular:</label>
-            <input type="text" id="celular" name="celular">
+            <input type="number" id="celular" name="celular">
+
 
             <label for="rol">Rol:</label>
             <input type="text" id="rol" name="rol">
@@ -142,7 +150,6 @@
             Crear Cuenta
             </button>
         </form>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script&gt;
     </div>
 
 </body>
