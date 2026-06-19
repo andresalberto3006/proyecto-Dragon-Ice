@@ -22,7 +22,7 @@ $query = mysqli_query($con, $sql);
         <h1>Crear usuario</h1>
         <form action="index.php" method="POST">
             <input type="text" na>
-            <input type="hidden" name="ciu" value="">
+            <input type="hidden" name="ci" value="">
             <input type="text" name="name" placeholder="Nombre">
             <input type="text" name="direccion" placeholder="Direccion">
             <input type="text" name="celular" placeholder="celular">

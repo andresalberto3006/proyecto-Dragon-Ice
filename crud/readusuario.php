@@ -9,7 +9,7 @@
     echo "hubo un error al conectar a la base de datos";
    }
 
-   $ci=$_GET['ci'];
+   $ci=$_GET['ciu'];
    $sql="SELECT * FROM usuario WHERE ci='$ci'";
    $resultado = $conexion->query($sql);
    if ($resultado->num_rows>0){
