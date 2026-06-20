@@ -110,6 +110,23 @@
         .boton:hover {
             background-color: #ffae42;
         }
+
+        label.error{
+            color:red;
+            font-size:12px;
+            font-weight:bold;
+            margin-top:5px;
+        }
+
+        input.error{
+            border:2px solid red;
+
+        }
+
+        input.valid{
+            border:2px solid green;
+        }
+
     </style>
 </head>
 
@@ -123,12 +140,12 @@
             Complete los datos del producto
         </p>
 
-        <form action="crud/registroproducto.php" method="POST">
+        <form id="formulario" action="../crud/registroproducto.php" method="POST">
 
             <div class="grupo">
 
-                <label for="id">Código / CI</label>
-                <input type="number" id ="Codigo" name="Codigo" placeholder="Ingrese el código">
+                <label for="id">Código / ID</label>
+                <input type="number" id ="id" name="id" placeholder="Ingrese el código">
             </div>
 
             <div class="grupo">
@@ -161,11 +178,59 @@
             </button>
 
         </form>
+  </div>
 
-        
-    
+  <script>
+$(document).ready(function(){
 
-    </div>
+$("#formulario").validate({
+
+rules:{
+    id:{
+        required:true
+    },
+    nombre:{
+        required:true
+    },
+    descripcion:{
+        required:true
+    },
+    precio:{
+        required:true
+    },
+    costo:{
+        required:true
+    },
+    stock:{
+        required:true
+    }
+},
+
+messages:{
+    id:{
+        required:"Ingrese su codigo/id"
+    },
+    nombre:{
+        required:"Ingrese su nombre"
+    },
+    descripcion:{
+        required:"Ingrese la descripcion"
+    },
+    precio:{
+        required:"Ingrese el precio"
+    },
+    costo:{
+        required:"Ingrese el costo"
+    },
+    stock:{
+        required:"Ingrese el estock"
+    }
+}
+
+});
+
+});
+</script>
 
 </body>
 

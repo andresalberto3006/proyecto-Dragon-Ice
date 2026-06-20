@@ -8,21 +8,20 @@
     if ($conn->error) {
       die("Conexión fallida: " . $conn->connect_error);
 }
-if ($_POST["REQUEST_METHOD"] == "POST") {
-$Codigo=$_POST['Codigo'];
+
+$id=$_POST['id'];
 $nombre=$_POST['nombre'];
 $descripcion=$_POST['descripcion'];
-$precio=$_POST['precio'];
+$precio=$_POST['precio'];  
 $costo=$_POST['costo'];
 $stock=$_POST['stock'];
-$sql ="INSERT INTO productos(Codigo, nombre, descripcion, precio, costo, stock) VALUES ('$Codigo', '$nombre', '$descripcion', '$precio', '$costo', '$stock')";
+$sql ="INSERT INTO productos(id, nombre, descripcion, precio, costo, stock) VALUES ('$id', '$nombre', '$descripcion', '$precio', '$costo', '$stock')";
 if ($conn->query($sql)===TRUE){
   echo "Se registro correctamente";
- // header("Location: readproducto.php?id=$id");
-}else{
-       echo "Error: " . $sql . "<br>" . $conn->error;
+  // header("Location: readproducto.php?id=$id");
 }
-
+else{
+  echo $sql->error;
 }
 
 ?>
