@@ -136,7 +136,7 @@
             Complete los datos del usuario
         </p>
 
-        <form action="./crud/registrousuario.php" method="POST">
+        <form action="../crud/registrousuario.php" method="POST">
         <form id="formulario" action="../crud/registrousuario.php" method="POST">
 
             <label for="ci">CI</label>

@@ -1,15 +1,15 @@
 <?php
 $direccion="localhost";
 $usuario-"root";
-$contrasena="";
+$contraseña="";
 $nombreBase="dragonice";
 
-$conexion- new mysqli($direccion,$usuario,$contrasena,$nombreBase);
+$conexion- new mysqli($direccion,$usuario,$contraseña,$nombreBase);
 if($conexion->error){
 echo "Hubo un error al conectar a la base de datos";
 }
 
-$sql= "SELECT * FROM personas WHERE id="
+$sql= "SELECT * FROM personas WHERE id="$id";
 $resultado = $conexion->query($sql);
 if ($resultado->num_rows>0){
 while($fila-$resultado->fetch_assoc()){
@@ -17,10 +17,12 @@ echo $fila['id']."<br>".$fila['nombre']."<br>".$fila['apellido']."<br>".$fila['d
 $idPersona-$fila['id'];
 echo "<a href='persona.php?id=$id'><button >Mostrar</button></a><br>";
 }
+}
 =======
+$direccion="localhost";
 $usuario="rout";
 $contraseña="";
-$nombreBase="dragon";
+$nombreBase="dragonice";
 
 $conexion= new mysqli($direccion,$usuario,$contraseña,$nombreBase);
 if($conexion->error){
@@ -34,6 +36,5 @@ while($fila=$resultado->fetch_assoc()){
     $ciu=$fila[ciu];
     $fila[nombre]."<br>".$fila[direccion]."<br>".$fila[celular]."<br>".$fila[rol];
   }
-
 }
 ?>

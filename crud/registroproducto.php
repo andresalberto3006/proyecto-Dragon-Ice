@@ -8,8 +8,7 @@
   if ($conn->connect_error) {
       die("Conexión fallida: " . $conn->connect_error);
   }
-  if ($_POST["REQUEST_METHOD"] == "POST"){
-
+  if ($_SERVER["REQUEST_METHOD"] == "POST"){
 
       $id = $_POST['id']; 
       $nombre = $_POST['nombre'];
@@ -28,7 +27,5 @@
       }
   }
 ?>
-
-
 
 
