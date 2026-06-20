@@ -22,7 +22,7 @@ if ($conn->connect_error) {
             VALUES ('$codigo', '$nombre', '$descripcion', '$precio', '$costo', '$stock')";
 
     if ($conn->query($sql) === TRUE) {
-        echo " Se registro correctamente";
+        echo " Producto registro correctamente";
         
      // header("Location: readproducto.php?id=$id");
         echo " Error: " . $conn->error;
