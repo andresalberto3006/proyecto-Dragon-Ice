@@ -114,6 +114,13 @@ h1{
     background:#2f5d9f;
 }
 
+.botones{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
 </style>
 
 </head>
@@ -132,9 +139,21 @@ h1{
     fue registrado correctamente.
 </p>
 
-<a href="../formularios/06.formularioproducto.php" class="boton">
-    Registrar otro producto
-</a>
+<div class="botones">
+
+    <a href="../formularios/06.formularioproducto.php" class="boton">
+        Registrar otro producto
+    </a>
+
+    <a href="../crud/readproducto.php?id=<?php echo $id; ?>" class="boton">
+        Ver producto
+    </a>
+
+    <a href="../crud/read.all.producto.php" class="boton">
+        Ver todos los productos
+    </a>
+
+</div>
 
 
 </div>
