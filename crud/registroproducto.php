@@ -11,15 +11,15 @@ if ($conn->connect_error) {
 
  if ($_SERVER["REQUEST_METHOD"] === "POST") {
     
-    $codigo = $_POST['codigo'];
+    $id = $_POST['id'];
     $nombre = $_POST['nombre'];
     $descripcion = $_POST['descripcion'];
     $precio = $_POST['precio'];
     $costo = $_POST['costo'];
     $stock = $_POST['stock'];
 
-    $sql = "INSERT INTO productos (codigo, nombre, descripcion, precio, costo, stock) 
-            VALUES ('$codigo', '$nombre', '$descripcion', '$precio', '$costo', '$stock')";
+    $sql = "INSERT INTO productos (id, nombre, descripcion, precio, costo, stock) 
+            VALUES ('$id', '$nombre', '$descripcion', '$precio', '$costo', '$stock')";
 
     if ($conn->query($sql) === TRUE) {
         echo " Se registro correctamente";
