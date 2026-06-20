@@ -92,7 +92,7 @@
 <nav class="menu">
 
     <div class="logo">
-        <img src="./imagenesproyecto/logo.png" alt="logo">
+        <img src="../imagenesproyecto/logo.png" alt="logo">
         <h2>Dragon Ice</h2>
     </div>
 
