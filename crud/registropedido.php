@@ -16,7 +16,7 @@ $nombrevendedor=$_POST['nombrevendedor'];
 $sql ="INSERT INTO pedidos(id, nombre, fecha, estado, nombrevendedor) VALUES ('$id', '$nombre', '$fecha', '$estado', '$nombrevendedor')";
 if ($conexion->query($sql)==TRUE){
   echo "Se registro correctamente";
-  header("Location: readpedido.php?id=$id");
+  //header("Location: readpedido.php?id=$id");
 }
 else{
   echo $sql->error;
