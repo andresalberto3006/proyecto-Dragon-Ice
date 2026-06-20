@@ -112,7 +112,8 @@
         <h2>🍦 Registrar Producto</h2>
         <p class="subtitulo">Complete los datos del producto</p>
 
-        <form id="formulario" action="../crud/registroproducto.php" method="POST">
+        <form action="../crud/registroproducto.php" method="POST">
+        <form id="formulario" action="../crud/registrousuario.php" method="POST">
             <div class="grupo">
                 <label for="nombre">Nombre</label>
                 <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre">
@@ -144,7 +145,7 @@
 
     <script>
         $(document).ready(function(){
-            $("#formulario").validate({
+           $("#formulario").validate({
                 rules:{
                     nombre:{ required:true },
                     descripcion:{ required:true },
