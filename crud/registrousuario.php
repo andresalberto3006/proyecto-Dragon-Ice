@@ -17,7 +17,7 @@ $celular=$_POST['celular'];
 $rol=$_POST['rol'];
 $estado=$_POST['estado'];
 $sql ="INSERT INTO usuario(ciu, nombre, direccion, celular, rol, estado) VALUES ('$ci','$nombre', '$direccion', '$celular', '$rol', '$estado')";
-  if ($conn->query($sql) === TRUE) {
+  if ($conn->query($sql)===TRUE){
           echo " Usuario registrado correctamente";
           //header("Location: readusuario.php?ci=$ci");
       } else {
