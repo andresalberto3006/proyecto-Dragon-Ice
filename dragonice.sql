@@ -18,13 +18,13 @@ USE `dragonice` ;
 -- Table `dragonice`.`usuario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dragonice`.`usuario` (
-  `ci` INT NOT NULL AUTO_INCREMENT,
+  `ciu` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NULL,
   `direccion` VARCHAR(45) NULL,
   `celular` INT NULL,
   `rol` VARCHAR(45) NULL,
   `estado` VARCHAR(45) NULL,
-  PRIMARY KEY (`ci`))
+  PRIMARY KEY (`ciu`))
 ENGINE = InnoDB;
 
 
@@ -32,13 +32,13 @@ ENGINE = InnoDB;
 -- Table `dragonice`.`productos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dragonice`.`productos` (
-  `id` INT NULL AUTO_INCREMENT,
+  `codigo` INT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NULL,
   `descripcion` VARCHAR(45) NULL,
   `precio` INT NULL,
   `costo` INT NULL,
   `stock` INT NULL,
-  PRIMARY KEY (`id`))
+  PRIMARY KEY (`codigo`))
 ENGINE = InnoDB;
 
 

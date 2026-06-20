@@ -9,27 +9,26 @@ if ($conn->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
 }
 
-if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] === "POST") {
+ if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    
+    $codigo = $_POST['codigo'];
     $nombre = $_POST['nombre'];
     $descripcion = $_POST['descripcion'];
     $precio = $_POST['precio'];
     $costo = $_POST['costo'];
     $stock = $_POST['stock'];
 
-    $sql = "INSERT INTO productos (nombre, descripcion, precio, costo, stock) 
-            VALUES ('$nombre', '$descripcion', '$precio', '$costo', '$stock')";
+    $sql = "INSERT INTO productos (codigo, nombre, descripcion, precio, costo, stock) 
+            VALUES ('$codigo', '$nombre', '$descripcion', '$precio', '$costo', '$stock')";
 
     if ($conn->query($sql) === TRUE) {
-        echo " Producto registrado correctamente";
-    } else {
+        echo " Se registro correctamente";
+        
+     // header("Location: readproducto.php?id=$id");
         echo " Error: " . $conn->error;
     }
-} else {
-    echo "Acceso inválido: use el formulario.";
 }
 
-$conn->close();
-?>
 
 
 

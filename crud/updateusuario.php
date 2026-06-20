@@ -28,6 +28,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
     <title>Formulario Heladeria</title>
 
     <style>
@@ -132,45 +134,111 @@
             background-color: #ffae42;
         }
 
+        label.error{
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+         input.error{
+            border:2px solid red;
+
+        }
+
+        input.valid{
+            border:2px solid green;
+        }
+
+    
     </style>
 </head>
 
 <body>
-
     <div class="formulario">
-
         <h2>Crear Cuenta</h2>
-
         <p class="subtitulo">
             Complete los datos del usuario
         </p>
 
-        <form action="registrousuario.php" method="POST">
-            <label for="ciu">Codigo</label>
-            <input type="number" id="ciu" name="ciu" placeholder="Ingrese su codigo" value="<?=$ciu?>"><br>
+        <form action="../crud/registrousuario.php" method="POST">
+        <form id="formulario" action="../crud/registrousuario.php" method="POST">
+
+            <label for="ciu">CI</label>
+            <input type="number" id="ciu" name="ciu">
+
 
             <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre" value="<?=$nombre?>"><br>
+            <input type="text" id="nombre" name="nombre">
 
-            <label for="direccion">Direccion</label>
-            <input type="text" id="direccion" name="direccion" placeholder="Ingrese su direccion" value="<?=$ciu?>"><br>
+            <label for="direccion">Direccion:</label>
+            <input type="text"id="direccion"  name="direccion">
 
-            <label for="celular">Celular</label>
-            <input type="text" id="celular" name="celular" placeholder="Ingrese su número de celular" value="<?=$celular?>"><br>
+            <label for="celular">Celular:</label>
+            <input type="number" id="celular" name="celular">
 
-            <label for="rol">Rol</label>
-            <input type="text" id="rol" name="rol" placeholder="Ingrese su rol personal" value="<?=$rol?>"><br>
 
-            <label for="estado">Estado</label>
-            <input type="text" id="estado" name="estado" placeholder="Ingrese su estado personal" value="<?=$estado?>"><br>
+            <label for="rol">Rol:</label>
+            <input type="text" id="rol" name="rol">
+
+            <label for="estado">Estado:</label>
+            <input type="text" id="estado" name="estado">
 
             <button type="submit" class="boton">
-                Crear Cuenta
+            Crear Cuenta
             </button>
-    
         </form>
-
     </div>
+    <script>
+$(document).ready(function(){
+
+$("#formulario").validate({
+
+rules:{
+    $ciu:{
+        required:true
+    },
+    nombre:{
+        required:true
+    },
+    direccion:{
+        required:true
+    },
+    celular:{
+        required:true
+    },
+    rol:{
+        required:true
+    },
+    estado:{
+        required:true
+    }
+},
+
+messages:{
+    ciu:{
+        required:"Ingrese su CI"
+    },
+    nombre:{
+        required:"Ingrese su nombre"
+    },
+    direccion:{
+        required:"Ingrese su direccion"
+    },
+    celular:{
+        required:"Ingrese su celular"
+    },
+    rol:{
+        required:"Ingrese el rol"
+    },
+    estado:{
+        required:"Ingrese el estado"
+    }
+}
+
+});
+
+});
+</script>
 
 </body>
 

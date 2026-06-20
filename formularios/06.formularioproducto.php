@@ -113,7 +113,13 @@
         <p class="subtitulo">Complete los datos del producto</p>
 
         <form action="../crud/registroproducto.php" method="POST">
-        <form id="formulario" action="../crud/registrousuario.php" method="POST">
+        <form id="formulario" action="../crud/registroproducto.php" method="POST">
+
+            <div class="grupo">
+                 <label for="codigo">id</label>
+                 <input type="number" id ="codigo" name="codigo" placeholder="Ingrese el código"> 
+            </div>
+
             <div class="grupo">
                 <label for="nombre">Nombre</label>
                 <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre">
