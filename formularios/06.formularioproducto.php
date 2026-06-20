@@ -112,12 +112,12 @@
         <h2>🍦 Registrar Producto</h2>
         <p class="subtitulo">Complete los datos del producto</p>
 
-        <form action="../crud/registroproducto.php" method="POST">
+    
         <form id="formulario" action="../crud/registroproducto.php" method="POST">
 
             <div class="grupo">
-                 <label for="codigo">id</label>
-                 <input type="number" id ="codigo" name="codigo" placeholder="Ingrese el código"> 
+                 <label for="id">id</label>
+                 <input type="number" id ="id" name="id" placeholder="Ingrese el código"> 
             </div>
 
             <div class="grupo">
@@ -153,6 +153,7 @@
         $(document).ready(function(){
            $("#formulario").validate({
                 rules:{
+                    id:{ required:true },
                     nombre:{ required:true },
                     descripcion:{ required:true },
                     precio:{ required:true, number:true },
@@ -160,6 +161,7 @@
                     stock:{ required:true, number:true }
                 },
                 messages:{
+                    id:{ required:"Ingrese el codigo del producto" },
                     nombre:{ required:"Ingrese el nombre del producto" },
                     descripcion:{ required:"Ingrese la descripción" },
                     precio:{ required:"Ingrese el precio" },

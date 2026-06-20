@@ -136,12 +136,11 @@
             Complete los datos del usuario
         </p>
 
-        <form action="../crud/registrousuario.php" method="POST">
+        
         <form id="formulario" action="../crud/registrousuario.php" method="POST">
 
-            <label for="ciu">CI</label>
-            <input type="number" id="ciu" name="ciu">
-
+            <label for="ci">CI</label>
+            <input type="number" id="ci" name="ci">
 
             <label for="nombre">Nombre</label>
             <input type="text" id="nombre" name="nombre">
@@ -151,7 +150,6 @@
 
             <label for="celular">Celular:</label>
             <input type="number" id="celular" name="celular">
-
 
             <label for="rol">Rol:</label>
             <input type="text" id="rol" name="rol">
@@ -170,7 +168,7 @@ $(document).ready(function(){
 $("#formulario").validate({
 
 rules:{
-    $ciu:{
+    ci:{
         required:true
     },
     nombre:{
@@ -191,8 +189,8 @@ rules:{
 },
 
 messages:{
-    ciu:{
-        required:"Ingrese su CI"
+    ci:{
+        required:"Ingrese su ci"
     },
     nombre:{
         required:"Ingrese su nombre"
