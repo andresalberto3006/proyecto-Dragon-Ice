@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `dragonice`.`usuario` (
   `celular` INT NULL,
   `rol` VARCHAR(45) NULL,
   `estado` VARCHAR(45) NULL,
-  PRIMARY KEY (`ciu`))
+  PRIMARY KEY (`ci`))
 ENGINE = InnoDB;
 
 

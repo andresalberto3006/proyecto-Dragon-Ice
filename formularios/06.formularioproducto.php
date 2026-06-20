@@ -17,31 +17,23 @@
 
         body {
             font-family: Arial, Helvetica, sans-serif;
-
             background-image: url("music-musical-instrument-guitar-two-dark-background.png");
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
-
             display: flex;
             justify-content: center;
             align-items: center;
-
             min-height: 100vh;
             padding: 20px;
         }
 
         .formulario {
-
             width: 330px;
             padding: 30px;
-
             border-radius: 15px;
-
             background-color: rgba(24, 45, 75, 0.9);
-
             border: 2px solid #6bb7ff;
-
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
         }
 
@@ -65,22 +57,16 @@
         label {
             display: block;
             margin-bottom: 5px;
-
             color: #fff3d6;
-
             font-size: 15px;
         }
 
         input {
             width: 100%;
-
             padding: 10px;
-
             border-radius: 8px;
             border: none;
-
             background-color: #f2f2f2;
-
             outline: none;
         }
 
@@ -89,21 +75,14 @@
         }
 
         .boton {
-
             width: 100%;
-
             margin-top: 15px;
             padding: 12px;
-
             border: none;
             border-radius: 10px;
-
             background-color: #4da6ff;
-
             color: white;
-
             font-size: 16px;
-
             cursor: pointer;
         }
 
@@ -111,44 +90,29 @@
             background-color: #ffae42;
         }
 
-        label.error{
-            color:red;
-            font-size:12px;
-            font-weight:bold;
-            margin-top:5px;
+        label.error {
+            color: red;
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 5px;
         }
 
-        input.error{
-            border:2px solid red;
-
+        input.error {
+            border: 2px solid red;
         }
 
-        input.valid{
-            border:2px solid green;
+        input.valid {
+            border: 2px solid green;
         }
-
     </style>
 </head>
 
 <body>
-
     <div class="formulario">
-
         <h2>🍦 Registrar Producto</h2>
+        <p class="subtitulo">Complete los datos del producto</p>
 
-        <p class="subtitulo">
-            Complete los datos del producto
-        </p>
-
-        <form action="./crud/registroproducto.php" method="POST">
         <form id="formulario" action="../crud/registroproducto.php" method="POST">
-
-            <div class="grupo">
-
-                <label for="id">Código / ID</label>
-                <input type="number" id ="id" name="id" placeholder="Ingrese el código">
-            </div>
-
             <div class="grupo">
                 <label for="nombre">Nombre</label>
                 <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre">
@@ -174,65 +138,29 @@
                 <input type="number" id="stock" name="stock" placeholder="Cantidad disponible">
             </div>
 
-            <button type="submit" class="boton">
-                Guardar Producto
-            </button>
-
+            <button type="submit" class="boton">Guardar Producto</button>
         </form>
-  </div>
+    </div>
 
-  <script>
-$(document).ready(function(){
-
-$("#formulario").validate({
-
-rules:{
-    id:{
-        required:true
-    },
-    nombre:{
-        required:true
-    },
-    descripcion:{
-        required:true
-    },
-    precio:{
-        required:true
-    },
-    costo:{
-        required:true
-    },
-    stock:{
-        required:true
-    }
-},
-
-messages:{
-    id:{
-        required:"Ingrese su codigo/id"
-    },
-    nombre:{
-        required:"Ingrese su nombre"
-    },
-    descripcion:{
-        required:"Ingrese la descripcion"
-    },
-    precio:{
-        required:"Ingrese el precio"
-    },
-    costo:{
-        required:"Ingrese el costo"
-    },
-    stock:{
-        required:"Ingrese el estock"
-    }
-}
-
-});
-
-});
-</script>
-
+    <script>
+        $(document).ready(function(){
+            $("#formulario").validate({
+                rules:{
+                    nombre:{ required:true },
+                    descripcion:{ required:true },
+                    precio:{ required:true, number:true },
+                    costo:{ required:true, number:true },
+                    stock:{ required:true, number:true }
+                },
+                messages:{
+                    nombre:{ required:"Ingrese el nombre del producto" },
+                    descripcion:{ required:"Ingrese la descripción" },
+                    precio:{ required:"Ingrese el precio" },
+                    costo:{ required:"Ingrese el costo" },
+                    stock:{ required:"Ingrese el stock disponible" }
+                }
+            });
+        });
+    </script>
 </body>
-
 </html>
