@@ -32,120 +32,6 @@
             object-fit: cover;
         }
 
-        header {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 15px;
-            padding: 35px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(8px);
-            border-bottom: 2px solid white;
-            box-shadow:
-                0 0 10px rgba(0, 0, 0, 0.3),
-                0 0 25px rgba(0, 0, 0, 0.4),
-                0 0 45px rgba(0, 0, 0, 0.5),
-                0 0 70px rgba(0, 0, 0, 0.4);
-
-            z-index: 10;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-        }
-
-        .logo img {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .logo h1 {
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
-            text-shadow:
-                0 0 5px rgba(0, 0, 0, 0.7),
-                0 0 10px rgba(0, 0, 0, 0.6);
-        }
-
-
-
-        nav {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 25px;
-        }
-
-
-        nav a,
-        button {
-
-            color: white;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: bold;
-            background: none;
-            border: none;
-            cursor: pointer;
-            text-shadow:
-                0 0 5px rgba(0, 0, 0, 0.7);
-        }
-
-        article {
-
-            position: relative;
-        }
-
-        ul {
-
-            position: absolute;
-            top: 35px;
-            top: 15px;
-            left: 0;
-            background: white;
-            border-radius: 10px;
-            min-width: 180px;
-            overflow: hidden;
-            display: none;
-            box-shadow:
-                0 0 10px rgba(0, 0, 0, 0.3),
-                0 0 25px rgba(0, 0, 0, 0.2);
-        }
-
-        article:hover ul {
-            display: block;
-            transform: scale(1.28);
-        }
-
-        li {
-            list-style: none;
-        }
-
-        li a {
-
-            display: block;
-            padding: 12px 15px;
-            color: black;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        li a:hover {
-            background: rgba(0, 0, 0, 0.08);
-        }
-
         main {
             position: absolute;
             top: 50%;
@@ -191,6 +77,7 @@
 </head>
 
 <body>
+    <?php include("menu.php"); ?>
 
     <section>
         <video autoplay muted loop muted>
@@ -224,10 +111,12 @@
                 <a href="">Iniciar Sesión</a>
             </nav>
         </header>
+
         <main>
             <h1>DRAGON ICE</h1>
         </main>
     </section>
+    <?php include("piedepagina.php"); ?>
 </body>
 
 </html>
