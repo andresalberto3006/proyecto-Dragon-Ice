@@ -77,41 +77,22 @@
 </head>
 
 <body>
-    <?php include("menu.php"); ?>
+    
+<header class="menu-principal">
+
+  <?php
+  include("menu.php")
+  
+  ?>
+
+</header>
 
     <section>
         <video autoplay muted loop muted>
             <source src="download.mp4" type="video/mp4">
 
         </video>
-        <header>
-            <aside>
-                <a href="" class="logo">
-                    <img src="./imagenesproyecto/logo.png" alt="Logo">
-                    <h1>Dragon Ice</h1>
-                </a>
-            </aside>
-            <nav>
-                <a href="01.inicio.php">Inicio</a>
-                <article>
-                    <button> Registrarte</button>
-                    <ul>
-                        <li>
-                            <a href="03.admin.php">Administrador</a>
-                            
-                        </li>
-                        <li>
-                            <a href="05.vendedor.php">Vendedor</a>
-                        </li>
-                        <li>
-                            <a href="04.usuario.php">Cliente</a>
-                        </li>
-                    </ul>
-                </article>
-                <a href="">Iniciar Sesión</a>
-            </nav>
-        </header>
-
+        
         <main>
             <h1>DRAGON ICE</h1>
         </main>

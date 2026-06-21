@@ -94,6 +94,29 @@ background:#28a745;
 background:#dc3545;
 }
 
+.acciones{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+}
+
+.volver{
+    display:block;
+    width:250px;
+    margin:30px auto 0;
+    text-align:center;
+    text-decoration:none;
+    background:#18335c;
+    color:white;
+    padding:15px;
+    border-radius:10px;
+    font-weight:bold;
+}
+
+.volver:hover{
+    background:#2f5d9f;
+}
+
 </style>
 </head>
 <body>
@@ -160,6 +183,11 @@ echo "<td>
         ?>
 
 </table>
+
+<a href="../formularios/06.formularioproducto.php" class="volver">
+        ➕ Registrar Nuevo Producto
+    </a>
+
 
 </div>
 
