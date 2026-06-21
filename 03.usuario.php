@@ -241,14 +241,13 @@ iframe{
 <section>
 
     <article>
-        <h1>Hola Nicolás Chávez 👋</h1>
+        <h1>Hola,<?php echo $_SESSION['usuario']. $_SESSION['ape']?> 👋</h1>
 
         <img id="principal"
         src="https://bloximages.newyork1.vip.townnews.com/berkshireeagle.com/content/tncms/assets/v3/editorial/4/ae/4ae98f76-ad56-4b80-80f8-f0943494e362/6807a7a64769c.image.jpg?resize=422%2C500"&gt;>
     </article>
 
     <article>
-
         <h3>Nuestro Catálogo</h3>
 
         <section class="catalogo">
