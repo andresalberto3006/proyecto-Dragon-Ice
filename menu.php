@@ -115,4 +115,10 @@ const navLinks = document.getElementById("navLinks");
 btnMenu.addEventListener("click", function(){
     navLinks.classList.toggle("active");
 });
+
+document.querySelectorAll("#navLinks a").forEach(function(link) {
+    link.addEventListener("click", function() {
+        navLinks.classList.remove("active");
+    });
+});
 </script>

@@ -205,7 +205,7 @@
                 </a>
             </aside>
             <nav>
-                <a href="">Inicio</a>
+                <a href="01.inicio.php">Inicio</a>
                 <article>
                     <button> Registrarte</button>
                     <ul>
