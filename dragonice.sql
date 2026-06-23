@@ -43,6 +43,18 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `dragonice`.`usuariosesion`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dragonice`.`usuariosesion` (
+  `id` INT NOT NULL  AUTO_INCREMENT,
+  `usuario` VARCHAR(50) NULL,
+  `apellido` VARCHAR(50) NULL,
+  `rol` INT(15) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `dragonice`.`pedidos`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dragonice`.`pedidos` (

@@ -8,16 +8,16 @@
 <body>
    <? php
 session_start();
-$nom=$_POST['usuario' ];
-$contra=$_POST['contra' ];
-echo $nom;
-echo $contra;
-if($nom == "Lucas"&& $contra == "123"){
-$_SESSION['nom' ]="Andresiño Aramayo Vargas";
+$nombre=$_POST['nonmbre' ];
+$celular=$_POST['celular' ];
+echo $nombre;
+echo $celular;
+if($nombre == "Lucas"&& $celular == "123"){
+$_SESSION['nombre' ]="Andresiño Aramayo Vargas";
 $_SESSION['edad' ]="13";
 header("Location:dos.php");
 }else{
-header("Location:maquetacion.php");
+header("Location:01.inicio.php");
 }
 ?>
 </body>

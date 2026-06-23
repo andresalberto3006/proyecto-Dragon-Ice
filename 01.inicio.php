@@ -115,6 +115,7 @@
         <main>
             <h1>DRAGON ICE</h1>
         </main>
+        
     </section>
     <?php include("piedepagina.php"); ?>
 </body>
