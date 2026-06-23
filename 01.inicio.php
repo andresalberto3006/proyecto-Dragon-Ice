@@ -94,7 +94,9 @@
             <nav>
                 <a href="01.inicio.php">Inicio</a>
                 <article>
-                    <button> Registrarte</button>
+                    <a href="./formularios/05.formulariousuario.php">
+                    <button>prueba</button>
+                    </a>
                     <ul>
                         <li>
                             <a href="03.admin.php">Administrador</a>
