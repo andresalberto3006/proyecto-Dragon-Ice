@@ -1,174 +1,288 @@
 <?php
-    $direccion="localhost";
-    $usuario="root";
-    $contraseña="";
-    $nombreBase="dragonice";
 
-    $conexion= new mysql($direccion, $usuario, $contraseña, $nombreBase);
-    if($conexion->error){
-        echo "Hubo un error al conectar la base de datos";
-    }
-    $ciu=$_GET['ciu'];
-    $sql="SELECT * FROM usuario WHERE ciu='$ciu'";
-    $resultado = $conexion->query($sql);
-    if ($resultado->num_rows>0){
-        while($fila=$resultado->fetch_assoc()){
-            $nombre=$fila['nombre'];
-            $direccion=$fila['direccion'];
-            $celular=$fila['celular'];
-            $rol=$fila['rol'];
-            $estado=$fila['estado'];
-        }
-    }
+$direccion="localhost";
+$usuario="root";
+$contraseña="";
+$nombreBase="dragonice";
+
+$conexion = new mysqli($direccion,$usuario,$contraseña,$nombreBase);
+
+if($conexion->connect_error){
+    die("Hubo un error al conectar a la base de datos");
+}
+
+$ci= $_GET['ci'];
+
+$sql = "SELECT * FROM usuario WHERE ci='$ci'";
+
+$resultado = $conexion->query($sql);
+
+if($resultado->num_rows > 0){
+
+    $fila = $resultado->fetch_assoc();
+
+    $nombre = $fila['nombre'];
+    $direccionUsuario = $fila['direccion'];
+    $celular = $fila['celular'];
+    $rol = $fila['rol'];
+    $estado = $fila['estado'];
+
+}else{
+
+    die("Usuario no encontrado");
+
+}
+
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario Heladeria</title>
 
-    <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
 
-        body{
-            font-family: Arial, sans-serif;
+<title>Actualizar Usuario</title>
 
-            background-image: url("music-musical-instrument-guitar-two-dark-background.png");
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
+<style>
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
 
-            min-height: 100vh;
-            padding: 20px;
-        }
+body{
 
-        .formulario{
+    min-height:100vh;
 
-            width: 330px;
-            padding: 30px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
-            border-radius: 15px;
+    background:linear-gradient(135deg,#18335c,#2f5d9f,#7fc7ff);
+}
 
-            background-color: rgba(24, 45, 75, 0.9);
+.formulario{
 
-            border: 2px solid #6bb7ff;
+    width:420px;
 
-            box-shadow: 0 0 15px rgba(0,0,0,0.4);
-        }
+    padding:35px;
 
-        h2{
-            text-align: center;
-            color: #fff3d6;
-            margin-bottom: 10px;
-        }
+    background:white;
 
-        .subtitulo{
-            text-align: center;
-            color: #dcdcdc;
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
+    border-radius:25px;
 
-        label{
-            display: block;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
 
-            margin-top: 12px;
-            margin-bottom: 5px;
+h2{
+    text-align:center;
+    color:#18335c;
+    margin-bottom:10px;
+}
 
-            color: #fff3d6;
+.subtitulo{
+    text-align:center;
+    color:#666;
+    margin-bottom:20px;
+}
 
-            font-size: 15px;
-        }
+label{
+    display:block;
+    margin-top:12px;
+    margin-bottom:5px;
+    font-weight:bold;
+    color:#18335c;
+}
 
-        input{
-            width: 100%;
+input{
 
-            padding: 10px;
+    width:100%;
 
-            border: none;
-            border-radius: 8px;
+    padding:12px;
 
-            background-color: #f2f2f2;
+    border:1px solid #ccc;
 
-            outline: none;
-        }
+    border-radius:10px;
 
-        input:focus{
-            border: 2px solid #4da6ff;
-        }
+    outline:none;
+}
 
-        .boton{
+input:focus{
+    border:2px solid #4da6ff;
+}
 
-            width: 100%;
+.boton{
 
-            background-color: #4da6ff;
-            color: white;
+    width:100%;
 
-            padding: 12px;
+    margin-top:20px;
 
-            border: none;
-            border-radius: 10px;
+    padding:12px;
 
-            margin-top: 20px;
+    border:none;
 
-            font-size: 16px;
+    border-radius:10px;
 
-            cursor: pointer;
-        }
+    background:#4da6ff;
 
-        .boton:hover{
-            background-color: #ffae42;
-        }
+    color:white;
 
-    </style>
+    font-size:16px;
+
+    cursor:pointer;
+}
+
+.boton:hover{
+    background:#2f5d9f;
+}
+
+label.error{
+    color:red;
+    font-size:12px;
+    margin-top:5px;
+}
+
+input.error{
+    border:2px solid red;
+}
+
+input.valid{
+    border:2px solid green;
+}
+
+</style>
+
 </head>
 
 <body>
 
-    <div class="formulario">
+<div class="formulario">
 
-        <h2>Crear Cuenta</h2>
+<h2>✏️ Actualizar Usuario</h2>
 
-        <p class="subtitulo">
-            Complete los datos del usuario
-        </p>
+<p class="subtitulo">
+Modifique los datos del usuario
+</p>
 
-        <form action="registrousuario.php" method="POST">
+<form id="formulario" action="updateusuario2.php" method="POST">
 
-            <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" placeholder="Ingrese su nombre" value=<?=$nombre?>><br>
+<label>CI</label>
+<input
+type="number"
+name="ci"
+id="ci"
+value="<?php echo $ci; ?>"
+readonly>
 
-            <label for="direccion">Direccion</label>
-            <input type="text" id="ciu" placeholder="Ingrese su direccion" value=<?=$ciu?>><br>>
+<label>Nombre</label>
+<input
+type="text"
+name="nombre"
+id="nombre"
+value="<?php echo $nombre; ?>">
 
-            <label for="celular">Celular</label>
-            <input type="text" id="celular" placeholder="Ingrese su número de celular" value=<?=$celular?>><br>>
+<label>Dirección</label>
+<input
+type="text"
+name="direccion"
+id="direccion"
+value="<?php echo $direccionUsuario; ?>">
 
-            <label for="rol">Rol</label>
-            <input type="text" id="rol" placeholder="Ingrese su rol personal" value=<?=$rol?>><br>>
+<label>Celular</label>
+<input
+type="number"
+name="celular"
+id="celular"
+value="<?php echo $celular; ?>">
 
-            <label for="estado">Estado</label>
-            <input type="text" estado" placeholder="Ingrese su estado personal" value=<?=$estado?>><br>>
+<label>Rol</label>
+<input
+type="text"
+name="rol"
+id="rol"
+value="<?php echo $rol; ?>">
 
-            <button type="submit" class="boton">
-                Crear Cuenta
-            </button>
-    
-        </form>
+<label>Estado</label>
+<input
+type="text"
+name="estado"
+id="estado"
+value="<?php echo $estado; ?>">
 
-    </div>
+<button type="submit" class="boton">
+Guardar Cambios
+</button>
+
+</form>
+
+</div>
+
+<script>
+
+$(document).ready(function(){
+
+$("#formulario").validate({
+
+rules:{
+
+nombre:{
+required:true
+},
+
+direccion:{
+required:true
+},
+
+celular:{
+required:true
+},
+
+rol:{
+required:true
+},
+
+estado:{
+required:true
+}
+
+},
+
+messages:{
+
+nombre:{
+required:"Ingrese el nombre"
+},
+
+direccion:{
+required:"Ingrese la dirección"
+},
+
+celular:{
+required:"Ingrese el celular"
+},
+
+rol:{
+required:"Ingrese el rol"
+},
+
+estado:{
+required:"Ingrese el estado"
+}
+
+}
+
+});
+
+});
+
+</script>
 
 </body>
-
 </html>

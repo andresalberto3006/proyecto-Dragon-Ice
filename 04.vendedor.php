@@ -268,7 +268,7 @@ table{
 </style>
 </head>
 <body>
-
+<?php session_start();?>
 <header>
     <h1 id="mio">Sistemas de Ventas</h1>
     <h1 id="rex">Panel del Vendedor</h1>

@@ -10,10 +10,10 @@
    }
 
    $id=$_GET['id'];
-   $sql="SELECT * FROM pedidos WHERE id='$id";
+   $sql="SELECT * FROM pedidos WHERE id='$id'";
    $resultado = $conexion->query($sql);
-   if ($resultado->num_rouws>0){
-    while($fila=$rsultado->fetch_assoc()){
+   if ($resultado->num_rows>0){
+    while($fila=$resultado->fetch_assoc()){
         echo $fila['id']."<br>".$fila['nombre']."<br>".$fila['fecha']."<br>".$fila['estado']."<br>".$fila['nombrevendedor'];   
     }
    }

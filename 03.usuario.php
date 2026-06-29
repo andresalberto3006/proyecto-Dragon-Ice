@@ -222,36 +222,33 @@ iframe{
 </head>
 
 <body>
-
+<?php session_start();?>
 <header>
     <input type="text" placeholder="🔍 Buscar productos, pedidos e inventarios...">
 </header>
-
 <nav>
-
-    <img src="https://lh3.googleusercontent.com/drive-storage/AJQWtBOfi3WBTfU8Mryu9DbtL6848MMilNW8CntuIbUnL-GzCTaTFnIOL3rN8iGpBbBy9S97YWeAUzDpozkQbc-PlIJ6ndTrCGYwfycCqVRgXtShzPXG=h360"&gt;>
+   <img src="./imagenesproyecto/logo.png" alt="">
 
     <h2>DRAGON ICE</h2>
-
     <a href="#">Inicio</a>
     <a href="#">Productos</a>
     <a href="#">Inventarios</a>
     <a href="#">Pedidos</a>
     <a href="#">Contacto</a>
+    <a href="iniciosesion.php">CERRAR SESION</a>
 
 </nav>
 
 <section>
 
     <article>
-        <h1>Hola Nicolás Chávez 👋</h1>
+        <h1>Hola,<?php echo $_SESSION['usuario'].$_SESSION['apellido']?> 👋</h1>
 
         <img id="principal"
         src="https://bloximages.newyork1.vip.townnews.com/berkshireeagle.com/content/tncms/assets/v3/editorial/4/ae/4ae98f76-ad56-4b80-80f8-f0943494e362/6807a7a64769c.image.jpg?resize=422%2C500"&gt;>
     </article>
 
     <article>
-
         <h3>Nuestro Catálogo</h3>
 
         <section class="catalogo">
@@ -281,7 +278,7 @@ iframe{
             <input type="date">
 
             <label>Celular</label>
-            <input type="tel">
+            <input type="number">
 
             <label>Dirección</label>
             <input type="text">

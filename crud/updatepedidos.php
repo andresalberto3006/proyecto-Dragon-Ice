@@ -4,20 +4,27 @@
     $contraseña="";
     $nombreBase="dragonice";
 
-    $conexion= new mysql($direccion, $usuario, $contraseña, $nombreBase);
-    if($conexion->error){
+    $conexion= new mysqli($direccion, $usuario, $contraseña, $nombreBase);
+    if($conexion->connect_error){
         echo "Hubo un error al conectar la base de datos";
     }
-    $ciu=$_GET['ciu'];
-    $sql="SELECT * FROM usuario WHERE ciu='$ciu'";
+    $id = "";
+    $nombre = "";
+    $fecha = "";
+    $estado = "";
+    $nombrevendedor = "";
+
+if(isset($_GET['id'])){
+    $id=$_GET['id'];
+    $sql="SELECT * FROM pedidos WHERE id='$id'";
     $resultado = $conexion->query($sql);
-    if ($resultado->num_rows>0){
-        while($fila=$resultado->fetch_assoc()){
+    if ($resultado->num_rows > 0){
+            $fila=$resultado->fetch_assoc();
+            $id=$fila['id'];
             $nombre=$fila['nombre'];
-            $direccion=$fila['direccion'];
-            $celular=$fila['celular'];
-            $rol=$fila['rol'];
+            $fecha=$fila['fecha'];
             $estado=$fila['estado'];
+            $nombrevendedor=$fila['nombrevendedor'];
         }
     }
 ?>
@@ -28,8 +35,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>;
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>;
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
     <title>Formulario Heladería</title>
 
     <style>
@@ -158,22 +165,22 @@
 
             <div class="grupo">
                 <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre" value=<?=$nombre?>>
+                <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre" value=<?=$nombre?>><br>
             </div>
 
             <div class="grupo">
                 <label for="fecha">Fecha</label>
-                <input type="date" id="fecha" name="fecha" value=<?=$fecha?>>
+                <input type="date" id="fecha" name="fecha" value=<?=$fecha?>><br>
             </div>
 
             <div class="grupo">
                 <label for="estado">Estado</label>
-                <input type="text" id="estado" name="estado" placeholder="Ingrese el estado" value=<?=$estado?>>
+                <input type="text" id="estado" name="estado" placeholder="Ingrese el estado" value=<?=$estado?>><br>
             </div>
 
             <div class="grupo">
                 <label for="nombrevendedor">Nombre del Vendedor</label>
-                <input type="text" id="nombrevendedor" name="nombrevendedor" placeholder="Ingrese el nombre del vendedor" value=<?=$nombrevendedor?>>
+                <input type="text" id="nombrevendedor" name="nombrevendedor" placeholder="Ingrese el nombre del vendedor" value=<?=$nombrevendedor?>><br>
             </div>
 
             <button type="submit" class="boton">
