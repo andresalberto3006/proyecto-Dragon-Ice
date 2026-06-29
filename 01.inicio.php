@@ -92,10 +92,44 @@
             <source src="download.mp4" type="video/mp4">
 
         </video>
+<<<<<<< HEAD
         
+=======
+        <header>
+            <aside>
+                <a href="" class="logo">
+                    <img src="./imagenesproyecto/logo.png" alt="Logo">
+                    <h1>Dragon Ice</h1>
+                </a>
+            </aside>
+            <nav>
+                <a href="01.inicio.php">Inicio</a>
+                <article>
+                    <a href="./formularios/05.formulariousuario.php">
+                    <button>prueba</button>
+                    </a>
+                    <ul>
+                        <li>
+                            <a href="03.admin.php">Administrador</a>
+                            
+                        </li>
+                        <li>
+                            <a href="05.vendedor.php">Vendedor</a>
+                        </li>
+                        <li>
+                            <a href="04.usuario.php">Cliente</a>
+                        </li>
+                    </ul>
+                </article>
+                <a href="">Iniciar Sesión</a>
+            </nav>
+        </header>
+
+>>>>>>> 179dbfb5c885d9f3e669be1d6c8d3817ca6532f7
         <main>
             <h1>DRAGON ICE</h1>
         </main>
+        
     </section>
     <?php include("piedepagina.php"); ?>
 </body>

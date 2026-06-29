@@ -276,11 +276,11 @@ header{
 </style>
 </head>
 <body>
-
+<?php session_start();?>
 <header>
     <h1 id="mio">Sistemas del administrador</h1>
     <h1 id="rex">Panel del administrador</h1>
-    <button id="crack">CERRAR SESION</button>
+    <button id="crack"><a href="iniciosesion.php">CERRAR SESION<?php echo $_SESSION['usuario'].$_SESSION['apellido']?></a> </button>
 </header>
 
  
