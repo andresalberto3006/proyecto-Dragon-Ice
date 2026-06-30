@@ -1,204 +1,182 @@
 <?php
-    $direccion="localhost";
-    $usuario="root";
-    $contraseña="";
-    $nombreBase="dragonice";
 
-    $conexion= new mysqli($direccion, $usuario, $contraseña, $nombreBase);
-    if($conexion->connector_error){
-        echo "Hubo un error al conectar la base de datos";
-    }
-    $id= "";
-    $nombre = "";
-    $descripcion = "";
-    $precio = "";
-    $costo = "";
-    $stock = "";
+$direccion="localhost";
+$usuario="root";
+$contraseña="";
+$nombreBase="dragonice";
 
-      if (isset($_GET['id'])) {
+$conn = new mysqli($direccion,$usuario,$contraseña,$nombreBase);
 
-    $id=$_GET['id'];
-    $sql="SELECT * FROM productos WHERE id='$id'";
-    $resultado = $conexion->query($sql);
-    if ($resultado->num_rows>0){
-        $fila=$resultado->fetch_assoc();
-            $id=$fila['id'];
-            $nombre=$fila['nombre'];
-            $descripcion=$fila['descripcion'];
-            $precio=$fila['precio'];
-            $costo=$fila['costo'];
-            $stock=$fila['stock'];
-        }
-    }
+if($conn->connect_error){
+    die("Error de conexión");
+}
+
+$id=$_GET['id'];
+
+$sql="SELECT * FROM productos WHERE id='$id'";
+
+$resultado=$conn->query($sql);
+
+$fila=$resultado->fetch_assoc();
+
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
-    <title>Formulario Heladería</title>
+<meta charset="UTF-8">
 
-    <style>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
 
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<title>Editar Producto</title>
 
-        body{
-            font-family: Arial, Helvetica, sans-serif;
+<style>
 
-            background-image: url("music-musical-instrument-guitar-two-dark-background.png");
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, Helvetica, sans-serif;
+}
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
+body{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#18335c,#2f5d9f,#7fc7ff);
+}
 
-            min-height: 100vh;
-            padding: 20px;
-        }
+.formulario{
 
-        .formulario{
+width:400px;
 
-            width: 330px;
-            padding: 30px;
+padding:30px;
 
-            border-radius: 15px;
+background:white;
 
-            background-color: rgba(24, 45, 75, 0.9);
+border-radius:20px;
 
-            border: 2px solid #6bb7ff;
+box-shadow:0 10px 30px rgba(0,0,0,.25);
 
-            box-shadow: 0 0 15px rgba(0,0,0,0.4);
-        }
+}
 
-        .formulario h2{
-            text-align: center;
-            color: #fff3d6;
-            margin-bottom: 10px;
-        }
+h2{
+text-align:center;
+margin-bottom:20px;
+color:#18335c;
+}
 
-        .subtitulo{
-            text-align: center;
-            color: #dcdcdc;
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
+label{
+display:block;
+margin-top:12px;
+margin-bottom:5px;
+font-weight:bold;
+}
 
-        .grupo{
-            margin-bottom: 15px;
-        }
+input{
+width:100%;
+padding:10px;
+border:1px solid #ccc;
+border-radius:8px;
+}
 
-        label{
-            display: block;
-            margin-bottom: 5px;
+.boton{
+width:100%;
+margin-top:20px;
+padding:12px;
+border:none;
+background:#4da6ff;
+color:white;
+font-size:16px;
+border-radius:10px;
+cursor:pointer;
+}
 
-            color: #fff3d6;
+.boton:hover{
+background:#2f5d9f;
+}
 
-            font-size: 15px;
-        }
+label.error{
+color:red;
+font-size:12px;
+margin-top:5px;
+}
 
-        input{
-            width: 100%;
-
-            padding: 10px;
-
-            border-radius: 8px;
-            border: none;
-
-            background-color: #f2f2f2;
-
-            outline: none;
-        }
-
-        input:focus{
-            border: 2px solid #4da6ff;
-        }
-
-        .boton{
-
-            width: 100%;
-
-            margin-top: 15px;
-            padding: 12px;
-
-            border: none;
-            border-radius: 10px;
-
-            background-color: #4da6ff;
-
-            color: white;
-
-            font-size: 16px;
-
-            cursor: pointer;
-        }
-
-        .boton:hover{
-            background-color: #ffae42;
-        }
-
-    </style>
+</style>
 </head>
 
 <body>
 
-    <div class="formulario">
+<div class="formulario">
 
-        <h2>🍦 Registrar Producto</h2>
+<h2>✏️ Editar Producto</h2>
 
-        <p class="subtitulo">
-            Complete los datos del producto
-        </p>
+<form id="formulario" action="updateproducto2.php" method="POST">
 
-        <form action="registro.php" method="POST">
+<label>ID</label>
+<input type="number"
+name="id"
+value="<?php echo $fila['id']; ?>"
+readonly>
 
-            <div class="grupo">
-                <label for="ci">Código / CI</label>
-                <input type="text" id="ci" name="ci" placeholder="Ingrese el código" value=<?=$ciu?>><br>
-            </div>
+<label>Nombre</label>
+<input type="text"
+name="nombre"
+value="<?php echo $fila['nombre']; ?>">
 
-            <div class="grupo">
-                <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre" value=<?=$nombre?>><br>
-            </div>
+<label>Descripción</label>
+<input type="text"
+name="descripcion"
+value="<?php echo $fila['descripcion']; ?>">
 
-            <div class="grupo">
-                <label for="descripcion">Descripción</label>
-                <input type="text" id="descripcion" name="descripcion" placeholder="Descripción del producto" value=<?=$descripcion?>><br>
-            </div>
+<label>Precio</label>
+<input type="number"
+name="precio"
+value="<?php echo $fila['precio']; ?>">
 
-            <div class="grupo">
-                <label for="precio">Precio</label>
-                <input type="text" id="precio" name="precio" placeholder="Ingrese el precio" value=<?=$precio?>><br>
-            </div>
+<label>Costo</label>
+<input type="number"
+name="costo"
+value="<?php echo $fila['costo']; ?>">
 
-            <div class="grupo">
-                <label for="costo">Costo</label>
-                <input type="text" id="costo" name="costo" placeholder="Ingrese el costo" value=<?=$costo?>><br>
-            </div>
+<label>Stock</label>
+<input type="number"
+name="stock"
+value="<?php echo $fila['stock']; ?>">
 
-            <div class="grupo">
-                <label for="stock">Stock</label>
-                <input type="text" id="stock" name="stock" placeholder="Cantidad disponible" value=<?=$stock?>><br>
-            </div>
+<button type="submit" class="boton">
+Actualizar Producto
+</button>
 
-            <button type="submit" class="boton">
-                Guardar Producto
-            </button>
+</form>
 
-        </form>
-        <a href=""></a>
-        
-    </div>
+</div>
+
+<script>
+
+$("#formulario").validate({
+
+rules:{
+nombre:{required:true},
+descripcion:{required:true},
+precio:{required:true},
+costo:{required:true},
+stock:{required:true}
+},
+
+messages:{
+nombre:{required:"Ingrese el nombre"},
+descripcion:{required:"Ingrese la descripción"},
+precio:{required:"Ingrese el precio"},
+costo:{required:"Ingrese el costo"},
+stock:{required:"Ingrese el stock"}
+}
+
+});
+
+</script>
 
 </body>
-
 </html>

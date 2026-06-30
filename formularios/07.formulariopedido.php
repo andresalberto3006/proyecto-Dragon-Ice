@@ -111,6 +111,20 @@
         .boton:hover{
             background-color: #ffae42;
         }
+        label.error{
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+         input.error{
+            border:2px solid red;
+
+        }
+
+        input.valid{
+            border:2px solid green;
+        }
 
     </style>
 </head>
@@ -125,7 +139,7 @@
             Complete los datos del producto
         </p>
 
-        <form action="crud/registroproducto.php" method="POST">
+        <form id= "formulario" action="../crud/registropedido.php" method="POST">
 
             <div class="grupo">
                 <label for="id">Código</label>
@@ -139,7 +153,7 @@
 
             <div class="grupo">
                 <label for="fecha">Fecha</label>
-                <input type="date" id="fecha" name="fecha">
+                <input type="date" id="fecha" name="fecha" placeholder="Ingrese la fecha">
             </div>
 
             <div class="grupo">
@@ -160,6 +174,56 @@
         
     </div>
 
+    <script>
+$(document).ready(function(){
+
+$("#formulario").validate({
+
+rules:{
+    id:{
+        required:true
+    },
+    nombre:{
+        required:true
+    },
+    fecha:{
+        required:true
+    },
+    estado:{
+        required:true
+    },
+    nombrevendedor:{
+        required:true
+    },
+    
+},
+
+messages:{
+    id:{
+        required:"Ingrese su codigo/id"
+    },
+    nombre:{
+        required:"Ingrese su nombre"
+    },
+    fecha:{
+        required:"Ingrese la fecha"
+    },
+    estado:{
+        required:"Ingrese su estado"
+    },
+    nombrevendedor:{
+        required:"Ingrese el nombre del vendedor"
+    },
+    
+}
+
+});
+
+});
+</script>
+
+
 </body>
 
 </html>
+

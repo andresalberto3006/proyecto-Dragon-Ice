@@ -8,14 +8,18 @@ $nombreBase="dragonice";
 $conn = new mysqli($direccion,$usuario,$contraseña,$nombreBase);
 
 if($conn->connect_error){
-    die("Hubo un error al conectar a la base de datos");
+    die("Error al conectar a la base de datos");
 }
 
 $ci = $_GET['ci'];
 
-$sql = "SELECT * FROM usuario WHERE ci='$ci'";
+$sql = "DELETE FROM usuario WHERE ci='$ci'";
 
-$resultado = $conn->query($sql);
+$eliminado = false;
+
+if($conn->query($sql) === TRUE){
+    $eliminado = true;
+}
 
 ?>
 
@@ -24,7 +28,7 @@ $resultado = $conn->query($sql);
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Usuario Registrado</title>
+<title>Eliminar Usuario</title>
 
 <style>
 
@@ -37,72 +41,58 @@ $resultado = $conn->query($sql);
 
 body{
     min-height:100vh;
-
     display:flex;
     justify-content:center;
     align-items:center;
-
     background:linear-gradient(135deg,#18335c,#2f5d9f,#7fc7ff);
 }
 
 .tarjeta{
-
-    width:650px;
-
+    width:600px;
     background:white;
-
     padding:40px;
-
     border-radius:25px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
 
-    box-shadow:0 10px 30px rgba(0,0,0,0.25);
+.icono{
+    font-size:80px;
+    margin-bottom:20px;
 }
 
 h1{
-    text-align:center;
-    color:#18335c;
-    margin-bottom:30px;
-}
-
-.dato{
-    background:#f4f8ff;
-
-    padding:15px;
-
     margin-bottom:15px;
-
-    border-left:6px solid #4da6ff;
-
-    border-radius:10px;
-
-    font-size:18px;
 }
 
-strong{
-    color:#18335c;
+.exito{
+    color:#28a745;
+}
+
+.error{
+    color:#dc3545;
+}
+
+.mensaje{
+    font-size:18px;
+    color:#555;
+    margin-bottom:25px;
 }
 
 .botones{
-    margin-top:30px;
     display:flex;
     justify-content:center;
     gap:15px;
+    flex-wrap:wrap;
 }
 
 .boton{
-
     text-decoration:none;
-
     background:#4da6ff;
-
     color:white;
-
     padding:12px 25px;
-
     border-radius:10px;
-
     font-weight:bold;
-
     transition:.3s;
 }
 
@@ -118,55 +108,31 @@ strong{
 
 <div class="tarjeta">
 
-<h1>🍦 Información del Usuario</h1>
+<?php if($eliminado){ ?>
 
-<?php
+<div class="icono">🗑️✅</div>
 
-if($resultado->num_rows > 0){
+<h1 class="exito">
+    Usuario eliminado correctamente
+</h1>
 
-    $fila = $resultado->fetch_assoc();
+<p class="mensaje">
+    El usuario con CI <strong><?php echo $ci; ?></strong> fue eliminado exitosamente.
+</p>
 
-?>
+<?php } else { ?>
 
-<div class="dato">
-    <strong>CI:</strong>
-    <?php echo $fila['ci']; ?>
-</div>
+<div class="icono">❌</div>
 
-<div class="dato">
-    <strong>Nombre:</strong>
-    <?php echo $fila['nombre']; ?>
-</div>
+<h1 class="error">
+    Error al eliminar usuario
+</h1>
 
-<div class="dato">
-    <strong>Dirección:</strong>
-    <?php echo $fila['direccion']; ?>
-</div>
+<p class="mensaje">
+    <?php echo $conn->error; ?>
+</p>
 
-<div class="dato">
-    <strong>Celular:</strong>
-    <?php echo $fila['celular']; ?>
-</div>
-
-<div class="dato">
-    <strong>Rol:</strong>
-    <?php echo $fila['rol']; ?>
-</div>
-
-<div class="dato">
-    <strong>Estado:</strong>
-    <?php echo $fila['estado']; ?>
-</div>
-
-<?php
-
-}else{
-
-    echo "<div class='dato'>Usuario no encontrado.</div>";
-
-}
-
-?>
+<?php } ?>
 
 <div class="botones">
 
@@ -175,7 +141,7 @@ if($resultado->num_rows > 0){
     </a>
 
     <a href="../formularios/05.formulariousuario.php" class="boton">
-        Registrar Usuario
+        Registrar usuario
     </a>
 
 </div>
@@ -184,3 +150,7 @@ if($resultado->num_rows > 0){
 
 </body>
 </html>
+
+<?php
+$conn->close();
+?>

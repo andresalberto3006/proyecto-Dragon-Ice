@@ -110,6 +110,22 @@
             background-color: #ffae42;
         }
 
+        label.error{
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+         input.error{
+            border:2px solid red;
+
+        }
+
+        input.valid{
+            border:2px solid green;
+        }
+
+    
     </style>
 </head>
 
@@ -119,10 +135,12 @@
         <p class="subtitulo">
             Complete los datos del usuario
         </p>
-        <form action="crud/registrousua.php" method="post">
-            <label for="ci">CI</label>
-            <input type="number" id="ciu" name="ciu">
 
+        
+        <form id="formulario" action="../crud/registrousuario.php" method="POST">
+
+            <label for="ci">CI</label>
+            <input type="number" id="ci" name="ci">
 
             <label for="nombre">Nombre</label>
             <input type="text" id="nombre" name="nombre">
@@ -132,7 +150,6 @@
 
             <label for="celular">Celular:</label>
             <input type="number" id="celular" name="celular">
-
 
             <label for="rol">Rol:</label>
             <input type="text" id="rol" name="rol">
@@ -145,6 +162,58 @@
             </button>
         </form>
     </div>
+    
+    <script>
+$(document).ready(function(){
+
+$("#formulario").validate({
+
+rules:{
+    ci:{
+        required:true
+    },
+    nombre:{
+        required:true
+    },
+    direccion:{
+        required:true
+    },
+    celular:{
+        required:true
+    },
+    rol:{
+        required:true
+    },
+    estado:{
+        required:true
+    }
+},
+
+messages:{
+    ci:{
+        required:"Ingrese su ci"
+    },
+    nombre:{
+        required:"Ingrese su nombre"
+    },
+    direccion:{
+        required:"Ingrese su direccion"
+    },
+    celular:{
+        required:"Ingrese su celular"
+    },
+    rol:{
+        required:"Ingrese el rol"
+    },
+    estado:{
+        required:"Ingrese el estado"
+    }
+}
+
+});
+
+});
+</script>
 
 </body>
 

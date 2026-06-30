@@ -92,7 +92,7 @@
 <nav class="menu">
 
     <div class="logo">
-        <img src="./imagenesproyecto/logo.png" alt="logo">
+        <img src="../imagenesproyecto/logo.png" alt="logo">
         <h2>Dragon Ice</h2>
     </div>
 
@@ -114,5 +114,11 @@ const navLinks = document.getElementById("navLinks");
 
 btnMenu.addEventListener("click", function(){
     navLinks.classList.toggle("active");
+});
+
+document.querySelectorAll("#navLinks a").forEach(function(link) {
+    link.addEventListener("click", function() {
+        navLinks.classList.remove("active");
+    });
 });
 </script>
