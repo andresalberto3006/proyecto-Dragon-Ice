@@ -13,7 +13,7 @@ $celular=$_POST['celular' ];
 echo $nombre;
 echo $celular;
 if($nombre == "Lucas"&& $celular == "123"){
-$_SESSION['nombre' ]="Andresiño Aramayo Vargas";
+$_SESSION['nombre' ]="Andre Aramayo Torrez";
 $_SESSION['edad' ]="13";
 header("Location:dos.php");
 }else{
