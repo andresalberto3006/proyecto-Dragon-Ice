@@ -198,10 +198,12 @@ table{
 @media (max-width: 668px){
 
     main{
+          
         flex-direction: column;
     }
 
     aside{
+        
         width: 100%;
         height: auto;
     }
@@ -272,7 +274,10 @@ header{
     table{
         min-width: 700px;
     }
-}
+
+
+    }
+
 </style>
 </head>
 <body>
