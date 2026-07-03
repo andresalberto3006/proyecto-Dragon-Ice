@@ -45,6 +45,10 @@
 
             box-shadow: 0 0 15px rgba(0,0,0,0.4);
         }
+        .formulario:hover{
+            transition: 1s;
+            transform:scale(1.05);
+        }
 
         h2{
             text-align: center;
