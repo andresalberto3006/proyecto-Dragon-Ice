@@ -11,9 +11,10 @@ if($conn->connect_error){
     die("Hubo un error al conectar a la base de datos");
 }
 
-$sql = "SELECT * FROM usuario";
+$sql = "SELECT * FROM usuario ORDER BY ci DESC";
 $resultado = $conn->query($sql);
 
+<a herf="hecerVendedor.php?ci=<?php echo $fila['ci']; ?>">Hacer Vendedor</a>
 ?>
 
 <!DOCTYPE html>

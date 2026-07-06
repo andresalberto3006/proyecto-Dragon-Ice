@@ -173,50 +173,25 @@ Modifique los datos del usuario
 
 <form id="formulario" action="updateusuario2.php" method="POST">
 
-<label>CI</label>
-<input
-type="number"
-name="ci"
-id="ci"
-value="<?php echo $ci; ?>"
-readonly>
+     <label>CI</label>
+     <input type="number"name="ci"id="ci"value="<?php echo $ci; ?>"readonly>
 
-<label>Nombre</label>
-<input
-type="text"
-name="nombre"
-id="nombre"
-value="<?php echo $nombre; ?>">
+     <label>Nombre</label>
+     <input type="text"name="nombre"id="nombre"value="<?php echo $nombre; ?>">
 
-<label>Dirección</label>
-<input
-type="text"
-name="direccion"
-id="direccion"
-value="<?php echo $direccionUsuario; ?>">
+     <label>Dirección</label>
+     <input type="text"name="direccion"id="direccion"value="<?php echo $direccionUsuario; ?>">
 
-<label>Celular</label>
-<input
-type="number"
-name="celular"
-id="celular"
-value="<?php echo $celular; ?>">
+     <label>Celular</label>
+     <input type="number"name="celular"id="celular"value="<?php echo $celular; ?>">
 
-<label>Rol</label>
-<input
-type="text"
-name="rol"
-id="rol"
-value="<?php echo $rol; ?>">
+     <label>Rol</label>
+     <input type="text"name="rol"id="rol"value="<?php echo $rol; ?>">
 
-<label>Estado</label>
-<input
-type="text"
-name="estado"
-id="estado"
-value="<?php echo $estado; ?>">
+     <label>Estado</label>
+     <input type="text"name="estado"id="estado"value="<?php echo $estado; ?>">
 
-<button type="submit" class="boton">
+     <button type="submit" class="boton">
 Guardar Cambios
 </button>
 
