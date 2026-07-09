@@ -1,54 +1,37 @@
 <?php
 
-$conexion = mysqli_connect("localhost","root","","dragonice");
+$servidor = "localhost";
+$usuario = "root";
+$contrasena = "";
+$nombreBase = "dragonice";
 
-if(!$conexion){
-    die("Error de conexión");
+$conn = new mysqli($servidor, $usuario, $contrasena, $nombreBase);
+
+if ($conn->connect_error) {
+    die("Error de conexión: " . $conn->connect_error);
 }
 
-$idProducto = $_POST["idProducto"];
-$idPedido   = $_POST["idPedido"];
-$cantidad   = $_POST["cantidad"];
-$precio     = $_POST["precio"];
+$id_productos = $_POST["codigo"];
+$id_pedidos = $_POST["idpedido"];
+$cantidad = $_POST["cantidad"];
+$costotal = $_POST["costotal"];
+$total=$costotal*$cantidad;
 
-$total = $cantidad * $precio;
+$sql = "INSERT INTO carrito
+(Producto_codigo,Pedido_id,cantidad,costototal)
+VALUES
+('$id_productos','$id_pedidos','$cantidad','$total')";
 
-/* Verificar si el producto ya está en el carrito */
-
-$sqlVerificar = "SELECT *
-                 FROM carrito
-                 WHERE productos_id='$idProducto'
-                 AND pedidos_id='$idPedido'";
-
-$resultado = mysqli_query($conexion,$sqlVerificar);
-
-if(mysqli_num_rows($resultado)>0){
-
-    echo "<script>
-            alert('Este producto ya fue agregado al carrito');
-            window.location='miCarrito.php?idPedido=$idPedido';
-          </script>";
-
+if($conn->query($sql)){
+    echo "Producto agregado al carrito";
+    header("location: miCarrito.php?idPedido=".$id_pedidos);
 }else{
-
-    $sql = "INSERT INTO carrito
-            (productos_id,pedidos_id,cantidad,costototal)
-            VALUES
-            ('$idProducto',
-             '$idPedido',
-             '$cantidad',
-             '$total')";
-
-    if(mysqli_query($conexion,$sql)){
-
-        header("Location: miCarrito.php?idPedido=".$idPedido);
-
-    }else{
-
-        echo "Error: ".mysqli_error($conexion);
-
-    }
-
+    echo "El producto ya se agregó";
+    echo "<a href='fmiCarrito.php?idPedido=$id_pedidos'>
+        <button>Volver a Pedidos</button>
+      </a>";
 }
+
+
 
 ?>
