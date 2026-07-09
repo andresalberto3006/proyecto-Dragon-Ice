@@ -154,15 +154,15 @@ echo "<td>".$fila['stock']."</td>";
 echo "<td>
         <div class='acciones'>
 
-        <a class='boton mostrar' href='readusuario.php?id=".$fila['id']."'>
+        <a class='boton mostrar' href='../producto/readproducto.php?id=".$fila['id']."'>
         Mostrar
         </a>
 
-        <a class='boton editar' href='updateproducto.php?id=".$fila['id']."'>
+        <a class='boton editar' href='../producto/updateproducto.php?id=".$fila['id']."'>
         Editar
         </a>
 
-        <a class='boton eliminar' href='delete_producto.php?id=".$fila['id']."'>
+        <a class='boton eliminar' href='../producto/delete_producto.php?id=".$fila['id']."'>
         Eliminar
         </a>
 
@@ -175,7 +175,7 @@ echo "<td>
         }else{
 
             echo "<tr>";
-            echo "<td colspan='7'>No existen usuarios registrados.</td>";
+            echo "<td colspan='7'>No existen productos registrados.</td>";
             echo "</tr>";
 
         }
@@ -184,7 +184,7 @@ echo "<td>
 
 </table>
 
-<a href="../formularios/06.formularioproducto.php" class="volver">
+<a href="../producto/formularioproducto.php" class="volver">
         ➕ Registrar Nuevo Producto
     </a>
 

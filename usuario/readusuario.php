@@ -170,11 +170,11 @@ if($resultado->num_rows > 0){
 
 <div class="botones">
 
-    <a href="read.all.usuario.php" class="boton">
+    <a href="../usuario/read.all.usuario.php" class="boton">
         Ver todos los usuarios
     </a>
 
-    <a href="../formularios/05.formulariousuario.php" class="boton">
+    <a href="../usuario/formulariousuario.php" class="boton">
         Registrar Usuario
     </a>
 

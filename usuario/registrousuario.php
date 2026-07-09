@@ -144,15 +144,15 @@ h1{
 
 <div class="botones">
 
-    <a href="../formularios/05.formulariousuario.php" class="boton">
+    <a href="../usuario/formulariousuario.php" class="boton">
         Registrar otro usuario
     </a>
 
-    <a href="../crud/readusuario.php?ci=<?php echo $ci; ?>" class="boton">
+    <a href="../usuario/readusuario.php?ci=<?php echo $ci; ?>" class="boton">
         Ver usuario
     </a>
 
-    <a href="../crud/read.all.usuario.php" class="boton">
+    <a href="../usuario/read.all.usuario.php" class="boton">
         Ver todos los usuarios
     </a>
 

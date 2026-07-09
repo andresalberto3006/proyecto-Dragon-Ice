@@ -92,9 +92,6 @@
             <source src="download.mp4" type="video/mp4">
 
         </video>
-<<<<<<< HEAD
-        
-=======
         <header>
             <aside>
                 <a href="" class="logo">
@@ -125,7 +122,6 @@
             </nav>
         </header>
 
->>>>>>> 179dbfb5c885d9f3e669be1d6c8d3817ca6532f7
         <main>
             <h1>DRAGON ICE</h1>
         </main>

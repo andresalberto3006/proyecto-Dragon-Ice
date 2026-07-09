@@ -141,7 +141,7 @@
         </p>
 
         
-        <form id="formulario" action="../crud/registrousuario.php" method="POST">
+        <form id="formulario" action="../usuario/registrousuario.php" method="POST">
 
             <label for="ci">CI</label>
             <input type="number" id="ci" name="ci">

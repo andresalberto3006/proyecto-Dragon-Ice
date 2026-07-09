@@ -14,7 +14,8 @@ if($conn->connect_error){
 $sql = "SELECT * FROM usuario ORDER BY ci DESC";
 $resultado = $conn->query($sql);
 
-<a herf="hecerVendedor.php?ci=<?php echo $fila['ci']; ?>">Hacer Vendedor</a>
+
+
 ?>
 
 <!DOCTYPE html>
@@ -171,15 +172,15 @@ tr:hover{
                 echo "<td>
                         <div class='acciones'>
 
-                        <a class='boton mostrar' href='readusuario.php?ci=".$fila['ci']."'>
+                        <a class='boton mostrar' href='../usuario/readusuario.php?ci=".$fila['ci']."'>
                         Mostrar
                         </a>
 
-                        <a class='boton editar' href='updateusuario.php?ci=".$fila['ci']."'>
+                        <a class='boton editar' href='../usuario/updateusuario.php?ci=".$fila['ci']."'>
                         Editar
                         </a>
 
-                        <a class='boton eliminar' href='delete_usuario.php?ci=".$fila['ci']."'>
+                        <a class='boton eliminar' href='../usuario/delete_usuario.php?ci=".$fila['ci']."'>
                         Eliminar
                         </a>
 
@@ -201,7 +202,7 @@ tr:hover{
 
     </table>
 
-    <a href="../formularios/05.formulariousuario.php" class="volver">
+    <a href="../usuario/formulariousuario.php" class="volver">
         ➕ Registrar Nuevo Usuario
     </a>
 

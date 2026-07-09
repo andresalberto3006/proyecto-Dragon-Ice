@@ -141,15 +141,15 @@ h1{
 
 <div class="botones">
 
-    <a href="../formularios/06.formularioproducto.php" class="boton">
+    <a href="../producto/formularioproducto.php" class="boton">
         Registrar otro producto
     </a>
 
-    <a href="../crud/readproducto.php?id=<?php echo $id; ?>" class="boton">
+    <a href="../producto/readproducto.php?id=<?php echo $id; ?>" class="boton">
         Ver producto
     </a>
 
-    <a href="../crud/read.all.producto.php" class="boton">
+    <a href="../producto/read.all.producto.php" class="boton">
         Ver todos los productos
     </a>
 

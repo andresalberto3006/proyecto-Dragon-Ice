@@ -112,14 +112,10 @@
         <h2>🍦 Registrar Producto</h2>
         <p class="subtitulo">Complete los datos del producto</p>
 
-        <p class="subtitulo">
-            Complete los datos del producto
-        </p>
-
-        <form action="./crud/registroproducto.php" method="POST">
+        
 
     
-        <form id="formulario" action="../crud/registroproducto.php" method="POST">
+        <form id="formulario" action="../producto/registroproducto.php" method="POST">
 
             <div class="grupo">
                  <label for="id">id</label>

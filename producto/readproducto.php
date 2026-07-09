@@ -116,7 +116,7 @@ echo "<div class='dato'>Producto no encontrado</div>";
 
 <div class="botones">
 
-<a href="read.all.producto.php" class="boton">
+<a href="../producto/read.all.producto.php" class="boton">
 Ver todos los productos
 </a>
 
