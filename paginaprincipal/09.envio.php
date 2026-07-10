@@ -219,8 +219,8 @@ body{
     </div>
 
     <div class="botones">
-        <a href="07.formulariopedido.php" class="btn btn-principal">Seguir Comprando</a>
-        <a href="08.formulariocarrito.php" class="btn btn-secundario">Ver Mis Pedidos</a>
+        <a href="formulariopedido.php" class="btn btn-principal">Seguir Comprando</a>
+        <a href="formulariocarrito.php" class="btn btn-secundario">Ver Mis Pedidos</a>
     </div>
 
     <div class="pie">
