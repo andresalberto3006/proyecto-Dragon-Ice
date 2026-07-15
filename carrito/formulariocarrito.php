@@ -8,6 +8,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
     <title>Compralo</title>
 
+    <link rel="stylesheet" href="../">
+
     <style>
 
         *{
