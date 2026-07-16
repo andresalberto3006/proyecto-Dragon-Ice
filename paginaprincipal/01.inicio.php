@@ -95,14 +95,14 @@
         <header>
             <aside>
                 <a href="" class="logo">
-                    <img src="../imagenesproyecto/logo.png" alt="Logo">
+                    <img src="../imagenes/logo.png" alt="Logo">
                     <h1>Dragon Ice</h1>
                 </a>
             </aside>
             <nav>
                 <a href="01.inicio.php">Inicio</a>
                 <article>
-                    <a href="./formularios/formulariousuario.php">
+                    <a href="./usuario/formulariousuario.php">
                     <button>prueba</button>
                     </a>
                     <ul>
