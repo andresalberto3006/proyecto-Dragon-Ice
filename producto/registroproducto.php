@@ -1,28 +1,14 @@
 <?php
-$direccion="localhost";
-$usuario="root";
-$contraseña="";
-$nombreBase="dragonice";
-
-$conn = new mysqli($direccion, $usuario, $contraseña, $nombreBase);
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
-}
-
- if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    
-    $id = $_POST['id'];
-    $nombre = $_POST['nombre'];
-    $descripcion = $_POST['descripcion'];
-    $precio = $_POST['precio'];
-    $costo = $_POST['costo'];
-    $stock = $_POST['stock'];
-
-    $sql = "INSERT INTO productos (id, nombre, descripcion, precio, costo, stock) 
-            VALUES ('$id', '$nombre', '$descripcion', '$precio', '$costo', '$stock')";
-
-    if($conn->query($sql) === TRUE) {
-        
+session_start();
+if (!isset($_SESSION['rol'])) { header("Location: ../iniciosesion.php"); exit(); }
+if ($_SESSION['rol'] != 'Administrador' && $_SESSION['rol'] != 'Vendedor') { header("Location: ../iniciosesion.php"); exit(); }
+include("../conexion.php");
+if($_SERVER["REQUEST_METHOD"]!="POST"){header("Location: formularioproducto.php");exit();}
+$id=$_POST['id'];$nombre=$_POST['nombre'];$descripcion=$_POST['descripcion'];$precio=$_POST['precio'];$costo=$_POST['costo'];$stock=$_POST['stock'];
+$imagen="imagenesproyecto/helado.jpg";
+if(isset($_FILES['imagen']) && $_FILES['imagen']['name']!=""){$nombreImagen=time()."_".$_FILES['imagen']['name'];$destino="../imagenesproyecto/".$nombreImagen;if(move_uploaded_file($_FILES['imagen']['tmp_name'],$destino)){$imagen="imagenesproyecto/".$nombreImagen;}}
+$sql="INSERT INTO productos(id,nombre,descripcion,precio,costo,stock,imagen) VALUES('$id','$nombre','$descripcion','$precio','$costo','$stock','$imagen')";
+if(!$conexion->query($sql)){echo "<script>alert('No se pudo registrar. Verifique que el código no esté repetido.');window.location='formularioproducto.php';</script>";exit();}
 ?>
 <!DOCTYPE html>
 
@@ -122,58 +108,8 @@ h1{
 }
 
 </style>
-
 </head>
-
-<body>
-
-<div class="tarjeta">
-
-<div class="icono">🍦✅</div>
-
-<h1>¡Registro Exitoso!</h1>
-
-<p class="mensaje">
-    El producto
-    <span class="productos"><?php echo $nombre; ?></span>
-    fue registrado correctamente.
-</p>
-
-<div class="botones">
-
-    <a href="../producto/formularioproducto.php" class="boton">
-        Registrar otro producto
-    </a>
-
-    <a href="../producto/readproducto.php?id=<?php echo $id; ?>" class="boton">
-        Ver producto
-    </a>
-
-    <a href="../producto/read.all.producto.php" class="boton">
-        Ver todos los productos
-    </a>
-
-</div>
-
-
-</div>
-
-</body>
-</html>
-
-<?php
-
-    }else{
-
-        echo "Error: ".$conn->error;
-
-    }
-
-}
-
-$conn->close();
-
-?>
+<body><div class="tarjeta"><div class="icono">🍦✅</div><h1>¡Registro Exitoso!</h1><p class="mensaje">El producto <span class="productos"><?php echo $nombre; ?></span> fue registrado correctamente.</p><div class="botones"><a href="formularioproducto.php" class="boton">Registrar otro producto</a><a href="readproducto.php?id=<?php echo $id; ?>" class="boton">Ver producto</a><a href="read.all.producto.php" class="boton">Ver todos los productos</a></div></div></body></html>
      
 
 

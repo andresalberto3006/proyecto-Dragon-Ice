@@ -1,25 +1,9 @@
 <?php
-
-$direccion="localhost";
-$usuario="root";
-$contraseña="";
-$nombreBase="dragonice";
-
-$conn = new mysqli($direccion,$usuario,$contraseña,$nombreBase);
-
-if($conn->connect_error){
-    die("Error de conexión");
-}
-
-$id=$_GET['id'];
-
-$sql="SELECT * FROM productos WHERE id='$id'";
-
-$resultado=$conn->query($sql);
-
-$fila=$resultado->fetch_assoc();
-
-?>
+session_start();
+if (!isset($_SESSION['rol'])) { header("Location: ../iniciosesion.php"); exit(); }
+if ($_SESSION['rol'] != 'Administrador' && $_SESSION['rol'] != 'Vendedor') { header("Location: ../iniciosesion.php"); exit(); }
+include("../conexion.php");
+$id=isset($_GET['id'])?$_GET['id']:0;$resultado=$conexion->query("SELECT * FROM productos WHERE id='$id'");if($resultado->num_rows==0){die("Producto no encontrado");}$fila=$resultado->fetch_assoc();$nombre=$fila['nombre'];$descripcion=$fila['descripcion'];$precio=$fila['precio'];$costo=$fila['costo'];$stock=$fila['stock'];$imagen=$fila['imagen'];?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -113,7 +97,7 @@ margin-top:5px;
 
 <h2>✏️ Editar Producto</h2>
 
-<form id="formulario" action="updateproducto2.php" method="POST">
+<form id="formulario" action="updateproducto2.php" method="POST" enctype="multipart/form-data">
 
 <label>ID</label>
 <input type="number"
@@ -145,6 +129,10 @@ value="<?php echo $fila['costo']; ?>">
 <input type="number"
 name="stock"
 value="<?php echo $fila['stock']; ?>">
+
+<label>Imagen nueva</label>
+<input type="file" name="imagen">
+<input type="hidden" name="imagenActual" value="<?php echo $imagen; ?>">
 
 <button type="submit" class="boton">
 Actualizar Producto

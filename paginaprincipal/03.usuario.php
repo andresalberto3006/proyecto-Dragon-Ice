@@ -1,3 +1,7 @@
+<?php
+header("Location: productos.php");
+exit();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>

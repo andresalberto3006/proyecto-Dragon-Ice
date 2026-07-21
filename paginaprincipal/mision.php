@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,7 +51,7 @@
 <body>
      <header> 
         <?php
-        include("menu.php");
+        $rutaMenu="../"; include("../menu.php");
         ?>
     </header>
     <section>

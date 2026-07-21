@@ -18,6 +18,12 @@ $sql = "SELECT * FROM usuario WHERE ci='$ci'";
 $resultado = $conn->query($sql);
 
 ?>
+<?php
+session_start();
+if (!isset($_SESSION['rol'])) { header("Location: ../iniciosesion.php"); exit(); }
+if ($_SESSION['rol'] != 'Administrador') { header("Location: ../paginaprincipal/04.vendedor.php"); exit(); }
+include("../conexion.php");
+$ci=isset($_GET['ci'])?$_GET['ci']:0; $resultado=$conexion->query("SELECT * FROM usuario WHERE ci='$ci'"); ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -114,73 +120,4 @@ strong{
 
 </head>
 
-<body>
-
-<div class="tarjeta">
-
-<h1>🍦 Información del Usuario</h1>
-
-<?php
-
-if($resultado->num_rows > 0){
-
-    $fila = $resultado->fetch_assoc();
-
-?>
-
-<div class="dato">
-    <strong>CI:</strong>
-    <?php echo $fila['ci']; ?>
-</div>
-
-<div class="dato">
-    <strong>Nombre:</strong>
-    <?php echo $fila['nombre']; ?>
-</div>
-
-<div class="dato">
-    <strong>Dirección:</strong>
-    <?php echo $fila['direccion']; ?>
-</div>
-
-<div class="dato">
-    <strong>Celular:</strong>
-    <?php echo $fila['celular']; ?>
-</div>
-
-<div class="dato">
-    <strong>Rol:</strong>
-    <?php echo $fila['rol']; ?>
-</div>
-
-<div class="dato">
-    <strong>Estado:</strong>
-    <?php echo $fila['estado']; ?>
-</div>
-
-<?php
-
-}else{
-
-    echo "<div class='dato'>Usuario no encontrado.</div>";
-
-}
-
-?>
-
-<div class="botones">
-
-    <a href="../usuario/read.all.usuario.php" class="boton">
-        Ver todos los usuarios
-    </a>
-
-    <a href="../usuario/formulariousuario.php" class="boton">
-        Registrar Usuario
-    </a>
-
-</div>
-
-</div>
-
-</body>
-</html>
+<body><div class="tarjeta"><h1>🍦 Información del Usuario</h1><?php if($resultado->num_rows>0){ $fila=$resultado->fetch_assoc(); ?><div class="dato"><strong>CI:</strong> <?php echo $fila['ci']; ?></div><div class="dato"><strong>Nombre:</strong> <?php echo $fila['nombre']; ?></div><div class="dato"><strong>Dirección:</strong> <?php echo $fila['direccion']; ?></div><div class="dato"><strong>Celular:</strong> <?php echo $fila['celular']; ?></div><div class="dato"><strong>Rol:</strong> <?php echo $fila['rol']; ?></div><div class="dato"><strong>Estado:</strong> <?php echo $fila['estado']; ?></div><?php } else { ?><div class="dato">Usuario no encontrado.</div><?php } ?><div class="botones"><a href="read.all.usuario.php" class="boton">Ver todos los usuarios</a><a href="formulariousuario.php" class="boton">Registrar Usuario</a></div></div></body></html>

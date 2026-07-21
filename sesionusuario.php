@@ -25,3 +25,4 @@
     echo "se registro correctamente";
    }
 ?>
+<?php header("Location: usuario/formulariousuario.php"); exit(); ?>

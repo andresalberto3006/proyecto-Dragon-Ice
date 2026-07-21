@@ -1,11 +1,16 @@
+<?php
+session_start();
+?>
+<?php
+include("../conexion.php");
+$resultado = $conexion->query("SELECT * FROM productos ORDER BY id DESC");
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-
 <title>Dragon Ice</title>
 
 <style>
@@ -210,97 +215,31 @@ iframe{
 <body>
 
 <header class="menu-principal">
-
-  <?php
-  include("menu.php")
-  
-  ?>
-
+<?php $rutaMenu="../"; include("../menu.php"); ?>
 </header>
-
 <div class="contenedor">
-
     <header class="titulo">
         <h1>PRODUCTOS 🍦</h1>
         <p>Los sabores más refrescantes y deliciosos</p>
     </header>
-
     <section class="productos">
-
-        <div class="card">
-            <img src="./imagenesproyecto/Helado de cafe.avif" alt="">
-            <div class="info">
-                <h2>Café</h2>
-                <p>Helado cremoso con intenso sabor a café.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="./imagenesproyecto/helado2.jpg" alt="">
-            <div class="info">
-                <h2>Frutilla</h2>
-                <p>Refrescante y dulce sabor natural.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="./imagenesproyecto/helado3.jpg" alt="">
-            <div class="info">
-                <h2>Durazno</h2>
-                <p>Textura suave y sabor tropical.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="./imagenesproyecto/helado4.jpg" alt="">
-            <div class="info">
-                <h2>Canela</h2>
-                <p>Un toque cálido y delicioso.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="./imagenesproyecto/helado5.jpg" alt="">
-            <div class="info">
-                <h2>Menta</h2>
-                <p>Frescura intensa y cremosa.</p>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="./imagenesproyecto/helado.jpg" alt="">
-            <div class="info">
-                <h2>Banana Split</h2>
-                <p>El clásico favorito de todos.</p>
-            </div>
-        </div>
-
+        <?php if ($resultado->num_rows > 0) { ?>
+            <?php while ($fila=$resultado->fetch_assoc()) { ?>
+                <div class="card">
+                    <img src="../<?php echo $fila['imagen']; ?>" alt="">
+                    <div class="info">
+                        <h2><?php echo $fila['nombre']; ?></h2>
+                        <p><?php echo $fila['descripcion']; ?></p>
+                        <p>Precio: Bs. <?php echo $fila['precio']; ?></p>
+                        <p>Stock disponible: <?php echo $fila['stock']; ?></p>
+                    </div>
+                </div>
+            <?php } ?>
+        <?php } else { ?>
+            <div class="card"><div class="info"><h2>No hay productos registrados</h2></div></div>
+        <?php } ?>
     </section>
-
-    <?php
-  include("piedepagina.php")
-  
-  ?>
+    <?php include("piedepagina.php"); ?>
 </div>
-
-<script>
-$(document).ready(function(){
-
-    $("#btnRegistro").click(function(e){
-        e.stopPropagation();
-        $("#menuRegistro").slideToggle(200);
-    });
-
-    $(document).click(function(){
-        $("#menuRegistro").slideUp(200);
-    });
-
-    $("#menuRegistro").click(function(e){
-        e.stopPropagation();
-    });
-
-});
-</script>
-
 </body>
 </html>

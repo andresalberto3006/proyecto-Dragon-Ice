@@ -28,6 +28,7 @@ if(isset($_GET['id'])){
         }
     }
 ?>
+<?php header("Location: ../pedidos.php"); exit(); ?>
 
 <!DOCTYPE html>
 <html lang="es">

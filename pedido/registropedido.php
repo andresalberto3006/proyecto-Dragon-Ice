@@ -1,3 +1,4 @@
+
 <?php
 $direccion="localhost";
 $usuario="root";
@@ -24,6 +25,7 @@ if ($conn->connect_error) {
     if($conn->query($sql) === TRUE) {
         
 ?>
+<?php header("Location: ../formpedido.php"); exit(); ?>
 <!DOCTYPE html>
 
 <html lang="es">

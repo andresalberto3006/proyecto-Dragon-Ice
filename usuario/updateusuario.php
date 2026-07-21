@@ -35,6 +35,13 @@ if($resultado->num_rows > 0){
 
 ?>
 
+<?php
+session_start();
+if (!isset($_SESSION['rol'])) { header("Location: ../iniciosesion.php"); exit(); }
+if ($_SESSION['rol'] != 'Administrador') { header("Location: ../paginaprincipal/04.vendedor.php"); exit(); }
+include("../conexion.php");
+$ci=isset($_GET['ci'])?$_GET['ci']:0; $resultado=$conexion->query("SELECT * FROM usuario WHERE ci='$ci'"); if($resultado->num_rows==0){ die("Usuario no encontrado"); } $fila=$resultado->fetch_assoc(); $nombre=$fila['nombre']; $direccionUsuario=$fila['direccion']; $celular=$fila['celular']; $rol=$fila['rol']; $estado=$fila['estado']; ?>
+
 <!DOCTYPE html>
 <html lang="es">
 

@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (!isset($_SESSION['rol'])) { header("Location: ../iniciosesion.php"); exit(); }
+if ($_SESSION['rol'] != 'Administrador') { header("Location: ../paginaprincipal/04.vendedor.php"); exit(); }
+include("../conexion.php");
+?>
 <!DOCTYPE html>
 <html lang="es">
 

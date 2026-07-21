@@ -78,56 +78,45 @@
         }
   </style>
     
+</head>
+<body>
 <header class="menu-principal">
-
-  <?php
-  include("menu.php")
-  
-  ?>
-
+<?php $rutaMenu="../"; include("../menu.php"); ?>
 </header>
-
-    <section>
-        <video autoplay muted loop muted>
-            <source src="download.mp4" type="video/mp4">
-
-        </video>
-        <header>
-            <aside>
-                <a href="" class="logo">
-                    <img src="../imagenes/logo.png" alt="Logo">
-                    <h1>Dragon Ice</h1>
-                </a>
-            </aside>
-            <nav>
-                <a href="01.inicio.php">Inicio</a>
-                <article>
-                    <a href="./usuario/formulariousuario.php">
-                    <button>prueba</button>
-                    </a>
-                    <ul>
-                        <li>
-                            <a href="02.admin.php">Administrador</a>
-                            
-                        </li>
-                        <li>
-                            <a href="04.vendedor.php">Vendedor</a>
-                        </li>
-                        <li>
-                            <a href="03.usuario.php">Cliente</a>
-                        </li>
-                    </ul>
-                </article>
-                <a href="">Iniciar Sesión</a>
-            </nav>
-        </header>
-
-        <main>
-            <h1>DRAGON ICE</h1>
-        </main>
-        
-    </section>
-    <?php include("piedepagina.php"); ?>
+<section>
+    <video autoplay muted loop>
+        <source src="../download.mp4" type="video/mp4">
+    </video>
+    <header>
+        <aside>
+            <a href="01.inicio.php" class="logo">
+                <img src="../imagenesproyecto/logo.png" alt="Logo">
+                <h1>Dragon Ice</h1>
+            </a>
+        </aside>
+        <nav>
+            <a href="01.inicio.php">Inicio</a>
+            <article>
+                <a href="productos.php"><button>Productos</button></a>
+                <ul>
+                    <li><a href="productos.php">Catálogo</a></li>
+                    <li><a href="../quienessomos.php">Sobre nosotros</a></li>
+                </ul>
+            </article>
+            <?php if (isset($_SESSION['rol'])) { ?>
+                <?php if ($_SESSION['rol']=='Administrador') { ?>
+                    <a href="02.admin.php">Mi panel</a>
+                <?php } else { ?>
+                    <a href="04.vendedor.php">Mi panel</a>
+                <?php } ?>
+            <?php } else { ?>
+                <a href="../iniciosesion.php">Iniciar Sesión</a>
+            <?php } ?>
+        </nav>
+    </header>
+    <main><h1>DRAGON ICE</h1></main>
+</section>
+<?php include("piedepagina.php"); ?>
 </body>
 
 </html>

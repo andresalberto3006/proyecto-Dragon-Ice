@@ -1,40 +1,9 @@
 <?php
-
-$direccion="localhost";
-$usuario="root";
-$contraseña="";
-$nombreBase="dragonice";
-
-$conn = new mysqli($direccion,$usuario,$contraseña,$nombreBase);
-
-if($conn->connect_error){
-    die("Error de conexión");
-}
-
-$id=$_POST['id'];
-$nombre=$_POST['nombre'];
-$descripcion=$_POST['descripcion'];
-$precio=$_POST['precio'];
-$costo=$_POST['costo'];
-$stock=$_POST['stock'];
-
-$sql="UPDATE productos SET
-
-nombre='$nombre',
-descripcion='$descripcion',
-precio='$precio',
-costo='$costo',
-stock='$stock'
-
-WHERE id='$id'";
-
-$actualizado=false;
-
-if($conn->query($sql)===TRUE){
-    $actualizado=true;
-}
-
-?>
+session_start();
+if (!isset($_SESSION['rol'])) { header("Location: ../iniciosesion.php"); exit(); }
+if ($_SESSION['rol'] != 'Administrador' && $_SESSION['rol'] != 'Vendedor') { header("Location: ../iniciosesion.php"); exit(); }
+include("../conexion.php");
+if($_SERVER["REQUEST_METHOD"]!="POST"){header("Location: read.all.producto.php");exit();}$id=$_POST['id'];$nombre=$_POST['nombre'];$descripcion=$_POST['descripcion'];$precio=$_POST['precio'];$costo=$_POST['costo'];$stock=$_POST['stock'];$imagen=$_POST['imagenActual'];if(isset($_FILES['imagen'])&&$_FILES['imagen']['name']!=""){$nombreImagen=time()."_".$_FILES['imagen']['name'];$destino="../imagenesproyecto/".$nombreImagen;if(move_uploaded_file($_FILES['imagen']['tmp_name'],$destino)){$imagen="imagenesproyecto/".$nombreImagen;}}$sql="UPDATE productos SET nombre='$nombre',descripcion='$descripcion',precio='$precio',costo='$costo',stock='$stock',imagen='$imagen' WHERE id='$id'";$conexion->query($sql);header("Location: read.all.producto.php");exit();?>
 
 <!DOCTYPE html>
 <html lang="es">

@@ -1,3 +1,7 @@
+<?php
+header("Location: 04.vendedor.php");
+exit();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>

@@ -22,6 +22,16 @@ if($conn->query($sql) === TRUE){
 }
 
 ?>
+<?php
+session_start();
+if (!isset($_SESSION['rol'])) { header("Location: ../iniciosesion.php"); exit(); }
+if ($_SESSION['rol'] != 'Administrador') { header("Location: ../paginaprincipal/04.vendedor.php"); exit(); }
+include("../conexion.php");
+$ci=isset($_GET['ci'])?$_GET['ci']:0;
+if($ci==$_SESSION['ci']){echo "<script>alert('No puede eliminar su propia cuenta.');window.location='read.all.usuario.php';</script>";exit();}
+$r=$conexion->query("SELECT COUNT(*) AS total FROM pedidos WHERE vendedor_ci='$ci'")->fetch_assoc();
+if($r['total']>0){echo "<script>alert('No se puede eliminar porque tiene pedidos registrados. Puede bloquearlo.');window.location='read.all.usuario.php';</script>";exit();}
+$conexion->query("DELETE FROM usuario WHERE ci='$ci'"); header("Location: read.all.usuario.php"); exit(); ?>
 
 <!DOCTYPE html>
 <html lang="es">

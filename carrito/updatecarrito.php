@@ -21,6 +21,7 @@ sss<?php
         }
     }
 ?>
+<?php header("Location: ../pedidos.php"); exit(); ?>
 
 <!DOCTYPE html>
 <html lang="es">

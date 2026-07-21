@@ -1,3 +1,4 @@
+<?php header("Location: ../formpedido.php"); exit(); ?>
 <!DOCTYPE html>
 <html lang="es">
 

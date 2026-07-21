@@ -1,4 +1,6 @@
-
+<?php
+session_start();
+?>
 
 <!DOCTYPE html>
 
@@ -98,13 +100,12 @@ body{
 </style>
 
 </head>
-
 <body>
 
 <header class="menu-principal">
 
   <?php
-  include("menu.php")
+   $rutaMenu=""; include("menu.php")
   
   ?>
 
@@ -112,7 +113,7 @@ body{
 
 <div class="contenedor">
 
-```
+
 <section class="presentacion">
 
     <h1>DRAGON ICE</h1>
@@ -178,8 +179,9 @@ body{
 </div>
 
 <?php
-include("piedepagina.php");
+include("paginaprincipal/piedepagina.php");
 ?>
 
 </body>
+
 </html>

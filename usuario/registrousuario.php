@@ -26,6 +26,19 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
     if($conn->query($sql)===TRUE){
 
 ?>
+<?php
+session_start();
+if (!isset($_SESSION['rol'])) { header("Location: ../iniciosesion.php"); exit(); }
+if ($_SESSION['rol'] != 'Administrador') { header("Location: ../paginaprincipal/04.vendedor.php"); exit(); }
+include("../conexion.php");
+if ($_SERVER["REQUEST_METHOD"] != "POST") { header("Location: formulariousuario.php"); exit(); }
+$ci=$_POST['ci']; $nombre=$_POST['nombre']; $direccion=$_POST['direccion']; $celular=$_POST['celular']; $rol=$_POST['rol']; $estado=$_POST['estado'];
+if ($rol!='Administrador' && $rol!='Vendedor') { echo "<script>alert('El rol debe ser Administrador o Vendedor.'); window.location='formulariousuario.php';</script>"; exit(); }
+if ($estado!='Activo' && $estado!='Bloqueado') { echo "<script>alert('El estado debe ser Activo o Bloqueado.'); window.location='formulariousuario.php';</script>"; exit(); }
+if ($rol=='Administrador') { $estado='Activo'; }
+$sql="INSERT INTO usuario(ci,nombre,direccion,celular,rol,estado) VALUES('$ci','$nombre','$direccion','$celular','$rol','$estado')";
+if (!$conexion->query($sql)) { echo "<script>alert('No se pudo registrar. Verifique que el CI no esté repetido.'); window.location='formulariousuario.php';</script>"; exit(); }
+?>
 
 <!DOCTYPE html>
 
@@ -128,51 +141,4 @@ h1{
 
 </head>
 
-<body>
-
-<div class="tarjeta">
-
-<div class="icono">🍦✅</div>
-
-<h1>¡Registro Exitoso!</h1>
-
-<p class="mensaje">
-    El usuario
-    <span class="usuario"><?php echo $nombre; ?></span>
-    fue registrado correctamente.
-</p>
-
-<div class="botones">
-
-    <a href="../usuario/formulariousuario.php" class="boton">
-        Registrar otro usuario
-    </a>
-
-    <a href="../usuario/readusuario.php?ci=<?php echo $ci; ?>" class="boton">
-        Ver usuario
-    </a>
-
-    <a href="../usuario/read.all.usuario.php" class="boton">
-        Ver todos los usuarios
-    </a>
-
-</div>
-
-</div>
-
-</body>
-</html>
-
-<?php
-
-    }else{
-
-        echo "Error: ".$conn->error;
-
-    }
-
-}
-
-$conn->close();
-
-?>
+<body><div class="tarjeta"><div class="icono">🍦✅</div><h1>¡Registro Exitoso!</h1><p class="mensaje">El usuario <span class="usuario"><?php echo $nombre; ?></span> fue registrado correctamente.</p><div class="botones"><a href="formulariousuario.php" class="boton">Registrar otro usuario</a><a href="readusuario.php?ci=<?php echo $ci; ?>" class="boton">Ver usuario</a><a href="read.all.usuario.php" class="boton">Ver todos los usuarios</a></div></div></body></html>

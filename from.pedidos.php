@@ -1,7 +1,4 @@
-<?php
-    session_start();
-    $vendedor=$_SESSION['Nombre'];
-?>
+<?php header("Location: formpedido.php"); exit(); ?>
 
 <!DOCTYPE html>
 <html>

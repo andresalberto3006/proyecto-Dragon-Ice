@@ -1,6 +1,11 @@
 <?php
+if (session_status() == PHP_SESSION_NONE && !headers_sent()) {
+    session_start();
+}
+if (!isset($rutaMenu)) {
+    $rutaMenu = "";
+}
 ?>
-
 <style>
 *{
     margin:0;
@@ -90,32 +95,35 @@
 </style>
 
 <nav class="menu">
-
     <div class="logo">
-        <img src="../imagenesproyecto/logo.png" alt="logo">
+        <img src="<?php echo $rutaMenu; ?>imagenesproyecto/logo.png" alt="logo">
         <h2>Dragon Ice</h2>
     </div>
-
-    <button class="btn-menu" id="btnMenu">
-        ☰
-    </button>
-
+    <button class="btn-menu" id="btnMenu">☰</button>
     <ul class="nav-links" id="navLinks">
-        <li><a href="01.inicio.php">Inicio</a></li>
-        <li><a href="05.formulariousuario.php">Registrarte</a></li>
-        <li><a href="login.php">Iniciar Sesión</a></li>
+        <li><a href="<?php echo $rutaMenu; ?>paginaprincipal/01.inicio.php">Inicio</a></li>
+        <li><a href="<?php echo $rutaMenu; ?>paginaprincipal/productos.php">Productos</a></li>
+        <li><a href="<?php echo $rutaMenu; ?>quienessomos.php">Quiénes somos</a></li>
+        <?php if (isset($_SESSION['rol'])) { ?>
+            <?php if ($_SESSION['rol'] == 'Administrador') { ?>
+                <li><a href="<?php echo $rutaMenu; ?>paginaprincipal/02.admin.php">Mi panel</a></li>
+            <?php } else { ?>
+                <li><a href="<?php echo $rutaMenu; ?>paginaprincipal/04.vendedor.php">Mi panel</a></li>
+            <?php } ?>
+            <li><a href="<?php echo $rutaMenu; ?>cerrar1.php">Cerrar sesión</a></li>
+        <?php } else { ?>
+            <li><a href="<?php echo $rutaMenu; ?>iniciosesion.php">Iniciar sesión</a></li>
+        <?php } ?>
     </ul>
-
 </nav>
-
 <script>
 const btnMenu = document.getElementById("btnMenu");
 const navLinks = document.getElementById("navLinks");
-
-btnMenu.addEventListener("click", function(){
-    navLinks.classList.toggle("active");
-});
-
+if (btnMenu) {
+    btnMenu.addEventListener("click", function(){
+        navLinks.classList.toggle("active");
+    });
+}
 document.querySelectorAll("#navLinks a").forEach(function(link) {
     link.addEventListener("click", function() {
         navLinks.classList.remove("active");

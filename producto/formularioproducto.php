@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (!isset($_SESSION['rol'])) { header("Location: ../iniciosesion.php"); exit(); }
+if ($_SESSION['rol'] != 'Administrador' && $_SESSION['rol'] != 'Vendedor') { header("Location: ../iniciosesion.php"); exit(); }
+include("../conexion.php");
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -115,7 +121,7 @@
         
 
     
-        <form id="formulario" action="../producto/registroproducto.php" method="POST">
+        <form id="formulario" action="../producto/registroproducto.php" method="POST" enctype="multipart/form-data">
 
             <div class="grupo">
                  <label for="id">id</label>
@@ -147,6 +153,7 @@
                 <input type="number" id="stock" name="stock" placeholder="Cantidad disponible">
             </div>
 
+            <div class="grupo"><label for="imagen">Imagen</label><input type="file" id="imagen" name="imagen"></div>
             <button type="submit" class="boton">Guardar Producto</button>
         </form>
     </div>

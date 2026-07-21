@@ -31,6 +31,20 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     if($conn->query($sql)===TRUE){
         ?>
 
+        <?php
+session_start();
+if (!isset($_SESSION['rol'])) { header("Location: ../iniciosesion.php"); exit(); }
+if ($_SESSION['rol'] != 'Administrador') { header("Location: ../paginaprincipal/04.vendedor.php"); exit(); }
+include("../conexion.php");
+if($_SERVER["REQUEST_METHOD"]!="POST"){header("Location: read.all.usuario.php");exit();}
+$ci=$_POST['ci'];$nombre=$_POST['nombre'];$direccion=$_POST['direccion'];$celular=$_POST['celular'];$rol=$_POST['rol'];$estado=$_POST['estado'];
+if($rol!='Administrador' && $rol!='Vendedor'){echo "<script>alert('Rol no válido.');window.location='updateusuario.php?ci=$ci';</script>";exit();}
+if($estado!='Activo' && $estado!='Bloqueado'){echo "<script>alert('Estado no válido.');window.location='updateusuario.php?ci=$ci';</script>";exit();}
+if($rol=='Administrador'){$estado='Activo';}
+if($ci==$_SESSION['ci']){$rol='Administrador';$estado='Activo';}
+$sql="UPDATE usuario SET nombre='$nombre',direccion='$direccion',celular='$celular',rol='$rol',estado='$estado' WHERE ci='$ci'";
+$conexion->query($sql); header("Location: read.all.usuario.php"); exit(); ?>
+
         <!DOCTYPE html>
         <html lang="es">
         <head>

@@ -1,3 +1,7 @@
+<?php
+header("Location: 02.admin.php");
+exit();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>

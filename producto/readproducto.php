@@ -1,23 +1,9 @@
 <?php
-
-$direccion="localhost";
-$usuario="root";
-$contraseña="";
-$nombreBase="dragonice";
-
-$conn = new mysqli($direccion,$usuario,$contraseña,$nombreBase);
-
-if($conn->connect_error){
-    die("Hubo un error al conectar a la base de datos");
-}
-
-$id = $_GET['id'];
-
-$sql = "SELECT * FROM productos WHERE id='$id'";
-
-$resultado = $conn->query($sql);
-
-?>
+session_start();
+if (!isset($_SESSION['rol'])) { header("Location: ../iniciosesion.php"); exit(); }
+if ($_SESSION['rol'] != 'Administrador' && $_SESSION['rol'] != 'Vendedor') { header("Location: ../iniciosesion.php"); exit(); }
+include("../conexion.php");
+$id=isset($_GET['id'])?$_GET['id']:0;$resultado=$conexion->query("SELECT * FROM productos WHERE id='$id'"); ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -87,42 +73,4 @@ background:#2f5d9f;
 
 </style>
 </head>
-<body>
-
-<div class="tarjeta">
-
-<h1>🍦 Información del Producto</h1>
-
-<?php
-
-if($resultado->num_rows>0){
-
-$fila=$resultado->fetch_assoc();
-
-echo "<div class='dato'><strong>ID:</strong> ".$fila['id']."</div>";
-echo "<div class='dato'><strong>Nombre:</strong> ".$fila['nombre']."</div>";
-echo "<div class='dato'><strong>Descripción:</strong> ".$fila['descripcion']."</div>";
-echo "<div class='dato'><strong>Precio:</strong> ".$fila['precio']."</div>";
-echo "<div class='dato'><strong>Costo:</strong> ".$fila['costo']."</div>";
-echo "<div class='dato'><strong>Stock:</strong> ".$fila['stock']."</div>";
-
-}else{
-
-echo "<div class='dato'>Producto no encontrado</div>";
-
-}
-
-?>
-
-<div class="botones">
-
-<a href="../producto/read.all.producto.php" class="boton">
-Ver todos los productos
-</a>
-
-</div>
-
-</div>
-
-</body>
-</html>
+<body><div class="tarjeta"><h1>🍦 Información del Producto</h1><?php if($resultado->num_rows>0){$fila=$resultado->fetch_assoc();?><div class="dato"><strong>ID:</strong> <?php echo $fila['id'];?></div><div class="dato"><strong>Nombre:</strong> <?php echo $fila['nombre'];?></div><div class="dato"><strong>Descripción:</strong> <?php echo $fila['descripcion'];?></div><div class="dato"><strong>Precio:</strong> <?php echo $fila['precio'];?></div><div class="dato"><strong>Costo:</strong> <?php echo $fila['costo'];?></div><div class="dato"><strong>Stock:</strong> <?php echo $fila['stock'];?></div><div class="dato"><img src="../<?php echo $fila['imagen'];?>" width="180"></div><?php }else{?><div class="dato">Producto no encontrado.</div><?php }?><div class="botones"><a href="read.all.producto.php" class="boton">Ver todos los productos</a><a href="formularioproducto.php" class="boton">Registrar Producto</a></div></div></body></html>

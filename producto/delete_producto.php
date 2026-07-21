@@ -1,5 +1,4 @@
 <?php
-
 $direccion="localhost";
 $usuario="root";
 $contraseña="";
@@ -22,6 +21,12 @@ $eliminado=true;
 }
 
 ?>
+<?php
+session_start();
+if (!isset($_SESSION['rol'])) { header("Location: ../iniciosesion.php"); exit(); }
+if ($_SESSION['rol'] != 'Administrador' && $_SESSION['rol'] != 'Vendedor') { header("Location: ../iniciosesion.php"); exit(); }
+include("../conexion.php");
+$id=isset($_GET['id'])?$_GET['id']:0;$r=$conexion->query("SELECT COUNT(*) AS total FROM carrito WHERE productos_id='$id'")->fetch_assoc();if($r['total']>0){echo "<script>alert('No se puede eliminar porque el producto pertenece a un pedido.');window.location='read.all.producto.php';</script>";exit();}$conexion->query("DELETE FROM productos WHERE id='$id'");header("Location: read.all.producto.php");exit();?>
 
 <!DOCTYPE html>
 <html lang="es">

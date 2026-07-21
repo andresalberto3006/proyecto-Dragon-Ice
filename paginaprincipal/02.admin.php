@@ -1,3 +1,13 @@
+<?php
+session_start();
+if (!isset($_SESSION['rol'])) { header("Location: ../iniciosesion.php"); exit(); }
+if ($_SESSION['rol'] != 'Administrador') { header("Location: 04.vendedor.php"); exit(); }
+include("../conexion.php");
+$r1=$conexion->query("SELECT COUNT(*) AS total FROM usuario")->fetch_assoc();
+$r2=$conexion->query("SELECT COUNT(*) AS total FROM productos")->fetch_assoc();
+$r3=$conexion->query("SELECT IFNULL(SUM(total),0) AS total FROM ventas WHERE fecha=CURDATE()")->fetch_assoc();
+$r4=$conexion->query("SELECT COUNT(*) AS total FROM pedidos")->fetch_assoc();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -281,45 +291,37 @@ header{
 </style>
 </head>
 <body>
-<?php session_start();?>
 <header>
     <h1 id="mio">Sistemas del administrador</h1>
     <h1 id="rex">Panel del administrador</h1>
-    <button id="crack"><a href="iniciosesion.php">CERRAR SESION<?php echo $_SESSION['usuario'].$_SESSION['apellido']?></a> </button>
+    <button id="crack"><a href="../cerrar1.php">CERRAR SESION <?php echo $_SESSION['usuario']; ?></a></button>
 </header>
-
- 
 <main>
-
     <aside>
-        <button>Gestionar usuario</button>
-        <button>Gestionar Productos</button>
-        <button>Visualizar reportes del sistemas</button>
-        <button>Supervizar ventas y pedidos</button>
+        <button onclick="location.href='../usuario/read.all.usuario.php'">Gestionar usuario</button>
+        <button onclick="location.href='../producto/read.all.producto.php'">Gestionar Productos</button>
+        <button onclick="location.href='../ventas.php'">Visualizar ventas</button>
+        <button onclick="location.href='../pedidos.php'">Supervizar ventas y pedidos</button>
     </aside>
     <article>
         <nav>
-          <h3>Total de usuarios</h3>
-       <h3>Total de productos</h3>
-       <h3>Ventas del dia</h3>
-       <h3>Ventas del dia</h3>
+            <h3>Total de usuarios<br><?php echo $r1['total']; ?></h3>
+            <h3>Total de productos<br><?php echo $r2['total']; ?></h3>
+            <h3>Ventas del día<br>Bs. <?php echo $r3['total']; ?></h3>
+            <h3>Pedidos totales<br><?php echo $r4['total']; ?></h3>
         </nav>
         <section>
-            <h2>Resumen de Ventas
-             <img src="./imagenesproyecto/graficotr1.png" alt="">   
-            </h2>
-            <h2>Ventas por categoria
-                <img src="./imagenesproyecto/grafico tr2.png" alt="">
-            </h2>
-            <h2>Productos mas vendidos
-                <a id="ttt" href="">Crear usuario</a>
-                <a id="ttt" href="">Registrar producto</a>
-                <a id="ttt" href="">Ver todas las ventas</a>
-                <a id="ttt" href="">Generar reporte</a>
+            <h2>Resumen de Ventas<img src="../imagenesproyecto/graficotr1.png" alt=""></h2>
+            <h2>Ventas por categoria<img src="../imagenesproyecto/grafico tr2.png" alt=""></h2>
+            <h2>Accesos rápidos
+                <a id="ttt" href="../usuario/formulariousuario.php">Crear usuario</a>
+                <a id="ttt" href="../producto/formularioproducto.php">Registrar producto</a>
+                <a id="ttt" href="../ventas.php">Ver todas las ventas</a>
+                <a id="ttt" href="../pedidos.php">Ver pedidos</a>
             </h2>
         </section>
-        
-    
+    </article>
+</main>
 </body>
 </html>
 

@@ -1,4 +1,8 @@
 <?php
+include("../conexion.php");
+?>
+
+<?php
 $direccion="localhost";
 $usuario="root";
 $contrasena="";

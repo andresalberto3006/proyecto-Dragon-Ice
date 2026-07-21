@@ -1,3 +1,17 @@
+<?php
+session_start();
+if (!isset($_SESSION['rol'])) { header("Location: ../iniciosesion.php"); exit(); }
+if ($_SESSION['rol'] != 'Vendedor') { header("Location: 02.admin.php"); exit(); }
+include("../conexion.php");
+$ci=$_SESSION['ci'];
+$nombreVendedor=$_SESSION['usuario'];
+$ventaDia=$conexion->query("SELECT IFNULL(SUM(total),0) AS total FROM ventas WHERE vendedor_ci='$ci' AND fecha=CURDATE()")->fetch_assoc();
+$productosDisponibles=$conexion->query("SELECT COUNT(*) AS total FROM productos WHERE stock>0")->fetch_assoc();
+$pendientes=$conexion->query("SELECT COUNT(*) AS total FROM pedidos WHERE vendedor_ci='$ci' AND estado='Pendiente'")->fetch_assoc();
+$proceso=$conexion->query("SELECT COUNT(*) AS total FROM pedidos WHERE vendedor_ci='$ci' AND estado='En proceso'")->fetch_assoc();
+$historial=$conexion->query("SELECT * FROM ventas WHERE vendedor_ci='$ci' ORDER BY id DESC LIMIT 9");
+$stock=$conexion->query("SELECT nombre,stock FROM productos ORDER BY nombre");
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -268,101 +282,57 @@ table{
 </style>
 </head>
 <body>
-<?php session_start();?>
 <header>
     <h1 id="mio">Sistemas de Ventas</h1>
     <h1 id="rex">Panel del Vendedor</h1>
-    <button id="crack">CERRAR SESION</button>
+    <button id="crack" onclick="location.href='../cerrar1.php'">CERRAR SESION</button>
 </header>
-
- 
 <main>
-
     <aside>
-        <button>VENTAS</button>
-        <button>PRODUCTOS</button>
-        <button>PEDIDOS</button>
-        <button>HISTORIAL</button>
+        <button onclick="location.href='../ventas.php'">VENTAS</button>
+        <button onclick="location.href='../producto/read.all.producto.php'">PRODUCTOS</button>
+        <button onclick="location.href='../pedidos.php'">PEDIDOS</button>
+        <button onclick="location.href='../ventas.php'">HISTORIAL</button>
     </aside>
     <article>
         <nav>
-          <h3>💰 Ventas del día
-            $170.000
-          </h3>
-       <h3>📦 Productos disponibles
-        120
-       </h3>
-       <h3>⏳ Pedidos pendientes
-        15
-       </h3>
-       <h3>🔄 Pedidos en proceso
-        10
-       </h3>
+            <h3>💰 Ventas del día<br>Bs. <?php echo $ventaDia['total']; ?></h3>
+            <h3>📦 Productos disponibles<br><?php echo $productosDisponibles['total']; ?></h3>
+            <h3>⏳ Pedidos pendientes<br><?php echo $pendientes['total']; ?></h3>
+            <h3>🔄 Pedidos en proceso<br><?php echo $proceso['total']; ?></h3>
         </nav>
         <section>
-             <h2 id="ttt">Ordena Aquí
-
-        <form>
-
-            <label>Cliente</label>
-            <input type="text" placeholder="Seleccionar cliente">
-
-            <label>Producto</label>
-            <input type="text" placeholder="Selccionar producto">
-
-            <label>Calidad</label>
-            <input type="text" placeholder="Calidad">
-
-            <label>Total</label>
-            <input type="text" placeholder="$0.00">
-
-            <button >🛒Guardar venta</button>
-
-        </form>
-        </h2>
-            <h2 id="yyy">
-            historial  
+            <h2 id="ttt">Ordena Aquí
+                <form action="../nuevo_pedido.php" method="POST">
+                    <label>Cliente</label>
+                    <input type="text" name="nombre" placeholder="Nombre del cliente" required>
+                    <label>Fecha</label>
+                    <input type="date" name="fecha" value="<?php echo date('Y-m-d'); ?>" readonly>
+                    <label>Estado</label>
+                    <input type="text" value="Pendiente" readonly>
+                    <label>Vendedor</label>
+                    <input type="text" value="<?php echo $nombreVendedor; ?>" readonly>
+                    <button type="submit">🛒 Comenzar pedido</button>
+                </form>
+            </h2>
+            <h2 id="yyy">Historial
                 <table id="dd" border="4px solid">
-                    <tr>
- <th>id Venta</th>
- <th>total</th>
- <th>fecha</th>
- 
-                    </tr id="oo">
-            <tr><td>#0001</td><td>$5</td><td>18/05/2026</td></tr>
-            <tr><td>#0002</td><td>$5</td><td>18/05/2026</td></tr>
-            <tr><td>#0003</td><td>$4</td><td>18/05/2026</td></tr>
-             <tr><td>#0004</td><td>$7</td><td>18/05/2026</td></tr>
-            <tr><td>#0005</td><td>$5</td><td>18/05/2026</td></tr>
-            <tr><td>#0006</td><td>$5</td><td>18/05/2026</td></tr>
-            <tr><td>#0007</td><td>$7</td><td>18/05/2026</td></tr>
-            <tr><td>#0008</td><td>$10</td><td>18/05/2026</td></tr>
-            <tr><td>#0009</td><td>$6</td><td>18/05/2026</td></tr>
-             <tr>
-                   
+                    <tr><th>id Venta</th><th>total</th><th>fecha</th></tr>
+                    <?php while($fila=$historial->fetch_assoc()) { ?>
+                        <tr><td>#<?php echo $fila['id']; ?></td><td>Bs. <?php echo $fila['total']; ?></td><td><?php echo $fila['fecha']; ?></td></tr>
+                    <?php } ?>
                 </table>
             </h2>
-             <h2 id="yyy">
-            Stock de productos  
-            <table id="dd">
-                 <tr>
-                <th>Producto</th>
-                <th>Stock</th>
-            </tr>
-            <tr id=""><td>Helado de café</td><td>4</td></tr>
-            <tr><td>Helado de canela</td><td>1</td></tr>
-            <tr><td>Helado de frutilla</td><td>2</td></tr>
-            <tr><td>Banana split</td><td>4</td></tr>
-            <tr><td>Helado de durazno</td><td>1</td></tr>
-            <tr><td>Helado de leche</td><td>2</td></tr>
-            <tr><td>Helado de chocolate</td><td>3</td></tr>
-            <tr><td>Helado de vainilla</td><td>2</td></tr>
-        </table>
- </h2>
+            <h2 id="yyy">Stock de productos
+                <table id="dd">
+                    <tr><th>Producto</th><th>Stock</th></tr>
+                    <?php while($fila=$stock->fetch_assoc()) { ?>
+                        <tr><td><?php echo $fila['nombre']; ?></td><td><?php echo $fila['stock']; ?></td></tr>
+                    <?php } ?>
+                </table>
+            </h2>
         </section>
     </article>
-   
 </main>
-
 </body>
 </html>

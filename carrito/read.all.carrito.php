@@ -20,3 +20,4 @@ echo "<a href=updatecarrito.php?id=$idcarrito'><button >Mostrar</button></a><br>
 }
 }
 ?>
+<?php header("Location: ../pedidos.php"); exit(); ?>

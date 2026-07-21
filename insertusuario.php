@@ -19,3 +19,4 @@ if($query){
 }
 
 ?>
+<?php header("Location: usuario/formulariousuario.php"); exit(); ?>

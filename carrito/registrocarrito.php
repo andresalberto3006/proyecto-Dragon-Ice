@@ -21,5 +21,4 @@ if ($conn->query($sql)==TRUE){
       }
   }
 ?>
-
-?>
+<?php header("Location: ../pedidos.php"); exit(); ?>

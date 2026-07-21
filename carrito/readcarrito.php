@@ -20,3 +20,4 @@
    }
 
 ?>
+<?php header("Location: ../pedidos.php"); exit(); ?>

@@ -38,3 +38,4 @@ while($fila=$resultado->fetch_assoc()){
   }
 }
 ?>
+<?php header("Location: usuario/read.all.usuario.php"); exit(); ?>
