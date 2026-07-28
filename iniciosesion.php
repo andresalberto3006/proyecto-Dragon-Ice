@@ -14,14 +14,10 @@
             font-family: Arial, Helvetica, sans-serif;
         }
 
-        body {
-            overflow: hidden;
-        }
-
         section {
             position: relative;
             width: 100%;
-            height: 100vh;
+            min-height: 100vh;
             overflow: hidden;
         }
 
@@ -132,11 +128,15 @@
     </style>
 </head>
 
+
+
 <body>
+
+<?php include 'menu.php'; ?>
 
 <section>
     <video autoplay muted loop>
-        <source src="download.mp4" type="video/mp4">
+        <source src="helado1.mp4" type="video/mp4">
     </video>
     <div class="overlay"></div>
     <main>
@@ -154,6 +154,8 @@
         </div>
     </main>
 </section>
+
+<?php include 'paginaprincipal/piedepagina.php'; ?>
 
 </body>
 
