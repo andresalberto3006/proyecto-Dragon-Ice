@@ -20,3 +20,4 @@ else{
 }
 $conn->close();
 ?>
+<?php header("Location: producto/read.all.producto.php"); exit(); ?>

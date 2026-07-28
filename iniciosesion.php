@@ -14,14 +14,10 @@
             font-family: Arial, Helvetica, sans-serif;
         }
 
-        body {
-            overflow: hidden;
-        }
-
         section {
             position: relative;
             width: 100%;
-            height: 100vh;
+            min-height: 100vh;
             overflow: hidden;
         }
 
@@ -132,39 +128,34 @@
     </style>
 </head>
 
+
+
 <body>
 
-    <section>
+<?php include 'menu.php'; ?>
 
-        <video autoplay muted loop>
-            <source src="download.mp4" type="video/mp4">
-        </video>
+<section>
+    <video autoplay muted loop>
+        <source src="helado1.mp4" type="video/mp4">
+    </video>
+    <div class="overlay"></div>
+    <main>
+        <div class="login-box">
+            <h1>DRAGON ICE</h1>
+            <p>Iniciar Sesión</p>
+            <form action="BDvali.php" method="post">
+                <label for="usuario">Usuario</label>
+                <input type="text" name="usuario" placeholder="Ingrese su nombre" required>
+                <label for="clave">Contraseña</label>
+                <input type="text" name="clave" placeholder="Ingrese su numero de celular" required>
+                <input type="submit" value="Ingresar">
+            </form>
+            <p style="margin-top:15px"><a href="paginaprincipal/01.inicio.php" style="color:white">Volver al inicio</a></p>
+        </div>
+    </main>
+</section>
 
-        <div class="overlay"></div>
-
-        <main>
-
-            <div class="login-box">
-
-                <h1>DRAGON ICE</h1>
-                <p>Iniciar Sesión</p>
-
-                <form action="BDvali.php" method="post">
-
-                    <label for="usuario">Usuario</label>
-                    <input type="text" name="usuario" placeholder="Ingrese su nombre" required>
-
-                    <label for="clave">Contraseña</label>
-                    <input type="text" name="clave" placeholder="Ingrese su numero de celular" required>
-
-                    <input type="submit" value="Ingresar">
-                </form>
-
-            </div>
-
-        </main>
-
-    </section>
+<?php include 'paginaprincipal/piedepagina.php'; ?>
 
 </body>
 

@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
     <title>Document</title>
 </head>
 <body>
-    <form action="createusuario.php" method="post">
+    <form action="createusuario.php" method="post" id="pepe">
         <div class="grupo">
             <label for="nombre">Nombre</label>
             <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre">
@@ -22,6 +24,57 @@
             <input type="password" id="contraseña" name="contraseña" placeholder="Ingrese su contraseña">
         </div>
 
+         <div class="grupo">
+            <label for="numero">Numero de celular</label>
+            <input type="number" id="numero" name="numero" placeholder="Ponga su numero de celular">
+         </div>
+
+        <div class="grupo">
+            <label for="mensaje">comentario</label>
+            <input type="text" id="mensaje" name="mensaje" placeholder="Deja tu comentario">
+        </div>
         <button type="submit" class="boton">Registrar usuario</button>
+<script>
+  $(document).ready(function(){
+  $("#pepe").validate({
+    rules:{
+        nombre:{
+            required: true,
+            maxlength: 5
+        },
+        correo:{
+            required: true,
+            gamil: true
+        },
+        contraseña:{
+            required: true,
+            minlength: 8
+        },
+        numero:{
+            required: true,
+            minlength: 3
+        }
+    },
+    messages:{
+        nombre:{
+            required: "pon tu nombre",
+            maxlength: "maximo 5 letras"
+        },
+             correo:{
+            required: "registrate con tu corre",
+            gamil: "pon siempre el @"
+        },
+        contraseña:{
+            required: "pon tu contraseña",
+            minlength: "minimo 3 digitos"
+        },
+        numero:{
+            required: "pon tu numero de celular",
+            minlength: "minimo de caracteres es 8 digitos"
+        },
+    },
+  });
+  });
+</script>
 </body>
 </html>

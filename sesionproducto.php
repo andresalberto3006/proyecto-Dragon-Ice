@@ -25,3 +25,4 @@
     echo "se registro correctamente";
    }
 ?>
+<?php header("Location: producto/formularioproducto.php"); exit(); ?>

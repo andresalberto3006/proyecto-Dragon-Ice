@@ -1,54 +1,83 @@
 <?php
+session_start();
 
-$conexion = mysqli_connect("localhost","root","","dragonice");
-
-if(!$conexion){
-    die("Error de conexión");
+if (!isset($_SESSION['rol'])) {
+    header("Location: iniciosesion.php");
+    exit();
 }
 
-$idProducto = $_POST["idProducto"];
-$idPedido   = $_POST["idPedido"];
-$cantidad   = $_POST["cantidad"];
-$precio     = $_POST["precio"];
+if ($_SESSION['rol'] != 'Vendedor') {
+    header("Location: paginaprincipal/02.admin.php");
+    exit();
+}
 
-$total = $cantidad * $precio;
+include("conexion.php");
 
-/* Verificar si el producto ya está en el carrito */
+$idProducto = $_POST['idProducto'];
+$idPedido = $_POST['idPedido'];
+$cantidad = $_POST['cantidad'];
+$ci = $_SESSION['ci'];
 
-$sqlVerificar = "SELECT *
-                 FROM carrito
-                 WHERE productos_id='$idProducto'
-                 AND pedidos_id='$idPedido'";
+$sqlPedido = "SELECT * FROM pedidos
+              WHERE id='$idPedido'
+              AND vendedor_ci='$ci'
+              AND estado='Pendiente'";
 
-$resultado = mysqli_query($conexion,$sqlVerificar);
+$resultadoPedido = $conexion->query($sqlPedido);
 
-if(mysqli_num_rows($resultado)>0){
+if ($resultadoPedido->num_rows == 0) {
+    header("Location: pedidos.php");
+    exit();
+}
 
+$sqlProducto = "SELECT * FROM productos WHERE id='$idProducto'";
+$resultadoProducto = $conexion->query($sqlProducto);
+
+if ($resultadoProducto->num_rows == 0) {
+    header("Location: miCarrito.php?idPedido=$idPedido");
+    exit();
+}
+
+$producto = $resultadoProducto->fetch_assoc();
+
+$sqlCarrito = "SELECT * FROM carrito
+               WHERE productos_id='$idProducto'
+               AND pedidos_id='$idPedido'";
+
+$resultadoCarrito = $conexion->query($sqlCarrito);
+$nuevaCantidad = $cantidad;
+
+if ($resultadoCarrito->num_rows > 0) {
+    $productoCarrito = $resultadoCarrito->fetch_assoc();
+    $nuevaCantidad = $productoCarrito['cantidad'] + $cantidad;
+}
+
+if ($nuevaCantidad > $producto['stock']) {
     echo "<script>
-            alert('Este producto ya fue agregado al carrito');
+            alert('No existe stock suficiente.');
             window.location='miCarrito.php?idPedido=$idPedido';
           </script>";
-
-}else{
-
-    $sql = "INSERT INTO carrito
-            (productos_id,pedidos_id,cantidad,costototal)
-            VALUES
-            ('$idProducto',
-             '$idPedido',
-             '$cantidad',
-             '$total')";
-
-    if(mysqli_query($conexion,$sql)){
-
-        header("Location: miCarrito.php?idPedido=".$idPedido);
-
-    }else{
-
-        echo "Error: ".mysqli_error($conexion);
-
-    }
-
+    exit();
 }
 
+$total = $producto['precio'] * $nuevaCantidad;
+
+if ($resultadoCarrito->num_rows > 0) {
+    $sql = "UPDATE carrito
+            SET cantidad='$nuevaCantidad', costototal='$total'
+            WHERE productos_id='$idProducto'
+            AND pedidos_id='$idPedido'";
+} else {
+    $total = $producto['precio'] * $cantidad;
+
+    $sql = "INSERT INTO carrito
+            (productos_id, pedidos_id, cantidad, costototal)
+            VALUES
+            ('$idProducto', '$idPedido', '$cantidad', '$total')";
+}
+
+$conexion->query($sql);
+
+header("Location: miCarrito.php?idPedido=$idPedido");
+exit();
 ?>

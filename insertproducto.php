@@ -19,3 +19,4 @@ if($query){
 }
 
 ?>
+<?php header("Location: producto/formularioproducto.php"); exit(); ?>
