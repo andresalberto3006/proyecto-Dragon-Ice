@@ -12,7 +12,6 @@ $resultado = $conexion->query("SELECT * FROM productos ORDER BY id DESC");
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <title>Dragon Ice</title>
-
 <style>
 
 *{
@@ -23,7 +22,7 @@ $resultado = $conexion->query("SELECT * FROM productos ORDER BY id DESC");
 
 body{
     font-family: Arial, Helvetica, sans-serif;
-    background-image:url("1 (4).png");
+    background-image:url("../imagenesproyecto/1 (4).png");
     background-size:cover;
     background-attachment:fixed;
     background-position:center;
@@ -211,9 +210,7 @@ iframe{
 
 </style>
 </head>
-
 <body>
-
 <header class="menu-principal">
 <?php $rutaMenu="../"; include("../menu.php"); ?>
 </header>
