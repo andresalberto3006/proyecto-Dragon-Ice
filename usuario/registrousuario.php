@@ -129,8 +129,7 @@ h1{
 
         </div><h1>¡Registro Exitoso!
 
-        </h1><p class="mensaje">El usuario 
-            <span class="usuario">
+        </h1><p class="mensaje">El usuario  <span class="usuario">
                 <?php echo htmlspecialchars($nombre); ?>
             </span> fue registrado correctamente.</p>
             <div class="botones">

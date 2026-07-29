@@ -3,6 +3,7 @@ session_start();
 if (!isset($_SESSION['rol'])) { header("Location: ../iniciosesion.php"); exit(); }
 if ($_SESSION['rol'] != 'Administrador') { header("Location: 04.vendedor.php"); exit(); }
 include("../conexion.php");
+
 $r1=$conexion->query("SELECT COUNT(*) AS total FROM usuario")->fetch_assoc();
 $r2=$conexion->query("SELECT COUNT(*) AS total FROM productos")->fetch_assoc();
 $r3=$conexion->query("SELECT IFNULL(SUM(total),0) AS total FROM ventas WHERE fecha=CURDATE()")->fetch_assoc();
@@ -13,316 +14,386 @@ $r4=$conexion->query("SELECT COUNT(*) AS total FROM pedidos")->fetch_assoc();
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maquetado Semántico</title>
-
+<title>Panel del Administrador | Dragon Ice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+
+    :root{
+        --navy: #0d2445;
+        --panel: #143261;
+        --panel-light: #1c4079;
+        --sky: #4da6ff;
+        --sky-soft: #9fd0ff;
+        --mint: #35d6a1;
+        --mint-dark: #22b487;
+        --text-light: #eaf3ff;
+        --text-muted: #a9c1e0;
+        --radius: 16px;
+    }
+
     *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
     }
+
     body{
-        background:#020617;
-        color:white;
-        padding: 20px;
-    }
-    header, nav, aside, article, section, footer{
-        border: solid 3px white;
-        padding: 20px;
-        border-radius: 15px;
-        text-align: center;
-    }
-    header{
-        background-color: rgb(27, 97, 129);
-        height: 60px;
-        display: flex;
-        justify-content: space-between;
-    }
-    header h2{
-        background-color: greenyellow;
-        width: 80px;
-        height: 30px;
-        border-radius: 15px;
-    }
-       aside{
-        flex: 1;
-        background-color: aqua;
-        height:850px ;
-}
-
-body{
-    background:#020617;
-    color:white;
-    padding:20px;
-    margin: -18px;
-}
-
-header, nav, article, section, aside, footer{
-    border:2px solid  rgb(118,158,203);
-    border-radius:10px;
-    padding:20px;
-    text-align:center
-    
-}
-
-header{
-     background:#0f172a;
-    height:80px;
-    display: flex;
-    flex-direction: row;
-    justify-content:space-between;
-}
-
-header h1, header button{
-    color: azure;
-    background: rgb(4, 85, 167);
-    border-radius: 10px;
-    height: 50px;
-    width: 100px;
-    border: none;
-}
-#mio{
-    background-color:  #85caec;
-    width: 600px;
-}
-#rex{
-    width: 550px;
-}
-#crack{
-    width: 150px
-}
-nav{
-    height:90px;
-    display: flex;
-    flex-direction: row;
-    justify-content:space-between;
-}
-
-main{
-    display:flex;
-    gap:2px;
-}
-
-article{
-    flex:2;
-    height:800px;
-    
-}
-nav h3{
-    color: black;
-    background-color: rgb(91, 187, 238);
-    border-radius: 15px;
-    width: 240px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-  
-}
-
-section{
-    margin-top:20px;
-    height:470px;
-    background:#020617;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-section h2{
-     background:rgb(7,53,106);
-    border-radius: 15px;
-    width:370px;
-    margin: 10px;    
-}
-section h2:hover{
-    transition: 0.6s;
-    transform: scale(1.05);
-}
-img{
-      width: 100%;
-    max-width: 300px;
-    height: auto;
-    display: block;
-    margin: 20px auto;
-    object-fit: contain;
-}
-#ttt{
-    border-radius: 10px;
-    height: 50px;
-    width: auto;
-    background: #85caec;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin: 20px;
-    text-decoration: none;
-    color: black;
-    padding: 10px;
-}
-
-#ttt:hover{
-    background:#cdecf6 ;
-    transition: 0.5s;
-    transform:scale(1.05);
-    border: 2px solid #f21212;
-}
-
-aside{
-    background:linear-gradient(135deg, rgba(5,112,235,0.32), #2563eb);
-    flex:1;
-    height:800px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-}
-aside button{
-    background: #85caec;
-    height: 70px;
-    border-radius: 15px;
-    border: none;
-    margin: 30px;
-    font-size: 20px;
-    color: aliceblue;
-}
-button:hover{
-    background:#036e92 ;
-    transition: 0.5s;
-    transform:scale(1.05);
-    border: 2px solid #ffffff;
-}
-
-footer{
-    background-color: gray;
-    height:auto;
-}
-table{
-    background-color: white;
-     width:100%;
-    color: black;
-     border-radius:20px;
-     border-collapse:collapse;
-    overflow:hidden;
-     box-shadow:0 4px 10px rgba(0,0,0,0.2);
-}
-@media (max-width: 668px){
-
-    main{
-          
-        flex-direction: column;
+        font-family:'Inter', Arial, sans-serif;
+        background:linear-gradient(160deg,var(--navy),#08152c 70%);
+        color:var(--text-light);
+        min-height:100vh;
     }
 
-    aside{
-        
-        width: 100%;
-        height: auto;
+    h1,h2,h3{
+        font-family:'Baloo 2', 'Inter', sans-serif;
     }
 
-    header{
-        flex-direction: column;
-        height: auto;
-        gap: 10px;
+    a{
+        text-decoration:none;
+        color:inherit;
     }
 
-    #mio{
-        width: 100%;
+    /* ---------- ESTRUCTURA GENERAL ---------- */
+
+    .app-shell{
+        display:flex;
+        flex-direction:column;
+        min-height:100vh;
     }
 
-    #rex{
-        width: 100%;
+    .layout{
+        display:flex;
+        flex:1;
     }
 
-    #crack{
-        width: 100%;
+    /* ---------- BARRA SUPERIOR ---------- */
+
+    .topbar{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        padding:22px 28px;
+        background:var(--panel);
+        border-bottom:1px solid rgba(255,255,255,0.08);
     }
 
-    nav{
-        flex-direction: column;
-        height: auto;
-        gap: 10px;
+    .topbar-titulo{
+        font-size:26px;
+        font-weight:700;
+        color:var(--sky-soft);
+        letter-spacing:.5px;
     }
 
-    nav h3{
-        width: 100%;
+    /* ---------- BARRA LATERAL (menú) ---------- */
+
+    .sidebar{
+        width:250px;
+        flex-shrink:0;
+        background:var(--panel);
+        border-right:1px solid rgba(255,255,255,0.08);
+        padding:24px 16px;
+        display:flex;
+        flex-direction:column;
+        gap:10px;
     }
 
-    section{
-        flex-direction: column;
-        height: auto;
-        gap: 20px;
-    }
-    section h3{
-        background: gray;
-        border-radius: 15px;
-        width: 450px;
-    }    
-    footer{
-        background-color: beige;
-    }
-header{
-    grid-area:uno;
-    background:#0f172a;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-bottom:3px solid rgb(118,158,203);
-    gap: 25;
-}
-
-    section h2{
-        width: 100%;
+    .sidebar .seccion-nombre{
+        font-size:12px;
+        text-transform:uppercase;
+        letter-spacing:1px;
+        color:var(--text-muted);
+        padding:8px 12px 4px;
     }
 
-    img{
-        max-width: 100%;
+    .nav-item{
+        display:block;
+        padding:15px 16px;
+        border-radius:12px;
+        font-size:15px;
+        font-weight:600;
+        color:var(--text-light);
+        background:var(--panel-light);
+        border:1px solid rgba(255,255,255,0.08);
+        transition:.2s;
+        text-align:left;
     }
+
+    .nav-item:hover{
+        background:var(--sky);
+        color:var(--navy);
+        transform:translateX(3px);
+    }
+
+    /* ---------- CONTENIDO PRINCIPAL ---------- */
+
+    .content{
+        flex:1;
+        padding:32px;
+        display:flex;
+        flex-direction:column;
+        gap:28px;
+    }
+
+    /* Tarjetas de estadísticas: solo lectura, no son enlaces */
+
+    .stats{
+        display:grid;
+        grid-template-columns:repeat(4, 1fr);
+        gap:22px;
+    }
+
+    .stat-card{
+        background:var(--panel);
+        border:1px solid rgba(255,255,255,0.07);
+        border-radius:var(--radius);
+        padding:34px 26px;
+        display:flex;
+        flex-direction:column;
+        gap:10px;
+        cursor:default;
+    }
+
+    .stat-card .etiqueta{
+        font-size:16px;
+        color:var(--text-muted);
+        font-weight:600;
+    }
+
+    .stat-card .valor{
+        font-size:38px;
+        font-weight:700;
+        font-family:'Baloo 2', sans-serif;
+    }
+
+    /* Cuadrícula de paneles inferiores */
+
+    .paneles{
+        display:grid;
+        grid-template-columns: 1.3fr 1.3fr 1fr;
+        gap:20px;
+        align-items:stretch;
+    }
+
+    .card{
+        background:var(--panel);
+        border:1px solid rgba(255,255,255,0.07);
+        border-radius:var(--radius);
+        padding:22px;
+        display:flex;
+        flex-direction:column;
+        gap:16px;
+    }
+
+    .card h2{
+        font-size:17px;
+        color:var(--sky-soft);
+    }
+
+    /* Gráfico de barras simple con CSS */
+
+    .grafico-barras{
+        flex:1;
+        display:flex;
+        align-items:flex-end;
+        justify-content:space-around;
+        gap:14px;
+        min-height:150px;
+        padding:0 6px;
+    }
+
+    .barra-grupo{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        gap:8px;
+        flex:1;
+    }
+
+    .barra{
+        width:100%;
+        max-width:36px;
+        border-radius:8px 8px 0 0;
+        background:linear-gradient(180deg,var(--sky),#2c5da3);
+    }
+
+    .barra-grupo span{
+        font-size:12px;
+        color:var(--text-muted);
+    }
+
+    /* Gráfico circular con conic-gradient */
+
+    .grafico-torta-wrap{
+        display:flex;
+        align-items:center;
+        gap:20px;
+        flex:1;
+    }
+
+    .grafico-torta{
+        width:130px;
+        height:130px;
+        border-radius:50%;
+        flex-shrink:0;
+        background:conic-gradient(
+            var(--sky) 0% 50%,
+            var(--mint) 50% 75%,
+            var(--sky-soft) 75% 90%,
+            #274b7f 90% 100%
+        );
+    }
+
+    .leyenda{
+        display:flex;
+        flex-direction:column;
+        gap:10px;
+        font-size:13px;
+    }
+
+    .leyenda li{
+        display:flex;
+        align-items:center;
+        gap:8px;
+        list-style:none;
+    }
+
+    .leyenda .punto{
+        width:11px;
+        height:11px;
+        border-radius:50%;
+        flex-shrink:0;
+    }
+
+    /* Accesos rápidos */
+
+    .accesos{
+        display:flex;
+        flex-direction:column;
+        gap:12px;
+    }
+
+    .btn-acceso{
+        background:var(--mint);
+        color:#04241a;
+        font-weight:700;
+        font-size:14px;
+        padding:13px 16px;
+        border-radius:12px;
+        transition:.2s;
+        text-align:center;
+    }
+
+    .btn-acceso:hover{
+        background:var(--mint-dark);
+        transform:translateY(-2px);
+    }
+
+    /* ---------- PIE DE PÁGINA ---------- */
 
     footer{
-        overflow-x: auto;
+        text-align:center;
+        padding:16px;
+        font-size:12px;
+        color:var(--text-muted);
+        border-top:1px solid rgba(255,255,255,0.08);
+        background:var(--panel);
     }
 
-    table{
-        min-width: 700px;
+    @media (max-width:1100px){
+        .paneles{ grid-template-columns:1fr 1fr; }
+        .stats{ grid-template-columns:repeat(2,1fr); }
     }
 
-
+    @media (max-width:760px){
+        .layout{ flex-direction:column; }
+        .sidebar{ width:100%; flex-direction:row; flex-wrap:wrap; }
+        .paneles{ grid-template-columns:1fr; }
+        .stats{ grid-template-columns:1fr 1fr; }
     }
 
 </style>
 </head>
 <body>
-<header>
-    <h1 id="mio">Sistemas del administrador</h1>
-    <h1 id="rex">Panel del administrador</h1>
-    <button id="crack"><a href="../cerrar1.php">CERRAR SESION <?php echo $_SESSION['usuario']; ?></a></button>
-</header>
-<main>
-    <aside>
-        <button onclick="location.href='../usuario/read.all.usuario.php'">Gestionar usuario</button>
-        <button onclick="location.href='../producto/read.all.producto.php'">Gestionar Productos</button>
-        <button onclick="location.href='../ventas.php'">Visualizar ventas</button>
-        <button onclick="location.href='../pedidos.php'">Supervizar ventas y pedidos</button>
-    </aside>
-    <article>
-        <nav>
-            <h3>Total de usuarios<br><?php echo $r1['total']; ?></h3>
-            <h3>Total de productos<br><?php echo $r2['total']; ?></h3>
-            <h3>Ventas del día<br>Bs. <?php echo $r3['total']; ?></h3>
-            <h3>Pedidos totales<br><?php echo $r4['total']; ?></h3>
-        </nav>
-        <section>
-            <h2>Resumen de Ventas<img src="../imagenesproyecto/graficotr1.png" alt=""></h2>
-            <h2>Ventas por categoria<img src="../imagenesproyecto/grafico tr2.png" alt=""></h2>
-            <h2>Accesos rápidos
-                <a id="ttt" href="../usuario/formulariousuario.php">Crear usuario</a>
-                <a id="ttt" href="../producto/formularioproducto.php">Registrar producto</a>
-                <a id="ttt" href="../ventas.php">Ver todas las ventas</a>
-                <a id="ttt" href="../pedidos.php">Ver pedidos</a>
-            </h2>
-        </section>
-    </article>
-</main>
+
+<div class="app-shell">
+
+    <header class="topbar">
+        <div class="topbar-titulo">Panel de Administrador</div>
+    </header>
+
+    <div class="layout">
+
+        <aside class="sidebar">
+            <p class="seccion-nombre">Menú</p>
+            <a href="../usuario/read.all.usuario.php" class="nav-item">Gestionar usuario</a>
+            <a href="../producto/read.all.producto.php" class="nav-item">Gestionar Productos</a>
+            <a href="../ventas.php" class="nav-item">Visualizar ventas</a>
+            <a href="../pedidos.php" class="nav-item">Supervisar ventas y pedidos</a>
+        </aside>
+
+        <main class="content">
+
+            <!-- Tarjetas de resumen: solo para ver, no son botones -->
+            <section class="stats">
+                <div class="stat-card">
+                    <span class="etiqueta">Total de usuarios</span>
+                    <span class="valor"><?php echo $r1['total']; ?></span>
+                </div>
+                <div class="stat-card">
+                    <span class="etiqueta">Total de productos</span>
+                    <span class="valor"><?php echo $r2['total']; ?></span>
+                </div>
+                <div class="stat-card">
+                    <span class="etiqueta">Ventas</span>
+                    <span class="valor">Bs. <?php echo number_format($r3['total'], 2); ?></span>
+                </div>
+                <div class="stat-card">
+                    <span class="etiqueta">Pedidos totales</span>
+                    <span class="valor"><?php echo $r4['total']; ?></span>
+                </div>
+            </section>
+
+            <!-- Paneles: gráficos y accesos rápidos -->
+            <section class="paneles">
+
+                
+
+                <article class="card">
+                    <h2>Ventas por categoría</h2>
+                    <div class="grafico-torta-wrap">
+                        <div class="grafico-torta"></div>
+                        <ul class="leyenda">
+                            <li><span class="punto" style="background:var(--sky);"></span> Helados clásicos — 50%</li>
+                            <li><span class="punto" style="background:var(--mint);"></span> Helados rellenos — 25%</li>
+                            <li><span class="punto" style="background:var(--sky-soft);"></span> Línea saludable — 15%</li>
+                            <li><span class="punto" style="background:#274b7f;"></span> Otros — 10%</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <h2>Accesos rápidos</h2>
+                    <div class="accesos">
+                        <a href="../usuario/formulariousuario.php" class="btn-acceso">Crear usuario</a>
+                        <a href="../producto/formularioproducto.php" class="btn-acceso">Registrar producto</a>
+                        <a href="../ventas.php" class="btn-acceso">Ver todas las ventas</a>
+                        <a href="../pedidos.php" class="btn-acceso">Ver pedidos</a>
+                    </div>
+                </article>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <footer>
+        Dragon Ice &copy; <?php echo date("Y"); ?> — Sistema de Control de Inventario y Punto de Venta
+    </footer>
+
+</div>
+
 </body>
 </html>
-
-
