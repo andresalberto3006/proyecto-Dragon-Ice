@@ -1,43 +1,25 @@
 <?php
-
-$direccion="localhost";
-$usuario="root";
-$contraseña="";
-$nombreBase="dragonice";
-
-$conn=new mysqli($direccion,$usuario,$contraseña,$nombreBase);
-
-if($conn->connect_error){
-    die("Conexión fallida: ".$conn->connect_error);
-}
-
-if($_SERVER["REQUEST_METHOD"]==="POST"){
-
-    $ci=$_POST['ci'];
-    $nombre=$_POST['nombre'];
-    $direccion=$_POST['direccion'];
-    $celular=$_POST['celular'];
-    $rol=$_POST['rol'];
-    $estado=$_POST['estado'];
-
-    $sql="INSERT INTO usuario(ci,nombre,direccion,celular,rol,estado)
-          VALUES('$ci','$nombre','$direccion','$celular','$rol','$estado')";
-
-    if($conn->query($sql)===TRUE){
-
-?>
-<?php
 session_start();
 if (!isset($_SESSION['rol'])) { header("Location: ../iniciosesion.php"); exit(); }
 if ($_SESSION['rol'] != 'Administrador') { header("Location: ../paginaprincipal/04.vendedor.php"); exit(); }
 include("../conexion.php");
 if ($_SERVER["REQUEST_METHOD"] != "POST") { header("Location: formulariousuario.php"); exit(); }
+
 $ci=$_POST['ci']; $nombre=$_POST['nombre']; $direccion=$_POST['direccion']; $celular=$_POST['celular']; $rol=$_POST['rol']; $estado=$_POST['estado'];
+
 if ($rol!='Administrador' && $rol!='Vendedor') { echo "<script>alert('El rol debe ser Administrador o Vendedor.'); window.location='formulariousuario.php';</script>"; exit(); }
 if ($estado!='Activo' && $estado!='Bloqueado') { echo "<script>alert('El estado debe ser Activo o Bloqueado.'); window.location='formulariousuario.php';</script>"; exit(); }
 if ($rol=='Administrador') { $estado='Activo'; }
-$sql="INSERT INTO usuario(ci,nombre,direccion,celular,rol,estado) VALUES('$ci','$nombre','$direccion','$celular','$rol','$estado')";
-if (!$conexion->query($sql)) { echo "<script>alert('No se pudo registrar. Verifique que el CI no esté repetido.'); window.location='formulariousuario.php';</script>"; exit(); }
+
+$sql = "INSERT INTO usuario(ci,nombre,direccion,celular,rol,estado) VALUES(?,?,?,?,?,?)";
+$stmt = $conexion->prepare($sql);
+$stmt->bind_param("ssssss", $ci, $nombre, $direccion, $celular, $rol, $estado);
+
+if (!$stmt->execute()) {
+    echo "<script>alert('No se pudo registrar. Verifique que el CI no esté repetido.'); window.location='formulariousuario.php';</script>";
+    exit();
+}
+$stmt->close();
 ?>
 
 <!DOCTYPE html>
@@ -141,4 +123,21 @@ h1{
 
 </head>
 
-<body><div class="tarjeta"><div class="icono">🍦✅</div><h1>¡Registro Exitoso!</h1><p class="mensaje">El usuario <span class="usuario"><?php echo $nombre; ?></span> fue registrado correctamente.</p><div class="botones"><a href="formulariousuario.php" class="boton">Registrar otro usuario</a><a href="readusuario.php?ci=<?php echo $ci; ?>" class="boton">Ver usuario</a><a href="read.all.usuario.php" class="boton">Ver todos los usuarios</a></div></div></body></html>
+<body>
+    <div class="tarjeta">
+        <div class="icono">🍦✅
+
+        </div><h1>¡Registro Exitoso!
+
+        </h1><p class="mensaje">El usuario 
+            <span class="usuario">
+                <?php echo htmlspecialchars($nombre); ?>
+            </span> fue registrado correctamente.</p>
+            <div class="botones">
+                <a href="formulariousuario.php" class="boton">Registrar otro usuario</a>
+                <a href="readusuario.php?ci=<?php echo urlencode($ci); ?>" class="boton">Ver usuario</a>
+                <a href="read.all.usuario.php" class="boton">Ver todos los usuarios</a>
+            </div>
+        </div>
+    </body>
+    </html>
