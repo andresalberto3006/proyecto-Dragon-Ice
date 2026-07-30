@@ -8,15 +8,13 @@ if (!isset($rutaMenu)) {
 ?>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
 :root{
     --noche-glaciar:#071426;
     --azul-profundo:#0e2a4d;
-    --azul-vidrio:rgba(255,255,255,0.06);
     --celeste:#63d4f2;
-    --celeste-brillo:#a8ecff;
     --menta:#7be0c4;
     --blanco:#ffffff;
     --texto-suave:#c7ddec;
@@ -28,93 +26,45 @@ if (!isset($rutaMenu)) {
     box-sizing:border-box;
 }
 
-/* ---------- Contenedor con fondo helado ---------- */
 .dragonice-nav{
     font-family:'Inter', Arial, sans-serif;
     width:100%;
-    background:
-        radial-gradient(circle at 15% 0%, rgba(99,212,242,0.18), transparent 45%),
-        radial-gradient(circle at 85% 100%, rgba(123,224,196,0.14), transparent 45%),
-        linear-gradient(120deg, var(--noche-glaciar) 0%, var(--azul-profundo) 100%);
+    background:linear-gradient(120deg, var(--noche-glaciar) 0%, var(--azul-profundo) 100%);
     position:sticky;
     top:0;
     z-index:1000;
-    overflow:visible;
-}
-
-/* pequeños destellos de "hielo" flotando en el fondo */
-.dragonice-nav .destello{
-    position:absolute;
-    border-radius:50%;
-    background:rgba(255,255,255,0.55);
-    filter:blur(0.5px);
-    opacity:0;
-    animation:brillar 5s ease-in-out infinite;
-    pointer-events:none;
-}
-.dragonice-nav .d1{ width:4px; height:4px; top:14px; left:12%; animation-delay:0.2s; }
-.dragonice-nav .d2{ width:3px; height:3px; top:34px; left:38%; animation-delay:1.8s; }
-.dragonice-nav .d3{ width:5px; height:5px; top:20px; left:63%; animation-delay:1s; }
-.dragonice-nav .d4{ width:3px; height:3px; top:44px; left:82%; animation-delay:2.6s; }
-
-@keyframes brillar{
-    0%, 100%{ opacity:0; transform:translateY(0) scale(1); }
-    50%{ opacity:0.9; transform:translateY(-6px) scale(1.3); }
-}
-
-.dragonice-nav .fila{
-    position:relative;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:14px 40px;
-    gap:20px;
     border-bottom:1px solid rgba(255,255,255,0.08);
 }
 
-/* ---------- Logo ---------- */
+.dragonice-nav .fila{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px 40px;
+    gap:20px;
+}
+
+/* ---------- Logo (sin caja, suelto) ---------- */
 .dragonice-nav .logo{
     display:flex;
     align-items:center;
-    gap:10px;
+    gap:8px;
     text-decoration:none;
     flex-shrink:0;
-    group:logo;
 }
 
-.dragonice-nav .logo .icono-cono{
-    width:38px;
-    height:38px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:12px;
-    background:linear-gradient(145deg, rgba(99,212,242,0.25), rgba(123,224,196,0.15));
-    border:1px solid rgba(255,255,255,0.15);
-    transition:transform 0.4s cubic-bezier(.34,1.56,.64,1), box-shadow 0.4s ease;
-}
-
-.dragonice-nav .logo:hover .icono-cono{
-    transform:rotate(-12deg) scale(1.08);
-    box-shadow:0 0 18px rgba(99,212,242,0.5);
-}
-
-.dragonice-nav .logo .icono-cono img{
-    width:26px;
-    height:26px;
+.dragonice-nav .logo img{
+    width:32px;
+    height:32px;
     object-fit:contain;
 }
 
 .dragonice-nav .logo h2{
     font-family:'Baloo 2', cursive;
-    font-size:26px;
-    font-weight:800;
-    letter-spacing:0.3px;
+    font-size:24px;
+    font-weight:700;
+    color:var(--celeste);
     white-space:nowrap;
-    background:linear-gradient(90deg, var(--blanco) 0%, var(--celeste-brillo) 60%, var(--menta) 100%);
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
 }
 
 /* ---------- Links de navegación ---------- */
@@ -122,53 +72,28 @@ if (!isset($rutaMenu)) {
     display:flex;
     align-items:center;
     list-style:none;
-    gap:8px;
+    gap:26px;
     flex:1;
-    margin-left:36px;
+    margin-left:40px;
 }
 
 .dragonice-nav .nav-links a{
-    position:relative;
-    display:inline-flex;
-    align-items:center;
     text-decoration:none;
     color:var(--texto-suave);
-    font-size:14.5px;
+    font-size:15px;
     font-weight:600;
-    letter-spacing:0.4px;
-    padding:9px 18px;
-    border-radius:24px;
-    isolation:isolate;
-    overflow:hidden;
-    transition:color 0.35s ease;
-}
-
-.dragonice-nav .nav-links a::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(120deg, var(--celeste), var(--celeste-brillo));
-    border-radius:24px;
-    transform:scale(0.4);
-    opacity:0;
-    z-index:-1;
-    transition:transform 0.35s cubic-bezier(.34,1.56,.64,1), opacity 0.3s ease;
+    transition:color 0.2s ease;
 }
 
 .dragonice-nav .nav-links a:hover{
-    color:var(--noche-glaciar);
-}
-
-.dragonice-nav .nav-links a:hover::before{
-    transform:scale(1);
-    opacity:1;
+    color:var(--celeste);
 }
 
 /* ---------- Iconos (derecha) ---------- */
 .dragonice-nav .iconos{
     display:flex;
     align-items:center;
-    gap:4px;
+    gap:6px;
     flex-shrink:0;
 }
 
@@ -176,12 +101,12 @@ if (!isset($rutaMenu)) {
     display:flex;
     align-items:center;
     justify-content:center;
-    width:40px;
-    height:40px;
+    width:38px;
+    height:38px;
     border-radius:50%;
     color:var(--texto-suave);
     text-decoration:none;
-    transition:color 0.3s ease, background 0.3s ease, transform 0.3s cubic-bezier(.34,1.56,.64,1);
+    transition:background 0.2s ease, color 0.2s ease;
     position:relative;
 }
 
@@ -194,45 +119,41 @@ if (!isset($rutaMenu)) {
 }
 
 .dragonice-nav .icono-btn:hover{
-    color:var(--noche-glaciar);
-    background:linear-gradient(145deg, var(--celeste-brillo), var(--blanco));
-    transform:translateY(-3px);
-    box-shadow:0 8px 18px rgba(99,212,242,0.35);
+    background:rgba(255,255,255,0.1);
+    color:var(--celeste);
 }
 
 .dragonice-nav .icono-btn .badge{
     position:absolute;
-    top:-3px;
-    right:-3px;
+    top:-2px;
+    right:-2px;
     background:var(--menta);
     color:var(--noche-glaciar);
     font-size:10px;
     font-weight:700;
-    min-width:17px;
-    height:17px;
+    min-width:16px;
+    height:16px;
     border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
     padding:0 3px;
-    box-shadow:0 0 0 2px var(--azul-profundo);
 }
 
 .dragonice-nav .sesion-texto{
-    font-size:13.5px;
+    font-size:14px;
     font-weight:700;
     color:var(--noche-glaciar);
     text-decoration:none;
-    padding:10px 20px;
-    border-radius:22px;
-    background:linear-gradient(120deg, var(--celeste), var(--menta));
-    transition:transform 0.3s cubic-bezier(.34,1.56,.64,1), box-shadow 0.3s ease;
+    padding:9px 18px;
+    border-radius:20px;
+    background:var(--celeste);
     white-space:nowrap;
+    transition:background 0.2s ease;
 }
 
 .dragonice-nav .sesion-texto:hover{
-    transform:translateY(-3px);
-    box-shadow:0 10px 20px rgba(99,212,242,0.4);
+    background:var(--menta);
 }
 
 /* ---------- Botón hamburguesa (mobile) ---------- */
@@ -241,7 +162,7 @@ if (!isset($rutaMenu)) {
     background:none;
     border:none;
     color:var(--blanco);
-    font-size:1.8rem;
+    font-size:1.6rem;
     cursor:pointer;
 }
 
@@ -262,32 +183,20 @@ if (!isset($rutaMenu)) {
         width:100%;
         order:4;
         margin:14px 0 0 0;
-        gap:6px;
+        gap:12px;
     }
 
     .dragonice-nav .nav-links.active{
         display:flex;
     }
-
-    .dragonice-nav .nav-links a{
-        width:100%;
-        justify-content:center;
-    }
 }
 </style>
 
 <nav class="dragonice-nav">
-    <span class="destello d1"></span>
-    <span class="destello d2"></span>
-    <span class="destello d3"></span>
-    <span class="destello d4"></span>
-
     <div class="fila">
 
         <a href="<?php echo $rutaMenu; ?>paginaprincipal/01.inicio.php" class="logo">
-            <span class="icono-cono">
-                <img src="<?php echo $rutaMenu; ?>imagenesproyecto/logo.png" alt="Logo Dragon Ice">
-            </span>
+            <img src="<?php echo $rutaMenu; ?>imagenesproyecto/logo.png" alt="Logo Dragon Ice">
             <h2>Dragon Ice</h2>
         </a>
 
@@ -324,12 +233,14 @@ if (!isset($rutaMenu)) {
                 </a>
             <?php } ?>
 
-            <a href="<?php echo $rutaMenu; ?>carrito.php" class="icono-btn" aria-label="Carrito de compras">
-                <svg viewBox="0 0 24 24"><path d="M3 4h2l2.4 12.4a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.6L21 8H6"></path><circle cx="9" cy="21" r="1.4"></circle><circle cx="18" cy="21" r="1.4"></circle></svg>
-                <?php if (isset($_SESSION['carrito_cantidad']) && $_SESSION['carrito_cantidad'] > 0) { ?>
-                    <span class="badge"><?php echo $_SESSION['carrito_cantidad']; ?></span>
-                <?php } ?>
-            </a>
+            <?php if (!isset($_SESSION['rol']) || $_SESSION['rol'] != 'Administrador') { ?>
+                <a href="<?php echo $rutaMenu; ?>carrito.php" class="icono-btn" aria-label="Carrito de compras">
+                    <svg viewBox="0 0 24 24"><path d="M3 4h2l2.4 12.4a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.6L21 8H6"></path><circle cx="9" cy="21" r="1.4"></circle><circle cx="18" cy="21" r="1.4"></circle></svg>
+                    <?php if (isset($_SESSION['carrito_cantidad']) && $_SESSION['carrito_cantidad'] > 0) { ?>
+                        <span class="badge"><?php echo $_SESSION['carrito_cantidad']; ?></span>
+                    <?php } ?>
+                </a>
+            <?php } ?>
         </div>
 
     </div>
