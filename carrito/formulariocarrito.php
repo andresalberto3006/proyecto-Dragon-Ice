@@ -131,8 +131,13 @@
         <form action="../crud/registrocarrito.php" method="POST">
 
             <div class="grupo">
+<<<<<<< HEAD:05.formularioproducto.php
+                <label for="ci">Código / CI</label>
+                <input type="number" id="ci" name="ci" placeholder="Ingrese el código">
+=======
                 <label for="id_productos">Código del producto</label>
                 <input type="number" id="id_productos" name="id_productos" placeholder="Ingrese el código">
+>>>>>>> abbdbf11be19abff5ef4b00641904b75ac5b6112:carrito/formulariocarrito.php
             </div>
 
             <div class="grupo">
@@ -146,12 +151,34 @@
             </div>
 
             <div class="grupo">
+<<<<<<< HEAD:05.formularioproducto.php
+                <label for="precio">Precio</label>
+                <input type="number" id="precio" name="precio" placeholder="Ingrese el precio">
+            </div>
+
+            <div class="grupo">
+                <label for="costo">Costo</label>
+                <input type="number" id="costo" name="costo" placeholder="Ingrese el costo">
+            </div>
+
+            <div class="grupo">
+                <label for="stock">Stock</label>
+                <input type="number" id="stock" name="stock" placeholder="Cantidad disponible">
+            </div>
+
+=======
                 <label for="costotal">Costo total</label>
                 <input type="number" id="costotal" name="costotal" placeholder="Ingrese el costo total">
             </div>
+>>>>>>> abbdbf11be19abff5ef4b00641904b75ac5b6112:carrito/formulariocarrito.php
             <button type="submit" class="boton">
                 Registrar compra
             </button>
+<<<<<<< HEAD:05.formularioproducto.php
+
+        </form>
+=======
+>>>>>>> abbdbf11be19abff5ef4b00641904b75ac5b6112:carrito/formulariocarrito.php
         
     </div>
 

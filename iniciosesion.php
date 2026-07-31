@@ -63,6 +63,7 @@
             letter-spacing: 5px;
             margin-bottom: 10px;
             text-shadow: 0 0 15px #00bfff;
+            transition: 300px;
         }
 
         .login-box p {
@@ -125,6 +126,7 @@
                 font-size: 35px;
             }
         }
+        
     </style>
 </head>
 
