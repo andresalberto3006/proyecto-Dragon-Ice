@@ -124,8 +124,13 @@ include("../conexion.php");
         <form id="formulario" action="../producto/registroproducto.php" method="POST" enctype="multipart/form-data">
 
             <div class="grupo">
+<<<<<<< Updated upstream:producto/formularioproducto.php
                  <label for="id">id</label>
                  <input type="number" id ="id" name="id" placeholder="Ingrese el código"> 
+=======
+                <label for="id">Código / CI</label>
+                <input type="text" id="id" name="id" placeholder="Ingrese el código">
+>>>>>>> Stashed changes:06.formularioproducto.php
             </div>
 
             <div class="grupo">
