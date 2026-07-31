@@ -1,3 +1,4 @@
+
 <?php
   $direccion="localhost";
    $usuario="root";
@@ -24,4 +25,5 @@
    if($conexion->query($sql)===TRUE){
     echo "se registro correctamente";
    }
+
 ?>
