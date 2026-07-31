@@ -129,7 +129,7 @@
 
             <div class="grupo">
                 <label for="ci">Código / CI</label>
-                <input type="text" id="ci" name="ci" placeholder="Ingrese el código">
+                <input type="number" id="ci" name="ci" placeholder="Ingrese el código">
             </div>
 
             <div class="grupo">
@@ -144,17 +144,17 @@
 
             <div class="grupo">
                 <label for="precio">Precio</label>
-                <input type="text" id="precio" name="precio" placeholder="Ingrese el precio">
+                <input type="number" id="precio" name="precio" placeholder="Ingrese el precio">
             </div>
 
             <div class="grupo">
                 <label for="costo">Costo</label>
-                <input type="text" id="costo" name="costo" placeholder="Ingrese el costo">
+                <input type="number" id="costo" name="costo" placeholder="Ingrese el costo">
             </div>
 
             <div class="grupo">
                 <label for="stock">Stock</label>
-                <input type="text" id="stock" name="stock" placeholder="Cantidad disponible">
+                <input type="number" id="stock" name="stock" placeholder="Cantidad disponible">
             </div>
 
             <button type="submit" class="boton">
@@ -162,7 +162,6 @@
             </button>
 
         </form>
-        <a href="09.formadmin.html"></a>
         
     </div>
 
