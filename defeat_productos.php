@@ -15,7 +15,9 @@ else{
             else{
                 echo "<div class='mensaje error'>CI no especificado: " . $conn->error . "</div>";
             }
-    
+            }
+    }
 }
 $conn->close();
 ?>
+<?php header("Location: producto/read.all.producto.php"); exit(); ?>
