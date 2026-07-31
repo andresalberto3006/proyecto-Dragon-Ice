@@ -1,4 +1,6 @@
-
+<?php
+session_start();
+?>
 
 <!DOCTYPE html>
 
@@ -28,13 +30,12 @@ body{
     background:rgba(255,255,255,0.85);
     box-shadow:0 5px 20px rgba(0,0,0,0.15);
 }
-
 .presentacion h1{
     font-size:80px;
     color:#2d4f7c;
     letter-spacing:8px;
     margin-bottom:25px;
-    text-shadow:2px 2px 10px rgba(0,0,0,0.2);
+    text-shadow:2px 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .presentacion p{
@@ -76,7 +77,6 @@ body{
     line-height:1.8;
     text-align:justify;
 }
-
 @media(max-width:768px){
 
     .presentacion h1{
@@ -100,13 +100,12 @@ body{
 </style>
 
 </head>
-
 <body>
 
 <header class="menu-principal">
 
   <?php
-  include("menu.php")
+   $rutaMenu=""; include("menu.php")
   
   ?>
 
@@ -114,7 +113,7 @@ body{
 
 <div class="contenedor">
 
-```
+
 <section class="presentacion">
 
     <h1>DRAGON ICE</h1>
@@ -180,8 +179,9 @@ body{
 </div>
 
 <?php
-include("piedepagina.php");
+include("paginaprincipal/piedepagina.php");
 ?>
 
 </body>
+
 </html>

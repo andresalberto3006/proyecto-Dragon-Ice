@@ -25,5 +25,10 @@
    if($conexion->query($sql)===TRUE){
     echo "se registro correctamente";
    }
+<<<<<<< HEAD
 
 ?>
+=======
+?>
+<?php header("Location: usuario/formulariousuario.php"); exit(); ?>
+>>>>>>> cf3f7a014983a027468ed93e89cd778541798d76
