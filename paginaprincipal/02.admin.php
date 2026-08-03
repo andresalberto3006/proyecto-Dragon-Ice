@@ -1,328 +1,182 @@
 <?php
 session_start();
-if (!isset($_SESSION['rol'])) { header("Location: ../iniciosesion.php"); exit(); }
-if ($_SESSION['rol'] != 'Administrador') { header("Location: 04.vendedor.php"); exit(); }
-include("../conexion.php");
-$r1=$conexion->query("SELECT COUNT(*) AS total FROM usuario")->fetch_assoc();
-$r2=$conexion->query("SELECT COUNT(*) AS total FROM productos")->fetch_assoc();
-$r3=$conexion->query("SELECT IFNULL(SUM(total),0) AS total FROM ventas WHERE fecha=CURDATE()")->fetch_assoc();
-$r4=$conexion->query("SELECT COUNT(*) AS total FROM pedidos")->fetch_assoc();
+// Usamos isset() para evitar el warning "Undefined array key 'nombre'"
+$nombreUsuario = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : 'Administrador';
+
+// $rutaMenu le indica a menu.php cómo llegar a la raíz del proyecto desde esta carpeta (admin/)
+$rutaMenu = "../";
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maquetado Semántico</title>
-
+<title>Panel de Administración | TechZone</title>
 <style>
+
     *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:Arial, Helvetica, sans-serif;
     }
+
     body{
-        background:#020617;
-        color:white;
-        padding: 20px;
-    }
-    header, nav, aside, article, section, footer{
-        border: solid 3px white;
-        padding: 20px;
-        border-radius: 15px;
-        text-align: center;
-    }
-    header{
-        background-color: rgb(27, 97, 129);
-        height: 60px;
-        display: flex;
-        justify-content: space-between;
-    }
-    header h2{
-        background-color: greenyellow;
-        width: 80px;
-        height: 30px;
-        border-radius: 15px;
-    }
-       aside{
-        flex: 1;
-        background-color: aqua;
-        height:850px ;
-}
-
-body{
-    background:#020617;
-    color:white;
-    padding:20px;
-    margin: -18px;
-}
-
-header, nav, article, section, aside, footer{
-    border:2px solid  rgb(118,158,203);
-    border-radius:10px;
-    padding:20px;
-    text-align:center
-    
-}
-
-header{
-     background:#0f172a;
-    height:80px;
-    display: flex;
-    flex-direction: row;
-    justify-content:space-between;
-}
-
-header h1, header button{
-    color: azure;
-    background: rgb(4, 85, 167);
-    border-radius: 10px;
-    height: 50px;
-    width: 100px;
-    border: none;
-}
-#mio{
-    background-color:  #85caec;
-    width: 600px;
-}
-#rex{
-    width: 550px;
-}
-#crack{
-    width: 150px
-}
-nav{
-    height:90px;
-    display: flex;
-    flex-direction: row;
-    justify-content:space-between;
-}
-
-main{
-    display:flex;
-    gap:2px;
-}
-
-article{
-    flex:2;
-    height:800px;
-    
-}
-nav h3{
-    color: black;
-    background-color: rgb(91, 187, 238);
-    border-radius: 15px;
-    width: 240px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-  
-}
-
-section{
-    margin-top:20px;
-    height:470px;
-    background:#020617;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-section h2{
-     background:rgb(7,53,106);
-    border-radius: 15px;
-    width:370px;
-    margin: 10px;    
-}
-section h2:hover{
-    transition: 0.6s;
-    transform: scale(1.05);
-}
-img{
-      width: 100%;
-    max-width: 300px;
-    height: auto;
-    display: block;
-    margin: 20px auto;
-    object-fit: contain;
-}
-#ttt{
-    border-radius: 10px;
-    height: 50px;
-    width: auto;
-    background: #85caec;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin: 20px;
-    text-decoration: none;
-    color: black;
-    padding: 10px;
-}
-
-#ttt:hover{
-    background:#cdecf6 ;
-    transition: 0.5s;
-    transform:scale(1.05);
-    border: 2px solid #f21212;
-}
-
-aside{
-    background:linear-gradient(135deg, rgba(5,112,235,0.32), #2563eb);
-    flex:1;
-    height:800px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-}
-aside button{
-    background: #85caec;
-    height: 70px;
-    border-radius: 15px;
-    border: none;
-    margin: 30px;
-    font-size: 20px;
-    color: aliceblue;
-}
-button:hover{
-    background:#036e92 ;
-    transition: 0.5s;
-    transform:scale(1.05);
-    border: 2px solid #ffffff;
-}
-
-footer{
-    background-color: gray;
-    height:auto;
-}
-table{
-    background-color: white;
-     width:100%;
-    color: black;
-     border-radius:20px;
-     border-collapse:collapse;
-    overflow:hidden;
-     box-shadow:0 4px 10px rgba(0,0,0,0.2);
-}
-@media (max-width: 668px){
-
-    main{
-          
-        flex-direction: column;
+        background:linear-gradient(180deg,#e8f2fb,#f5f9fd 40%);
+        min-height:100vh;
     }
 
-    aside{
-        
-        width: 100%;
-        height: auto;
+    a{ text-decoration:none; color:inherit; }
+
+    /* ---------- CONTENIDO ---------- */
+
+    .contenido{
+        max-width:1200px;
+        margin:0 auto;
+        padding:30px 24px;
     }
 
-    header{
-        flex-direction: column;
-        height: auto;
-        gap: 10px;
+    /* Tarjeta de bienvenida */
+
+    .bienvenida{
+        background:#ffffff;
+        border-left:6px solid #29a8e0;
+        border-radius:10px;
+        padding:24px 30px;
+        box-shadow:0 4px 14px rgba(0,0,0,0.08);
+        margin-bottom:24px;
     }
 
-    #mio{
-        width: 100%;
+    .bienvenida h1{
+        color:#111a2e;
+        font-size:28px;
+        margin-bottom:12px;
     }
 
-    #rex{
-        width: 100%;
+    .bienvenida p{
+        color:#555;
+        font-size:15px;
+        line-height:1.6;
     }
 
-    #crack{
-        width: 100%;
+    /* Cuadrícula de tarjetas */
+
+    .tarjetas{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:22px;
     }
 
-    nav{
-        flex-direction: column;
-        height: auto;
-        gap: 10px;
+    .tarjeta{
+        background:#ffffff;
+        border-radius:10px;
+        overflow:hidden;
+        box-shadow:0 4px 14px rgba(0,0,0,0.08);
     }
 
-    nav h3{
-        width: 100%;
+    /* Antes las 2 primeras tarjetas tenían la franja negra (#111a2e) y las
+       otras 2 celeste (.clara). Ahora todas usan el mismo color celeste
+       para que las 4 se vean igual. */
+    .tarjeta .franja{
+        height:6px;
+        background:#29a8e0;
     }
 
-    section{
-        flex-direction: column;
-        height: auto;
-        gap: 20px;
-    }
-    section h3{
-        background: gray;
-        border-radius: 15px;
-        width: 450px;
-    }    
-    footer{
-        background-color: beige;
-    }
-header{
-    grid-area:uno;
-    background:#0f172a;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-bottom:3px solid rgb(118,158,203);
-    gap: 25;
-}
-
-    section h2{
-        width: 100%;
+    .tarjeta .cuerpo{
+        padding:26px 28px;
     }
 
-    img{
-        max-width: 100%;
+    .tarjeta h2{
+        color:#173a8a;
+        font-size:20px;
+        margin-bottom:12px;
     }
 
-    footer{
-        overflow-x: auto;
+    .tarjeta p{
+        color:#555;
+        font-size:14.5px;
+        line-height:1.6;
+        margin-bottom:20px;
     }
 
-    table{
-        min-width: 700px;
+    .boton{
+        display:inline-block;
+        background:#29a8e0;
+        color:#0b1f33;
+        font-weight:700;
+        font-size:14.5px;
+        padding:11px 22px;
+        border-radius:8px;
+        transition:.2s;
     }
 
+    .boton:hover{
+        background:#1c8fc4;
+    }
 
+    @media (max-width:760px){
+        .tarjetas{ grid-template-columns:1fr; }
     }
 
 </style>
 </head>
 <body>
-<header>
-    <h1 id="mio">Sistemas del administrador</h1>
-    <h1 id="rex">Panel del administrador</h1>
-    <button id="crack"><a href="../cerrar1.php">CERRAR SESION <?php echo $_SESSION['usuario']; ?></a></button>
-</header>
-<main>
-    <aside>
-        <button onclick="location.href='../usuario/read.all.usuario.php'">Gestionar usuario</button>
-        <button onclick="location.href='../producto/read.all.producto.php'">Gestionar Productos</button>
-        <button onclick="location.href='../ventas.php'">Visualizar ventas</button>
-        <button onclick="location.href='../pedidos.php'">Supervizar ventas y pedidos</button>
-    </aside>
-    <article>
-        <nav>
-            <h3>Total de usuarios<br><?php echo $r1['total']; ?></h3>
-            <h3>Total de productos<br><?php echo $r2['total']; ?></h3>
-            <h3>Ventas del día<br>Bs. <?php echo $r3['total']; ?></h3>
-            <h3>Pedidos totales<br><?php echo $r4['total']; ?></h3>
-        </nav>
-        <section>
-            <h2>Resumen de Ventas<img src="../imagenesproyecto/graficotr1.png" alt=""></h2>
-            <h2>Ventas por categoria<img src="../imagenesproyecto/grafico tr2.png" alt=""></h2>
-            <h2>Accesos rápidos
-                <a id="ttt" href="../usuario/formulariousuario.php">Crear usuario</a>
-                <a id="ttt" href="../producto/formularioproducto.php">Registrar producto</a>
-                <a id="ttt" href="../ventas.php">Ver todas las ventas</a>
-                <a id="ttt" href="../pedidos.php">Ver pedidos</a>
-            </h2>
-        </section>
-    </article>
+
+<?php include("../menu.php"); ?>
+
+<main class="contenido">
+
+    <section class="bienvenida">
+        <h1>Panel de administración</h1>
+        <p>
+            Bienvenido, <?php echo htmlspecialchars($nombreUsuario); ?>.
+            Desde aquí se controla la gestión general del sistema.
+        </p>
+    </section>
+
+    <section class="tarjetas">
+
+        <article class="tarjeta">
+            <div class="franja"></div>
+            <div class="cuerpo">
+                <h2>Usuarios y vendedores</h2>
+                <p>Permite registrar administradores y vendedores, editar sus datos, cambiar su estado y bloquear o desbloquear vendedores.</p>
+                <a href="../usuario/read.all.usuario.php" class="boton">Gestionar usuarios</a>
+            </div>
+        </article>
+
+        <article class="tarjeta">
+            <div class="franja"></div>
+            <div class="cuerpo">
+                <h2>Ventas generales</h2>
+                <p>Muestra todas las ventas registradas en el sistema. El administrador puede revisar, editar o eliminar ventas.</p>
+                <a href="../ventas.php" class="boton">Ver ventas</a>
+            </div>
+        </article>
+
+        <article class="tarjeta">
+            <div class="franja"></div>
+            <div class="cuerpo">
+                <h2>Consulta de pedidos</h2>
+                <p>Permite consultar el estado de un pedido utilizando el ID del pedido y el nombre del cliente externo.</p>
+                <a href="../pedidos.php" class="boton">Consultar pedido</a>
+            </div>
+        </article>
+
+        <article class="tarjeta">
+            <div class="franja"></div>
+            <div class="cuerpo">
+                <h2>Catálogo </h2>
+                <p>Muestra los productos disponibles con su información, stock, categoría e imagen registrada.</p>
+                <a href="../producto/read.all.producto.php" class="boton">Ver catálogo</a>
+            </div>
+        </article>
+
+    </section>
+
 </main>
+
+<?php include("../paginaprincipal/piedepagina.php"); ?>
+
 </body>
 </html>
-
-

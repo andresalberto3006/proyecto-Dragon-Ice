@@ -14,7 +14,7 @@
      exit();
    }
 
-   $id=$_POST['codigo'];
+   $id=$_POST['id'];
    $nombre=$_POST['nombre'];
    $descripcion=$_POST['descripcion'];
    $precio=$_POST['precio'];
