@@ -149,7 +149,7 @@ $rutaMenu = "../";
             <div class="franja"></div>
             <div class="cuerpo">
                 <h2>Productos</h2>
-                <p>Registra nuevos accesorios tecnológicos, edita información, controla stock, agrega imágenes y organiza productos por categoría.</p>
+                <p>Registra nuevos productos , edita información, controla stock, agrega imágenes y organiza productos por categoría.</p>
                 <a href="../producto/read.all.producto.php" class="boton">Gestionar Productos</a>
             </div>
         </article>
