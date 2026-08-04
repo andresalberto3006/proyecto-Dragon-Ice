@@ -2,213 +2,217 @@
 ?>
 
 <style>
+
+
+.footer{
+    background-color: yellow;
+
+}
+
+
 :root{
-    --noche-glaciar:#071426;
-    --azul-profundo:#0e2a4d;
-    --celeste:#63d4f2;
-    --celeste-brillo:#a8ecff;
-    --menta:#7be0c4;
-    --blanco:#ffffff;
-    --texto-suave:#c7ddec;
+    --azul-oscuro:#0e2a4d;
+    --celeste:#29a8e0;
+    --gris-texto:#6b7280;
+    --gris-titulo:#374151;
+    --gris-borde:#e5e7eb;
 }
 
 .pie{
-    margin-top:0;
-    position:relative;
-    background:
-        radial-gradient(circle at 10% 0%, rgba(99,212,242,0.16), transparent 45%),
-        radial-gradient(circle at 90% 100%, rgba(123,224,196,0.14), transparent 45%),
-        linear-gradient(150deg, var(--noche-glaciar) 0%, var(--azul-profundo) 100%);
-    overflow:hidden;
+    background: #80a7fd;;
     font-family:'Inter', Arial, sans-serif;
+    padding-top:40px;
 }
 
-/* destellos flotando, igual que en el menú */
-.pie .destello{
-    position:absolute;
-    border-radius:50%;
-    background:rgba(255,255,255,0.55);
-    filter:blur(0.5px);
-    opacity:0;
-    animation:pie-brillar 6s ease-in-out infinite;
-    pointer-events:none;
-}
-.pie .d1{ width:4px; height:4px; top:30px; left:8%; animation-delay:0.3s; }
-.pie .d2{ width:3px; height:3px; top:80px; left:34%; animation-delay:2.2s; }
-.pie .d3{ width:5px; height:5px; top:50px; left:60%; animation-delay:1.3s; }
-.pie .d4{ width:3px; height:3px; top:110px; left:88%; animation-delay:3s; }
-
-@keyframes pie-brillar{
-    0%, 100%{ opacity:0; transform:translateY(0) scale(1); }
-    50%{ opacity:0.9; transform:translateY(-8px) scale(1.3); }
+.pie-linea{
+    max-width:1200px;
+    margin:0 auto;
+    border-top:1px solid var(--gris-borde);
 }
 
 .pie-contenido{
-    position:relative;
-    padding:60px 50px;
+    max-width:1200px;
+    margin:0 auto;
+    padding:40px 24px;
     display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:50px;
+    grid-template-columns:1.3fr 1fr 1fr 1fr;
+    gap:30px;
 }
 
-.pie-info h3{
-    font-family:'Baloo 2', cursive;
-    font-size:32px;
-    font-weight:800;
-    margin-bottom:26px;
-    background:linear-gradient(90deg, var(--blanco) 0%, var(--celeste-brillo) 60%, var(--menta) 100%);
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-    display:inline-block;
-}
-
-.pie-dato{
-    display:flex;
-    align-items:flex-start;
-    gap:14px;
-    margin-bottom:20px;
-    padding:14px 18px;
-    background:rgba(255,255,255,0.05);
-    border:1px solid rgba(255,255,255,0.08);
-    border-radius:16px;
-    transition:transform 0.3s cubic-bezier(.34,1.56,.64,1), background 0.3s ease, box-shadow 0.3s ease;
-}
-
-.pie-dato:hover{
-    transform:translateY(-4px);
-    background:rgba(255,255,255,0.09);
-    box-shadow:0 10px 24px rgba(99,212,242,0.18);
-}
-
-.pie-dato .icono-pie{
-    flex-shrink:0;
-    width:38px;
-    height:38px;
-    border-radius:12px;
+/* Marca */
+.pie-marca{
     display:flex;
     align-items:center;
-    justify-content:center;
-    background:linear-gradient(145deg, rgba(99,212,242,0.25), rgba(123,224,196,0.15));
-    border:1px solid rgba(255,255,255,0.15);
+    gap:12px;
 }
 
-.pie-dato .icono-pie svg{
-    width:19px;
-    height:19px;
-    stroke:var(--celeste-brillo);
-    fill:none;
-    stroke-width:1.8;
+.pie-marca img{
+    border-radius:100px;
+    width:150px;
+    height:150px;
+    object-fit:contain;
 }
 
-.pie-dato .texto-dato{
-    color:var(--texto-suave);
-    font-size:16px;
+.pie-marca h2{
+    font-family:'Baloo 2', Arial, sans-serif;
+    font-size:20px;
+    font-weight:800;
+    color:var(--azul-oscuro);
+    margin-bottom:6px;
+}
+
+.pie-marca p{
+    font-size:13px;
+    letter-spacing:1px;
+    color:var(--gris-texto);
+    text-transform:uppercase;
+}
+
+/* Columnas de enlaces / contacto */
+.pie-col h3{
+    font-size:15px;
+    font-weight:700;
+    color:var(--gris-titulo);
+    margin-bottom:16px;
+    text-align:center;
+}
+
+.pie-col ul{
+    list-style:none;
+}
+
+.pie-col li{
+    margin-bottom:12px;
+    text-align:center;
+}
+
+.pie-col a{
+    text-decoration:none;
+    color:var(--gris-texto);
+    font-size:14px;
+    transition:color .2s;
+}
+
+.pie-col a:hover{
+    color:var(--celeste);
+}
+
+.pie-col.contacto p{
+    color:var(--gris-texto);
+    font-size:14px;
+    text-align:center;
+    margin-bottom:10px;
     line-height:1.5;
 }
 
-.pie-dato .texto-dato strong{
-    display:block;
-    color:var(--blanco);
-    font-size:14px;
-    font-weight:700;
-    letter-spacing:0.4px;
-    text-transform:uppercase;
-    margin-bottom:3px;
+/* Redes sociales */
+.pie-redes{
+    display:flex;
+    justify-content:center;
+    gap:12px;
 }
 
-.pie-mapa iframe{
-    width:100%;
-    height:340px;
-    border:none;
-    border-radius:20px;
-    filter:saturate(0.9) brightness(0.95);
-    border:1px solid rgba(255,255,255,0.12);
+.pie-redes a{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:#9ca3af;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:background .2s;
 }
 
+.pie-redes a:hover{
+    background:var(--celeste);
+}
+
+.pie-redes svg{
+    width:17px;
+    height:17px;
+    fill:#ffffff;
+}
+
+/* Barra inferior */
 .pie-copy{
-    position:relative;
-    background:linear-gradient(120deg, var(--celeste), var(--menta));
-    color:var(--noche-glaciar);
+    border-top:1px solid var(--gris-borde);
     text-align:center;
-    font-size:15px;
-    font-weight:700;
-    letter-spacing:0.3px;
     padding:18px;
+    font-size:13px;
+    color:var(--gris-texto);
 }
 
 @media(max-width:900px){
 
     .pie-contenido{
-        grid-template-columns:1fr;
-        padding:44px 26px;
+        grid-template-columns:1fr 1fr;
     }
 
-    .pie-info{
-        text-align:center;
-    }
-
-    .pie-dato{
+    .pie-marca{
+        grid-column:1 / -1;
+        justify-content:center;
         text-align:left;
+        margin-bottom:10px;
+    }
+}
+
+@media(max-width:600px){
+
+    .pie-contenido{
+        grid-template-columns:1fr;
     }
 }
 </style>
 
 <footer class="pie">
-    <span class="destello d1"></span>
-    <span class="destello d2"></span>
-    <span class="destello d3"></span>
-    <span class="destello d4"></span>
+
+    <div class="pie-linea"></div>
 
     <div class="pie-contenido">
 
-        <div class="pie-info">
-            <h3>Contacto</h3>
-
-            <div class="pie-dato">
-                <span class="icono-pie">
-                    <svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.5 2.1L8 9.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.7 2z"></path></svg>
-                </span>
-                <div class="texto-dato">
-                    <strong>Teléfono</strong>
-                    62622743
-                </div>
-            </div>
-
-            <div class="pie-dato">
-                <span class="icono-pie">
-                    <svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"></path><path d="M22 6l-10 7L2 6"></path></svg>
-                </span>
-                <div class="texto-dato">
-                    <strong>Correo</strong>
-                    frost@gmail.com
-                </div>
-            </div>
-
-            <div class="pie-dato">
-                <span class="icono-pie">
-                    <svg viewBox="0 0 24 24"><path d="M12 21s-7-6.4-7-11a7 7 0 0 1 14 0c0 4.6-7 11-7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
-                </span>
-                <div class="texto-dato">
-                    <strong>Ubicación</strong>
-                    Av. Heroínas y Lanza #452
-                </div>
+        <div class="pie-marca">
+            <img src="../imagenesproyecto/logo.png" alt="Logo Dragon Ice">
+            <div>
+                <h2>Dragon Ice</h2>
+                <p>Helados Artesanales</p>
             </div>
         </div>
 
-        <div class="pie-mapa">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d951.8538846511874!2d-66.15444203036925!3d-17.391834719174938!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x93e373f8a49eaf75%3A0xc9337e878bf0dab9!2sInternet%20y%20Cabinas%20EDGAR!5e0!3m2!1ses!2sbo!4v1781896843542!5m2!1ses!2sbo"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
+        <div class="pie-col">
+            <h3>Dragon Ice</h3>
+            <ul>
+                <li><a href="../paginaprincipal/01.inicio.php">Inicio</a></li>
+                <li><a href="../productos.php">Productos</a></li>
+                <li><a href="../quienessomos.php">Sobre nosotros</a></li>
+            </ul>
+        </div>
+
+        <div class="pie-col contacto">
+            <h3>Contacto</h3>
+            <p>Av. Heroínas y Lanza #452</p>
+            <p>62622743</p>
+            <p>frost@gmail.com</p>
+        </div>
+
+        <div class="pie-col">
+            <h3>Redes</h3>
+            <div class="pie-redes">
+                <a href="#" aria-label="Facebook">
+                    <svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z"/></svg>
+                </a>
+                <a href="#" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24"><path d="M12 2c2.7 0 3.1 0 4.1.1 1.1 0 1.8.2 2.5.5.7.3 1.2.6 1.8 1.2.6.6.9 1.1 1.2 1.8.3.7.5 1.4.5 2.5.1 1 .1 1.4.1 4.1s0 3.1-.1 4.1c0 1.1-.2 1.8-.5 2.5-.3.7-.6 1.2-1.2 1.8-.6.6-1.1.9-1.8 1.2-.7.3-1.4.5-2.5.5-1 .1-1.4.1-4.1.1s-3.1 0-4.1-.1c-1.1 0-1.8-.2-2.5-.5-.7-.3-1.2-.6-1.8-1.2-.6-.6-.9-1.1-1.2-1.8-.3-.7-.5-1.4-.5-2.5C2 15.1 2 14.7 2 12s0-3.1.1-4.1c0-1.1.2-1.8.5-2.5.3-.7.6-1.2 1.2-1.8.6-.6 1.1-.9 1.8-1.2.7-.3 1.4-.5 2.5-.5C8.9 2 9.3 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.2-8.4a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4z"/></svg>
+                </a>
+                <a href="#" aria-label="TikTok">
+                    <svg viewBox="0 0 24 24"><path d="M14 3c.4 2.2 1.9 3.7 4.1 4v3c-1.4 0-2.7-.4-4.1-1.3v6.2A5.9 5.9 0 1 1 8.3 9v3.2a2.7 2.7 0 1 0 2.7 2.7V3H14z"/></svg>
+                </a>
+            </div>
         </div>
 
     </div>
 
     <div class="pie-copy">
-        🍦 © 2026 Dragon Ice | Helados Artesanales
+        © 2026 Dragon Ice | Helados Artesanales — Todos los derechos reservados
     </div>
 
 </footer>
