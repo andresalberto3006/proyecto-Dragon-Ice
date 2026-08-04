@@ -34,7 +34,7 @@ if ($resultado->num_rows > 0) {
     if ($fila['rol'] == 'Administrador') {
         header("Location: paginaprincipal/02.admin.php");
     } else {
-        header("Location: paginaprincipal/04.vendedor.php");
+        header("Location: paginaprincipal/vendedor20.php");
     }
     exit();
 }

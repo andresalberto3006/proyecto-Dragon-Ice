@@ -107,7 +107,7 @@
                 <?php if ($_SESSION['rol']=='Administrador') { ?>
                     <a href="02.admin.php">Mi panel</a>
                 <?php } else { ?>
-                    <a href="04.vendedor.php">Mi panel</a>
+                    <a href="vendedor20.php">Mi panel</a>
                 <?php } ?>
             <?php } else { ?>
                 <a href="../iniciosesion.php">Iniciar Sesión</a>

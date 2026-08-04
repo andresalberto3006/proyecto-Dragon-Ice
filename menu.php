@@ -222,7 +222,7 @@ if (!isset($rutaMenu)) {
                         <svg viewBox="0 0 24 24"><path d="M20 21v-1a7 7 0 0 0-14 0v1"></path><circle cx="13" cy="7" r="4"></circle></svg>
                     </a>
                 <?php } else { ?>
-                    <a href="<?php echo $rutaMenu; ?>paginaprincipal/04.vendedor.php" class="icono-btn" aria-label="Mi panel">
+                    <a href="<?php echo $rutaMenu; ?>paginaprincipal/vendedor20.php" class="icono-btn" aria-label="Mi panel">
                         <svg viewBox="0 0 24 24"><path d="M20 21v-1a7 7 0 0 0-14 0v1"></path><circle cx="13" cy="7" r="4"></circle></svg>
                     </a>
                 <?php } ?>
