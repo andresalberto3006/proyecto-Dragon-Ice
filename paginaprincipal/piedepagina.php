@@ -139,7 +139,7 @@
     text-align:center;
     padding:18px;
     font-size:13px;
-    color:var(--gris-texto);
+    color:var(black);
 }
 
 @media(max-width:900px){
