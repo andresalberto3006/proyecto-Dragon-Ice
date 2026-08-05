@@ -64,7 +64,7 @@ $rutaMenu = "../";
     .tarjetas{
         display:grid;
         grid-template-columns:1fr 1fr;
-        gap:22px;
+        gap:30px;
     }
 
     .tarjeta{
@@ -72,6 +72,9 @@ $rutaMenu = "../";
         border-radius:10px;
         overflow:hidden;
         box-shadow:0 4px 14px rgba(0,0,0,0.08);
+        min-height:325px;
+        display:flex;
+        flex-direction:column;
     }
 
     /* Antes las 2 primeras tarjetas tenían la franja negra (#111a2e) y las
@@ -83,20 +86,24 @@ $rutaMenu = "../";
     }
 
     .tarjeta .cuerpo{
-        padding:26px 28px;
+        padding:42px 38px;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        flex:1;
     }
 
     .tarjeta h2{
         color:#173a8a;
-        font-size:20px;
-        margin-bottom:12px;
+        font-size:24px;
+        margin-bottom:16px;
     }
 
     .tarjeta p{
         color:#555;
-        font-size:14.5px;
-        line-height:1.6;
-        margin-bottom:20px;
+        font-size:16px;
+        line-height:1.7;
+        margin-bottom:26px;
     }
 
     .boton{
@@ -104,10 +111,11 @@ $rutaMenu = "../";
         background:#29a8e0;
         color:#0b1f33;
         font-weight:700;
-        font-size:14.5px;
-        padding:11px 22px;
+        font-size:15.5px;
+        padding:13px 26px;
         border-radius:8px;
         transition:.2s;
+        width:fit-content;
     }
 
     .boton:hover{
@@ -116,6 +124,7 @@ $rutaMenu = "../";
 
     @media (max-width:760px){
         .tarjetas{ grid-template-columns:1fr; }
+        .tarjeta{ min-height:auto; }
     }
 
 </style>
@@ -140,7 +149,7 @@ $rutaMenu = "../";
             <div class="franja"></div>
             <div class="cuerpo">
                 <h2>Productos</h2>
-                <p>Registra nuevos accesorios tecnológicos, edita información, controla stock, agrega imágenes y organiza productos por categoría.</p>
+                <p>Registra nuevos productos , edita información, controla stock, agrega imágenes y organiza productos por categoría.</p>
                 <a href="../producto/read.all.producto.php" class="boton">Gestionar Productos</a>
             </div>
         </article>
