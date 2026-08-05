@@ -1,5 +1,5 @@
 <?php
-session_start();if(!isset($_SESSION['rol'])){header("Location: iniciosesion.php");exit();}if($_SESSION['rol']!='Administrador'){header("Location: paginaprincipal/04.vendedor.php");exit();}include("conexion.php");$id=isset($_GET['id'])?$_GET['id']:0;$r=$conexion->query("SELECT * FROM ventas WHERE id='$id'");if($r->num_rows==0){header("Location: ventas.php");exit();}$v=$r->fetch_assoc();?>
+session_start();if(!isset($_SESSION['rol'])){header("Location: ../iniciosesion.php");exit();}if($_SESSION['rol']!='Administrador'){header("Location: ../paginaprincipal/vendedor20.php");exit();}include("../conexion.php");$id=isset($_GET['id'])?$_GET['id']:0;$r=$conexion->query("SELECT * FROM ventas WHERE id='$id'");if($r->num_rows==0){header("Location: ventas.php");exit();}$v=$r->fetch_assoc();?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -117,4 +117,20 @@ input.valid{
 
 </style>
 </head>
-<body><div class="formulario"><h2>✏️ Actualizar Venta</h2><p class="subtitulo">Modifique los datos permitidos</p><form action="actualizarVenta.php" method="POST"><input type="hidden" name="id" value="<?php echo $v['id'];?>"><label>Cliente</label><input type="text" name="cliente" value="<?php echo $v['cliente'];?>"><label>Fecha</label><input type="date" name="fecha" value="<?php echo $v['fecha'];?>"><label>Método de pago</label><input type="text" name="metodo_pago" value="<?php echo $v['metodo_pago'];?>"><button type="submit" class="boton">Guardar Cambios</button></form></div></body></html>
+<body>
+    <div class="formulario">
+        <h2>✏️ Actualizar Venta</h2>
+        <p class="subtitulo">Modifique los datos permitidos</p>
+        <form action="actualizarVenta.php" method="POST">
+            <input type="hidden" name="id" value="<?php echo $v['id'];?>">
+            <label>Cliente</label>
+            <input type="text" name="cliente" value="<?php echo $v['cliente'];?>">
+            <label>Fecha</label>
+            <input type="date" name="fecha" value="<?php echo $v['fecha'];?>">
+            <label>Método de pago</label>
+            <input type="text" name="metodo_pago" value="<?php echo $v['metodo_pago'];?>">
+            <button type="submit" class="boton">Guardar Cambios</button>
+        </form>
+    </div>
+</body>
+</html>

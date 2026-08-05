@@ -1,5 +1,5 @@
 <?php
-session_start();if(!isset($_SESSION['rol'])){header("Location: iniciosesion.php");exit();}include("conexion.php");if($_SESSION['rol']=='Administrador'){$resultado=$conexion->query("SELECT * FROM ventas ORDER BY id DESC");}else{$ci=$_SESSION['ci'];$resultado=$conexion->query("SELECT * FROM ventas WHERE vendedor_ci='$ci' ORDER BY id DESC");}?>
+session_start();if(!isset($_SESSION['rol'])){header("Location: ../iniciosesion.php");exit();}include("../conexion.php");if($_SESSION['rol']=='Administrador'){$resultado=$conexion->query("SELECT * FROM ventas ORDER BY id DESC");}else{$ci=$_SESSION['ci'];$resultado=$conexion->query("SELECT * FROM ventas WHERE vendedor_ci='$ci' ORDER BY id DESC");}?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -115,4 +115,49 @@ tr:hover{
 
 </style>
 </head>
-<body><div class="contenedor"><h1>🍦 Lista de Ventas</h1><table><tr><th>ID</th><th>Pedido</th><th>Cliente</th><th>Vendedor</th><th>Fecha</th><th>Total</th><th>Pago</th><th>Acciones</th></tr><?php if($resultado->num_rows>0){while($fila=$resultado->fetch_assoc()){?><tr><td><?php echo $fila['id'];?></td><td><?php echo $fila['pedidos_id'];?></td><td><?php echo $fila['cliente'];?></td><td><?php echo $fila['nombrevendedor'];?></td><td><?php echo $fila['fecha'];?></td><td>Bs. <?php echo $fila['total'];?></td><td><?php echo $fila['metodo_pago'];?></td><td><div class="acciones"><a class="boton mostrar" href="detallePedido.php?id=<?php echo $fila['pedidos_id'];?>">Detalle</a><?php if($_SESSION['rol']=='Administrador'){?><a class="boton editar" href="editarVenta.php?id=<?php echo $fila['id'];?>">Editar</a><a class="boton eliminar" href="eliminarVenta.php?id=<?php echo $fila['id'];?>">Eliminar</a><?php }?></div></td></tr><?php }}else{?><tr><td colspan="8">No hay ventas registradas.</td></tr><?php }?></table><?php if($_SESSION['rol']=='Administrador'){?><a href="paginaprincipal/02.admin.php" class="volver">Volver al panel</a><?php }else{?><a href="paginaprincipal/04.vendedor.php" class="volver">Volver al panel</a><?php }?></div></body></html>
+<body>
+    <div class="contenedor">
+        <h1>🍦 Lista de Ventas</h1>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Pedido</th>
+                <th>Cliente</th>
+                <th>Vendedor</th>
+                <th>Fecha</th>
+                <th>Total</th>
+                <th>Pago</th>
+                <th>Acciones</th>
+            </tr>
+            <?php if($resultado->num_rows>0){while($fila=$resultado->fetch_assoc()){?>
+            <tr>
+                <td><?php echo $fila['id'];?></td>
+                <td><?php echo $fila['pedidos_id'];?></td>
+                <td><?php echo $fila['cliente'];?></td>
+                <td><?php echo $fila['nombrevendedor'];?></td>
+                <td><?php echo $fila['fecha'];?></td>
+                <td>Bs. <?php echo $fila['total'];?></td>
+                <td><?php echo $fila['metodo_pago'];?></td>
+                <td>
+                    <div class="acciones">
+                        <a class="boton mostrar" href="../detallePedido.php?id=<?php echo $fila['pedidos_id'];?>">Detalle</a>
+                        <?php if($_SESSION['rol']=='Administrador'){?>
+                            <a class="boton editar" href="editarVenta.php?id=<?php echo $fila['id'];?>">Editar</a>
+                            <a class="boton eliminar" href="eliminarVenta.php?id=<?php echo $fila['id'];?>">Eliminar</a>
+                        <?php }?>
+                    </div>
+                </td>
+            </tr>
+            <?php }}else{?>
+            <tr>
+                <td colspan="8">No hay ventas registradas.</td>
+            </tr>
+            <?php }?>
+        </table>
+        <?php if($_SESSION['rol']=='Administrador'){?>
+            <a href="../paginaprincipal/02.admin.php" class="volver">Volver al panel</a>
+        <?php }else{?>
+            <a href="../paginaprincipal/vendedor20.php" class="volver">Volver al panel</a>
+        <?php }?>
+    </div>
+</body>
