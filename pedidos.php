@@ -117,4 +117,65 @@ tr:hover{
 
 </style>
 </head>
-<body><div class="contenedor"><h1>🍦 Lista de Pedidos</h1><table><tr><th>ID</th><th>Cliente</th><th>Fecha</th><th>Estado</th><th>Vendedor</th><th>Total</th><th>Acciones</th></tr><?php if($resultado->num_rows>0){while($fila=$resultado->fetch_assoc()){?><tr><td><?php echo $fila['id'];?></td><td><?php echo $fila['nombre'];?></td><td><?php echo $fila['fecha'];?></td><td><?php echo $fila['estado'];?></td><td><?php echo $fila['nombrevendedor'];?></td><td>Bs. <?php echo $fila['total'];?></td><td><div class="acciones"><a class="boton mostrar" href="detallePedido.php?id=<?php echo $fila['id'];?>">Detalle</a><?php if($_SESSION['rol']=='Vendedor'&&$fila['estado']=='Pendiente'){?><a class="boton editar" href="miCarrito.php?idPedido=<?php echo $fila['id'];?>">Carrito</a><a class="boton editar" href="cambiarEstadoPedido.php?id=<?php echo $fila['id'];?>&estado=En proceso">Aceptar</a><a class="boton eliminar" href="cambiarEstadoPedido.php?id=<?php echo $fila['id'];?>&estado=Rechazado">Rechazar</a><?php }?><?php if($_SESSION['rol']=='Vendedor'&&$fila['estado']=='En proceso'){?><a class="boton editar" href="venta_formulario.php?id=<?php echo $fila['id'];?>">Registrar venta</a><?php }?></div></td></tr><?php }}else{?><tr><td colspan="7">No hay pedidos registrados.</td></tr><?php }?></table><?php if($_SESSION['rol']=='Vendedor'){?><a href="formpedido.php" class="volver">➕ Nuevo Pedido</a><a href="paginaprincipal/04.vendedor.php" class="volver">Volver al panel</a><?php }else{?><a href="paginaprincipal/02.admin.php" class="volver">Volver al panel</a><?php }?></div></body></html>
+<body>
+    <div class="contenedor">
+        <h1>🍦 Lista de Pedidos</h1>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Vendedor</th>
+                <th>Total</th>
+                <th>Acciones</th>
+            </tr>
+            <?php if($resultado->num_rows>0){while($fila=$resultado->fetch_assoc()){?>
+            <tr>
+                <td>
+                    <?php echo $fila['id'];?>
+                </td>
+                <td>
+                    <?php echo $fila['nombre'];?>
+                </td>
+                <td>
+                    <?php echo $fila['fecha'];?>
+                </td>
+                <td>
+                    <?php echo $fila['estado'];?>
+                </td>
+                <td>
+                    <?php echo $fila['nombrevendedor'];?>
+                </td>
+                <td>
+                    Bs. <?php echo $fila['total'];?>
+                </td>
+                <td>
+                    <div class="acciones">
+                        <a class="boton mostrar" href="detallePedido.php?id=<?php echo $fila['id'];?>">Detalle</a>
+                        <?php if($_SESSION['rol']=='Vendedor'&&$fila['estado']=='Pendiente'){?>
+                            <a class="boton editar" href="miCarrito.php?idPedido=<?php echo $fila['id'];?>">Carrito</a>
+                            <a class="boton editar" href="cambiarEstadoPedido.php?id=<?php echo $fila['id'];?>&estado=En proceso">Aceptar</a>
+                            <a class="boton eliminar" href="cambiarEstadoPedido.php?id=<?php echo $fila['id'];?>&estado=Rechazado">Rechazar</a>
+                        <?php }?>
+                        <?php if($_SESSION['rol']=='Vendedor'&&$fila['estado']=='En proceso'){?>
+                            <a class="boton editar" href="venta_formulario.php?id=<?php echo $fila['id'];?>">Registrar venta</a>
+                        <?php }?>
+                    </div>
+                </td>
+            </tr>
+            <?php }}else{?>
+            <tr>
+                <td colspan="7">No hay pedidos registrados.</td>
+            </tr>
+            <?php }?>
+        </table>
+        <?php if($_SESSION['rol']=='Vendedor'){?>
+            <a href="formpedido.php" class="volver">➕ Nuevo Pedido</a>
+            <a href="paginaprincipal/vendedor20.php" class="volver">Volver al panel</a>
+        <?php }else{?>
+            <a href="paginaprincipal/02.admin.php" class="volver">Volver al panel</a>
+        <?php }?>
+    </div>
+</body>
+</html>
