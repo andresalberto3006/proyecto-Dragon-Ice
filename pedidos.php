@@ -159,7 +159,7 @@ tr:hover{
                             <a class="boton eliminar" href="cambiarEstadoPedido.php?id=<?php echo $fila['id'];?>&estado=Rechazado">Rechazar</a>
                         <?php }?>
                         <?php if($_SESSION['rol']=='Vendedor'&&$fila['estado']=='En proceso'){?>
-                            <a class="boton editar" href="venta_formulario.php?id=<?php echo $fila['id'];?>">Registrar venta</a>
+                            <a class="boton editar" href="ventas/venta_formulario.php?id=<?php echo $fila['id'];?>">Registrar venta</a>
                         <?php }?>
                     </div>
                 </td>
