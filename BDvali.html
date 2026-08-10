@@ -1,11 +1,6 @@
 <?php
 session_start();
-
-$conexion = mysqli_connect("localhost", "root", "", "dragonice");
-
-if (!$conexion) {
-    die("Error de conexión: " . mysqli_connect_error());
-}
+include("conexion.php");
 
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
     header("Location: iniciosesion.php");
@@ -15,52 +10,39 @@ if ($_SERVER["REQUEST_METHOD"] != "POST") {
 $usuario = $_POST['usuario'];
 $clave = $_POST['clave'];
 
-$sql = "SELECT * FROM usuariosesion
-        WHERE usuario='$usuario'
-        AND clave='$clave'
-        LIMIT 1";
+$sql = "SELECT * FROM usuario WHERE nombre='$usuario' AND celular='$clave' LIMIT 1";
+$resultado = $conexion->query($sql);
 
-$resultado = mysqli_query($conexion, $sql);
+if ($resultado->num_rows > 0) {
+    $fila = $resultado->fetch_assoc();
 
-if (!$resultado) {
-    die("Error en la consulta SQL: " . mysqli_error($conexion));
-}
-
-if (mysqli_num_rows($resultado) > 0) {
-
-    $fila = mysqli_fetch_assoc($resultado);
-
-    $_SESSION['id'] = $fila['id'];
-    $_SESSION['usuario'] = $fila['usuario'];
-    $_SESSION['clave'] = $fila['clave'];
-    $_SESSION['apellido'] = $fila['apellido'];
-    $_SESSION['rol'] = $fila['rol'];
-
-    if ($fila['rol'] == 1) {
-        header("Location: 03.usuario.php");
+    if ($fila['estado'] == 'Bloqueado') {
+        echo "<script>alert('Este usuario está bloqueado.'); window.location='iniciosesion.php';</script>";
         exit();
-    } elseif ($fila['rol'] == 2) {
-        header("Location: 02.admin.php");
-        exit();
-    } elseif ($fila['rol'] == 3) {
-        header("Location: 04.vendedor.php");
-        exit();
-    } else {
-        echo "Rol no válido";
     }
 
-} else {
-    echo "Usuario o número de celular incorrectos";
+    if ($fila['rol'] != 'Administrador' && $fila['rol'] != 'Vendedor') {
+        echo "<script>alert('El rol del usuario no es válido.'); window.location='iniciosesion.php';</script>";
+        exit();
+    }
+
+    $_SESSION['ci'] = $fila['ci'];
+    $_SESSION['usuario'] = $fila['nombre'];
+    $_SESSION['rol'] = $fila['rol'];
+    $_SESSION['estado'] = $fila['estado'];
+
+    if ($fila['rol'] == 'Administrador') {
+        header("Location: paginaprincipal/02.admin.php");
+    } else {
+        header("Location: paginaprincipal/vendedor20.php");
+    }
+    exit();
 }
-?> No newline at end of file
-<!DOCTYPE html>
-<html lang="es">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dragon Ice - Iniciar Sesión</title>
+echo "<script>alert('Nombre o número de celular incorrectos.'); window.location='iniciosesion.php';</script>";
+?>
 
+<<<<<<< HEAD:BDvali.html
     <style>
         * {
             margin: 0;
@@ -222,3 +204,5 @@ if (mysqli_num_rows($resultado) > 0) {
     </section>
 
 </body>
+=======
+>>>>>>> 053b0cab70aff7c93c78d8e7135974e3ceb3a8e7:BDvali.php
