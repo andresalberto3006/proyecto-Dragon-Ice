@@ -22,7 +22,7 @@ $resultado = $conexion->query("SELECT * FROM productos ORDER BY id DESC");
 
 body{
     font-family: Arial, Helvetica, sans-serif;
-    background-image:url("../imagenesproyecto/1 (4).png");
+    background-image:url("../imagenesproyecto/1 (21).png");
     background-size:cover;
     background-attachment:fixed;
     background-position:center;
