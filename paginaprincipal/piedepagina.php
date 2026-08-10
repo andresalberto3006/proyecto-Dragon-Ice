@@ -1,14 +1,8 @@
 <?php
+if (!isset($rutaMenu)) { $rutaMenu = "../"; }
 ?>
 
 <style>
-
-
-.footer{
-    background-color: yellow;
-
-}
-
 
 :root{
     --azul-oscuro:#0e2a4d;
@@ -19,15 +13,9 @@
 }
 
 .pie{
-    background: #0a2152;;
+    background:#0e2a4d;
     font-family:'Inter', Arial, sans-serif;
     padding-top:40px;
-}
-
-.pie-linea{
-    max-width:1200px;
-    margin:0 auto;
-    border-top:1px solid var(--gris-borde);
 }
 
 .pie-contenido{
@@ -39,7 +27,6 @@
     gap:30px;
 }
 
-/* Marca */
 .pie-marca{
     display:flex;
     align-items:center;
@@ -48,8 +35,8 @@
 
 .pie-marca img{
     border-radius:100px;
-    width:150px;
-    height:150px;
+    width:80px;
+    height:80px;
     object-fit:contain;
 }
 
@@ -57,7 +44,7 @@
     font-family:'Baloo 2', Arial, sans-serif;
     font-size:20px;
     font-weight:800;
-    color:var(--azul-oscuro);
+    color:white;
     margin-bottom:6px;
 }
 
@@ -68,11 +55,10 @@
     text-transform:uppercase;
 }
 
-/* Columnas de enlaces / contacto */
 .pie-col h3{
     font-size:15px;
     font-weight:700;
-    color:var(--gris-titulo);
+    color:white;
     margin-bottom:16px;
     text-align:center;
 }
@@ -90,14 +76,13 @@
     text-decoration:none;
     color:var(--gris-texto);
     font-size:14px;
-    transition:color .2s;
 }
 
 .pie-col a:hover{
     color:var(--celeste);
 }
 
-.pie-col.contacto p{
+.pie-contacto p{
     color:var(--gris-texto);
     font-size:14px;
     text-align:center;
@@ -105,7 +90,6 @@
     line-height:1.5;
 }
 
-/* Redes sociales */
 .pie-redes{
     display:flex;
     justify-content:center;
@@ -120,7 +104,6 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    transition:background .2s;
 }
 
 .pie-redes a:hover{
@@ -130,34 +113,28 @@
 .pie-redes svg{
     width:17px;
     height:17px;
-    fill:#ffffff;
+    fill:white;
 }
 
-/* Barra inferior */
 .pie-copy{
-    border-top:1px solid var(--gris-borde);
+    border-top:1px solid rgba(255,255,255,0.15);
     text-align:center;
     padding:18px;
     font-size:13px;
-    color:var(black);
+    color:var(--gris-texto);
 }
 
 @media(max-width:900px){
-
     .pie-contenido{
         grid-template-columns:1fr 1fr;
     }
-
     .pie-marca{
         grid-column:1 / -1;
-        justify-content:center;
-        text-align:left;
         margin-bottom:10px;
     }
 }
 
 @media(max-width:600px){
-
     .pie-contenido{
         grid-template-columns:1fr;
     }
@@ -166,12 +143,10 @@
 
 <footer class="pie">
 
-    <div class="pie-linea"></div>
-
     <div class="pie-contenido">
 
         <div class="pie-marca">
-            <img src="../imagenesproyecto/logo.png" alt="Logo Dragon Ice">
+            <img src="<?php echo $rutaMenu; ?>imagenesproyecto/logo.png" alt="Logo Dragon Ice">
             <div>
                 <h2>Dragon Ice</h2>
                 <p>Helados Artesanales</p>
@@ -181,13 +156,13 @@
         <div class="pie-col">
             <h3>Dragon Ice</h3>
             <ul>
-                <li><a href="../paginaprincipal/01.inicio.php">Inicio</a></li>
-                <li><a href="../productos.php">Productos</a></li>
-                <li><a href="../quienessomos.php">Sobre nosotros</a></li>
+                <li><a href="<?php echo $rutaMenu; ?>paginaprincipal/01.inicio.php">Inicio</a></li>
+                <li><a href="<?php echo $rutaMenu; ?>paginaprincipal/productos.php">Productos</a></li>
+                <li><a href="<?php echo $rutaMenu; ?>quienessomos.php">Sobre nosotros</a></li>
             </ul>
         </div>
 
-        <div class="pie-col contacto">
+       <div class="pie-col pie-contacto">
             <h3>Contacto</h3>
             <p>Av. Heroínas y Lanza #452</p>
             <p>62622743</p>

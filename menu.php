@@ -12,8 +12,9 @@ if (!isset($rutaMenu)) {
 
 <style>
 :root{
-    --noche-glaciar:#071426;
-    --azul-profundo:#0e2a4d;
+    --fondo-1:#0b1f22;
+    --fondo-2:#123338;
+    --fondo-3:#1b4a52;
     --celeste:#63d4f2;
     --menta:#7be0c4;
     --blanco:#ffffff;
@@ -29,13 +30,12 @@ if (!isset($rutaMenu)) {
 .dragonice-nav{
     font-family:'Inter', Arial, sans-serif;
     width:100%;
-    background:linear-gradient(120deg, var(--noche-glaciar) 0%, var(--azul-profundo) 100%);
+    background:#0e2a4d;
     position:sticky;
     top:0;
     z-index:1000;
     border-bottom:1px solid rgba(255,255,255,0.08);
 }
-
 .dragonice-nav .fila{
     display:flex;
     align-items:center;
@@ -56,7 +56,8 @@ if (!isset($rutaMenu)) {
 .dragonice-nav .logo img{
     width:32px;
     height:32px;
-    object-fit:contain;
+    border-radius:50%;
+    object-fit:cover;
 }
 
 .dragonice-nav .logo h2{
@@ -128,7 +129,7 @@ if (!isset($rutaMenu)) {
     top:-2px;
     right:-2px;
     background:var(--menta);
-    color:var(--noche-glaciar);
+    color:var(--fondo-1);
     font-size:10px;
     font-weight:700;
     min-width:16px;
@@ -143,7 +144,7 @@ if (!isset($rutaMenu)) {
 .dragonice-nav .sesion-texto{
     font-size:14px;
     font-weight:700;
-    color:var(--noche-glaciar);
+    color:var(--fondo-1);
     text-decoration:none;
     padding:9px 18px;
     border-radius:20px;
