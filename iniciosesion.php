@@ -155,7 +155,7 @@
             <p style="margin-top:15px"><a href="paginaprincipal/01.inicio.php" style="color:white">Volver al inicio</a></p>
         </div>
     </main>
-</section>
+
 
 
         <div class="overlay"></div>
@@ -208,5 +208,4 @@
     </script>
 <?php include 'paginaprincipal/piedepagina.php'; ?>
 </body>
-
 </html>
