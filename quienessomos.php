@@ -29,15 +29,20 @@ body{
     border-radius:30px;
     background:rgba(255,255,255,0.85);
     box-shadow:0 5px 20px rgba(0,0,0,0.15);
+      animation-name: myAnimation;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
 }
+
 .presentacion h1{
     font-size:80px;
     color:#2d4f7c;
     letter-spacing:8px;
     margin-bottom:25px;
     text-shadow:2px 2px 10px rgba(0, 0, 0, 0.2);
+   
 }
-
+ 
 .presentacion p{
     font-size:24px;
     color:#444;
@@ -59,7 +64,13 @@ body{
     border-radius:25px;
     box-shadow:0 5px 15px rgba(0,0,0,0.12);
     transition:0.3s;
+    
 }
+
+@keyframes myAnimation {
+    from {background-color:rgba(255, 255, 255, 0);}
+    to {background-color: red;}
+  }
 
 .tarjeta:hover{
     transform:translateY(-5px);
