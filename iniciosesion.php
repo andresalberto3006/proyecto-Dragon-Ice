@@ -156,6 +156,33 @@
         </div>
     </main>
 
+
+
+        <div class="overlay"></div>
+
+        <main>
+
+            <div class="login-box">
+
+                <h1>DRAGON ICE</h1>
+                <p>Iniciar Sesión</p>
+
+                <form action="BDvali.php" method="post" id="formulario">
+
+                    <label for="usuario">Usuario</label>
+                    <input type="text" name="usuario" placeholder="Ingrese su nombre" required>
+
+                    <label for="clave">Contraseña</label>
+                    <input type="text" name="clave" placeholder="Ingrese su numero de celular" required>
+
+                    <input type="submit" value="Ingresar">
+                </form>
+
+            </div>
+
+        </main>
+
+    </section>
     <script>
         $(document).ready(function(){
         $("#formulario").validate({
@@ -179,7 +206,6 @@
         })
 
     </script>
-
+<?php include 'paginaprincipal/piedepagina.php'; ?>
 </body>
-
 </html>
