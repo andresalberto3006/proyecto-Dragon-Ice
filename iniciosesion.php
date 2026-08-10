@@ -155,34 +155,7 @@
             <p style="margin-top:15px"><a href="paginaprincipal/01.inicio.php" style="color:white">Volver al inicio</a></p>
         </div>
     </main>
-</section>
 
-<<<<<<< HEAD:iniciosesion.html
-        <div class="overlay"></div>
-
-        <main>
-
-            <div class="login-box">
-
-                <h1>DRAGON ICE</h1>
-                <p>Iniciar Sesión</p>
-
-                <form action="BDvali.php" method="post" id="formulario">
-
-                    <label for="usuario">Usuario</label>
-                    <input type="text" name="usuario" placeholder="Ingrese su nombre" required>
-
-                    <label for="clave">Contraseña</label>
-                    <input type="text" name="clave" placeholder="Ingrese su numero de celular" required>
-
-                    <input type="submit" value="Ingresar">
-                </form>
-
-            </div>
-
-        </main>
-
-    </section>
     <script>
         $(document).ready(function(){
         $("#formulario").validate({
@@ -206,9 +179,6 @@
         })
 
     </script>
-=======
-<?php include 'paginaprincipal/piedepagina.php'; ?>
->>>>>>> 053b0cab70aff7c93c78d8e7135974e3ceb3a8e7:iniciosesion.php
 
 </body>
 
