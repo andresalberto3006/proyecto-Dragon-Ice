@@ -11,7 +11,7 @@ if ($_SESSION['rol'] != 'Administrador') {
     exit();
 }
 
-include("conexion.php");
+include("../conexion.php");
 
 $id = isset($_GET['id']) ? $_GET['id'] : 0;
 $resultadoVenta = $conexion->query("SELECT pedidos_id FROM ventas WHERE id='$id'");

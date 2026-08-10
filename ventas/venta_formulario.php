@@ -125,4 +125,25 @@ transform:scale(1.02);
 
 </style>
 </head>
-<body><?php $rutaMenu="";include("menu.php");?><div class="contenedor"><div class="tarjeta"><h1>🍦 Registrar Venta</h1><form action="registrarVenta.php" method="POST"><input type="hidden" name="idPedido" value="<?php echo $p['id'];?>"><label>Cliente</label><input type="text" value="<?php echo $p['nombre'];?>" readonly><label>Total</label><input type="text" value="Bs. <?php echo $p['total'];?>" readonly><label>Método de pago</label><input type="text" name="metodo_pago" placeholder="Efectivo o transferencia" required><button type="submit">Guardar venta</button></form></div></div></body></html>
+<body>
+    <?php $rutaMenu="";include("../menu.php");?>
+    <div class="contenedor">
+        <div class="tarjeta">
+            <h1>🍦 Registrar Venta</h1>
+            <form action="registrarVenta.php" method="POST">
+                <input type="hidden" name="idPedido" value="<?php 
+                echo $p['id'];?>">
+                <label>Cliente</label>
+                <input type="text" value="<?php 
+                echo $p['nombre'];?>" readonly>
+                <label>Total</label>
+                <input type="text" value="Bs. <?php 
+                echo $p['total'];?>" readonly>
+                <label>Método de pago</label>
+                <input type="text" name="metodo_pago" placeholder="Efectivo o transferencia" required>
+                <button type="submit">Guardar venta</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
