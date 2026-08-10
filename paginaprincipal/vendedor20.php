@@ -168,7 +168,7 @@ $rutaMenu = "../";
             <div class="cuerpo">
                 <h2>Mis ventas</h2>
                 <p>Consulta el historial de ventas que registraste, revisa comprobantes y accede al detalle de cada venta.</p>
-                <a href="../ventas.php" class="boton">Mis Ventas</a>
+                <a href="../ventas/ventas.php" class="boton">Mis Ventas</a>
             </div>
         </article>
 
