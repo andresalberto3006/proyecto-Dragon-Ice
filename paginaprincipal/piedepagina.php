@@ -19,7 +19,7 @@
 }
 
 .pie{
-    background: #80a7fd;;
+    background: #0a2152;;
     font-family:'Inter', Arial, sans-serif;
     padding-top:40px;
 }
