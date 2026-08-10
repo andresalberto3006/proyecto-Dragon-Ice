@@ -1,5 +1,5 @@
 <?php
-session_start();if(!isset($_SESSION['rol'])||$_SESSION['rol']!='Vendedor'){header("Location: iniciosesion.php");exit();}include("conexion.php");$id=isset($_GET['id'])?$_GET['id']:0;$ci=$_SESSION['ci'];$r=$conexion->query("SELECT p.*,IFNULL(SUM(c.costototal),0) AS total FROM pedidos p LEFT JOIN carrito c ON p.id=c.pedidos_id WHERE p.id='$id' AND p.vendedor_ci='$ci' AND p.estado='En proceso' GROUP BY p.id,p.nombre,p.fecha,p.estado,p.vendedor_ci,p.nombrevendedor,p.metodo_pago");if($r->num_rows==0){header("Location: pedidos.php");exit();}$p=$r->fetch_assoc();?>
+session_start();if(!isset($_SESSION['rol'])||$_SESSION['rol']!='Vendedor'){header("Location: iniciosesion.php");exit();}include("../conexion.php");$id=isset($_GET['id'])?$_GET['id']:0;$ci=$_SESSION['ci'];$r=$conexion->query("SELECT p.*,IFNULL(SUM(c.costototal),0) AS total FROM pedidos p LEFT JOIN carrito c ON p.id=c.pedidos_id WHERE p.id='$id' AND p.vendedor_ci='$ci' AND p.estado='En proceso' GROUP BY p.id,p.nombre,p.fecha,p.estado,p.vendedor_ci,p.nombrevendedor,p.metodo_pago");if($r->num_rows==0){header("Location: pedidos.php");exit();}$p=$r->fetch_assoc();?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
