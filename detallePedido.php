@@ -1,5 +1,8 @@
 <?php
-session_start();if(!isset($_SESSION['rol'])){header("Location: iniciosesion.php");exit();}include("conexion.php");$id=isset($_GET['id'])?$_GET['id']:0;if($_SESSION['rol']=='Administrador'){$pedido=$conexion->query("SELECT * FROM pedidos WHERE id='$id'");}else{$ci=$_SESSION['ci'];$pedido=$conexion->query("SELECT * FROM pedidos WHERE id='$id' AND vendedor_ci='$ci'");}if($pedido->num_rows==0){header("Location: pedidos.php");exit();}$p=$pedido->fetch_assoc();$detalle=$conexion->query("SELECT c.*,pr.nombre,pr.precio FROM carrito c INNER JOIN productos pr ON c.productos_id=pr.id WHERE c.pedidos_id='$id'");?>
+session_start();
+if(!isset($_SESSION['rol'])){header("Location: iniciosesion.php");
+exit();
+}include("conexion.php");$id=isset($_GET['id'])?$_GET['id']:0;if($_SESSION['rol']=='Administrador'){$pedido=$conexion->query("SELECT * FROM pedidos WHERE id='$id'");}else{$ci=$_SESSION['ci'];$pedido=$conexion->query("SELECT * FROM pedidos WHERE id='$id' AND vendedor_ci='$ci'");}if($pedido->num_rows==0){header("Location: pedidos.php");exit();}$p=$pedido->fetch_assoc();$detalle=$conexion->query("SELECT c.*,pr.nombre,pr.precio FROM carrito c INNER JOIN productos pr ON c.productos_id=pr.id WHERE c.pedidos_id='$id'");?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -115,4 +118,49 @@ tr:hover{
 
 </style>
 </head>
-<body><div class="contenedor"><h1>🍦 Detalle del Pedido #<?php echo $p['id'];?></h1><table><tr><th>Cliente</th><th>Fecha</th><th>Estado</th><th>Vendedor</th><th>Método de pago</th></tr><tr><td><?php echo $p['nombre'];?></td><td><?php echo $p['fecha'];?></td><td><?php echo $p['estado'];?></td><td><?php echo $p['nombrevendedor'];?></td><td><?php echo $p['metodo_pago'];?></td></tr></table><br><table><tr><th>Producto</th><th>Precio</th><th>Cantidad</th><th>Subtotal</th></tr><?php $total=0;while($f=$detalle->fetch_assoc()){$total=$total+$f['costototal'];?><tr><td><?php echo $f['nombre'];?></td><td>Bs. <?php echo $f['precio'];?></td><td><?php echo $f['cantidad'];?></td><td>Bs. <?php echo $f['costototal'];?></td></tr><?php }?><tr><th colspan="3">Total</th><th>Bs. <?php echo $total;?></th></tr></table><a href="pedidos.php" class="volver">Volver a pedidos</a></div></body></html>
+<body>
+    <div class="contenedor">
+        <h1>🍦 Detalle del Pedido #<?php
+         echo $p['id'];?>
+    </h1>
+    <table>
+        <tr>
+            <th>Cliente</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+            <th>Vendedor</th>
+            <th>Método de pago</th>
+        </tr>
+        <tr>
+            <td><?php echo $p['nombre'];?></td>
+            <td><?php echo $p['fecha'];?></td>
+            <td><?php echo $p['estado'];?></td>
+            <td><?php echo $p['nombrevendedor'];?></td>
+            <td><?php echo $p['metodo_pago'];?></td>
+        </tr>
+    </table>
+    <br>
+    <table>
+        <tr>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
+        </tr>
+        <?php $total=0; while($f=$detalle->fetch_assoc()) { $total=$total+$f['costototal']; ?>
+        <tr>
+            <td><?php echo $f['nombre'];?></td>
+            <td>Bs. <?php echo $f['precio'];?></td>
+            <td><?php echo $f['cantidad'];?></td>
+            <td>Bs. <?php echo $f['costototal'];?></td>
+        </tr>
+        <?php } ?>
+        <tr>
+            <th colspan="3">Total</th>
+            <th>Bs. <?php echo $total;?></th>
+        </tr>
+    </table>
+    <a href="pedidos.php" class="volver">Volver a pedidos</a>
+</div>
+</body>
+</html>
