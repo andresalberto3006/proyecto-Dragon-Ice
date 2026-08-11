@@ -1,9 +1,9 @@
 <?php
 session_start();
-// Usamos isset() para evitar el warning "Undefined array key 'nombre'"
+
 $nombreUsuario = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : 'Administrador';
 
-// $rutaMenu le indica a menu.php cómo llegar a la raíz del proyecto desde esta carpeta (admin/)
+
 $rutaMenu = "../";
 ?>
 <!DOCTYPE html>
@@ -28,9 +28,16 @@ $rutaMenu = "../";
 
     a{ text-decoration:none; color:inherit; }
 
-  
 
-    .bienvenida{
+    .contenido{
+        max-width:1200px;
+        margin:0 auto;
+        padding:30px 24px;
+    }
+
+   
+
+    .bienvenido{
         background:#ffffff;
         border-left:6px solid #29a8e0;
         border-radius:10px;
@@ -39,19 +46,19 @@ $rutaMenu = "../";
         margin-bottom:24px;
     }
 
-    .bienvenida h1{
+    .bienvenido h1{
         color:#111a2e;
         font-size:28px;
         margin-bottom:12px;
     }
 
-    .bienvenida p{
+    .bienvenido p{
         color:#555;
         font-size:15px;
         line-height:1.6;
     }
 
-
+    
 
     .tarjetas{
         display:grid;
@@ -76,7 +83,7 @@ $rutaMenu = "../";
     }
 
     .tarjeta .cuerpo{
-        padding:26px 28px;
+        padding:42px 38px;
         display:flex;
         flex-direction:column;
         justify-content:center;
@@ -90,14 +97,14 @@ $rutaMenu = "../";
     }
 
     .tarjeta p{
-             color:#555;
+        color:#555;
         font-size:16px;
         line-height:1.7;
         margin-bottom:26px;
     }
 
     .boton{
-      display:inline-block;
+        display:inline-block;
         background:#29a8e0;
         color:#0b1f33;
         font-weight:700;
@@ -113,7 +120,7 @@ $rutaMenu = "../";
     }
 
     @media (max-width:760px){
-       .tarjetas{ grid-template-columns:1fr; }
+        .tarjetas{ grid-template-columns:1fr; }
         .tarjeta{ min-height:auto; }
     }
 
@@ -125,7 +132,7 @@ $rutaMenu = "../";
 
 <main class="contenido">
 
-    <section class="bienvenida">
+    <section class="bienvenido">
         <h1>Panel de administración</h1>
         <p>
             Bienvenido, <?php echo htmlspecialchars($nombreUsuario); ?>.
