@@ -14,7 +14,7 @@ exit();
         grid-area: uno;
         .header{
            
-        background-color: rgba(12, 121, 172, 0.548);
+        background-color: rgba(23, 34, 133, 0.67);
          padding-left: 20px;
          padding-right: 50px;
         }
