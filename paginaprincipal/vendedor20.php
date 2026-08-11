@@ -1,9 +1,9 @@
 <?php
 session_start();
-// Usamos isset() para evitar el warning "Undefined array key 'nombre'"
+
 $nombreUsuario = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : 'Vendedor';
 
-// $rutaMenu le indica a menu.php cómo llegar a la raíz del proyecto desde esta carpeta (admin/)
+
 $rutaMenu = "../";
 ?>
 <!DOCTYPE html>
@@ -28,7 +28,6 @@ $rutaMenu = "../";
 
     a{ text-decoration:none; color:inherit; }
 
-    /* ---------- CONTENIDO ---------- */
 
     .contenido{
         max-width:1200px;
@@ -36,7 +35,7 @@ $rutaMenu = "../";
         padding:30px 24px;
     }
 
-    /* Tarjeta de bienvenida */
+   
 
     .bienvenido{
         background:#ffffff;
@@ -59,7 +58,7 @@ $rutaMenu = "../";
         line-height:1.6;
     }
 
-    /* Cuadrícula de tarjetas */
+    
 
     .tarjetas{
         display:grid;
@@ -77,9 +76,7 @@ $rutaMenu = "../";
         flex-direction:column;
     }
 
-    /* Antes las 2 primeras tarjetas tenían la franja negra (#111a2e) y las
-       otras 2 celeste (.clara). Ahora todas usan el mismo color celeste
-       para que las 4 se vean igual. */
+    
     .tarjeta .franja{
         height:6px;
         background:#29a8e0;
