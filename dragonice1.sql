@@ -64,10 +64,23 @@ INSERT INTO usuario VALUES
 (10000000,'Administrador','Dragon Ice','70000000','Administrador','Activo'),
 (20000000,'Vendedor','Dragon Ice','71111111','Vendedor','Activo');
 
-INSERT INTO productos VALUES
-(1,'Café','Helado cremoso con intenso sabor a café',12,7,20,'imagenesproyecto/Helado de cafe.avif'),
-(2,'Frutilla','Refrescante y dulce sabor natural',10,6,20,'imagenesproyecto/helado2.jpg'),
-(3,'Durazno','Textura suave y sabor tropical',10,6,20,'imagenesproyecto/helado3.jpg'),
-(4,'Canela','Un toque cálido y delicioso',11,6,20,'imagenesproyecto/helado4.jpg'),
-(5,'Menta','Frescura intensa y cremosa',11,6,20,'imagenesproyecto/helado5.jpg'),
-(6,'Banana Split','El clásico favorito de todos',18,10,20,'imagenesproyecto/helado.jpg');
+INSERT INTO productos (id, nombre, descripcion, precio, costo, stock, imagen) VALUES
+(1,  'Banana Split',             'Plátano, helado y toppings clásicos',        18, 10, 20, 'imagenesproyecto/banana.jpg'),
+(2,  'Paleta Blue Razz',         'Paleta helada de frambuesa azul',             8,  4, 25, 'imagenesproyecto/blue.jpg'),
+(3,  'Bolo Tres Leches',         'Bolo helado con tres leches',                15,  9, 15, 'imagenesproyecto/bolos.jpg'),
+(4,  'Boba Helada',              'Helado con perlas de boba',                  14,  8, 20, 'imagenesproyecto/boobas.jpg'),
+(5,  'Brownie Supreme',          'Brownie con helado y chocolate caliente',    16,  9, 15, 'imagenesproyecto/brownie.jpg'),
+(6,  'Combo Dragon',             'Combo especial de la casa',                  20, 12, 10, 'imagenesproyecto/combo.jpg'),
+(7,  'Cono Waffle',              'Helado en cono de waffle artesanal',         10,  5, 25, 'imagenesproyecto/conos.jpg'),
+(8,  'Ensalada de Frutas Helada','Frutas frescas con helado',                  12,  6, 20, 'imagenesproyecto/ensalada.jpg'),
+(9,  'Kiwi Berry',               'Helado sabor kiwi y berries',                11,  6, 20, 'imagenesproyecto/kiyrbi.jpg'),
+(10, 'Mochi Helado',             'Mochi relleno de helado',                    13,  7, 20, 'imagenesproyecto/mochi.jpg'),
+(11, 'Paleta Frutal',            'Paleta de frutas naturales',                  7,  3, 25, 'imagenesproyecto/paletas.jpg'),
+(12, 'Paleta Pez',               'Paleta helada con forma de pez',              9,  4, 20, 'imagenesproyecto/pez.jpg'),
+(13, 'Helado Picante',           'Helado con un toque picante',                12,  6, 15, 'imagenesproyecto/picante.jpg'),
+(14, 'Raspado de Frutas',        'Raspado de hielo con jarabe de frutas',       9,  4, 20, 'imagenesproyecto/raspados.jpg'),
+(15, 'Taco Relleno',             'Taco de helado relleno',                     14,  8, 15, 'imagenesproyecto/relleno.jpg'),
+(16, 'Rollo de Helado',          'Helado enrollado estilo tailandés',          15,  9, 15, 'imagenesproyecto/rollo.jpg'),
+(17, 'Rollo de Canela',          'Rollo de helado sabor canela',               15,  9, 15, 'imagenesproyecto/rollocanela.jpg'),
+(18, 'Helado Snoopy',            'Helado decorado estilo Snoopy',              16,  9, 10, 'imagenesproyecto/snoopye.jpg'),
+(19, 'Taco Helado Clásico',      'Taco de helado tradicional',                 12,  6, 20, 'imagenesproyecto/tacos.jpg');
