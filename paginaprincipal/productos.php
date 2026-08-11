@@ -29,30 +29,27 @@ $imagenesSabores = [
 
 $imagenGenerica = '../imagenesproyecto/logo.png';
 
-// NOTA: la tabla "productos" todavía no tiene una columna "categoria".
-// Mientras tanto, asignamos una categoría a cada sabor aquí mismo (por ID,
-// para que no falle por tildes o mayúsculas) para poder mostrar el filtro.
-// Lo ideal a futuro es agregar la columna en la BD.
+
 $categoriasSabores = [
-    1  => 'especiales', // Banana Split
-    2  => 'granizado',    // Paleta Blue Razz
-    3  => 'bolos',      // Bolo Tres Leches
-    4  => 'especiales', // Boba Helada
-    5  => 'especiales',      // Brownie Supreme
-    6  => 'especiales', // Combo Dragon
-    7  => 'granizado',      // Cono Waffle
-    8  => 'especiales', // Ensalada de Frutas Helada
-    9  => 'granizado',    // Kiwi Berry
-    10 => 'especiales', // Mochi Helado
-    11 => 'paletas',    // Paleta Frutal
-    12 => 'especiales',    // Paleta Pez
-    13 => 'paletas', // Helado Picante
-    14 => 'granizado',  // Raspado de Frutas
-    15 => 'paletas',      // Taco Relleno
-    16 => 'especiales', // Rollo de Helado
-    17 => 'especiales', // Rollo de Canela
-    18 => 'especiales',      // Helado Snoopy
-    19 => 'tacos',      // Taco Helado Clásico
+    1  => 'especiales', 
+    2  => 'especiales',    
+    3  => 'bolos',    
+    4  => 'especiales', 
+    5  => 'especiales',      
+    6  => 'especiales', 
+    7  => 'granizado',  
+    8  => 'especiales', 
+    9  => 'granizado',    
+    10 => 'especiales', 
+    11 => 'paletas',    
+    12 => 'especiales',    
+    13 => 'paletas', 
+    14 => 'granizado',  
+    15 => 'paletas',      
+    16 => 'especiales', 
+    17 => 'especiales', 
+    18 => 'especiales',    
+    19 => 'tacos',      
 ];
 
 $categoriasDisponibles = ['paletas','bolos','tacos','granizado','especiales'];
@@ -103,7 +100,7 @@ body{
     color:#5b7590;
 }
 
-/* ---------- FILTRO DE CATEGORÍAS ---------- */
+
 
 .filtros{
     display:flex;
@@ -136,7 +133,7 @@ body{
     color:#ffffff;
 }
 
-/* ---------- GRID DE PRODUCTOS ---------- */
+
 
 .productos{
     display:flex;
@@ -150,9 +147,7 @@ body{
     display:none;
 }
 
-/* ==================================================== */
-/* Tarjeta estilo Uiverse (alexruix), adaptada a Dragon Ice */
-/* ==================================================== */
+
 
 .card{
     width: 300px;
@@ -262,8 +257,8 @@ body{
     <section class="productos" id="listaProductos">
         <?php if ($resultado->num_rows > 0) { ?>
             <?php while ($fila=$resultado->fetch_assoc()) {
-                if (isset($imagenesSabores[$fila['id']])) {
-                    $imagenProducto = $imagenesSabores[$fila['id']];
+              if (!empty($fila['imagen'])) {
+                    $imagenProducto = "../" . $fila['imagen'];
                 } else {
                     $imagenProducto = $imagenGenerica;
                 }
