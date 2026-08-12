@@ -1,5 +1,8 @@
 <?php
-session_start();if(!isset($_SESSION['rol'])){header("Location: ../iniciosesion.php");exit();}include("../conexion.php");if($_SESSION['rol']=='Administrador'){$resultado=$conexion->query("SELECT * FROM ventas ORDER BY id DESC");}else{$ci=$_SESSION['ci'];$resultado=$conexion->query("SELECT * FROM ventas WHERE vendedor_ci='$ci' ORDER BY id DESC");}?>
+session_start();
+if(!isset($_SESSION['rol'])){header("Location: ../iniciosesion.php");exit();}include("../conexion.php");if($_SESSION['rol']=='Administrador'){$resultado=$conexion->query("SELECT * FROM ventas ORDER BY id DESC");}else{$ci=$_SESSION['ci'];$resultado=$conexion->query("SELECT * FROM ventas WHERE vendedor_ci='$ci' ORDER BY id DESC");}
+$rutaMenu = "../";
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -116,6 +119,8 @@ tr:hover{
 </style>
 </head>
 <body>
+    <?php include("../menu.php"); ?>
+    
     <div class="contenedor">
         <h1>🍦 Lista de Ventas</h1>
         <table>

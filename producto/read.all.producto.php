@@ -3,7 +3,10 @@ session_start();
 if (!isset($_SESSION['rol'])) { header("Location: ../iniciosesion.php"); exit(); }
 if ($_SESSION['rol'] != 'Administrador' && $_SESSION['rol'] != 'Vendedor') { header("Location: ../iniciosesion.php"); exit(); }
 include("../conexion.php");
-$resultado=$conexion->query("SELECT * FROM productos ORDER BY id DESC"); ?>
+$resultado=$conexion->query("SELECT * FROM productos ORDER BY id DESC");
+
+$rutaMenu = "../";
+?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -107,5 +110,52 @@ background:#dc3545;
 
 </style>
 </head>
-<body><div class="contenedor"><h1>🍦 Lista de Productos Registrados</h1>
-<table><tr><th>ID</th><th>Nombre</th><th>Descripción</th><th>Precio</th><th>Costo</th><th>Stock</th><th>Imagen</th><th>Acciones</th></tr><?php if($resultado->num_rows>0){while($fila=$resultado->fetch_assoc()){?><tr><td><?php echo $fila['id'];?></td><td><?php echo $fila['nombre'];?></td><td><?php echo $fila['descripcion'];?></td><td><?php echo $fila['precio'];?></td><td><?php echo $fila['costo'];?></td><td><?php echo $fila['stock'];?></td><td><img src="../<?php echo $fila['imagen'];?>" width="60"></td><td><div class="acciones"><a class="boton mostrar" href="readproducto.php?id=<?php echo $fila['id'];?>">Mostrar</a><a class="boton editar" href="updateproducto.php?id=<?php echo $fila['id'];?>">Editar</a><a class="boton eliminar" href="delete_producto.php?id=<?php echo $fila['id'];?>">Eliminar</a></div></td></tr><?php }}else{?><tr><td colspan="8">No existen productos registrados.</td></tr><?php }?></table><a href="formularioproducto.php" class="volver">➕ Registrar Nuevo Producto</a><?php if($_SESSION['rol']=='Administrador'){?><a href="../paginaprincipal/02.admin.php" class="volver">Volver al panel</a><?php }else{?><a href="../paginaprincipal/vendedor20.php" class="volver">Volver al panel</a><?php }?></div></body></html>
+<body>
+    <?php include("../menu.php"); ?>
+    
+    <div class="contenedor">
+        <h1>🍦 Lista de Productos Registrados</h1>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Costo</th>
+                <th>Stock</th>
+                <th>Imagen</th>
+                <th>Acciones</th>
+            </tr>
+            <?php if($resultado->num_rows>0){ while($fila=$resultado->fetch_assoc()){ ?>
+            <tr>
+                <td><?php echo $fila['id'];?></td>
+                <td><?php echo $fila['nombre'];?></td>
+                <td><?php echo $fila['descripcion'];?></td>
+                <td><?php echo $fila['precio'];?></td>
+                <td><?php echo $fila['costo'];?></td>
+                <td><?php echo $fila['stock'];?></td>
+                <td><img src="../<?php echo $fila['imagen'];?>" width="60"></td>
+                <td>
+                    <div class="acciones">
+                        <a class="boton mostrar" href="readproducto.php?id=<?php echo $fila['id'];?>">Mostrar</a>
+                        <a class="boton editar" href="updateproducto.php?id=<?php echo $fila['id'];?>">Editar</a>
+                        <a class="boton eliminar" href="delete_producto.php?id=<?php echo $fila['id'];?>">Eliminar</a>
+                    </div>
+                </td>
+            </tr>
+            <?php }}else{ ?>
+            <tr>
+                <td colspan="8">No existen productos registrados.</td>
+            </tr>
+            <?php } ?>
+        </table>
+        <a href="formularioproducto.php" class="volver">➕ Registrar Nuevo Producto</a>
+        <?php if($_SESSION['rol']=='Administrador'){ ?>
+            <a href="../paginaprincipal/02.admin.php" class="volver">Volver al panel</a>
+        <?php }else{ ?>
+            <a href="../paginaprincipal/vendedor20.php" class="volver">Volver al panel</a>
+        <?php } ?>
+    </div>
+    <?php include("../paginaprincipal/piedepagina.php"); ?>
+</body>
+</html>
