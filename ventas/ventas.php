@@ -136,7 +136,7 @@ tr:hover{
 
     <main class="fondo-panel">
         <div class="contenedor">
-            <h1>🍦 Lista de Ventas</h1>
+            <h1> Lista de Ventas</h1>
             <table>
                 <tr>
                     <th>ID</th>

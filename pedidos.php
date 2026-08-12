@@ -18,6 +18,9 @@ $rutaMenu = "../";
     font-family:Arial, Helvetica, sans-serif;
 }
 
+html, body{
+    height:100%;
+}
 body{
     display:flex;
     flex-direction:column;
@@ -187,7 +190,9 @@ tr:hover{
         <?php }else{?>
             <a href="paginaprincipal/02.admin.php" class="volver">Volver al panel</a>
         <?php }?>
+        </div>
      </main>
-    </div>
+      <?php include("../paginaprincipal/piedepagina.php"); ?>
+    
 </body>
 </html>
