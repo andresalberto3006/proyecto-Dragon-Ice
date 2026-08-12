@@ -1,1 +1,0 @@
-<?php header("Location: iniciosesion.php"); exit(); ?>

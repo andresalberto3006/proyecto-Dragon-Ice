@@ -15,8 +15,14 @@ $rutaMenu = "../";
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
     <title>Registrar Producto</title>
-
     <style>
+        :root{
+            --azul-oscuro:#0e2a4d;
+            --celeste:#63d4f2;
+            --menta:#7be0c4;
+            --texto-suave:#d9f6ff;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -24,99 +30,176 @@ $rutaMenu = "../";
             font-family: Arial, Helvetica, sans-serif;
         }
 
-        html, body{
+        .auth-section{
+            position:relative;
+            width:100%;
+            min-height:100vh;
+            overflow:hidden;
+        }
+
+        .auth-section video{
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+            width:100%;
             height:100%;
+            object-fit:cover;
+            z-index:0;
         }
 
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+        .auth-section .overlay{
+            position:absolute;
+            inset:0;
+            background:rgba(14,42,77,0.55);
+            z-index:1;
         }
 
-        .fondo-panel{
-            flex:1;
-            background:linear-gradient(135deg,#18335c,#2f5d9f,#7fc7ff);
+        .auth-section main{
+            position:relative;
+            z-index:2;
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:40px 20px;
+        }
+
+        .form-box{
+            width:100%;
+            max-width:430px;
             padding:40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background:rgba(0,0,0,0.55);
+            backdrop-filter:blur(12px);
+            border-radius:20px;
+            border:1px solid rgba(255,255,255,0.2);
+            box-shadow:0 0 30px rgba(99,212,242,0.35);
+            text-align:center;
         }
 
-        .formulario {
-            width: 380px;
-            padding: 30px;
-            border-radius: 25px;
-            background:white;
-            box-shadow: 0 10px 30px rgba(0,0,0,.25);
+        .form-box h1{
+            color:white;
+            font-size:34px;
+            letter-spacing:3px;
+            margin-bottom:8px;
+            text-shadow:0 0 15px var(--celeste);
         }
 
-        .formulario h2 {
-            text-align: center;
-            color: #18335c;
-            margin-bottom: 10px;
+        .form-box .subtitulo{
+            color:var(--texto-suave);
+            margin-bottom:25px;
+            font-size:15px;
         }
 
-        .subtitulo {
-            text-align: center;
-            color: #666;
-            margin-bottom: 20px;
-            font-size: 14px;
+        .form-box form{
+            text-align:left;
         }
 
-        .grupo {
-            margin-bottom: 15px;
+        .form-box label{
+            display:block;
+            text-align:left;
+            color:white;
+            margin-bottom:5px;
+            margin-top:15px;
+            font-weight:bold;
+            font-size:14px;
         }
 
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #18335c;
-            font-size: 15px;
+        .form-box input,
+        .form-box select{
+            width:100%;
+            padding:12px;
+            border:none;
+            border-radius:10px;
+            outline:none;
+            background:rgba(255,255,255,0.15);
+            color:white;
+            font-size:15px;
         }
 
-        input {
-            width: 100%;
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            outline: none;
+        .form-box input::placeholder{
+            color:rgba(255,255,255,0.65);
         }
 
-        input:focus {
-            border: 2px solid #4da6ff;
+        .form-box input:focus,
+        .form-box select:focus{
+            background:rgba(255,255,255,0.25);
+            box-shadow:0 0 0 2px var(--celeste);
         }
 
-        .boton {
-            width: 100%;
-            margin-top: 15px;
-            padding: 12px;
-            border: none;
-            border-radius: 10px;
-            background-color: #4da6ff;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
+        .form-box input[type="submit"],
+        .form-box button[type="submit"]{
+            width:100%;
+            margin-top:22px;
+            padding:13px;
+            border:none;
+            border-radius:10px;
+            background:var(--celeste);
+            color:var(--azul-oscuro);
+            font-size:16px;
+            font-weight:bold;
+            cursor:pointer;
+            transition:0.3s;
         }
 
-        .boton:hover {
-            background-color: #2f5d9f;
+        .form-box input[type="submit"]:hover,
+        .form-box button[type="submit"]:hover{
+            background:var(--menta);
+            transform:scale(1.02);
         }
 
-        label.error {
-            color: red;
-            font-size: 12px;
-            font-weight: bold;
-            margin-top: 5px;
+        .form-box .enlace-secundario{
+            margin-top:18px;
+            font-size:14px;
+            color:var(--texto-suave);
+            text-align:center;
         }
 
-        input.error {
-            border: 2px solid red;
+        .form-box .enlace-secundario a{
+            color:var(--celeste);
+            font-weight:bold;
+            text-decoration:none;
         }
 
-        input.valid {
-            border: 2px solid green;
+        .form-box .enlace-secundario a:hover{
+            text-decoration:underline;
+            color:var(--menta);
+        }
+
+        .form-box .volver{
+            display:block;
+            margin-top:10px;
+            color:white;
+            font-size:13px;
+            opacity:0.8;
+            text-decoration:none;
+            text-align:center;
+        }
+
+        .form-box .volver:hover{
+            opacity:1;
+            color:var(--celeste);
+        }
+
+        .form-box label.error{
+            color:#ff9b9b;
+            font-size:12px;
+            margin-top:4px;
+            margin-bottom:0;
+            font-weight:bold;
+        }
+
+        .form-box input.error{
+            box-shadow:0 0 0 2px #ff4d4d;
+        }
+
+        .form-box input.valid{
+            box-shadow:0 0 0 2px var(--menta);
+        }
+
+        @media(max-width:700px){
+            .form-box{ padding:28px; }
+            .form-box h1{ font-size:26px; }
         }
     </style>
 </head>
@@ -125,50 +208,46 @@ $rutaMenu = "../";
 
 <?php include("../menu.php"); ?>
 
-<main class="fondo-panel">
-    <div class="formulario">
-        <h2> Registrar Producto</h2>
-        <p class="subtitulo">Complete los datos del producto</p>
+<section class="auth-section">
+    <video autoplay muted loop>
+        <source src="../helado1.mp4" type="video/mp4">
+    </video>
+    <div class="overlay"></div>
+    <main>
+        <div class="form-box">
+            <h1>DRAGON ICE</h1>
+            <p class="subtitulo">Registrar Producto</p>
 
-        <form id="formulario" action="../producto/registroproducto.php" method="POST" enctype="multipart/form-data">
+            <form id="formulario" action="../producto/registroproducto.php" method="POST" enctype="multipart/form-data">
 
-            <div class="grupo">
+                <label for="id">ID</label>
+                <input type="number" id="id" name="id" placeholder="Ingrese el código">
 
-                 <label for="id">id</label>
-                 <input type="number" id ="id" name="id" placeholder="Ingrese el código"> 
-               
-            </div>
-
-            <div class="grupo">
                 <label for="nombre">Nombre</label>
                 <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre">
-            </div>
 
-            <div class="grupo">
                 <label for="descripcion">Descripción</label>
                 <input type="text" id="descripcion" name="descripcion" placeholder="Descripción del producto">
-            </div>
 
-            <div class="grupo">
                 <label for="precio">Precio</label>
                 <input type="number" id="precio" name="precio" placeholder="Ingrese el precio">
-            </div>
 
-            <div class="grupo">
                 <label for="costo">Costo</label>
                 <input type="number" id="costo" name="costo" placeholder="Ingrese el costo">
-            </div>
 
-            <div class="grupo">
                 <label for="stock">Stock</label>
                 <input type="number" id="stock" name="stock" placeholder="Cantidad disponible">
-            </div>
 
-            <div class="grupo"><label for="imagen">Imagen</label><input type="file" id="imagen" name="imagen"></div>
-            <button type="submit" class="boton">Guardar Producto</button>
-        </form>
-    </div>
-</main>
+                <label for="imagen">Imagen</label>
+                <input type="file" id="imagen" name="imagen">
+
+                <input type="submit" value="Guardar Producto">
+            </form>
+
+            <a href="read.all.producto.php" class="volver">Volver a la lista de productos</a>
+        </div>
+    </main>
+</section>
 
 <?php include("../paginaprincipal/piedepagina.php"); ?>
 

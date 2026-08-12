@@ -23,213 +23,252 @@ $usuario=$_SESSION["usuario"];
 
 <title>Dragon Ice | Nuevo Pedido</title>
 
-<style>
+    <style>
+        :root{
+            --azul-oscuro:#0e2a4d;
+            --celeste:#63d4f2;
+            --menta:#7be0c4;
+            --texto-suave:#d9f6ff;
+        }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
 
-body{
-    min-height:100vh;
+        .auth-section{
+            position:relative;
+            width:100%;
+            min-height:100vh;
+            overflow:hidden;
+        }
 
-    background:linear-gradient(
-        135deg,
-        #18335c,
-        #2f5d9f,
-        #7fc7ff
-    );
+        .auth-section video{
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            z-index:0;
+        }
 
-    background-attachment:fixed;
-}
+        .auth-section .overlay{
+            position:absolute;
+            inset:0;
+            background:rgba(14,42,77,0.55);
+            z-index:1;
+        }
 
-/* CONTENEDOR */
+        .auth-section main{
+            position:relative;
+            z-index:2;
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:40px 20px;
+        }
 
-.contenedor{
+        .form-box{
+            width:100%;
+            max-width:430px;
+            padding:40px;
+            background:rgba(0,0,0,0.55);
+            backdrop-filter:blur(12px);
+            border-radius:20px;
+            border:1px solid rgba(255,255,255,0.2);
+            box-shadow:0 0 30px rgba(99,212,242,0.35);
+            text-align:center;
+        }
 
-    width:100%;
-    min-height:calc(100vh - 80px);
+        .form-box h1{
+            color:white;
+            font-size:34px;
+            letter-spacing:3px;
+            margin-bottom:8px;
+            text-shadow:0 0 15px var(--celeste);
+        }
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+        .form-box .subtitulo{
+            color:var(--texto-suave);
+            margin-bottom:25px;
+            font-size:15px;
+        }
 
-    padding:50px 30px;
-}
+        .form-box form{
+            text-align:left;
+        }
 
-/* TARJETA DEL FORMULARIO */
+        .form-box label{
+            display:block;
+            text-align:left;
+            color:white;
+            margin-bottom:5px;
+            margin-top:15px;
+            font-weight:bold;
+            font-size:14px;
+        }
 
-.tarjeta{
+        .form-box input,
+        .form-box select{
+            width:100%;
+            padding:12px;
+            border:none;
+            border-radius:10px;
+            outline:none;
+            background:rgba(255,255,255,0.15);
+            color:white;
+            font-size:15px;
+        }
 
-    width:450px;
+        .form-box input::placeholder{
+            color:rgba(255,255,255,0.65);
+        }
 
-    background:white;
+        .form-box input:focus,
+        .form-box select:focus{
+            background:rgba(255,255,255,0.25);
+            box-shadow:0 0 0 2px var(--celeste);
+        }
 
-    border-radius:25px;
+        .form-box input[type="submit"],
+        .form-box button[type="submit"]{
+            width:100%;
+            margin-top:22px;
+            padding:13px;
+            border:none;
+            border-radius:10px;
+            background:var(--celeste);
+            color:var(--azul-oscuro);
+            font-size:16px;
+            font-weight:bold;
+            cursor:pointer;
+            transition:0.3s;
+        }
 
-    padding:35px;
+        .form-box input[type="submit"]:hover,
+        .form-box button[type="submit"]:hover{
+            background:var(--menta);
+            transform:scale(1.02);
+        }
 
-    box-shadow:0 15px 35px rgba(0,0,0,.25);
+        .form-box .enlace-secundario{
+            margin-top:18px;
+            font-size:14px;
+            color:var(--texto-suave);
+            text-align:center;
+        }
 
-    border:1px solid rgba(255,255,255,.6);
-}
+        .form-box .enlace-secundario a{
+            color:var(--celeste);
+            font-weight:bold;
+            text-decoration:none;
+        }
 
-/* TITULO */
+        .form-box .enlace-secundario a:hover{
+            text-decoration:underline;
+            color:var(--menta);
+        }
 
-.tarjeta h1{
+        .form-box .volver{
+            display:block;
+            margin-top:10px;
+            color:white;
+            font-size:13px;
+            opacity:0.8;
+            text-decoration:none;
+            text-align:center;
+        }
 
-    text-align:center;
+        .form-box .volver:hover{
+            opacity:1;
+            color:var(--celeste);
+        }
 
-    color:#18335c;
+        .form-box label.error{
+            color:#ff9b9b;
+            font-size:12px;
+            margin-top:4px;
+            margin-bottom:0;
+            font-weight:bold;
+        }
 
-    margin-bottom:25px;
+        .form-box input.error{
+            box-shadow:0 0 0 2px #ff4d4d;
+        }
 
-    font-size:28px;
-}
+        .form-box input.valid{
+            box-shadow:0 0 0 2px var(--menta);
+        }
 
-/* ETIQUETAS */
-
-label{
-
-    display:block;
-
-    margin-top:15px;
-
-    margin-bottom:5px;
-
-    font-weight:bold;
-
-    color:#18335c;
-}
-
-/* CAMPOS */
-
-input{
-
-    width:100%;
-
-    padding:12px;
-
-    margin-top:2px;
-
-    border:2px solid #d7eaff;
-
-    background:#f4f9ff;
-
-    border-radius:10px;
-
-    font-size:16px;
-
-    color:#18335c;
-
-    outline:none;
-}
-
-input:focus{
-
-    border-color:#4da6ff;
-
-    background:white;
-}
-
-/* BOTÓN */
-
-button{
-
-    width:100%;
-
-    padding:15px;
-
-    margin-top:25px;
-
-    border:none;
-
-    background:#4da6ff;
-
-    color:white;
-
-    font-size:18px;
-
-    font-weight:bold;
-
-    cursor:pointer;
-
-    border-radius:12px;
-
-    transition:.3s;
-
-    box-shadow:0 5px 12px rgba(77,166,255,.35);
-}
-
-button:hover{
-
-    background:#2f5d9f;
-
-    transform:scale(1.02);
-}
-
-</style>
-
+        @media(max-width:700px){
+            .form-box{ padding:28px; }
+            .form-box h1{ font-size:26px; }
+        }
+    </style>
 </head>
 
 <body>
 
 <?php include("menu.php"); ?>
 
+<section class="auth-section">
+    <video autoplay muted loop>
+        <source src="helado1.mp4" type="video/mp4">
+    </video>
+    <div class="overlay"></div>
+    <main>
+        <div class="form-box">
 
-<div class="contenedor">
+            <h1>DRAGON ICE</h1>
+            <p class="subtitulo">Nuevo Pedido</p>
 
-    <div class="tarjeta">
+            <form action="nuevo_pedido.php" method="POST">
 
-        <h1> Nuevo Pedido</h1>
+                <label>Cliente</label>
 
-        <form action="nuevo_pedido.php" method="POST">
+                <input
+                    type="text"
+                    name="nombre"
+                    value="<?php echo $usuario;?>"
+                    readonly
+                >
 
-            <label>Cliente</label>
+                <label>Fecha</label>
 
-            <input
-                type="text"
-                name="nombre"
-                value="<?php echo $usuario;?>"
-                readonly
-            >
+                <input
+                    type="date"
+                    name="fecha"
+                    value="<?php echo date("Y-m-d");?>"
+                    readonly
+                >
 
-            <label>Fecha</label>
+                <input
+                    type="hidden"
+                    name="estado"
+                    value="En proceso"
+                >
 
-            <input
-                type="date"
-                name="fecha"
-                value="<?php echo date("Y-m-d");?>"
-                readonly
-            >
+                <input
+                    type="hidden"
+                    name="nombrevendedor"
+                    value="<?php echo $usuario;?>"
+                >
 
-            <input
-                type="hidden"
-                name="estado"
-                value="En proceso"
-            >
+                <input type="submit" value="Comenzar Compra">
 
-            <input
-                type="hidden"
-                name="nombrevendedor"
-                value="<?php echo $usuario;?>"
-            >
+            </form>
 
-            <button>
-                 Comenzar Compra
-            </button>
-
-        </form>
-
-    </div>
-
-</div>
-
+            <a href="pedidos.php" class="volver">Volver a mis pedidos</a>
+        </div>
+    </main>
+</section>
 
 <?php include("paginaprincipal/piedepagina.php"); ?>
-
 
 </body>
 

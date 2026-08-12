@@ -1,7 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['rol'])) { header("Location: ../iniciosesion.php"); exit(); }
-if ($_SESSION['rol'] != 'Administrador') { header("Location: ../paginaprincipal/vendedor20.php"); exit(); }
+// Público: ya no exige sesión de Administrador para poder registrarse.
 include("../conexion.php");
 if ($_SERVER["REQUEST_METHOD"] != "POST") { header("Location: formulariousuario.php"); exit(); }
 
@@ -25,7 +24,6 @@ $rutaMenu = "../";
 ?>
 
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -148,9 +146,7 @@ h1{
                 <?php echo htmlspecialchars($nombre); ?>
             </span> fue registrado correctamente.</p>
             <div class="botones">
-                <a href="formulariousuario.php" class="boton">Registrar otro usuario</a>
-                <a href="readusuario.php?ci=<?php echo urlencode($ci); ?>" class="boton">Ver usuario</a>
-                <a href="read.all.usuario.php" class="boton">Ver todos los usuarios</a>
+                <a href="../iniciosesion.php" class="boton">Iniciar sesión</a>
             </div>
         </div>
 </main>

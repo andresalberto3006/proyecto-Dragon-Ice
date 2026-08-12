@@ -29,169 +29,238 @@ $rutaMenu = "../";
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
 
 <title>Actualizar Usuario</title>
+    <style>
+        :root{
+            --azul-oscuro:#0e2a4d;
+            --celeste:#63d4f2;
+            --menta:#7be0c4;
+            --texto-suave:#d9f6ff;
+        }
 
-<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
-}
+        .auth-section{
+            position:relative;
+            width:100%;
+            min-height:100vh;
+            overflow:hidden;
+        }
 
-html, body{
-    height:100%;
-}
+        .auth-section video{
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            z-index:0;
+        }
 
-body{
-    display:flex;
-    flex-direction:column;
-    min-height:100vh;
-}
+        .auth-section .overlay{
+            position:absolute;
+            inset:0;
+            background:rgba(14,42,77,0.55);
+            z-index:1;
+        }
 
-.fondo-panel{
-    flex:1;
-    background:linear-gradient(135deg,#18335c,#2f5d9f,#7fc7ff);
-    padding:40px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
+        .auth-section main{
+            position:relative;
+            z-index:2;
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:40px 20px;
+        }
 
-.formulario{
+        .form-box{
+            width:100%;
+            max-width:430px;
+            padding:40px;
+            background:rgba(0,0,0,0.55);
+            backdrop-filter:blur(12px);
+            border-radius:20px;
+            border:1px solid rgba(255,255,255,0.2);
+            box-shadow:0 0 30px rgba(99,212,242,0.35);
+            text-align:center;
+        }
 
-    width:420px;
+        .form-box h1{
+            color:white;
+            font-size:34px;
+            letter-spacing:3px;
+            margin-bottom:8px;
+            text-shadow:0 0 15px var(--celeste);
+        }
 
-    padding:35px;
+        .form-box .subtitulo{
+            color:var(--texto-suave);
+            margin-bottom:25px;
+            font-size:15px;
+        }
 
-    background:white;
+        .form-box form{
+            text-align:left;
+        }
 
-    border-radius:25px;
+        .form-box label{
+            display:block;
+            text-align:left;
+            color:white;
+            margin-bottom:5px;
+            margin-top:15px;
+            font-weight:bold;
+            font-size:14px;
+        }
 
-    box-shadow:0 10px 30px rgba(0,0,0,.25);
-}
+        .form-box input,
+        .form-box select{
+            width:100%;
+            padding:12px;
+            border:none;
+            border-radius:10px;
+            outline:none;
+            background:rgba(255,255,255,0.15);
+            color:white;
+            font-size:15px;
+        }
 
-h2{
-    text-align:center;
-    color:#18335c;
-    margin-bottom:10px;
-}
+        .form-box input::placeholder{
+            color:rgba(255,255,255,0.65);
+        }
 
-.subtitulo{
-    text-align:center;
-    color:#666;
-    margin-bottom:20px;
-}
+        .form-box input:focus,
+        .form-box select:focus{
+            background:rgba(255,255,255,0.25);
+            box-shadow:0 0 0 2px var(--celeste);
+        }
 
-label{
-    display:block;
-    margin-top:12px;
-    margin-bottom:5px;
-    font-weight:bold;
-    color:#18335c;
-}
+        .form-box input[type="submit"],
+        .form-box button[type="submit"]{
+            width:100%;
+            margin-top:22px;
+            padding:13px;
+            border:none;
+            border-radius:10px;
+            background:var(--celeste);
+            color:var(--azul-oscuro);
+            font-size:16px;
+            font-weight:bold;
+            cursor:pointer;
+            transition:0.3s;
+        }
 
-input{
+        .form-box input[type="submit"]:hover,
+        .form-box button[type="submit"]:hover{
+            background:var(--menta);
+            transform:scale(1.02);
+        }
 
-    width:100%;
+        .form-box .enlace-secundario{
+            margin-top:18px;
+            font-size:14px;
+            color:var(--texto-suave);
+            text-align:center;
+        }
 
-    padding:12px;
+        .form-box .enlace-secundario a{
+            color:var(--celeste);
+            font-weight:bold;
+            text-decoration:none;
+        }
 
-    border:1px solid #ccc;
+        .form-box .enlace-secundario a:hover{
+            text-decoration:underline;
+            color:var(--menta);
+        }
 
-    border-radius:10px;
+        .form-box .volver{
+            display:block;
+            margin-top:10px;
+            color:white;
+            font-size:13px;
+            opacity:0.8;
+            text-decoration:none;
+            text-align:center;
+        }
 
-    outline:none;
-}
+        .form-box .volver:hover{
+            opacity:1;
+            color:var(--celeste);
+        }
 
-input:focus{
-    border:2px solid #4da6ff;
-}
+        .form-box label.error{
+            color:#ff9b9b;
+            font-size:12px;
+            margin-top:4px;
+            margin-bottom:0;
+            font-weight:bold;
+        }
 
-.boton{
+        .form-box input.error{
+            box-shadow:0 0 0 2px #ff4d4d;
+        }
 
-    width:100%;
+        .form-box input.valid{
+            box-shadow:0 0 0 2px var(--menta);
+        }
 
-    margin-top:20px;
-
-    padding:12px;
-
-    border:none;
-
-    border-radius:10px;
-
-    background:#4da6ff;
-
-    color:white;
-
-    font-size:16px;
-
-    cursor:pointer;
-}
-
-.boton:hover{
-    background:#2f5d9f;
-}
-
-label.error{
-    color:red;
-    font-size:12px;
-    margin-top:5px;
-}
-
-input.error{
-    border:2px solid red;
-}
-
-input.valid{
-    border:2px solid green;
-}
-
-</style>
-
+        @media(max-width:700px){
+            .form-box{ padding:28px; }
+            .form-box h1{ font-size:26px; }
+        }
+    </style>
 </head>
 
 <body>
 
 <?php include("../menu.php"); ?>
 
-<main class="fondo-panel">
-<div class="formulario">
+<section class="auth-section">
+    <video autoplay muted loop>
+        <source src="../helado1.mp4" type="video/mp4">
+    </video>
+    <div class="overlay"></div>
+    <main>
+        <div class="form-box">
 
-<h2> Actualizar Usuario</h2>
+            <h1>DRAGON ICE</h1>
+            <p class="subtitulo">Actualizar Usuario</p>
 
-<p class="subtitulo">
-Modifique los datos del usuario
-</p>
+            <form id="formulario" action="updateusuario2.php" method="POST">
 
-<form id="formulario" action="updateusuario2.php" method="POST">
+                 <label>CI</label>
+                 <input type="number" name="ci" id="ci" value="<?php echo $ci; ?>" readonly>
 
-     <label>CI</label>
-     <input type="number" name="ci" id="ci" value="<?php echo $ci; ?>" readonly>
+                 <label>Nombre</label>
+                 <input type="text" name="nombre" id="nombre" value="<?php echo $nombre; ?>">
 
-     <label>Nombre</label>
-     <input type="text" name="nombre" id="nombre" value="<?php echo $nombre; ?>">
+                 <label>Dirección</label>
+                 <input type="text" name="direccion" id="direccion" value="<?php echo $direccionUsuario; ?>">
 
-     <label>Dirección</label>
-     <input type="text" name="direccion" id="direccion" value="<?php echo $direccionUsuario; ?>">
+                 <label>Celular</label>
+                 <input type="number" name="celular" id="celular" value="<?php echo $celular; ?>">
 
-     <label>Celular</label>
-     <input type="number" name="celular" id="celular" value="<?php echo $celular; ?>">
+                 <label>Rol</label>
+                 <input type="text" name="rol" id="rol" value="<?php echo $rol; ?>">
 
-     <label>Rol</label>
-     <input type="text" name="rol" id="rol" value="<?php echo $rol; ?>">
+                 <label>Estado</label>
+                 <input type="text" name="estado" id="estado" value="<?php echo $estado; ?>">
 
-     <label>Estado</label>
-     <input type="text" name="estado" id="estado" value="<?php echo $estado; ?>">
+                 <input type="submit" value="Guardar Cambios">
 
-     <button type="submit" class="boton">
-Guardar Cambios
-</button>
+            </form>
 
-</form>
-
-</div>
-</main>
+            <a href="read.all.usuario.php" class="volver">Volver a la lista de usuarios</a>
+        </div>
+    </main>
+</section>
 
 <?php include("../paginaprincipal/piedepagina.php"); ?>
 

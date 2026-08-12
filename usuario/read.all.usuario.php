@@ -1,8 +1,18 @@
 <?php
 session_start();
-if (!isset($_SESSION['rol'])) { header("Location: ../iniciosesion.php"); exit(); }
-if ($_SESSION['rol'] != 'Administrador') { header("Location: ../paginaprincipal/vendedor20.php"); exit(); }
+
+if (!isset($_SESSION['rol'])) {
+    header("Location: ../iniciosesion.php");
+    exit();
+}
+
+if ($_SESSION['rol'] != 'Administrador') {
+    header("Location: ../paginaprincipal/vendedor20.php");
+    exit();
+}
+
 include("../conexion.php");
+
 $resultado = $conexion->query("SELECT * FROM usuario ORDER BY ci DESC");
 
 $rutaMenu = "../";
@@ -43,16 +53,11 @@ body{
 }
 
 .contenedor{
-
     max-width:1200px;
     width:100%;
-
     background:white;
-
     padding:30px;
-
     border-radius:25px;
-
     box-shadow:0 10px 30px rgba(0,0,0,0.25);
 }
 
@@ -85,17 +90,11 @@ tr:hover{
 }
 
 .boton{
-
     text-decoration:none;
-
     color:white;
-
     padding:8px 15px;
-
     border-radius:8px;
-
     font-size:14px;
-
     font-weight:bold;
 }
 
@@ -107,6 +106,10 @@ tr:hover{
     background:#28a745;
 }
 
+.rol{
+    background:#6f42c1;
+}
+
 .eliminar{
     background:#dc3545;
 }
@@ -115,6 +118,7 @@ tr:hover{
     display:flex;
     justify-content:center;
     gap:8px;
+    flex-wrap:wrap;
 }
 
 .volver{
@@ -142,10 +146,82 @@ tr:hover{
 <?php include("../menu.php"); ?>
 
 <main class="fondo-panel">
-<div class="contenedor"><h1> Lista de Usuarios Registrados</h1><table><tr><th>CI</th><th>Nombre</th><th>Dirección</th><th>Celular</th><th>Rol</th><th>Estado</th><th>Acciones</th></tr>
-<?php if($resultado->num_rows>0){ while($fila=$resultado->fetch_assoc()){ ?>
-<tr><td><?php echo $fila['ci']; ?></td><td><?php echo $fila['nombre']; ?></td><td><?php echo $fila['direccion']; ?></td><td><?php echo $fila['celular']; ?></td><td><?php echo $fila['rol']; ?></td><td><?php echo $fila['estado']; ?></td><td><div class="acciones"><a class="boton mostrar" href="readusuario.php?ci=<?php echo $fila['ci']; ?>">Mostrar</a><a class="boton editar" href="updateusuario.php?ci=<?php echo $fila['ci']; ?>">Editar</a><?php if($fila['rol']=='Vendedor'){ ?><a class="boton editar" href="estado_usuario.php?ci=<?php echo $fila['ci']; ?>"><?php echo $fila['estado']=='Activo'?'Bloquear':'Activar'; ?></a><?php } ?><a class="boton eliminar" href="delete_usuario.php?ci=<?php echo $fila['ci']; ?>">Eliminar</a></div></td></tr>
-<?php }} else { ?><tr><td colspan="7">No existen usuarios registrados.</td></tr><?php } ?></table><a href="formulariousuario.php" class="volver"> Registrar Nuevo Usuario</a><a href="../paginaprincipal/02.admin.php" class="volver">Volver al panel</a></div>
+    <div class="contenedor">
+
+        <h1>Lista de Usuarios Registrados</h1>
+
+        <table>
+            <tr>
+                <th>CI</th>
+                <th>Nombre</th>
+                <th>Dirección</th>
+                <th>Celular</th>
+                <th>Rol</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+
+            <?php if ($resultado->num_rows > 0) { ?>
+                <?php while ($fila = $resultado->fetch_assoc()) { ?>
+                    <tr>
+                        <td><?php echo $fila['ci']; ?></td>
+                        <td><?php echo $fila['nombre']; ?></td>
+                        <td><?php echo $fila['direccion']; ?></td>
+                        <td><?php echo $fila['celular']; ?></td>
+                        <td><?php echo $fila['rol']; ?></td>
+                        <td><?php echo $fila['estado']; ?></td>
+                        <td>
+                            <div class="acciones">
+
+                                <a class="boton mostrar" href="readusuario.php?ci=<?php echo $fila['ci']; ?>">
+                                    Mostrar
+                                </a>
+
+                                <a class="boton editar" href="updateusuario.php?ci=<?php echo $fila['ci']; ?>">
+                                    Editar
+                                </a>
+
+                                <?php if ($fila['ci'] != $_SESSION['ci']) { ?>
+
+                                    <?php if ($fila['rol'] == 'Administrador') { ?>
+                                        <a class="boton rol"
+                                           href="../cambiarRol/hacerVendedor.php?ci=<?php echo $fila['ci']; ?>">
+                                            Hacer Vendedor
+                                        </a>
+                                    <?php } else { ?>
+                                        <a class="boton rol"
+                                           href="../cambiarRol/hacerAdministrador.php?ci=<?php echo $fila['ci']; ?>">
+                                            Hacer Administrador
+                                        </a>
+                                    <?php } ?>
+
+                                <?php } ?>
+
+                                <?php if ($fila['rol'] == 'Vendedor') { ?>
+                                    <a class="boton editar" href="estado_usuario.php?ci=<?php echo $fila['ci']; ?>">
+                                        <?php echo $fila['estado'] == 'Activo' ? 'Bloquear' : 'Activar'; ?>
+                                    </a>
+                                <?php } ?>
+
+                                <a class="boton eliminar" href="delete_usuario.php?ci=<?php echo $fila['ci']; ?>">
+                                    Eliminar
+                                </a>
+
+                            </div>
+                        </td>
+                    </tr>
+                <?php } ?>
+            <?php } else { ?>
+                <tr>
+                    <td colspan="7">No existen usuarios registrados.</td>
+                </tr>
+            <?php } ?>
+        </table>
+
+        <a href="formulariousuario.php" class="volver">Registrar Nuevo Usuario</a>
+        <a href="../paginaprincipal/02.admin.php" class="volver">Volver al panel</a>
+
+    </div>
 </main>
 
 <?php include("../paginaprincipal/piedepagina.php"); ?>
