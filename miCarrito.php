@@ -223,7 +223,7 @@ include("menu.php");
 
     <div class="tarjeta">
 
-        <h1>🍦 Mi Carrito</h1>
+        <h1> Mi Carrito</h1>
 
         <h2>
             Pedido #<?php echo $idPedido; ?> -
@@ -236,7 +236,7 @@ include("menu.php");
 
     </div>
 
-    <h2 class="titulo-seccion">🍨 Productos disponibles</h2>
+    <h2 class="titulo-seccion"> Productos disponibles</h2>
 
     <table>
 
@@ -289,7 +289,7 @@ include("menu.php");
                 </td>
 
                 <td>
-                    <button type="submit">➕ Agregar</button>
+                    <button type="submit"> Agregar</button>
                 </td>
 
             </tr>
@@ -365,7 +365,7 @@ include("menu.php");
                 <a href="eliminarCarrito.php?idPedido=<?php echo $idPedido; ?>&idProducto=<?php echo $fila['productos_id']; ?>">
 
                     <button type="button">
-                        🗑️ Eliminar
+                         Eliminar
                     </button>
 
                 </a>
@@ -395,11 +395,11 @@ include("menu.php");
     <div class="botones-finales">
 
         <a href="pedidos.php">
-            <button class="btnNuevo">✅ Terminar pedido</button>
+            <button class="btnNuevo"> Terminar pedido</button>
         </a>
 
         <a href="formpedido.php">
-            <button class="btnNuevo">➕ Nuevo pedido</button>
+            <button class="btnNuevo"> Nuevo pedido</button>
         </a>
 
     </div>
