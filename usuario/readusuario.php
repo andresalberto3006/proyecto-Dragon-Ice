@@ -1,29 +1,14 @@
 <?php
-
-$direccion="localhost";
-$usuario="root";
-$contraseña="";
-$nombreBase="dragonice";
-
-$conn = new mysqli($direccion,$usuario,$contraseña,$nombreBase);
-
-if($conn->connect_error){
-    die("Hubo un error al conectar a la base de datos");
-}
-
-$ci = $_GET['ci'];
-
-$sql = "SELECT * FROM usuario WHERE ci='$ci'";
-
-$resultado = $conn->query($sql);
-
-?>
-<?php
 session_start();
 if (!isset($_SESSION['rol'])) { header("Location: ../iniciosesion.php"); exit(); }
-if ($_SESSION['rol'] != 'Administrador') { header("Location: ../paginaprincipal/04.vendedor.php"); exit(); }
+if ($_SESSION['rol'] != 'Administrador') { header("Location: ../paginaprincipal/vendedor20.php"); exit(); }
 include("../conexion.php");
-$ci=isset($_GET['ci'])?$_GET['ci']:0; $resultado=$conexion->query("SELECT * FROM usuario WHERE ci='$ci'"); ?>
+
+$ci = isset($_GET['ci']) ? $_GET['ci'] : 0;
+$resultado = $conexion->query("SELECT * FROM usuario WHERE ci='$ci'");
+
+$rutaMenu = "../";
+?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -41,14 +26,23 @@ $ci=isset($_GET['ci'])?$_GET['ci']:0; $resultado=$conexion->query("SELECT * FROM
     font-family:Arial, Helvetica, sans-serif;
 }
 
-body{
-    min-height:100vh;
+html, body{
+    height:100%;
+}
 
+body{
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+}
+
+.fondo-panel{
+    flex:1;
+    background:linear-gradient(135deg,#18335c,#2f5d9f,#7fc7ff);
+    padding:40px;
     display:flex;
     justify-content:center;
     align-items:center;
-
-    background:linear-gradient(135deg,#18335c,#2f5d9f,#7fc7ff);
 }
 
 .tarjeta{
@@ -120,4 +114,31 @@ strong{
 
 </head>
 
-<body><div class="tarjeta"><h1>🍦 Información del Usuario</h1><?php if($resultado->num_rows>0){ $fila=$resultado->fetch_assoc(); ?><div class="dato"><strong>CI:</strong> <?php echo $fila['ci']; ?></div><div class="dato"><strong>Nombre:</strong> <?php echo $fila['nombre']; ?></div><div class="dato"><strong>Dirección:</strong> <?php echo $fila['direccion']; ?></div><div class="dato"><strong>Celular:</strong> <?php echo $fila['celular']; ?></div><div class="dato"><strong>Rol:</strong> <?php echo $fila['rol']; ?></div><div class="dato"><strong>Estado:</strong> <?php echo $fila['estado']; ?></div><?php } else { ?><div class="dato">Usuario no encontrado.</div><?php } ?><div class="botones"><a href="read.all.usuario.php" class="boton">Ver todos los usuarios</a><a href="formulariousuario.php" class="boton">Registrar Usuario</a></div></div></body></html>
+<body>
+
+<?php include("../menu.php"); ?>
+
+<main class="fondo-panel">
+<div class="tarjeta">
+<h1>🍦 Información del Usuario</h1>
+<?php if($resultado->num_rows>0){ $fila=$resultado->fetch_assoc(); ?>
+<div class="dato"><strong>CI:</strong> <?php echo $fila['ci']; ?></div>
+<div class="dato"><strong>Nombre:</strong> <?php echo $fila['nombre']; ?></div>
+<div class="dato"><strong>Dirección:</strong> <?php echo $fila['direccion']; ?></div>
+<div class="dato"><strong>Celular:</strong> <?php echo $fila['celular']; ?></div>
+<div class="dato"><strong>Rol:</strong> <?php echo $fila['rol']; ?></div>
+<div class="dato"><strong>Estado:</strong> <?php echo $fila['estado']; ?></div>
+<?php } else { ?>
+<div class="dato">Usuario no encontrado.</div>
+<?php } ?>
+<div class="botones">
+<a href="read.all.usuario.php" class="boton">Ver todos los usuarios</a>
+<a href="formulariousuario.php" class="boton">Registrar Usuario</a>
+</div>
+</div>
+</main>
+
+<?php include("../paginaprincipal/piedepagina.php"); ?>
+
+</body>
+</html>

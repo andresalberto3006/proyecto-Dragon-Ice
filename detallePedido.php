@@ -11,6 +11,8 @@ $detalle=$conexion->query("SELECT c.*,pr.nombre,pr.precio FROM carrito c INNER J
 // --- Generación del código QR (Opción 1: API externa) ---
 $datoQR = "Pedido #" . $p['id'] . " | Cliente: " . $p['nombre'] . " | Estado: " . $p['estado'];
 $qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=" . urlencode($datoQR);
+
+$rutaMenu = "";
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -27,15 +29,28 @@ $qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=" . urle
     font-family:Arial, Helvetica, sans-serif;
 }
 
+html, body{
+    height:100%;
+}
+
 body{
+    display:flex;
+    flex-direction:column;
     min-height:100vh;
+}
+
+.fondo-panel{
+    flex:1;
     background:linear-gradient(135deg,#18335c,#2f5d9f,#7fc7ff);
     padding:40px;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
 }
 
 .contenedor{
     max-width:1200px;
-    margin:auto;
+    width:100%;
     background:white;
     padding:30px;
     border-radius:25px;
@@ -174,15 +189,6 @@ tr:hover{
     display:inline-block;
 }
 
-.boton{
-    text-decoration:none;
-    color:white;
-    padding:8px 15px;
-    border-radius:8px;
-    font-size:14px;
-    font-weight:bold;
-}
-
 .volver{
     display:block;
     width:250px;
@@ -212,6 +218,10 @@ tr:hover{
 </style>
 </head>
 <body>
+
+<?php include("menu.php"); ?>
+
+<main class="fondo-panel">
     <div class="contenedor">
         <h1> Detalle del Pedido #<?php echo $p['id'];?></h1>
 
@@ -236,7 +246,7 @@ tr:hover{
                         <div class="valor"><?php echo $p['estado'];?></div>
                     </div>
                     <div class="info-item">
-                        <div class="etiqueta"> Cliente</div>
+                        <div class="etiqueta"> Vendedor</div>
                         <div class="valor"><?php echo $p['nombrevendedor'];?></div>
                     </div>
                     <div class="info-item" style="grid-column:1 / -1;">
@@ -282,5 +292,9 @@ tr:hover{
 
         <a href="pedidos.php" class="volver">Volver a pedidos</a>
     </div>
+</main>
+
+<?php include("paginaprincipal/piedepagina.php"); ?>
+
 </body>
 </html>

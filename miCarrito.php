@@ -300,7 +300,7 @@ include("menu.php");
 
     </table>
 
-    <h2 class="titulo-seccion">🛒 Productos agregados</h2>
+    <h2 class="titulo-seccion"> Productos agregados</h2>
 
     <table>
 
@@ -328,7 +328,7 @@ include("menu.php");
 
             <td>
 
-                <form action="actualizarCarrito.php" method="POST">
+                <form action="carrito/actualizarCarrito.php" method="POST">
 
                     <input
                         type="hidden"

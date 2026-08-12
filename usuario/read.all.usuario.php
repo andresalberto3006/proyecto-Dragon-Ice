@@ -1,27 +1,11 @@
 <?php
-
-$direccion="localhost";
-$usuario="root";
-$contraseña="";
-$nombreBase="dragonice";
-
-$conn = new mysqli($direccion,$usuario,$contraseña,$nombreBase);
-
-if($conn->connect_error){
-    die("Hubo un error al conectar a la base de datos");
-}
-
-$sql = "SELECT * FROM usuario ORDER BY ci DESC";
-$resultado = $conn->query($sql);
-
-?>
-
-<?php
 session_start();
 if (!isset($_SESSION['rol'])) { header("Location: ../iniciosesion.php"); exit(); }
-if ($_SESSION['rol'] != 'Administrador') { header("Location: ../paginaprincipal/04.vendedor.php"); exit(); }
+if ($_SESSION['rol'] != 'Administrador') { header("Location: ../paginaprincipal/vendedor20.php"); exit(); }
 include("../conexion.php");
-$resultado=$conexion->query("SELECT * FROM usuario ORDER BY ci DESC");
+$resultado = $conexion->query("SELECT * FROM usuario ORDER BY ci DESC");
+
+$rutaMenu = "../";
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -39,16 +23,29 @@ $resultado=$conexion->query("SELECT * FROM usuario ORDER BY ci DESC");
     font-family:Arial, Helvetica, sans-serif;
 }
 
+html, body{
+    height:100%;
+}
+
 body{
+    display:flex;
+    flex-direction:column;
     min-height:100vh;
+}
+
+.fondo-panel{
+    flex:1;
     background:linear-gradient(135deg,#18335c,#2f5d9f,#7fc7ff);
     padding:40px;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
 }
 
 .contenedor{
 
     max-width:1200px;
-    margin:auto;
+    width:100%;
 
     background:white;
 
@@ -140,7 +137,18 @@ tr:hover{
 </style>
 
 </head>
-<body><div class="contenedor"><h1>🍦 Lista de Usuarios Registrados</h1><table><tr><th>CI</th><th>Nombre</th><th>Dirección</th><th>Celular</th><th>Rol</th><th>Estado</th><th>Acciones</th></tr>
+<body>
+
+<?php include("../menu.php"); ?>
+
+<main class="fondo-panel">
+<div class="contenedor"><h1>🍦 Lista de Usuarios Registrados</h1><table><tr><th>CI</th><th>Nombre</th><th>Dirección</th><th>Celular</th><th>Rol</th><th>Estado</th><th>Acciones</th></tr>
 <?php if($resultado->num_rows>0){ while($fila=$resultado->fetch_assoc()){ ?>
 <tr><td><?php echo $fila['ci']; ?></td><td><?php echo $fila['nombre']; ?></td><td><?php echo $fila['direccion']; ?></td><td><?php echo $fila['celular']; ?></td><td><?php echo $fila['rol']; ?></td><td><?php echo $fila['estado']; ?></td><td><div class="acciones"><a class="boton mostrar" href="readusuario.php?ci=<?php echo $fila['ci']; ?>">Mostrar</a><a class="boton editar" href="updateusuario.php?ci=<?php echo $fila['ci']; ?>">Editar</a><?php if($fila['rol']=='Vendedor'){ ?><a class="boton editar" href="estado_usuario.php?ci=<?php echo $fila['ci']; ?>"><?php echo $fila['estado']=='Activo'?'Bloquear':'Activar'; ?></a><?php } ?><a class="boton eliminar" href="delete_usuario.php?ci=<?php echo $fila['ci']; ?>">Eliminar</a></div></td></tr>
-<?php }} else { ?><tr><td colspan="7">No existen usuarios registrados.</td></tr><?php } ?></table><a href="formulariousuario.php" class="volver">➕ Registrar Nuevo Usuario</a><a href="../paginaprincipal/02.admin.php" class="volver">Volver al panel</a></div></body></html>
+<?php }} else { ?><tr><td colspan="7">No existen usuarios registrados.</td></tr><?php } ?></table><a href="formulariousuario.php" class="volver">➕ Registrar Nuevo Usuario</a><a href="../paginaprincipal/02.admin.php" class="volver">Volver al panel</a></div>
+</main>
+
+<?php include("../paginaprincipal/piedepagina.php"); ?>
+
+</body>
+</html>

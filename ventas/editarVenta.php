@@ -1,5 +1,15 @@
 <?php
-session_start();if(!isset($_SESSION['rol'])){header("Location: ../iniciosesion.php");exit();}if($_SESSION['rol']!='Administrador'){header("Location: ../paginaprincipal/vendedor20.php");exit();}include("../conexion.php");$id=isset($_GET['id'])?$_GET['id']:0;$r=$conexion->query("SELECT * FROM ventas WHERE id='$id'");if($r->num_rows==0){header("Location: ventas.php");exit();}$v=$r->fetch_assoc();?>
+session_start();
+if(!isset($_SESSION['rol'])){header("Location: ../iniciosesion.php");exit();}
+if($_SESSION['rol']!='Administrador'){header("Location: ../paginaprincipal/vendedor20.php");exit();}
+include("../conexion.php");
+$id=isset($_GET['id'])?$_GET['id']:0;
+$r=$conexion->query("SELECT * FROM ventas WHERE id='$id'");
+if($r->num_rows==0){header("Location: ventas.php");exit();}
+$v=$r->fetch_assoc();
+
+$rutaMenu = "../";
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -15,15 +25,23 @@ session_start();if(!isset($_SESSION['rol'])){header("Location: ../iniciosesion.p
     font-family:Arial, Helvetica, sans-serif;
 }
 
+html, body{
+    height:100%;
+}
+
 body{
-
+    display:flex;
+    flex-direction:column;
     min-height:100vh;
+}
 
+.fondo-panel{
+    flex:1;
+    background:linear-gradient(135deg,#18335c,#2f5d9f,#7fc7ff);
+    padding:40px;
     display:flex;
     justify-content:center;
     align-items:center;
-
-    background:linear-gradient(135deg,#18335c,#2f5d9f,#7fc7ff);
 }
 
 .formulario{
@@ -101,23 +119,13 @@ input:focus{
     background:#2f5d9f;
 }
 
-label.error{
-    color:red;
-    font-size:12px;
-    margin-top:5px;
-}
-
-input.error{
-    border:2px solid red;
-}
-
-input.valid{
-    border:2px solid green;
-}
-
 </style>
 </head>
 <body>
+
+<?php include("../menu.php"); ?>
+
+<main class="fondo-panel">
     <div class="formulario">
         <h2>✏️ Actualizar Venta</h2>
         <p class="subtitulo">Modifique los datos permitidos</p>
@@ -132,5 +140,9 @@ input.valid{
             <button type="submit" class="boton">Guardar Cambios</button>
         </form>
     </div>
+</main>
+
+<?php include("../paginaprincipal/piedepagina.php"); ?>
+
 </body>
 </html>

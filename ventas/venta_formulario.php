@@ -1,5 +1,14 @@
 <?php
-session_start();if(!isset($_SESSION['rol'])||$_SESSION['rol']!='Vendedor'){header("Location: iniciosesion.php");exit();}include("../conexion.php");$id=isset($_GET['id'])?$_GET['id']:0;$ci=$_SESSION['ci'];$r=$conexion->query("SELECT p.*,IFNULL(SUM(c.costototal),0) AS total FROM pedidos p LEFT JOIN carrito c ON p.id=c.pedidos_id WHERE p.id='$id' AND p.vendedor_ci='$ci' AND p.estado='En proceso' GROUP BY p.id,p.nombre,p.fecha,p.estado,p.vendedor_ci,p.nombrevendedor,p.metodo_pago");if($r->num_rows==0){header("Location: pedidos.php");exit();}$p=$r->fetch_assoc();?>
+session_start();
+if(!isset($_SESSION['rol'])||$_SESSION['rol']!='Vendedor'){header("Location: ../iniciosesion.php");exit();}
+include("../conexion.php");
+$id=isset($_GET['id'])?$_GET['id']:0;
+$ci=$_SESSION['ci'];
+$r=$conexion->query("SELECT p.*,IFNULL(SUM(c.costototal),0) AS total FROM pedidos p LEFT JOIN carrito c ON p.id=c.pedidos_id WHERE p.id='$id' AND p.vendedor_ci='$ci' AND p.estado='En proceso' GROUP BY p.id,p.nombre,p.fecha,p.estado,p.vendedor_ci,p.nombrevendedor,p.metodo_pago");
+if($r->num_rows==0){header("Location: ../pedidos.php");exit();}
+$p=$r->fetch_assoc();
+$rutaMenu="../";
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -9,141 +18,126 @@ session_start();if(!isset($_SESSION['rol'])||$_SESSION['rol']!='Vendedor'){heade
 <style>
 
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,Helvetica,sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+html, body{
+    height:100%;
 }
 
 body{
-
-background-image:url("1 (4).png");
-background-size:cover;
-background-position:center;
-background-attachment:fixed;
-
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
 }
 
-.contenedor{
-
-width:100%;
-min-height:100vh;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-padding:30px;
-
+.fondo-panel{
+    flex:1;
+    background:linear-gradient(135deg,#18335c,#2f5d9f,#7fc7ff);
+    padding:40px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
 .tarjeta{
 
-width:450px;
+    width:450px;
 
-background:rgb(125,197,197);
+    background:white;
 
-border-radius:25px;
+    border-radius:25px;
 
-padding:35px;
+    padding:35px;
 
-box-shadow:0 15px 35px rgba(0,0,0,.4);
-
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
 }
 
 .tarjeta h1{
-
-text-align:center;
-
-color:white;
-
-margin-bottom:25px;
-
+    text-align:center;
+    color:#18335c;
+    margin-bottom:25px;
 }
 
 label{
-
-display:block;
-
-margin-top:15px;
-
-font-weight:bold;
-
-color:white;
-
+    display:block;
+    margin-top:15px;
+    margin-bottom:5px;
+    font-weight:bold;
+    color:#18335c;
 }
 
 input{
 
-width:100%;
+    width:100%;
 
-padding:12px;
+    padding:12px;
 
-margin-top:5px;
+    border:1px solid #ccc;
 
-border:none;
+    border-radius:10px;
 
-border-radius:10px;
+    outline:none;
 
-font-size:16px;
+    font-size:16px;
+}
 
+input:focus{
+    border:2px solid #4da6ff;
 }
 
 button{
 
-width:100%;
+    width:100%;
 
-padding:15px;
+    padding:15px;
 
-margin-top:25px;
+    margin-top:25px;
 
-border:none;
+    border:none;
 
-background:#0b5ed7;
+    background:#4da6ff;
 
-color:white;
+    color:white;
 
-font-size:18px;
+    font-size:18px;
 
-cursor:pointer;
+    cursor:pointer;
 
-border-radius:12px;
+    border-radius:12px;
 
-transition:.3s;
-
+    transition:.3s;
 }
 
 button:hover{
-
-background:#084298;
-
-transform:scale(1.02);
-
+    background:#2f5d9f;
+    transform:scale(1.02);
 }
 
 </style>
 </head>
 <body>
-    <?php $rutaMenu="";include("../menu.php");?>
-    <div class="contenedor">
+    <?php include("../menu.php"); ?>
+
+    <main class="fondo-panel">
         <div class="tarjeta">
-            <h1>🍦 Registrar Venta</h1>
+            <h1> Registrar Venta</h1>
             <form action="registrarVenta.php" method="POST">
-                <input type="hidden" name="idPedido" value="<?php 
-                echo $p['id'];?>">
+                <input type="hidden" name="idPedido" value="<?php echo $p['id'];?>">
                 <label>Cliente</label>
-                <input type="text" value="<?php 
-                echo $p['nombre'];?>" readonly>
+                <input type="text" value="<?php echo $p['nombre'];?>" readonly>
                 <label>Total</label>
-                <input type="text" value="Bs. <?php 
-                echo $p['total'];?>" readonly>
+                <input type="text" value="Bs. <?php echo $p['total'];?>" readonly>
                 <label>Método de pago</label>
                 <input type="text" name="metodo_pago" placeholder="Efectivo o transferencia" required>
                 <button type="submit">Guardar venta</button>
             </form>
         </div>
-    </div>
+    </main>
+
+    <?php include("../paginaprincipal/piedepagina.php"); ?>
 </body>
 </html>

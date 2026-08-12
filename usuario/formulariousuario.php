@@ -1,8 +1,10 @@
 <?php
 session_start();
 if (!isset($_SESSION['rol'])) { header("Location: ../iniciosesion.php"); exit(); }
-if ($_SESSION['rol'] != 'Administrador') { header("Location: ../paginaprincipal/04.vendedor.php"); exit(); }
+if ($_SESSION['rol'] != 'Administrador') { header("Location: ../paginaprincipal/vendedor20.php"); exit(); }
 include("../conexion.php");
+
+$rutaMenu = "../";
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -10,9 +12,9 @@ include("../conexion.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
-    <title>Formulario Heladeria</title>
+    <title>Registrar Usuario</title>
 
     <style>
 
@@ -20,76 +22,63 @@ include("../conexion.php");
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        html, body{
+            height:100%;
         }
 
         body{
-            font-family: Arial, sans-serif;
+            display:flex;
+            flex-direction:column;
+            min-height:100vh;
+        }
 
-            background-image: url("music-musical-instrument-guitar-two-dark-background.png");
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            min-height: 100vh;
-            padding: 20px;
+        .fondo-panel{
+            flex:1;
+            background:linear-gradient(135deg,#18335c,#2f5d9f,#7fc7ff);
+            padding:40px;
+            display:flex;
+            justify-content:center;
+            align-items:center;
         }
 
         .formulario{
-
-            width: 330px;
-            padding: 30px;
-
-            border-radius: 15px;
-
-            background-color: rgba(24, 45, 75, 0.9);
-
-            border: 2px solid #6bb7ff;
-
-            box-shadow: 0 0 15px rgba(0,0,0,0.4);
-        }
-        .formulario:hover{
-            transition: 1s;
-            transform:scale(1.05);
+            width:380px;
+            padding:35px;
+            border-radius:25px;
+            background:white;
+            box-shadow:0 10px 30px rgba(0,0,0,.25);
         }
 
         h2{
             text-align: center;
-            color: #fff3d6;
+            color: #18335c;
             margin-bottom: 10px;
         }
 
         .subtitulo{
             text-align: center;
-            color: #dcdcdc;
+            color: #666;
             margin-bottom: 20px;
             font-size: 14px;
         }
 
         label{
             display: block;
-
             margin-top: 12px;
             margin-bottom: 5px;
-
-            color: #fff3d6;
-
+            font-weight:bold;
+            color: #18335c;
             font-size: 15px;
         }
 
         input{
             width: 100%;
-
             padding: 10px;
-
-            border: none;
+            border: 1px solid #ccc;
             border-radius: 8px;
-
-            background-color: #f2f2f2;
-
             outline: none;
         }
 
@@ -98,26 +87,19 @@ include("../conexion.php");
         }
 
         .boton{
-
             width: 100%;
-
             background-color: #4da6ff;
             color: white;
-
             padding: 12px;
-
             border: none;
             border-radius: 10px;
-
             margin-top: 20px;
-
             font-size: 16px;
-
             cursor: pointer;
         }
 
         .boton:hover{
-            background-color: #ffae42;
+            background-color: #2f5d9f;
         }
 
         label.error{
@@ -128,7 +110,6 @@ include("../conexion.php");
         }
          input.error{
             border:2px solid red;
-
         }
 
         input.valid{
@@ -140,13 +121,16 @@ include("../conexion.php");
 </head>
 
 <body>
+
+<?php include("../menu.php"); ?>
+
+<main class="fondo-panel">
     <div class="formulario">
-        <h2>Crear Cuenta</h2>
+        <h2>🍦 Registrar Usuario</h2>
         <p class="subtitulo">
             Complete los datos del usuario
         </p>
 
-        
         <form id="formulario" action="../usuario/registrousuario.php" method="POST">
 
             <label for="ci">CI</label>
@@ -172,6 +156,9 @@ include("../conexion.php");
             </button>
         </form>
     </div>
+</main>
+
+<?php include("../paginaprincipal/piedepagina.php"); ?>
     
     <script>
 $(document).ready(function(){

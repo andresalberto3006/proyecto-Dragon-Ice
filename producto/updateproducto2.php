@@ -3,12 +3,35 @@ session_start();
 if (!isset($_SESSION['rol'])) { header("Location: ../iniciosesion.php"); exit(); }
 if ($_SESSION['rol'] != 'Administrador' && $_SESSION['rol'] != 'Vendedor') { header("Location: ../iniciosesion.php"); exit(); }
 include("../conexion.php");
-if($_SERVER["REQUEST_METHOD"]!="POST"){header("Location: read.all.producto.php");exit();}$id=$_POST['id'];$nombre=$_POST['nombre'];$descripcion=$_POST['descripcion'];$precio=$_POST['precio'];$costo=$_POST['costo'];$stock=$_POST['stock'];$imagen=$_POST['imagenActual'];if(isset($_FILES['imagen'])&&$_FILES['imagen']['name']!=""){$nombreImagen=time()."_".$_FILES['imagen']['name'];$destino="../imagenesproyecto/".$nombreImagen;if(move_uploaded_file($_FILES['imagen']['tmp_name'],$destino)){$imagen="imagenesproyecto/".$nombreImagen;}}$sql="UPDATE productos SET nombre='$nombre',descripcion='$descripcion',precio='$precio',costo='$costo',stock='$stock',imagen='$imagen' WHERE id='$id'";$conexion->query($sql);header("Location: read.all.producto.php");exit();?>
 
+if ($_SERVER["REQUEST_METHOD"] != "POST") { header("Location: read.all.producto.php"); exit(); }
+
+$id = $_POST['id'];
+$nombre = $_POST['nombre'];
+$descripcion = $_POST['descripcion'];
+$precio = $_POST['precio'];
+$costo = $_POST['costo'];
+$stock = $_POST['stock'];
+$imagen = $_POST['imagenActual'];
+
+if (isset($_FILES['imagen']) && $_FILES['imagen']['name'] != "") {
+    $nombreImagen = time()."_".$_FILES['imagen']['name'];
+    $destino = "../imagenesproyecto/".$nombreImagen;
+    if (move_uploaded_file($_FILES['imagen']['tmp_name'], $destino)) {
+        $imagen = "imagenesproyecto/".$nombreImagen;
+    }
+}
+
+$sql = "UPDATE productos SET nombre='$nombre',descripcion='$descripcion',precio='$precio',costo='$costo',stock='$stock',imagen='$imagen' WHERE id='$id'";
+$actualizado = $conexion->query($sql);
+
+$rutaMenu = "../";
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Producto Actualizado</title>
 
 <style>
@@ -20,12 +43,23 @@ box-sizing:border-box;
 font-family:Arial, Helvetica, sans-serif;
 }
 
+html, body{
+    height:100%;
+}
+
 body{
-min-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:linear-gradient(135deg,#18335c,#2f5d9f,#7fc7ff);
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+}
+
+.fondo-panel{
+    flex:1;
+    background:linear-gradient(135deg,#18335c,#2f5d9f,#7fc7ff);
+    padding:40px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
 .tarjeta{
@@ -83,6 +117,9 @@ background:#2f5d9f;
 
 <body>
 
+<?php include("../menu.php"); ?>
+
+<main class="fondo-panel">
 <div class="tarjeta">
 
 <?php if($actualizado){ ?>
@@ -106,7 +143,7 @@ Error al actualizar
 </h1>
 
 <p>
-<?php echo $conn->error; ?>
+<?php echo $conexion->error; ?>
 </p>
 
 <?php } ?>
@@ -118,10 +155,9 @@ Ver todos los productos
 </a>
 
 </div>
+</main>
+
+<?php include("../paginaprincipal/piedepagina.php"); ?>
 
 </body>
 </html>
-
-<?php
-$conn->close();
-?>

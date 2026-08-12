@@ -3,7 +3,10 @@ session_start();
 if (!isset($_SESSION['rol'])) { header("Location: ../iniciosesion.php"); exit(); }
 if ($_SESSION['rol'] != 'Administrador' && $_SESSION['rol'] != 'Vendedor') { header("Location: ../iniciosesion.php"); exit(); }
 include("../conexion.php");
-$id=isset($_GET['id'])?$_GET['id']:0;$resultado=$conexion->query("SELECT * FROM productos WHERE id='$id'"); ?>
+$id=isset($_GET['id'])?$_GET['id']:0;$resultado=$conexion->query("SELECT * FROM productos WHERE id='$id'");
+
+$rutaMenu = "../";
+?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -20,12 +23,23 @@ box-sizing:border-box;
 font-family:Arial, Helvetica, sans-serif;
 }
 
+html, body{
+    height:100%;
+}
+
 body{
-min-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:linear-gradient(135deg,#18335c,#2f5d9f,#7fc7ff);
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+}
+
+.fondo-panel{
+    flex:1;
+    background:linear-gradient(135deg,#18335c,#2f5d9f,#7fc7ff);
+    padding:40px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
 .tarjeta{
@@ -73,4 +87,15 @@ background:#2f5d9f;
 
 </style>
 </head>
-<body><div class="tarjeta"><h1>🍦 Información del Producto</h1><?php if($resultado->num_rows>0){$fila=$resultado->fetch_assoc();?><div class="dato"><strong>ID:</strong> <?php echo $fila['id'];?></div><div class="dato"><strong>Nombre:</strong> <?php echo $fila['nombre'];?></div><div class="dato"><strong>Descripción:</strong> <?php echo $fila['descripcion'];?></div><div class="dato"><strong>Precio:</strong> <?php echo $fila['precio'];?></div><div class="dato"><strong>Costo:</strong> <?php echo $fila['costo'];?></div><div class="dato"><strong>Stock:</strong> <?php echo $fila['stock'];?></div><div class="dato"><img src="../<?php echo $fila['imagen'];?>" width="180"></div><?php }else{?><div class="dato">Producto no encontrado.</div><?php }?><div class="botones"><a href="read.all.producto.php" class="boton">Ver todos los productos</a><a href="formularioproducto.php" class="boton">Registrar Producto</a></div></div></body></html>
+<body>
+
+<?php include("../menu.php"); ?>
+
+<main class="fondo-panel">
+<div class="tarjeta"><h1>🍦 Información del Producto</h1><?php if($resultado->num_rows>0){$fila=$resultado->fetch_assoc();?><div class="dato"><strong>ID:</strong> <?php echo $fila['id'];?></div><div class="dato"><strong>Nombre:</strong> <?php echo $fila['nombre'];?></div><div class="dato"><strong>Descripción:</strong> <?php echo $fila['descripcion'];?></div><div class="dato"><strong>Precio:</strong> <?php echo $fila['precio'];?></div><div class="dato"><strong>Costo:</strong> <?php echo $fila['costo'];?></div><div class="dato"><strong>Stock:</strong> <?php echo $fila['stock'];?></div><div class="dato"><img src="../<?php echo $fila['imagen'];?>" width="180"></div><?php }else{?><div class="dato">Producto no encontrado.</div><?php }?><div class="botones"><a href="read.all.producto.php" class="boton">Ver todos los productos</a><a href="formularioproducto.php" class="boton">Registrar Producto</a></div></div>
+</main>
+
+<?php include("../paginaprincipal/piedepagina.php"); ?>
+
+</body>
+</html>

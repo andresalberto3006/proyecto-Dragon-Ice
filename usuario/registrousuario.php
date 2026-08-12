@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['rol'])) { header("Location: ../iniciosesion.php"); exit(); }
-if ($_SESSION['rol'] != 'Administrador') { header("Location: ../paginaprincipal/04.vendedor.php"); exit(); }
+if ($_SESSION['rol'] != 'Administrador') { header("Location: ../paginaprincipal/vendedor20.php"); exit(); }
 include("../conexion.php");
 if ($_SERVER["REQUEST_METHOD"] != "POST") { header("Location: formulariousuario.php"); exit(); }
 
@@ -20,6 +20,8 @@ if (!$stmt->execute()) {
     exit();
 }
 $stmt->close();
+
+$rutaMenu = "../";
 ?>
 
 <!DOCTYPE html>
@@ -39,21 +41,30 @@ $stmt->close();
     font-family:Arial, Helvetica, sans-serif;
 }
 
-body{
-    min-height:100vh;
+html, body{
+    height:100%;
+}
 
+body{
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+}
+
+.fondo-panel{
+    flex:1;
+    background:linear-gradient(135deg,#18335c,#2f5d9f,#7fc7ff);
+    padding:40px;
     display:flex;
     justify-content:center;
     align-items:center;
-
-    background:linear-gradient(135deg,#18335c,#2f5d9f,#7fc7ff);
 }
 
 .tarjeta{
 
     width:550px;
 
-    background-color: #c2e0ff;
+    background-color: white;
 
     padding:45px;
 
@@ -124,6 +135,10 @@ h1{
 </head>
 
 <body>
+
+<?php include("../menu.php"); ?>
+
+<main class="fondo-panel">
     <div class="tarjeta">
         <div class="icono">🍦✅
 
@@ -138,5 +153,9 @@ h1{
                 <a href="read.all.usuario.php" class="boton">Ver todos los usuarios</a>
             </div>
         </div>
+</main>
+
+<?php include("../paginaprincipal/piedepagina.php"); ?>
+
     </body>
     </html>

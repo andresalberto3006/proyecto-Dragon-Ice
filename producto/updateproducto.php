@@ -3,7 +3,10 @@ session_start();
 if (!isset($_SESSION['rol'])) { header("Location: ../iniciosesion.php"); exit(); }
 if ($_SESSION['rol'] != 'Administrador' && $_SESSION['rol'] != 'Vendedor') { header("Location: ../iniciosesion.php"); exit(); }
 include("../conexion.php");
-$id=isset($_GET['id'])?$_GET['id']:0;$resultado=$conexion->query("SELECT * FROM productos WHERE id='$id'");if($resultado->num_rows==0){die("Producto no encontrado");}$fila=$resultado->fetch_assoc();$nombre=$fila['nombre'];$descripcion=$fila['descripcion'];$precio=$fila['precio'];$costo=$fila['costo'];$stock=$fila['stock'];$imagen=$fila['imagen'];?>
+$id=isset($_GET['id'])?$_GET['id']:0;$resultado=$conexion->query("SELECT * FROM productos WHERE id='$id'");if($resultado->num_rows==0){die("Producto no encontrado");}$fila=$resultado->fetch_assoc();$nombre=$fila['nombre'];$descripcion=$fila['descripcion'];$precio=$fila['precio'];$costo=$fila['costo'];$stock=$fila['stock'];$imagen=$fila['imagen'];
+
+$rutaMenu = "../";
+?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -24,12 +27,23 @@ box-sizing:border-box;
 font-family:Arial, Helvetica, sans-serif;
 }
 
+html, body{
+    height:100%;
+}
+
 body{
-min-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:linear-gradient(135deg,#18335c,#2f5d9f,#7fc7ff);
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+}
+
+.fondo-panel{
+    flex:1;
+    background:linear-gradient(135deg,#18335c,#2f5d9f,#7fc7ff);
+    padding:40px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
 .formulario{
@@ -57,6 +71,7 @@ display:block;
 margin-top:12px;
 margin-bottom:5px;
 font-weight:bold;
+color:#18335c;
 }
 
 input{
@@ -93,6 +108,9 @@ margin-top:5px;
 
 <body>
 
+<?php include("../menu.php"); ?>
+
+<main class="fondo-panel">
 <div class="formulario">
 
 <h2>✏️ Editar Producto</h2>
@@ -141,6 +159,9 @@ Actualizar Producto
 </form>
 
 </div>
+</main>
+
+<?php include("../paginaprincipal/piedepagina.php"); ?>
 
 <script>
 

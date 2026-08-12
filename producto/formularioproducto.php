@@ -3,6 +3,8 @@ session_start();
 if (!isset($_SESSION['rol'])) { header("Location: ../iniciosesion.php"); exit(); }
 if ($_SESSION['rol'] != 'Administrador' && $_SESSION['rol'] != 'Vendedor') { header("Location: ../iniciosesion.php"); exit(); }
 include("../conexion.php");
+
+$rutaMenu = "../";
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -12,46 +14,52 @@ include("../conexion.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
-    <title>Formulario Heladería</title>
+    <title>Registrar Producto</title>
 
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }   
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        html, body{
+            height:100%;
+        }
 
         body {
-            font-family: Arial, Helvetica, sans-serif;
-            background-image: url("music-musical-instrument-guitar-two-dark-background.png");
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .fondo-panel{
+            flex:1;
+            background:linear-gradient(135deg,#18335c,#2f5d9f,#7fc7ff);
+            padding:40px;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            padding: 20px;
         }
 
         .formulario {
-            width: 330px;
+            width: 380px;
             padding: 30px;
-            border-radius: 15px;
-            background-color: rgba(24, 45, 75, 0.9);
-            border: 2px solid #6bb7ff;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+            border-radius: 25px;
+            background:white;
+            box-shadow: 0 10px 30px rgba(0,0,0,.25);
         }
 
         .formulario h2 {
             text-align: center;
-            color: #fff3d6;
+            color: #18335c;
             margin-bottom: 10px;
         }
 
         .subtitulo {
             text-align: center;
-            color: #dcdcdc;
+            color: #666;
             margin-bottom: 20px;
             font-size: 14px;
         }
@@ -63,7 +71,8 @@ include("../conexion.php");
         label {
             display: block;
             margin-bottom: 5px;
-            color: #fff3d6;
+            font-weight: bold;
+            color: #18335c;
             font-size: 15px;
         }
 
@@ -71,8 +80,7 @@ include("../conexion.php");
             width: 100%;
             padding: 10px;
             border-radius: 8px;
-            border: none;
-            background-color: #f2f2f2;
+            border: 1px solid #ccc;
             outline: none;
         }
 
@@ -93,7 +101,7 @@ include("../conexion.php");
         }
 
         .boton:hover {
-            background-color: #ffae42;
+            background-color: #2f5d9f;
         }
 
         label.error {
@@ -114,13 +122,14 @@ include("../conexion.php");
 </head>
 
 <body>
+
+<?php include("../menu.php"); ?>
+
+<main class="fondo-panel">
     <div class="formulario">
         <h2>🍦 Registrar Producto</h2>
         <p class="subtitulo">Complete los datos del producto</p>
 
-        
-
-    
         <form id="formulario" action="../producto/registroproducto.php" method="POST" enctype="multipart/form-data">
 
             <div class="grupo">
@@ -159,6 +168,9 @@ include("../conexion.php");
             <button type="submit" class="boton">Guardar Producto</button>
         </form>
     </div>
+</main>
+
+<?php include("../paginaprincipal/piedepagina.php"); ?>
 
     <script>
         $(document).ready(function(){

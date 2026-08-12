@@ -1,46 +1,21 @@
 <?php
-
-$direccion="localhost";
-$usuario="root";
-$contraseña="";
-$nombreBase="dragonice";
-
-$conexion = new mysqli($direccion,$usuario,$contraseña,$nombreBase);
-
-if($conexion->connect_error){
-    die("Hubo un error al conectar a la base de datos");
-}
-
-$ci= $_GET['ci'];
-
-$sql = "SELECT * FROM usuario WHERE ci='$ci'";
-
-$resultado = $conexion->query($sql);
-
-if($resultado->num_rows > 0){
-
-    $fila = $resultado->fetch_assoc();
-
-    $nombre = $fila['nombre'];
-    $direccionUsuario = $fila['direccion'];
-    $celular = $fila['celular'];
-    $rol = $fila['rol'];
-    $estado = $fila['estado'];
-
-}else{
-
-    die("Usuario no encontrado");
-
-}
-
-?>
-
-<?php
 session_start();
 if (!isset($_SESSION['rol'])) { header("Location: ../iniciosesion.php"); exit(); }
-if ($_SESSION['rol'] != 'Administrador') { header("Location: ../paginaprincipal/04.vendedor.php"); exit(); }
+if ($_SESSION['rol'] != 'Administrador') { header("Location: ../paginaprincipal/vendedor20.php"); exit(); }
 include("../conexion.php");
-$ci=isset($_GET['ci'])?$_GET['ci']:0; $resultado=$conexion->query("SELECT * FROM usuario WHERE ci='$ci'"); if($resultado->num_rows==0){ die("Usuario no encontrado"); } $fila=$resultado->fetch_assoc(); $nombre=$fila['nombre']; $direccionUsuario=$fila['direccion']; $celular=$fila['celular']; $rol=$fila['rol']; $estado=$fila['estado']; ?>
+
+$ci = isset($_GET['ci']) ? $_GET['ci'] : 0;
+$resultado = $conexion->query("SELECT * FROM usuario WHERE ci='$ci'");
+if ($resultado->num_rows == 0) { die("Usuario no encontrado"); }
+$fila = $resultado->fetch_assoc();
+$nombre = $fila['nombre'];
+$direccionUsuario = $fila['direccion'];
+$celular = $fila['celular'];
+$rol = $fila['rol'];
+$estado = $fila['estado'];
+
+$rutaMenu = "../";
+?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -64,15 +39,23 @@ $ci=isset($_GET['ci'])?$_GET['ci']:0; $resultado=$conexion->query("SELECT * FROM
     font-family:Arial, Helvetica, sans-serif;
 }
 
+html, body{
+    height:100%;
+}
+
 body{
-
+    display:flex;
+    flex-direction:column;
     min-height:100vh;
+}
 
+.fondo-panel{
+    flex:1;
+    background:linear-gradient(135deg,#18335c,#2f5d9f,#7fc7ff);
+    padding:40px;
     display:flex;
     justify-content:center;
     align-items:center;
-
-    background:linear-gradient(135deg,#18335c,#2f5d9f,#7fc7ff);
 }
 
 .formulario{
@@ -170,6 +153,9 @@ input.valid{
 
 <body>
 
+<?php include("../menu.php"); ?>
+
+<main class="fondo-panel">
 <div class="formulario">
 
 <h2>✏️ Actualizar Usuario</h2>
@@ -181,22 +167,22 @@ Modifique los datos del usuario
 <form id="formulario" action="updateusuario2.php" method="POST">
 
      <label>CI</label>
-     <input type="number"name="ci"id="ci"value="<?php echo $ci; ?>"readonly>
+     <input type="number" name="ci" id="ci" value="<?php echo $ci; ?>" readonly>
 
      <label>Nombre</label>
-     <input type="text"name="nombre"id="nombre"value="<?php echo $nombre; ?>">
+     <input type="text" name="nombre" id="nombre" value="<?php echo $nombre; ?>">
 
      <label>Dirección</label>
-     <input type="text"name="direccion"id="direccion"value="<?php echo $direccionUsuario; ?>">
+     <input type="text" name="direccion" id="direccion" value="<?php echo $direccionUsuario; ?>">
 
      <label>Celular</label>
-     <input type="number"name="celular"id="celular"value="<?php echo $celular; ?>">
+     <input type="number" name="celular" id="celular" value="<?php echo $celular; ?>">
 
      <label>Rol</label>
-     <input type="text"name="rol"id="rol"value="<?php echo $rol; ?>">
+     <input type="text" name="rol" id="rol" value="<?php echo $rol; ?>">
 
      <label>Estado</label>
-     <input type="text"name="estado"id="estado"value="<?php echo $estado; ?>">
+     <input type="text" name="estado" id="estado" value="<?php echo $estado; ?>">
 
      <button type="submit" class="boton">
 Guardar Cambios
@@ -205,6 +191,9 @@ Guardar Cambios
 </form>
 
 </div>
+</main>
+
+<?php include("../paginaprincipal/piedepagina.php"); ?>
 
 <script>
 
