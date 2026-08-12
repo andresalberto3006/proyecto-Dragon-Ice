@@ -142,10 +142,10 @@ tr:hover{
 <?php include("../menu.php"); ?>
 
 <main class="fondo-panel">
-<div class="contenedor"><h1>🍦 Lista de Usuarios Registrados</h1><table><tr><th>CI</th><th>Nombre</th><th>Dirección</th><th>Celular</th><th>Rol</th><th>Estado</th><th>Acciones</th></tr>
+<div class="contenedor"><h1> Lista de Usuarios Registrados</h1><table><tr><th>CI</th><th>Nombre</th><th>Dirección</th><th>Celular</th><th>Rol</th><th>Estado</th><th>Acciones</th></tr>
 <?php if($resultado->num_rows>0){ while($fila=$resultado->fetch_assoc()){ ?>
 <tr><td><?php echo $fila['ci']; ?></td><td><?php echo $fila['nombre']; ?></td><td><?php echo $fila['direccion']; ?></td><td><?php echo $fila['celular']; ?></td><td><?php echo $fila['rol']; ?></td><td><?php echo $fila['estado']; ?></td><td><div class="acciones"><a class="boton mostrar" href="readusuario.php?ci=<?php echo $fila['ci']; ?>">Mostrar</a><a class="boton editar" href="updateusuario.php?ci=<?php echo $fila['ci']; ?>">Editar</a><?php if($fila['rol']=='Vendedor'){ ?><a class="boton editar" href="estado_usuario.php?ci=<?php echo $fila['ci']; ?>"><?php echo $fila['estado']=='Activo'?'Bloquear':'Activar'; ?></a><?php } ?><a class="boton eliminar" href="delete_usuario.php?ci=<?php echo $fila['ci']; ?>">Eliminar</a></div></td></tr>
-<?php }} else { ?><tr><td colspan="7">No existen usuarios registrados.</td></tr><?php } ?></table><a href="formulariousuario.php" class="volver">➕ Registrar Nuevo Usuario</a><a href="../paginaprincipal/02.admin.php" class="volver">Volver al panel</a></div>
+<?php }} else { ?><tr><td colspan="7">No existen usuarios registrados.</td></tr><?php } ?></table><a href="formulariousuario.php" class="volver"> Registrar Nuevo Usuario</a><a href="../paginaprincipal/02.admin.php" class="volver">Volver al panel</a></div>
 </main>
 
 <?php include("../paginaprincipal/piedepagina.php"); ?>

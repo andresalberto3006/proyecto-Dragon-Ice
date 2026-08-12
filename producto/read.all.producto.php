@@ -128,7 +128,7 @@ background:#dc3545;
     
     <main class="fondo-panel">
      <div class="contenedor">
-        <h1>🍦 Lista de Productos Registrados</h1>
+        <h1> Lista de Productos Registrados</h1>
         <table>
             <tr>
                 <th>ID</th>
@@ -163,7 +163,7 @@ background:#dc3545;
             </tr>
             <?php } ?>
         </table>
-        <a href="formularioproducto.php" class="volver">➕ Registrar Nuevo Producto</a>
+        <a href="formularioproducto.php" class="volver"> Registrar Nuevo Producto</a>
         <?php if($_SESSION['rol']=='Administrador'){ ?>
             <a href="../paginaprincipal/02.admin.php" class="volver">Volver al panel</a>
         <?php }else{ ?>

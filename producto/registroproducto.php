@@ -125,7 +125,7 @@ h1{
 <?php include("../menu.php"); ?>
  
 <main class="fondo-panel">
-<div class="tarjeta"><div class="icono">🍦✅</div><h1>¡Registro Exitoso!</h1><p class="mensaje">El producto <span class="productos"><?php echo htmlspecialchars($nombre); ?></span> fue registrado correctamente.</p><div class="botones"><a href="formularioproducto.php" class="boton">Registrar otro producto</a><a href="readproducto.php?id=<?php echo $id; ?>" class="boton">Ver producto</a><a href="read.all.producto.php" class="boton">Ver todos los productos</a></div></div>
+<div class="tarjeta"><div class="icono"></div><h1>¡Registro Exitoso!</h1><p class="mensaje">El producto <span class="productos"><?php echo htmlspecialchars($nombre); ?></span> fue registrado correctamente.</p><div class="botones"><a href="formularioproducto.php" class="boton">Registrar otro producto</a><a href="readproducto.php?id=<?php echo $id; ?>" class="boton">Ver producto</a><a href="read.all.producto.php" class="boton">Ver todos los productos</a></div></div>
 </main>
  
 <?php include("../paginaprincipal/piedepagina.php"); ?>

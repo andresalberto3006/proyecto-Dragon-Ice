@@ -124,7 +124,7 @@ background:#2f5d9f;
 
 <?php if($actualizado){ ?>
 
-<div class="icono">✅🍦</div>
+<div class="icono"></div>
 
 <h1 class="exito">
 Producto actualizado correctamente
@@ -136,7 +136,7 @@ Los cambios fueron guardados exitosamente.
 
 <?php } else { ?>
 
-<div class="icono">❌</div>
+<div class="icono"></div>
 
 <h1 class="error">
 Error al actualizar

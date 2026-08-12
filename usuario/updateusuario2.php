@@ -128,12 +128,12 @@ p{
 
         <?php if ($actualizado) { ?>
 
-            <h1 class="exito">✅ Usuario actualizado correctamente</h1>
+            <h1 class="exito"> Usuario actualizado correctamente</h1>
             <p>Los cambios fueron guardados exitosamente.</p>
 
         <?php } else { ?>
 
-            <h1 class="error">❌ Error al actualizar</h1>
+            <h1 class="error"> Error al actualizar</h1>
             <p><?php echo $conexion->error; ?></p>
 
         <?php } ?>

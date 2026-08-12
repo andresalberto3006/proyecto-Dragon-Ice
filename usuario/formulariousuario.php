@@ -126,7 +126,7 @@ $rutaMenu = "../";
 
 <main class="fondo-panel">
     <div class="formulario">
-        <h2>🍦 Registrar Usuario</h2>
+        <h2> Registrar Usuario</h2>
         <p class="subtitulo">
             Complete los datos del usuario
         </p>

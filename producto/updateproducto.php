@@ -113,7 +113,7 @@ margin-top:5px;
 <main class="fondo-panel">
 <div class="formulario">
 
-<h2>✏️ Editar Producto</h2>
+<h2> Editar Producto</h2>
 
 <form id="formulario" action="updateproducto2.php" method="POST" enctype="multipart/form-data">
 

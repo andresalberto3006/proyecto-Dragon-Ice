@@ -98,7 +98,7 @@ background:#2f5d9f;
 
 <?php if($eliminado){ ?>
 
-<div class="icono">🗑️✅</div>
+<div class="icono"></div>
 
 <h1>Producto eliminado correctamente</h1>
 
@@ -106,7 +106,7 @@ background:#2f5d9f;
 
 <?php } else { ?>
 
-<div class="icono">❌</div>
+<div class="icono"></div>
 
 <h1>Error al eliminar</h1>
 

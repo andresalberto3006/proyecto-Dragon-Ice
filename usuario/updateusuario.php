@@ -158,7 +158,7 @@ input.valid{
 <main class="fondo-panel">
 <div class="formulario">
 
-<h2>✏️ Actualizar Usuario</h2>
+<h2> Actualizar Usuario</h2>
 
 <p class="subtitulo">
 Modifique los datos del usuario

@@ -120,7 +120,7 @@ strong{
 
 <main class="fondo-panel">
 <div class="tarjeta">
-<h1>🍦 Información del Usuario</h1>
+<h1> Información del Usuario</h1>
 <?php if($resultado->num_rows>0){ $fila=$resultado->fetch_assoc(); ?>
 <div class="dato"><strong>CI:</strong> <?php echo $fila['ci']; ?></div>
 <div class="dato"><strong>Nombre:</strong> <?php echo $fila['nombre']; ?></div>

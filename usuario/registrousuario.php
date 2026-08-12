@@ -140,7 +140,7 @@ h1{
 
 <main class="fondo-panel">
     <div class="tarjeta">
-        <div class="icono">🍦✅
+        <div class="icono">
 
         </div><h1>¡Registro Exitoso!
 

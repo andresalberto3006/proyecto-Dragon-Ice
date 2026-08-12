@@ -127,7 +127,7 @@ $rutaMenu = "../";
 
 <main class="fondo-panel">
     <div class="formulario">
-        <h2>🍦 Registrar Producto</h2>
+        <h2> Registrar Producto</h2>
         <p class="subtitulo">Complete los datos del producto</p>
 
         <form id="formulario" action="../producto/registroproducto.php" method="POST" enctype="multipart/form-data">

@@ -133,7 +133,7 @@ h1{
 
 <?php if($eliminado){ ?>
 
-<div class="icono">🗑️✅</div>
+<div class="icono"></div>
 
 <h1 class="exito">
     Usuario eliminado correctamente
@@ -145,7 +145,7 @@ h1{
 
 <?php } else { ?>
 
-<div class="icono">❌</div>
+<div class="icono"></div>
 
 <h1 class="error">
     Error al eliminar usuario
