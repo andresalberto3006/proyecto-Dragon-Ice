@@ -1,6 +1,7 @@
 <?php
 session_start();if(!isset($_SESSION['rol'])){header("Location: iniciosesion.php");exit();}include("conexion.php");
 if($_SESSION['rol']=='Administrador'){$resultado=$conexion->query("SELECT p.*,IFNULL(SUM(c.costototal),0) AS total FROM pedidos p LEFT JOIN carrito c ON p.id=c.pedidos_id GROUP BY p.id,p.nombre,p.fecha,p.estado,p.vendedor_ci,p.nombrevendedor,p.metodo_pago ORDER BY p.id DESC");}else{$ci=$_SESSION['ci'];$resultado=$conexion->query("SELECT p.*,IFNULL(SUM(c.costototal),0) AS total FROM pedidos p LEFT JOIN carrito c ON p.id=c.pedidos_id WHERE p.vendedor_ci='$ci' GROUP BY p.id,p.nombre,p.fecha,p.estado,p.vendedor_ci,p.nombrevendedor,p.metodo_pago ORDER BY p.id DESC");}
+$rutaMenu = "../";
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -18,11 +19,18 @@ if($_SESSION['rol']=='Administrador'){$resultado=$conexion->query("SELECT p.*,IF
 }
 
 body{
+    display:flex;
+    flex-direction:column;
     min-height:100vh;
+}
+.fondo-panel{
+    flex:1;
     background:linear-gradient(135deg,#18335c,#2f5d9f,#7fc7ff);
     padding:40px;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
 }
-
 .contenedor{
 
     max-width:1200px;
@@ -118,7 +126,10 @@ tr:hover{
 </style>
 </head>
 <body>
-    <div class="contenedor">
+    <?php include("../menu.php"); ?>
+
+    <main class="fondo-panel">
+      <div class="contenedor">
         <h1>🍦 Lista de Pedidos</h1>
         <table>
             <tr>
@@ -176,6 +187,7 @@ tr:hover{
         <?php }else{?>
             <a href="paginaprincipal/02.admin.php" class="volver">Volver al panel</a>
         <?php }?>
+     </main>
     </div>
 </body>
 </html>
