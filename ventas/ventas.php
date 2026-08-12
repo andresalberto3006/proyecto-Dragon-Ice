@@ -18,16 +18,29 @@ $rutaMenu = "../";
     font-family:Arial, Helvetica, sans-serif;
 }
 
+html, body{
+    height:100%;
+}
+
 body{
+    display:flex;
+    flex-direction:column;
     min-height:100vh;
+}
+
+.fondo-panel{
+    flex:1;
     background:linear-gradient(135deg,#18335c,#2f5d9f,#7fc7ff);
     padding:40px;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
 }
 
 .contenedor{
 
+    width:100%;
     max-width:1200px;
-    margin:auto;
 
     background:white;
 
@@ -120,49 +133,54 @@ tr:hover{
 </head>
 <body>
     <?php include("../menu.php"); ?>
-    
-    <div class="contenedor">
-        <h1>🍦 Lista de Ventas</h1>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Pedido</th>
-                <th>Cliente</th>
-                <th>Vendedor</th>
-                <th>Fecha</th>
-                <th>Total</th>
-                <th>Pago</th>
-                <th>Acciones</th>
-            </tr>
-            <?php if($resultado->num_rows>0){while($fila=$resultado->fetch_assoc()){?>
-            <tr>
-                <td><?php echo $fila['id'];?></td>
-                <td><?php echo $fila['pedidos_id'];?></td>
-                <td><?php echo $fila['cliente'];?></td>
-                <td><?php echo $fila['nombrevendedor'];?></td>
-                <td><?php echo $fila['fecha'];?></td>
-                <td>Bs. <?php echo $fila['total'];?></td>
-                <td><?php echo $fila['metodo_pago'];?></td>
-                <td>
-                    <div class="acciones">
-                        <a class="boton mostrar" href="../detallePedido.php?id=<?php echo $fila['pedidos_id'];?>">Detalle</a>
-                        <?php if($_SESSION['rol']=='Administrador'){?>
-                            <a class="boton editar" href="editarVenta.php?id=<?php echo $fila['id'];?>">Editar</a>
-                            <a class="boton eliminar" href="eliminarVenta.php?id=<?php echo $fila['id'];?>">Eliminar</a>
-                        <?php }?>
-                    </div>
-                </td>
-            </tr>
-            <?php }}else{?>
-            <tr>
-                <td colspan="8">No hay ventas registradas.</td>
-            </tr>
+
+    <main class="fondo-panel">
+        <div class="contenedor">
+            <h1>🍦 Lista de Ventas</h1>
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Pedido</th>
+                    <th>Cliente</th>
+                    <th>Vendedor</th>
+                    <th>Fecha</th>
+                    <th>Total</th>
+                    <th>Pago</th>
+                    <th>Acciones</th>
+                </tr>
+                <?php if($resultado->num_rows>0){while($fila=$resultado->fetch_assoc()){?>
+                <tr>
+                    <td><?php echo $fila['id'];?></td>
+                    <td><?php echo $fila['pedidos_id'];?></td>
+                    <td><?php echo $fila['cliente'];?></td>
+                    <td><?php echo $fila['nombrevendedor'];?></td>
+                    <td><?php echo $fila['fecha'];?></td>
+                    <td>Bs. <?php echo $fila['total'];?></td>
+                    <td><?php echo $fila['metodo_pago'];?></td>
+                    <td>
+                        <div class="acciones">
+                            <a class="boton mostrar" href="../detallePedido.php?id=<?php echo $fila['pedidos_id'];?>">Detalle</a>
+                            <?php if($_SESSION['rol']=='Administrador'){?>
+                                <a class="boton editar" href="editarVenta.php?id=<?php echo $fila['id'];?>">Editar</a>
+                                <a class="boton eliminar" href="eliminarVenta.php?id=<?php echo $fila['id'];?>">Eliminar</a>
+                            <?php }?>
+                        </div>
+                    </td>
+                </tr>
+                <?php }}else{?>
+                <tr>
+                    <td colspan="8">No hay ventas registradas.</td>
+                </tr>
+                <?php }?>
+            </table>
+            <?php if($_SESSION['rol']=='Administrador'){?>
+                <a href="../paginaprincipal/02.admin.php" class="volver">Volver al panel</a>
+            <?php }else{?>
+                <a href="../paginaprincipal/vendedor20.php" class="volver">Volver al panel</a>
             <?php }?>
-        </table>
-        <?php if($_SESSION['rol']=='Administrador'){?>
-            <a href="../paginaprincipal/02.admin.php" class="volver">Volver al panel</a>
-        <?php }else{?>
-            <a href="../paginaprincipal/vendedor20.php" class="volver">Volver al panel</a>
-        <?php }?>
-    </div>
+        </div>
+    </main>
+
+    <?php include("../paginaprincipal/piedepagina.php"); ?>
 </body>
+</html>
