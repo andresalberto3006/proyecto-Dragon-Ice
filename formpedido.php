@@ -26,118 +26,148 @@ $usuario=$_SESSION["usuario"];
 <style>
 
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,Helvetica,sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
 body{
+    min-height:100vh;
 
-background-image:url("1 (4).png");
-background-size:cover;
-background-position:center;
-background-attachment:fixed;
+    background:linear-gradient(
+        135deg,
+        #18335c,
+        #2f5d9f,
+        #7fc7ff
+    );
 
+    background-attachment:fixed;
 }
+
+/* CONTENEDOR */
 
 .contenedor{
 
-width:100%;
-min-height:100vh;
+    width:100%;
+    min-height:calc(100vh - 80px);
 
-display:flex;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
-justify-content:center;
-
-align-items:center;
-
-padding:30px;
-
+    padding:50px 30px;
 }
+
+/* TARJETA DEL FORMULARIO */
 
 .tarjeta{
 
-width:450px;
+    width:450px;
 
-background:rgb(125,197,197);
+    background:white;
 
-border-radius:25px;
+    border-radius:25px;
 
-padding:35px;
+    padding:35px;
 
-box-shadow:0 15px 35px rgba(0,0,0,.4);
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
 
+    border:1px solid rgba(255,255,255,.6);
 }
+
+/* TITULO */
 
 .tarjeta h1{
 
-text-align:center;
+    text-align:center;
 
-color:white;
+    color:#18335c;
 
-margin-bottom:25px;
+    margin-bottom:25px;
 
+    font-size:28px;
 }
+
+/* ETIQUETAS */
 
 label{
 
-display:block;
+    display:block;
 
-margin-top:15px;
+    margin-top:15px;
 
-font-weight:bold;
+    margin-bottom:5px;
 
-color:white;
+    font-weight:bold;
 
+    color:#18335c;
 }
+
+/* CAMPOS */
 
 input{
 
-width:100%;
+    width:100%;
 
-padding:12px;
+    padding:12px;
 
-margin-top:5px;
+    margin-top:2px;
 
-border:none;
+    border:2px solid #d7eaff;
 
-border-radius:10px;
+    background:#f4f9ff;
 
-font-size:16px;
+    border-radius:10px;
 
+    font-size:16px;
+
+    color:#18335c;
+
+    outline:none;
 }
+
+input:focus{
+
+    border-color:#4da6ff;
+
+    background:white;
+}
+
+/* BOTÓN */
 
 button{
 
-width:100%;
+    width:100%;
 
-padding:15px;
+    padding:15px;
 
-margin-top:25px;
+    margin-top:25px;
 
-border:none;
+    border:none;
 
-background:#0b5ed7;
+    background:#4da6ff;
 
-color:white;
+    color:white;
 
-font-size:18px;
+    font-size:18px;
 
-cursor:pointer;
+    font-weight:bold;
 
-border-radius:12px;
+    cursor:pointer;
 
-transition:.3s;
+    border-radius:12px;
 
+    transition:.3s;
+
+    box-shadow:0 5px 12px rgba(77,166,255,.35);
 }
 
 button:hover{
 
-background:#084298;
+    background:#2f5d9f;
 
-transform:scale(1.02);
-
+    transform:scale(1.02);
 }
 
 </style>
@@ -146,53 +176,60 @@ transform:scale(1.02);
 
 <body>
 
-<?php include("menu.php");?>
+<?php include("menu.php"); ?>
+
 
 <div class="contenedor">
 
-<div class="tarjeta">
+    <div class="tarjeta">
 
-<h1>🍦 Nuevo Pedido</h1>
+        <h1> Nuevo Pedido</h1>
 
-<form action="nuevo_pedido.php" method="POST">
+        <form action="nuevo_pedido.php" method="POST">
 
-<label>Cliente</label>
+            <label>Cliente</label>
 
-<input
-type="text"
-name="nombre"
-value="<?php echo $usuario;?>"
-readonly>
+            <input
+                type="text"
+                name="nombre"
+                value="<?php echo $usuario;?>"
+                readonly
+            >
 
-<label>Fecha</label>
+            <label>Fecha</label>
 
-<input
-type="date"
-name="fecha"
-value="<?php echo date("Y-m-d");?>"
-readonly>
+            <input
+                type="date"
+                name="fecha"
+                value="<?php echo date("Y-m-d");?>"
+                readonly
+            >
 
-<input
-type="hidden"
-name="estado"
-value="En proceso">
+            <input
+                type="hidden"
+                name="estado"
+                value="En proceso"
+            >
 
-<input
-type="hidden"
-name="nombrevendedor"
-value="<?php echo $usuario;?>">
+            <input
+                type="hidden"
+                name="nombrevendedor"
+                value="<?php echo $usuario;?>"
+            >
 
-<button>
+            <button>
+                 Comenzar Compra
+            </button>
 
-Comenzar Compra
+        </form>
 
-</button>
-
-</form>
+    </div>
 
 </div>
 
-</div>
+
+<?php include("paginaprincipal/piedepagina.php"); ?>
+
 
 </body>
 
