@@ -156,7 +156,7 @@ $rutaMenu = "../";
             <div class="cuerpo">
                 <h2>Mis pedidos</h2>
                 <p>Revisa los pedidos creados, consulta el detalle, cambia el estado y registra ventas desde pedidos aceptados.</p>
-                <a href="../pedidos.php" class="boton">Ver Pedidos</a>
+                <a href="../pedidos/pedidos.php" class="boton">Ver Pedidos</a>
             </div>
         </article>
 
