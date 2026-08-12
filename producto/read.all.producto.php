@@ -23,9 +23,22 @@ box-sizing:border-box;
 font-family:Arial, Helvetica, sans-serif;
 }
 
+html, body{
+    height:100%;
+}
+
 body{
-background:linear-gradient(135deg,#18335c,#2f5d9f,#7fc7ff);
-padding:40px;
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+}
+.fondo-panel{
+    flex:1;
+    background:linear-gradient(135deg,#18335c,#2f5d9f,#7fc7ff);
+    padding:40px;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
 }
 
 .contenedor{
@@ -113,7 +126,8 @@ background:#dc3545;
 <body>
     <?php include("../menu.php"); ?>
     
-    <div class="contenedor">
+    <main class="fondo-panel">
+     <div class="contenedor">
         <h1>🍦 Lista de Productos Registrados</h1>
         <table>
             <tr>
@@ -155,7 +169,8 @@ background:#dc3545;
         <?php }else{ ?>
             <a href="../paginaprincipal/vendedor20.php" class="volver">Volver al panel</a>
         <?php } ?>
-    </div>
+     </div>
+    </main>
     <?php include("../paginaprincipal/piedepagina.php"); ?>
 </body>
 </html>
