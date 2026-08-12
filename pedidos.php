@@ -1,7 +1,7 @@
 <?php
 session_start();if(!isset($_SESSION['rol'])){header("Location: iniciosesion.php");exit();}include("conexion.php");
 if($_SESSION['rol']=='Administrador'){$resultado=$conexion->query("SELECT p.*,IFNULL(SUM(c.costototal),0) AS total FROM pedidos p LEFT JOIN carrito c ON p.id=c.pedidos_id GROUP BY p.id,p.nombre,p.fecha,p.estado,p.vendedor_ci,p.nombrevendedor,p.metodo_pago ORDER BY p.id DESC");}else{$ci=$_SESSION['ci'];$resultado=$conexion->query("SELECT p.*,IFNULL(SUM(c.costototal),0) AS total FROM pedidos p LEFT JOIN carrito c ON p.id=c.pedidos_id WHERE p.vendedor_ci='$ci' GROUP BY p.id,p.nombre,p.fecha,p.estado,p.vendedor_ci,p.nombrevendedor,p.metodo_pago ORDER BY p.id DESC");}
-$rutaMenu = "../";
+$rutaMenu = "";
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -36,8 +36,8 @@ body{
 }
 .contenedor{
 
+    width:100%;
     max-width:1200px;
-    margin:auto;
 
     background:white;
 
@@ -129,7 +129,7 @@ tr:hover{
 </style>
 </head>
 <body>
-    <?php include("../menu.php"); ?>
+    <?php include("menu.php"); ?>
 
     <main class="fondo-panel">
       <div class="contenedor">
@@ -192,7 +192,7 @@ tr:hover{
         <?php }?>
         </div>
      </main>
-      <?php include("../paginaprincipal/piedepagina.php"); ?>
+      <?php include("paginaprincipal/piedepagina.php"); ?>
     
 </body>
 </html>
