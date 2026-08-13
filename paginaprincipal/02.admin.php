@@ -133,7 +133,7 @@ $rutaMenu = "../";
 <main class="contenido">
 
     <section class="bienvenido">
-        <h1>Panel de administración</h1>
+        <h1>Panel de Administrador</h1>
         <p>
             Bienvenido, <?php echo htmlspecialchars($nombreUsuario); ?>.
             Desde aquí se controla la gestión general del sistema.
