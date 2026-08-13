@@ -20,7 +20,7 @@ $ci = $_SESSION['ci'];
 $pedido = $conexion->query("SELECT * FROM pedidos WHERE id='$idPedido' AND vendedor_ci='$ci'");
 
 if($pedido->num_rows == 0){
-    header("Location: pedidos.php");
+    header("Location: ../pedidos/pedidospedidos.php");
     exit();
 }
 
@@ -394,11 +394,11 @@ include("menu.php");
 
     <div class="botones-finales">
 
-        <a href="pedidos.php">
+        <a href="pedidos/pedidos.php">
             <button class="btnNuevo"> Terminar pedido</button>
         </a>
 
-        <a href="formpedido.php">
+        <a href="pedidos/formpedido.php">
             <button class="btnNuevo"> Nuevo pedido</button>
         </a>
 

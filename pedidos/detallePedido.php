@@ -1,7 +1,7 @@
 <?php
 session_start();
-if(!isset($_SESSION['rol'])){header("Location: iniciosesion.php");exit();}
-include("conexion.php");
+if(!isset($_SESSION['rol'])){header("Location: ../iniciosesion.php");exit();}
+include("../conexion.php");
 $id=isset($_GET['id'])?$_GET['id']:0;
 if($_SESSION['rol']=='Administrador'){$pedido=$conexion->query("SELECT * FROM pedidos WHERE id='$id'");}else{$ci=$_SESSION['ci'];$pedido=$conexion->query("SELECT * FROM pedidos WHERE id='$id' AND vendedor_ci='$ci'");}
 if($pedido->num_rows==0){header("Location: pedidos.php");exit();}
@@ -12,7 +12,7 @@ $detalle=$conexion->query("SELECT c.*,pr.nombre,pr.precio FROM carrito c INNER J
 $datoQR = "Pedido #" . $p['id'] . " | Cliente: " . $p['nombre'] . " | Estado: " . $p['estado'];
 $qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=" . urlencode($datoQR);
 
-$rutaMenu = "";
+$rutaMenu = "../";
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -219,7 +219,7 @@ tr:hover{
 </head>
 <body>
 
-<?php include("menu.php"); ?>
+<?php include("../menu.php"); ?>
 
 <main class="fondo-panel">
     <div class="contenedor">
@@ -290,11 +290,11 @@ tr:hover{
 
         </div>
 
-        <a href="pedidos.php" class="volver">Volver a pedidos</a>
+        <a href="../pedidos/pedidos.php" class="volver">Volver a pedidos</a>
     </div>
 </main>
 
-<?php include("paginaprincipal/piedepagina.php"); ?>
+<?php include("../paginaprincipal/piedepagina.php"); ?>
 
 </body>
 </html>

@@ -168,12 +168,12 @@ tr:hover{
                     <div class="acciones">
                         <a class="boton mostrar" href="detallePedido.php?id=<?php echo $fila['id'];?>">Detalle</a>
                         <?php if($_SESSION['rol']=='Vendedor'&&$fila['estado']=='Pendiente'){?>
-                            <a class="boton editar" href="miCarrito.php?idPedido=<?php echo $fila['id'];?>">Carrito</a>
-                            <a class="boton editar" href="cambiarEstadoPedido.php?id=<?php echo $fila['id'];?>&estado=En proceso">Aceptar</a>
+                            <a class="boton editar" href="../miCarrito.php?idPedido=<?php echo $fila['id'];?>">Carrito</a>
+                            <a class="boton editar" href="../pedidos/cambiarEstadoPedido.php?id=<?php echo $fila['id'];?>&estado=En proceso">Aceptar</a>
                             <a class="boton eliminar" href="cambiarEstadoPedido.php?id=<?php echo $fila['id'];?>&estado=Rechazado">Rechazar</a>
                         <?php }?>
                         <?php if($_SESSION['rol']=='Vendedor'&&$fila['estado']=='En proceso'){?>
-                            <a class="boton editar" href="ventas/venta_formulario.php?id=<?php echo $fila['id'];?>">Registrar venta</a>
+                            <a class="boton editar" href="../ventas/venta_formulario.php?id=<?php echo $fila['id'];?>">Registrar venta</a>
                         <?php }?>
                     </div>
                 </td>

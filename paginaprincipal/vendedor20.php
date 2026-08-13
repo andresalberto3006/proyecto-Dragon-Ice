@@ -174,7 +174,7 @@ $rutaMenu = "../";
             <div class="cuerpo">
                 <h2>Nuevo Pedido</h2>
                 <p>Crea un pedido para un cliente externo. Después podrás agregar productos al carrito y calcular el total.</p>
-                <a href="../formpedido.php" class="boton">Ver Pedidos</a>
+                <a href="../pedidos/formpedido.php" class="boton">Ver Pedidos</a>
             </div>
         </article>
 

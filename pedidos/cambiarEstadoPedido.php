@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['rol'])) {
-    header("Location: iniciosesion.php");
+    header("Location: ../iniciosesion.php");
     exit();
 }
 
@@ -11,7 +11,7 @@ if ($_SESSION['rol'] != 'Vendedor') {
     exit();
 }
 
-include("conexion.php");
+include("../conexion.php");
 
 $id = isset($_GET['id']) ? $_GET['id'] : 0;
 $estado = isset($_GET['estado']) ? $_GET['estado'] : '';
@@ -44,6 +44,6 @@ if ($estado == 'En proceso' || $estado == 'Rechazado') {
     $conexion->query($sql);
 }
 
-header("Location: pedidos.php");
+header("Location: ../pedidos/pedidos.php");
 exit();
 ?>

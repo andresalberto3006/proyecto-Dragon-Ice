@@ -159,7 +159,7 @@ tr:hover{
                     <td><?php echo $fila['metodo_pago'];?></td>
                     <td>
                         <div class="acciones">
-                            <a class="boton mostrar" href="../detallePedido.php?id=<?php echo $fila['pedidos_id'];?>">Detalle</a>
+                            <a class="boton mostrar" href="../pedidos/detallePedido.php?id=<?php echo $fila['pedidos_id'];?>">Detalle</a>
                             <?php if($_SESSION['rol']=='Administrador'){?>
                                 <a class="boton editar" href="editarVenta.php?id=<?php echo $fila['id'];?>">Editar</a>
                                 <a class="boton eliminar" href="eliminarVenta.php?id=<?php echo $fila['id'];?>">Eliminar</a>

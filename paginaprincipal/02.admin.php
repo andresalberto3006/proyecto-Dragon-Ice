@@ -165,7 +165,7 @@ $rutaMenu = "../";
             <div class="cuerpo">
                 <h2>Consulta de pedidos</h2>
                 <p>Permite consultar el estado de un pedido utilizando el ID del pedido y el nombre del cliente externo.</p>
-                <a href="../pedidos.php" class="boton">Consultar pedido</a>
+                <a href="../pedidos/pedidos.php" class="boton">Consultar pedido</a>
             </div>
         </article>
 

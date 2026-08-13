@@ -2,13 +2,14 @@
 session_start();
 
 if(!isset($_SESSION["usuario"])){
-    header("Location: iniciosesion.php");
+    header("Location: ../iniciosesion.php");
     exit();
 }
 
-include("conexion.php");
+include("../conexion.php");
 
 $usuario=$_SESSION["usuario"];
+$rutaMenu = "../";
 
 ?>
 
@@ -214,11 +215,11 @@ $usuario=$_SESSION["usuario"];
 
 <body>
 
-<?php include("menu.php"); ?>
+<?php include("../menu.php"); ?>
 
 <section class="auth-section">
     <video autoplay muted loop>
-        <source src="helado1.mp4" type="video/mp4">
+        <source src="../helado1.mp4" type="video/mp4">
     </video>
     <div class="overlay"></div>
     <main>
@@ -227,7 +228,7 @@ $usuario=$_SESSION["usuario"];
             <h1>DRAGON ICE</h1>
             <p class="subtitulo">Nuevo Pedido</p>
 
-            <form action="nuevo_pedido.php" method="POST">
+            <form action="../pedidos/nuevo_pedido.php" method="POST">
 
                 <label>Cliente</label>
 
@@ -263,12 +264,12 @@ $usuario=$_SESSION["usuario"];
 
             </form>
 
-            <a href="pedidos.php" class="volver">Volver a mis pedidos</a>
+            <a href="../pedidos/pedidos.php" class="volver">Volver a mis pedidos</a>
         </div>
     </main>
 </section>
 
-<?php include("paginaprincipal/piedepagina.php"); ?>
+<?php include("../paginaprincipal/piedepagina.php"); ?>
 
 </body>
 
