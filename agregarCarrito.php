@@ -28,7 +28,6 @@ if($cantidad <= 0){
 }
 
 
-/* VERIFICAR PEDIDO */
 
 $stmtPedido = $conexion->prepare("
     SELECT * FROM pedidos
@@ -49,7 +48,6 @@ if($resultadoPedido->num_rows == 0){
 }
 
 
-/* BUSCAR PRODUCTO */
 
 $stmtProducto = $conexion->prepare("
     SELECT * FROM productos
@@ -72,7 +70,6 @@ if($resultadoProducto->num_rows == 0){
 $producto = $resultadoProducto->fetch_assoc();
 
 
-/* VERIFICAR STOCK */
 
 if($cantidad > $producto['stock']){
     echo json_encode([
@@ -83,7 +80,6 @@ if($cantidad > $producto['stock']){
 }
 
 
-/* BUSCAR SI YA EXISTE */
 
 $stmtCarrito = $conexion->prepare("
     SELECT * FROM carrito
@@ -98,7 +94,6 @@ $resultadoCarrito = $stmtCarrito->get_result();
 $nuevaCantidad = $cantidad;
 
 
-/* SI YA EXISTE */
 
 if($resultadoCarrito->num_rows > 0){
 
@@ -109,7 +104,6 @@ if($resultadoCarrito->num_rows > 0){
 }
 
 
-/* VERIFICAR STOCK TOTAL */
 
 if($nuevaCantidad > $producto['stock']){
 
@@ -122,7 +116,6 @@ if($nuevaCantidad > $producto['stock']){
 }
 
 
-/* ACTUALIZAR O INSERTAR */
 
 if($resultadoCarrito->num_rows > 0){
 
@@ -167,7 +160,6 @@ if($resultadoCarrito->num_rows > 0){
 }
 
 
-/* RESPUESTA AJAX */
 
 echo json_encode([
     "ok" => true,
