@@ -1,84 +1,100 @@
 document
-  .getElementById("consultar")
-  .addEventListener("click", () => {
+.getElementById("consultar")
+.addEventListener("click",()=>{
 
-    let id = document.getElementById("numeroPedido").value;
 
-    fetch("php/consultar_pedido.php", {
+let id =
+document.getElementById("numeroPedido").value;
 
-      method: "POST",
 
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
 
-      body: "id=" + id
+fetch("php/consultar_pedido.php",{
 
-    })
 
-      .then(res => res.json())
+method:"POST",
 
-      .then(data => {
 
-        console.log(data);
+headers:{
 
-        if (data.ok) {
+"Content-Type":
+"application/x-www-form-urlencoded"
 
-          let p = data.pedido;
+},
 
-          document.getElementById("resultado")
-            .innerHTML = `
 
-            <hr>
+body:
+"id="+id
 
-            <h3>
-            Pedido Nº ${p.id}
-            </h3>
 
-            <p>
-            Cliente:
-            ${p.nombre}
-            </p>
+})
 
-            <p>
-            Teléfono:
-            ${p.telefono}
-            </p>
 
-            <p>
-            Dirección:
-            ${p.direccion}
-            </p>
+.then(res=>res.json())
 
-            <p>
-            Fecha:
-            ${p.fecha}
-            </p>
 
-            <p>
-            Estado:
-            <b>${p.estado}</b>
-            </p>
+.then(data=>{
 
-            <p>
-            Vendedor:
-            ${p.nombrevendedor ?? "Pendiente"}
-            </p>
 
-            <p>
-            Método de pago:
-            ${p.metodo_pago}
-            </p>
+console.log(data);
 
-            `;
 
-        } else {
 
-          document.getElementById("resultado")
-            .innerHTML = "Pedido no encontrado";
+if(data.ok){
 
-        }
 
-      });
+let p=data.pedido;
 
-  });
+
+
+document.getElementById("resultado")
+.innerHTML=`
+
+<hr>
+
+<h3>
+Pedido Nº ${p.id}
+</h3>
+
+
+<p>
+Cliente:
+${p.Nombre}
+</p>
+
+
+<p>
+Fecha:
+${p.Fecha}
+</p>
+
+
+<p>
+Estado:
+<b>${p.Estado}</b>
+</p>
+
+
+<p>
+Vendedor:
+${p.NombreVendedor ?? "Pendiente"}
+</p>
+
+`;
+
+
+
+}else{
+
+
+document.getElementById("resultado")
+.innerHTML=
+"Pedido no encontrado";
+
+
+}
+
+
+});
+
+
+});
