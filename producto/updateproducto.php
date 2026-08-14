@@ -1,15 +1,22 @@
+<?php
+session_start();
+if (!isset($_SESSION['rol'])) { header("Location: ../iniciosesion.php"); exit(); }
+if ($_SESSION['rol'] != 'Administrador' && $_SESSION['rol'] != 'Vendedor') { header("Location: ../iniciosesion.php"); exit(); }
+include("../conexion.php");
+$id=isset($_GET['id'])?$_GET['id']:0;$resultado=$conexion->query("SELECT * FROM productos WHERE id='$id'");if($resultado->num_rows==0){die("Producto no encontrado");}$fila=$resultado->fetch_assoc();$nombre=$fila['nombre'];$descripcion=$fila['descripcion'];$precio=$fila['precio'];$costo=$fila['costo'];$stock=$fila['stock'];$imagen=$fila['imagen'];
+
+$rutaMenu = "../";
+?>
+
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dragon Ice - Iniciar Sesión</title>
-<<<<<<< HEAD
+<meta charset="UTF-8">
+
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
-=======
->>>>>>> 38a9d61561d31fd892b063ad5593f2793a467338
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
+
+<title>Editar Producto</title>
     <style>
         :root{
             --azul-oscuro:#0e2a4d;
@@ -197,194 +204,94 @@
             .form-box h1{ font-size:26px; }
         }
     </style>
-<style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        .login-box h1 {
-            transition: 300ms;
-        }
-
-        .login-box input[type="text"],
-        .login-box input[type="password"] {
-<<<<<<< HEAD
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 10px;
-            outline: none;
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            font-size: 16px;
-        }
-
-        .login-box input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .login-box input[type="submit"] {
-            width: 100%;
-            margin-top: 25px;
-            padding: 12px;
-            border: none;
-            border-radius: 10px;
-            background: #00bfff;
-            color: white;
-            font-size: 17px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .login-box input[type="submit"]:hover {
-            background: #0099cc;
-            transform: scale(1.03);
-            box-shadow: 0 0 20px #00bfff;
-        }
-         label.error{
-            color:#ff8080;
-            font-size:12px;
-            margin-top:3px;
-            margin-bottom:5px;
-            display:block;
-        }
-
-input.error{
-    border:2px solid #ff5555;
-}
-
-
-
-        @media(max-width:700px) {
-            .login-box {
-                width: 90%;
-                padding: 30px;
-            }
-
-            .login-box h1 {
-                font-size: 35px;
-            }
-=======
-            margin-bottom: 2px;
->>>>>>> 38a9d61561d31fd892b063ad5593f2793a467338
-        }
-    </style>
 </head>
-
-
 
 <body>
 
-<?php include 'menu.php'; ?>
+<?php include("../menu.php"); ?>
 
 <section class="auth-section">
     <video autoplay muted loop>
-        <source src="helado1.mp4" type="video/mp4">
+        <source src="../helado1.mp4" type="video/mp4">
     </video>
     <div class="overlay"></div>
     <main>
-        <div class="form-box login-box">
+        <div class="form-box">
+
             <h1>DRAGON ICE</h1>
-            <p class="subtitulo">Iniciar Sesión</p>
-            <form action="BDvali.php" method="post">
-                <label for="usuario">Usuario</label>
-                <input type="text" name="usuario" placeholder="Ingrese su nombre" required>
-                <label for="clave">Contraseña</label>
-                <input type="text" name="clave" placeholder="Ingrese su numero de celular" required>
-                <input type="submit" value="Ingresar">
+            <p class="subtitulo">Editar Producto</p>
+
+            <form id="formulario" action="updateproducto2.php" method="POST" enctype="multipart/form-data">
+
+                <label>ID</label>
+                <input type="number"
+                name="id"
+                value="<?php echo $fila['id']; ?>"
+                readonly>
+
+                <label>Nombre</label>
+                <input type="text"
+                name="nombre"
+                value="<?php echo $fila['nombre']; ?>">
+
+                <label>Descripción</label>
+                <input type="text"
+                name="descripcion"
+                value="<?php echo $fila['descripcion']; ?>">
+
+                <label>Precio</label>
+                <input type="number"
+                name="precio"
+                value="<?php echo $fila['precio']; ?>">
+
+                <label>Costo</label>
+                <input type="number"
+                name="costo"
+                value="<?php echo $fila['costo']; ?>">
+
+                <label>Stock</label>
+                <input type="number"
+                name="stock"
+                value="<?php echo $fila['stock']; ?>">
+
+                <label>Imagen nueva</label>
+                <input type="file" name="imagen">
+                <input type="hidden" name="imagenActual" value="<?php echo $imagen; ?>">
+
+                <input type="submit" value="Actualizar Producto">
+
             </form>
 
-            <p class="enlace-secundario">
-                ¿No tienes una cuenta? <a href="usuario/formulariousuario.php">Regístrate aquí</a>
-            </p>
-
-<<<<<<< HEAD
-        <main>
-
-            <div class="login-box">
-
-                <h1>DRAGON ICE</h1>
-                <p>Iniciar Sesión</p>
-
-                <form id="formulario" action="BDvali.php" method="post">
-
-                    <label for="usuario">Usuario</label>
-                    <input id="usuario" type="text" name="usuario" placeholder="Ingrese su nombre" required>
-
-                    <label for="clave">Contraseña</label>
-                    <input id="clave" type="text" name="clave" placeholder="Ingrese su numero de celular" required>
-
-                    <input type="submit" value="Ingresar">
-                </form>
-
-            </div>
-
-        </main>
-=======
-            <a href="paginaprincipal/01.inicio.php" class="volver">Volver al inicio</a>
+            <a href="read.all.producto.php" class="volver">Volver a la lista de productos</a>
         </div>
     </main>
->>>>>>> 38a9d61561d31fd892b063ad5593f2793a467338
+</section>
 
-    </section>
-    <script>
-        $(document).ready(function(){
-        $("#formulario").validate({
-            role:{
-                usuario:{
-                    required: true,
-                    maxlength: 5
-                },
-                contraseña:{
-                    required: true,
-                    minlength: 4
-                }
-            },
-            messages:{
-                usuario:{
-                    required: "pon tu nombre de ususario",
-                    maxlength: "maximo "
-                }
-            }
-        })    
-        })
+<?php include("../paginaprincipal/piedepagina.php"); ?>
 
-<<<<<<< HEAD
-
-     <script>
-$(document).ready(function(){
+<script>
 
 $("#formulario").validate({
 
 rules:{
-    usuario:{
-        required:true
-    },
-    clave:{
-        required:true
-    }
+nombre:{required:true},
+descripcion:{required:true},
+precio:{required:true},
+costo:{required:true},
+stock:{required:true}
 },
 
 messages:{
-    usuario:{
-        required:"Ingrese su nombre de usuario"
-    },
-    clave:{
-        required:"Ingrese su contraseña"
-    }
+nombre:{required:"Ingrese el nombre"},
+descripcion:{required:"Ingrese la descripción"},
+precio:{required:"Ingrese el precio"},
+costo:{required:"Ingrese el costo"},
+stock:{required:"Ingrese el stock"}
 }
 
 });
 
-});
 </script>
-=======
-    </script>
-<?php include 'paginaprincipal/piedepagina.php'; ?>
->>>>>>> 38a9d61561d31fd892b063ad5593f2793a467338
+
 </body>
 </html>

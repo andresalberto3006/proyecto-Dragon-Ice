@@ -1,15 +1,19 @@
+<?php
+session_start();
+// Formulario público: cualquier visitante puede registrarse, no requiere sesión de Administrador.
+include("../conexion.php");
+
+$rutaMenu = "../";
+?>
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dragon Ice - Iniciar Sesión</title>
-<<<<<<< HEAD
-<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
-=======
->>>>>>> 38a9d61561d31fd892b063ad5593f2793a467338
+    <title>Registrar Usuario</title>
     <style>
         :root{
             --azul-oscuro:#0e2a4d;
@@ -197,184 +201,96 @@
             .form-box h1{ font-size:26px; }
         }
     </style>
-<style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        .login-box h1 {
-            transition: 300ms;
-        }
-
-        .login-box input[type="text"],
-        .login-box input[type="password"] {
-<<<<<<< HEAD
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 10px;
-            outline: none;
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            font-size: 16px;
-        }
-
-        .login-box input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .login-box input[type="submit"] {
-            width: 100%;
-            margin-top: 25px;
-            padding: 12px;
-            border: none;
-            border-radius: 10px;
-            background: #00bfff;
-            color: white;
-            font-size: 17px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .login-box input[type="submit"]:hover {
-            background: #0099cc;
-            transform: scale(1.03);
-            box-shadow: 0 0 20px #00bfff;
-        }
-         label.error{
-            color:#ff8080;
-            font-size:12px;
-            margin-top:3px;
-            margin-bottom:5px;
-            display:block;
-        }
-
-input.error{
-    border:2px solid #ff5555;
-}
-
-
-
-        @media(max-width:700px) {
-            .login-box {
-                width: 90%;
-                padding: 30px;
-            }
-
-            .login-box h1 {
-                font-size: 35px;
-            }
-=======
-            margin-bottom: 2px;
->>>>>>> 38a9d61561d31fd892b063ad5593f2793a467338
-        }
-    </style>
 </head>
-
-
 
 <body>
 
-<?php include 'menu.php'; ?>
+<?php include("../menu.php"); ?>
 
 <section class="auth-section">
     <video autoplay muted loop>
-        <source src="helado1.mp4" type="video/mp4">
+        <source src="../helado1.mp4" type="video/mp4">
     </video>
     <div class="overlay"></div>
     <main>
-        <div class="form-box login-box">
+        <div class="form-box">
             <h1>DRAGON ICE</h1>
-            <p class="subtitulo">Iniciar Sesión</p>
-            <form action="BDvali.php" method="post">
-                <label for="usuario">Usuario</label>
-                <input type="text" name="usuario" placeholder="Ingrese su nombre" required>
-                <label for="clave">Contraseña</label>
-                <input type="text" name="clave" placeholder="Ingrese su numero de celular" required>
-                <input type="submit" value="Ingresar">
+            <p class="subtitulo">Registrar Usuario</p>
+
+            <form id="formulario" action="../usuario/registrousuario.php" method="POST">
+
+                <label for="ci">CI</label>
+                <input type="number" id="ci" name="ci" placeholder="Ingrese el CI">
+
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre">
+
+                <label for="direccion">Dirección</label>
+                <input type="text" id="direccion" name="direccion" placeholder="Ingrese la dirección">
+
+                <label for="celular">Celular</label>
+                <input type="number" id="celular" name="celular" placeholder="Ingrese el celular">
+
+                <label for="rol">Rol</label>
+                <input type="text" id="rol" name="rol" placeholder="Administrador o Vendedor">
+
+                <label for="estado">Estado</label>
+                <input type="text" id="estado" name="estado" placeholder="Activo o Bloqueado">
+
+                <input type="submit" value="Crear Cuenta">
             </form>
 
-            <p class="enlace-secundario">
-                ¿No tienes una cuenta? <a href="usuario/formulariousuario.php">Regístrate aquí</a>
-            </p>
-
-<<<<<<< HEAD
-        <main>
-
-            <div class="login-box">
-
-                <h1>DRAGON ICE</h1>
-                <p>Iniciar Sesión</p>
-
-                <form id="formulario" action="BDvali.php" method="post">
-
-                    <label for="usuario">Usuario</label>
-                    <input id="usuario" type="text" name="usuario" placeholder="Ingrese su nombre" required>
-
-                    <label for="clave">Contraseña</label>
-                    <input id="clave" type="text" name="clave" placeholder="Ingrese su numero de celular" required>
-
-                    <input type="submit" value="Ingresar">
-                </form>
-
-            </div>
-
-        </main>
-=======
-            <a href="paginaprincipal/01.inicio.php" class="volver">Volver al inicio</a>
+            <a href="../iniciosesion.php" class="volver">Ya tengo cuenta, iniciar sesión</a>
         </div>
     </main>
->>>>>>> 38a9d61561d31fd892b063ad5593f2793a467338
+</section>
 
-    </section>
+<?php include("../paginaprincipal/piedepagina.php"); ?>
+
     <script>
-        $(document).ready(function(){
-        $("#formulario").validate({
-            role:{
-                usuario:{
-                    required: true,
-                    maxlength: 5
-                },
-                contraseña:{
-                    required: true,
-                    minlength: 4
-                }
-            },
-            messages:{
-                usuario:{
-                    required: "pon tu nombre de ususario",
-                    maxlength: "maximo "
-                }
-            }
-        })    
-        })
-
-<<<<<<< HEAD
-
-     <script>
 $(document).ready(function(){
 
 $("#formulario").validate({
 
 rules:{
-    usuario:{
+    ci:{
         required:true
     },
-    clave:{
+    nombre:{
+        required:true
+    },
+    direccion:{
+        required:true
+    },
+    celular:{
+        required:true
+    },
+    rol:{
+        required:true
+    },
+    estado:{
         required:true
     }
 },
 
 messages:{
-    usuario:{
-        required:"Ingrese su nombre de usuario"
+    ci:{
+        required:"Ingrese su ci"
     },
-    clave:{
-        required:"Ingrese su contraseña"
+    nombre:{
+        required:"Ingrese su nombre"
+    },
+    direccion:{
+        required:"Ingrese su direccion"
+    },
+    celular:{
+        required:"Ingrese su celular"
+    },
+    rol:{
+        required:"Ingrese el rol"
+    },
+    estado:{
+        required:"Ingrese el estado"
     }
 }
 
@@ -382,9 +298,7 @@ messages:{
 
 });
 </script>
-=======
-    </script>
-<?php include 'paginaprincipal/piedepagina.php'; ?>
->>>>>>> 38a9d61561d31fd892b063ad5593f2793a467338
+
 </body>
+
 </html>

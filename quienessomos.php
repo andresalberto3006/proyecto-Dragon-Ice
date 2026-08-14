@@ -1,187 +1,210 @@
-
+<?php
+session_start();
+?>
 
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dragon Ice</title>
+<title>Quiénes somos | Dragon Ice</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 
-body{
-    background:linear-gradient(to bottom,#d8e8ff,#f4f8ff);
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter', Arial, sans-serif;
 }
 
-.contenedor{
-    max-width:1200px;
-    margin:auto;
-    padding:50px 30px;
+h1,h2{
+    font-family:'Baloo 2', Arial, sans-serif;
 }
 
-.presentacion{
+/* HERO */
+
+.hero{
+    position:relative;
+    height:100vh;
+    display:flex;
+    align-items:center;
+}
+
+.hero img{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-1;
+}
+
+.hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(5,11,22,0.45);
+    z-index:-1;
+}
+
+.hero-texto{
+    width:100%;
+    padding:30px;
     text-align:center;
-    padding:80px 40px;
-    margin-top:40px;
-    border-radius:30px;
-    background:rgba(255,255,255,0.85);
-    box-shadow:0 5px 20px rgba(0,0,0,0.15);
+    color:white;
 }
 
-.presentacion h1{
-    font-size:80px;
-    color:#2d4f7c;
-    letter-spacing:8px;
-    margin-bottom:25px;
-    text-shadow:2px 2px 10px rgba(0,0,0,0.2);
+.hero-texto h1{
+    font-size:58px;
+    letter-spacing:4px;
 }
 
-.presentacion p{
-    font-size:24px;
-    color:#444;
-    line-height:1.8;
-    max-width:900px;
-    margin:auto;
+.hero-texto p{
+    margin-top:14px;
+    font-size:18px;
+    max-width:600px;
+    margin-inline:auto;
 }
 
-.informacion{
+/* SECCIONES */
+
+.seccion{
+    max-width:1100px;
+    margin:90px auto;
+    padding:0 30px;
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-    gap:30px;
-    margin-top:50px;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    align-items:center;
 }
 
-.tarjeta{
-    background:white;
-    padding:35px;
-    border-radius:25px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.12);
-    transition:0.3s;
+.seccion.invertida .imagen{
+    order:-1;
 }
 
-.tarjeta:hover{
-    transform:translateY(-5px);
+.seccion .chip{
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:#29a8e0;
+    margin-bottom:12px;
 }
 
-.tarjeta h2{
-    color:#2d4f7c;
-    font-size:32px;
-    margin-bottom:20px;
+.seccion h2{
+    font-size:34px;
+    color:#0e2a4d;
+    margin-bottom:16px;
 }
 
-.tarjeta p{
-    font-size:20px;
-    color:#555;
+.seccion p{
+    font-size:16px;
     line-height:1.8;
-    text-align:justify;
+    color:#4b5563;
 }
 
-@media(max-width:768px){
+.seccion img{
+    width:100%;
+    height:380px;
+    object-fit:cover;
+    border-radius:20px;
+    box-shadow:0 15px 35px rgba(0,0,0,0.15);
+}
 
-    .presentacion h1{
-        font-size:50px;
-        letter-spacing:4px;
-    }
+/* CTA */
 
-    .presentacion p{
-        font-size:18px;
-    }
+.cta{
+    text-align:center;
+    padding:90px 30px;
+    background:linear-gradient(135deg,#18335c,#2f5d9f,#7fc7ff);
+}
 
-    .tarjeta h2{
-        font-size:26px;
-    }
+.cta h2{
+    color:white;
+    font-size:32px;
+    margin-bottom:14px;
+}
 
-    .tarjeta p{
-        font-size:18px;
-    }
+.cta p{
+    color:#e6f3ff;
+    margin-bottom:25px;
+}
+
+.cta a{
+    display:inline-block;
+    background:white;
+    color:#18335c;
+    text-decoration:none;
+    font-weight:700;
+    padding:14px 36px;
+    border-radius:30px;
+}
+
+@media(max-width:900px){
+    .hero-texto h1{ font-size:38px; }
+    .seccion{ grid-template-columns:1fr; margin:60px auto; }
+    .seccion.invertida .imagen{ order:0; }
 }
 
 </style>
-
 </head>
-
 <body>
 
-<header class="menu-principal">
+<?php $rutaMenu=""; include("menu.php"); ?>
 
-  <?php
-  include("menu.php")
-  
-  ?>
-
-</header>
-
-<div class="contenedor">
-
-```
-<section class="presentacion">
-
-    <h1>DRAGON ICE</h1>
-
-    <p>
-        Bienvenido a Dragon Ice, una empresa dedicada a la elaboración
-        y comercialización de helados artesanales de excelente calidad.
-        Nuestro objetivo es brindar productos únicos, deliciosos y
-        refrescantes que permitan a nuestros clientes disfrutar
-        experiencias inolvidables en cada visita.
-    </p>
-
+<section class="hero">
+    <img src="https://images.unsplash.com/photo-1580915411954-282cb1b0d780?auto=format&fit=crop&w=1800&q=80" alt="Helados Dragon Ice">
+    <div class="hero-texto">
+        <h1>DRAGON ICE</h1>
+        <p>Helados artesanales hechos con ingredientes reales, mucho cariño y ganas de alegrar tu día.</p>
+    </div>
 </section>
 
-<section class="informacion">
-
-    <div class="tarjeta">
-
-        <h2>📖 Descripción</h2>
-
-        <p>
-            Dragon Ice es una empresa especializada en la producción y
-            venta de helados artesanales elaborados con ingredientes de
-            calidad. Nos caracterizamos por ofrecer sabores innovadores,
-            una atención cordial y productos que combinan creatividad,
-            frescura y excelencia para satisfacer los gustos de nuestros
-            clientes.
-        </p>
-
+<section class="seccion">
+    <div>
+        <div class="chip">Nuestra historia</div>
+        <h2>Helado hecho como debe ser</h2>
+        <p>Dragon Ice es una empresa dedicada a la elaboración y comercialización de helados artesanales de excelente calidad. Nació con una idea simple: usar ingredientes de verdad y recetas propias para ofrecer un helado distinto en cada cucharada.</p>
     </div>
-
-    <div class="tarjeta">
-
-        <h2>🎯 Misión</h2>
-
-        <p>
-            Elaborar y comercializar helados artesanales de alta calidad,
-            brindando a nuestros clientes productos frescos, deliciosos e
-            innovadores, acompañados de una atención eficiente y un
-            compromiso constante con la satisfacción de quienes confían
-            en nuestra empresa.
-        </p>
-
+    <div class="imagen">
+        <img src="https://images.unsplash.com/photo-1562790879-dfde82829db0?auto=format&fit=crop&w=1200&q=80" alt="Helado de chocolate">
     </div>
-
-    <div class="tarjeta">
-
-        <h2>🚀 Visión</h2>
-
-        <p>
-            Ser una empresa líder y reconocida en el mercado de helados
-            artesanales, destacándonos por la calidad de nuestros
-            productos, la innovación permanente y la preferencia de los
-            clientes, consolidándonos como una marca referente en el
-            sector gastronómico.
-        </p>
-
-    </div>
-
 </section>
 
+<section class="seccion invertida">
+    <div>
+        <div class="chip">Misión</div>
+        <h2>Calidad en cada sabor</h2>
+        <p>Elaborar y comercializar helados artesanales de alta calidad, brindando productos frescos, deliciosos e innovadores, junto a una atención eficiente y un compromiso constante con la satisfacción de nuestros clientes.</p>
+    </div>
+    <div class="imagen">
+        <img src="https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?auto=format&fit=crop&w=1200&q=80" alt="Helado de fresa">
+    </div>
+</section>
 
-</div>
+<section class="seccion">
+    <div>
+        <div class="chip">Visión</div>
+        <h2>Un referente artesanal</h2>
+        <p>Ser una empresa líder y reconocida en el mercado de helados artesanales, destacándonos por la calidad de nuestros productos, la innovación permanente y la preferencia de nuestros clientes.</p>
+    </div>
+    <div class="imagen">
+        <img src="https://images.unsplash.com/photo-1567206563064-6f60f40a2b57?auto=format&fit=crop&w=1200&q=80" alt="Variedad de helados">
+    </div>
+</section>
 
-<?php
-include("piedepagina.php");
-?>
+<section class="cta">
+    <h2>¿Listo para probarlo?</h2>
+    <p>Descubre todo nuestro catálogo de helados artesanales.</p>
+    <a href="paginaprincipal/productos.php">Ver productos</a>
+</section>
+
+<?php include("paginaprincipal/piedepagina.php"); ?>
 
 </body>
 </html>
