@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 if(!isset($_SESSION['rol'])){
@@ -14,19 +13,32 @@ if($_SESSION['rol'] != 'Vendedor'){
 
 include("conexion.php");
 
-$idPedido = isset($_GET['idPedido']) ? $_GET['idPedido'] : 0;
+$idPedido = isset($_GET['idPedido']) ? intval($_GET['idPedido']) : 0;
 $ci = $_SESSION['ci'];
 
-$pedido = $conexion->query("SELECT * FROM pedidos WHERE id='$idPedido' AND vendedor_ci='$ci'");
+$pedido = $conexion->query("
+    SELECT * FROM pedidos
+    WHERE id='$idPedido' AND vendedor_ci='$ci'
+");
 
 if($pedido->num_rows == 0){
-    header("Location: ../pedidos/pedidospedidos.php");
+    header("Location: pedidos.php");
     exit();
 }
 
 $datoPedido = $pedido->fetch_assoc();
 
-$productos = $conexion->query("SELECT * FROM productos ORDER BY nombre");
+$productos = $conexion->query("
+    SELECT * FROM productos
+    ORDER BY id DESC
+");
+
+$detalle = $conexion->query("
+    SELECT c.*,p.nombre,p.precio,p.stock,p.imagen
+    FROM carrito c
+    INNER JOIN productos p ON c.productos_id=p.id
+    WHERE c.pedidos_id='$idPedido'
+");
 
 $t = $conexion->query("
     SELECT IFNULL(SUM(costototal),0) AS total
@@ -36,6 +48,7 @@ $t = $conexion->query("
 
 $total = $t['total'];
 
+$imagenGenerica = "imagenesproyecto/logo.png";
 ?>
 
 <!DOCTYPE html>
@@ -54,167 +67,343 @@ $total = $t['total'];
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-    min-height:100vh;
-    background:linear-gradient(135deg,#18335c,#2f5d9f,#7fc7ff);
-    background-attachment:fixed;
-    color:#18335c;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#ffffff;
+    color:#0e2a4d;
 }
 
 .contenedor{
-    width:90%;
-    max-width:1200px;
+    width:94%;
+    max-width:1500px;
     margin:auto;
-    padding:40px 0 50px;
+    padding:40px 0 60px;
 }
 
-.tarjeta{
-    background:white;
-    padding:25px;
+.encabezado-pedido{
+    background:#0e2a4d;
+    color:white;
     border-radius:20px;
-    margin-bottom:25px;
-    box-shadow:0 10px 25px rgba(0,0,0,.20);
+    padding:25px 30px;
+    margin-bottom:40px;
+    box-shadow:0 8px 25px rgba(14,42,77,.2);
 }
 
-.tarjeta h1{
-    color:#18335c;
-    margin-bottom:10px;
-    font-size:28px;
+.encabezado-pedido h1{
+    font-size:32px;
+    margin-bottom:15px;
 }
 
-.tarjeta h2{
-    color:#2f5d9f;
-    font-size:18px;
-    margin-top:7px;
+.datos-pedido{
+    display:flex;
+    flex-wrap:wrap;
+    gap:30px;
+}
+
+.dato{
+    font-size:17px;
+}
+
+.dato strong{
+    color:#63d4f2;
 }
 
 .titulo-seccion{
-    color:white;
     text-align:center;
-    margin:25px 0 15px;
-    font-size:22px;
+    margin:35px 0 25px;
 }
 
-table{
-    width:100%;
-    border-collapse:collapse;
-    background:white;
-    color:#18335c;
-    border-radius:15px;
+.titulo-seccion h2{
+    font-size:30px;
+    color:#0e2a4d;
+}
+
+.titulo-seccion p{
+    margin-top:7px;
+    color:#5b7590;
+}
+
+.productos{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:25px;
+    margin-bottom:50px;
+}
+
+.card{
+    min-width:0;
+    border-radius:18px;
     overflow:hidden;
-    box-shadow:0 8px 20px rgba(0,0,0,.15);
-    margin-bottom:25px;
-}
-
-th{
-    background:#4da6ff;
-    color:white;
-    padding:15px;
-}
-
-td{
-    padding:14px;
-    text-align:center;
-    border-bottom:1px solid #e3edf8;
-}
-
-tr:nth-child(even){
-    background:#f4f9ff;
-}
-
-tr:hover{
-    background:#e8f4ff;
-}
-
-input[type=number]{
-    width:70px;
-    padding:8px;
-    border-radius:8px;
-    border:2px solid #d7eaff;
-    background:#f4f9ff;
-    color:#18335c;
-    text-align:center;
-}
-
-button{
-    padding:10px 18px;
-    border:none;
-    background:#4da6ff;
-    color:white;
-    border-radius:10px;
-    cursor:pointer;
-    font-weight:bold;
+    background:white;
+    box-shadow:0 6px 20px rgba(14,42,77,.18);
+    border:1px solid #e2edf5;
     transition:.3s;
 }
 
-button:hover{
-    background:#2f5d9f;
-    transform:scale(1.03);
+.card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 12px 28px rgba(14,42,77,.25);
 }
 
-.acciones-carrito{
+.card-img{
+    width:100%;
+    height:220px;
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-color:#eaf8fc;
+}
+
+.card-info{
+    padding:17px;
+}
+
+.text-title{
+    font-size:20px;
+    font-weight:bold;
+    color:#0e2a4d;
+    margin-bottom:7px;
+}
+
+.text-price{
+    font-size:19px;
+    font-weight:bold;
+    color:#159db9;
+    margin-bottom:8px;
+}
+
+.text-body{
+    color:#5b7590;
+    font-size:14px;
+    line-height:1.4;
+    min-height:40px;
+    margin-bottom:10px;
+}
+
+.stock{
+    font-size:14px;
+    font-weight:bold;
+    color:#0e2a4d;
+    margin-bottom:12px;
+}
+
+.cantidad{
     display:flex;
-    justify-content:center;
     align-items:center;
+    justify-content:space-between;
     gap:8px;
-    flex-wrap:wrap;
+    margin-bottom:10px;
 }
 
-.btnEliminar{
+.cantidad label{
+    font-size:14px;
+    font-weight:bold;
+}
+
+.cantidad input{
+    width:65px;
+    padding:8px;
+    border:2px solid #63d4f2;
+    border-radius:8px;
+    text-align:center;
+    font-size:15px;
+}
+
+.btn{
+    width:100%;
+    padding:11px;
+    border:none;
+    border-radius:10px;
+    background:#0e2a4d;
+    color:white;
+    font-size:14px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn:hover{
+    background:#1b4a52;
+    transform:scale(1.02);
+}
+
+.btn:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+.btn-eliminar{
     background:#dc3545;
 }
 
-.btnEliminar:hover{
-    background:#b52a37;
+.btn-eliminar:hover{
+    background:#b02a37;
+}
+
+.subtotal{
+    font-size:17px;
+    font-weight:bold;
+    color:#0e2a4d;
+    margin:10px 0;
+}
+
+.cantidad-actual{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+    margin:12px 0;
+}
+
+.cantidad-actual strong{
+    font-size:14px;
+}
+
+.cantidad-actual input{
+    width:65px;
+    padding:8px;
+    border:2px solid #63d4f2;
+    border-radius:8px;
+    text-align:center;
+}
+
+.total-final{
+    max-width:500px;
+    margin:20px auto 30px;
+    background:#0e2a4d;
+    color:white;
+    padding:20px;
+    border-radius:18px;
+    text-align:center;
+    box-shadow:0 8px 20px rgba(14,42,77,.2);
+}
+
+.total-final div{
+    font-size:16px;
+    margin-bottom:5px;
+}
+
+.total-final span{
+    color:#7be0c4;
+    font-size:28px;
+    font-weight:bold;
 }
 
 .botones-finales{
     display:flex;
     justify-content:center;
     gap:15px;
-    margin-top:30px;
-    margin-bottom:10px;
+    margin-top:25px;
 }
 
 .botones-finales a{
     text-decoration:none;
 }
 
-.btnNuevo{
-    min-width:180px;
-    padding:14px 20px;
-    font-size:16px;
-    background:#18335c;
+.btn-final{
+    width:auto;
+    min-width:200px;
+    padding:14px 25px;
 }
 
-.btnNuevo:hover{
-    background:#2f5d9f;
+.btn-nuevo{
+    background:#63d4f2;
+    color:#0e2a4d;
 }
 
-@media(max-width:800px){
+.btn-nuevo:hover{
+    background:#7be0c4;
+}
+
+.sin-productos{
+    grid-column:1/-1;
+    text-align:center;
+    padding:35px;
+    background:#f4fbfd;
+    border-radius:18px;
+    color:#5b7590;
+    font-size:17px;
+}
+
+.mensaje{
+    position:fixed;
+    top:90px;
+    right:25px;
+    padding:14px 22px;
+    border-radius:12px;
+    color:white;
+    font-weight:bold;
+    z-index:2000;
+    opacity:0;
+    transform:translateY(-15px);
+    transition:.3s;
+    pointer-events:none;
+}
+
+.mensaje.mostrar{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.mensaje.ok{
+    background:#198754;
+}
+
+.mensaje.error{
+    background:#dc3545;
+}
+
+@media(max-width:1200px){
+    .productos{
+        grid-template-columns:repeat(4,1fr);
+    }
+}
+
+@media(max-width:950px){
+    .productos{
+        grid-template-columns:repeat(3,1fr);
+    }
+}
+
+@media(max-width:650px){
 
     .contenedor{
-        width:95%;
-        padding:25px 0;
+        width:92%;
     }
 
-    table{
-        display:block;
-        overflow-x:auto;
-        white-space:nowrap;
+    .productos{
+        grid-template-columns:repeat(2,1fr);
+        gap:15px;
+    }
+
+    .card-img{
+        height:180px;
+    }
+
+    .encabezado-pedido h1{
+        font-size:26px;
+    }
+
+    .datos-pedido{
+        flex-direction:column;
+        gap:8px;
     }
 
     .botones-finales{
         flex-direction:column;
     }
 
-    .btnNuevo{
+    .btn-final{
         width:100%;
     }
+}
 
+@media(max-width:430px){
+    .productos{
+        grid-template-columns:1fr;
+    }
 }
 
 </style>
@@ -228,325 +417,565 @@ $rutaMenu="";
 include("menu.php");
 ?>
 
+<div id="mensaje" class="mensaje"></div>
+
 <div class="contenedor">
 
-    <div class="tarjeta">
+    <div class="encabezado-pedido">
 
-        <h1> Mi Carrito</h1>
+        <h1>🍦 Mi Carrito</h1>
 
-        <h2>
-            Pedido #<?php echo $idPedido; ?> -
-            Cliente: <?php echo $datoPedido['nombre']; ?>
-        </h2>
+        <div class="datos-pedido">
 
-        <h2>
-            Total: Bs. <span id="totalCarrito"><?php echo $total; ?></span>
-        </h2>
+            <div class="dato">
+                <strong>Pedido:</strong>
+                #<?php echo $idPedido; ?>
+            </div>
+
+            <div class="dato">
+                <strong>Cliente:</strong>
+                <?php echo $datoPedido['nombre']; ?>
+            </div>
+
+            <div class="dato">
+                <strong>Total:</strong>
+                Bs. <span id="totalEncabezado"><?php echo $total; ?></span>
+            </div>
+
+        </div>
 
     </div>
 
-    <h2 class="titulo-seccion"> Productos disponibles</h2>
 
-    <table>
+    <div class="titulo-seccion">
 
-        <tr>
-            <th>ID</th>
-            <th>Producto</th>
-            <th>Descripción</th>
-            <th>Precio</th>
-            <th>Stock</th>
-            <th>Cantidad</th>
-            <th>Agregar</th>
-        </tr>
+        <h2>🍨 Productos disponibles</h2>
 
-        <?php while($fila=$productos->fetch_assoc()){ ?>
+        <p>Elige los productos que deseas agregar al pedido</p>
 
-        <tr>
+    </div>
 
-            <td><?php echo $fila['id']; ?></td>
 
-            <td><?php echo $fila['nombre']; ?></td>
+    <section class="productos">
 
-            <td><?php echo $fila['descripcion']; ?></td>
+        <?php if($productos->num_rows > 0){ ?>
 
-            <td>Bs. <?php echo $fila['precio']; ?></td>
+            <?php while($fila=$productos->fetch_assoc()){ ?>
 
-            <td><?php echo $fila['stock']; ?></td>
+                <?php
 
-            <td>
-                <input
-                    type="number"
-                    id="cantidad_<?php echo $fila['id']; ?>"
-                    min="1"
-                    value="1"
-                >
-            </td>
+                if(!empty($fila['imagen'])){
+                    $imagenProducto=$fila['imagen'];
+                }else{
+                    $imagenProducto=$imagenGenerica;
+                }
 
-            <td>
-                <button
-                    type="button"
-                    class="btnAgregar"
-                    data-id="<?php echo $fila['id']; ?>"
-                > Agregar</button>
-            </td>
+                ?>
 
-        </tr>
+                <div class="card">
+
+                    <div
+                        class="card-img"
+                        style="background-image:url('<?php echo $imagenProducto; ?>')">
+                    </div>
+
+                    <div class="card-info">
+
+                        <p class="text-title">
+                            <?php echo $fila['nombre']; ?>
+                        </p>
+
+                        <p class="text-price">
+                            Bs. <?php echo $fila['precio']; ?>
+                        </p>
+
+                        <p class="text-body">
+                            <?php echo $fila['descripcion']; ?>
+                        </p>
+
+                        <p class="stock">
+                            📦 Stock: <?php echo $fila['stock']; ?>
+                        </p>
+
+                        <form
+                            class="form-agregar"
+                            data-producto="<?php echo $fila['id']; ?>">
+
+                            <input
+                                type="hidden"
+                                name="idProducto"
+                                value="<?php echo $fila['id']; ?>">
+
+                            <input
+                                type="hidden"
+                                name="idPedido"
+                                value="<?php echo $idPedido; ?>">
+
+                            <div class="cantidad">
+
+                                <label>Cantidad:</label>
+
+                                <input
+                                    type="number"
+                                    name="cantidad"
+                                    min="1"
+                                    max="<?php echo $fila['stock']; ?>"
+                                    value="1"
+                                    required>
+
+                            </div>
+
+                            <button
+                                type="submit"
+                                class="btn">
+
+                                🛒 Agregar
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            <?php } ?>
+
+        <?php }else{ ?>
+
+            <div class="sin-productos">
+                No hay productos registrados.
+            </div>
 
         <?php } ?>
 
-    </table>
+    </section>
 
-    <h2 class="titulo-seccion"> Productos agregados</h2>
 
-    <table>
+    <div class="titulo-seccion">
 
-        <thead>
-            <tr>
-                <th>Producto</th>
-                <th>Precio</th>
-                <th>Cantidad</th>
-                <th>Subtotal</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
+        <h2>🛒 Productos agregados</h2>
 
-        <tbody id="cuerpoCarrito">
-            <tr>
-                <td colspan="5">Cargando...</td>
-            </tr>
-        </tbody>
+        <p>Productos que forman parte de este pedido</p>
 
-    </table>
+    </div>
+
+
+    <section
+        class="productos"
+        id="productosCarrito">
+
+        <?php if($detalle->num_rows > 0){ ?>
+
+            <?php while($fila=$detalle->fetch_assoc()){ ?>
+
+                <?php
+
+                if(!empty($fila['imagen'])){
+                    $imagenProducto=$fila['imagen'];
+                }else{
+                    $imagenProducto=$imagenGenerica;
+                }
+
+                ?>
+
+                <div
+                    class="card card-carrito"
+                    id="carrito-<?php echo $fila['productos_id']; ?>">
+
+                    <div
+                        class="card-img"
+                        style="background-image:url('<?php echo $imagenProducto; ?>')">
+                    </div>
+
+                    <div class="card-info">
+
+                        <p class="text-title">
+                            <?php echo $fila['nombre']; ?>
+                        </p>
+
+                        <p class="text-price">
+                            Bs. <?php echo $fila['precio']; ?> c/u
+                        </p>
+
+                        <p class="subtotal">
+                            Subtotal:
+                            Bs.
+                            <span class="subtotal-valor">
+                                <?php echo $fila['costototal']; ?>
+                            </span>
+                        </p>
+
+                        <form
+                            class="form-actualizar">
+
+                            <input
+                                type="hidden"
+                                name="idPedido"
+                                value="<?php echo $idPedido; ?>">
+
+                            <input
+                                type="hidden"
+                                name="idProducto"
+                                value="<?php echo $fila['productos_id']; ?>">
+
+                            <div class="cantidad-actual">
+
+                                <strong>Cantidad:</strong>
+
+                                <input
+                                    type="number"
+                                    name="cantidad"
+                                    min="1"
+                                    max="<?php echo $fila['stock']; ?>"
+                                    value="<?php echo $fila['cantidad']; ?>">
+
+                            </div>
+
+                            <button
+                                type="submit"
+                                class="btn">
+
+                                🔄 Actualizar
+
+                            </button>
+
+                        </form>
+
+                        <br>
+
+                        <button
+                            type="button"
+                            class="btn btn-eliminar"
+                            onclick="eliminarProducto(<?php echo $fila['productos_id']; ?>)">
+
+                            🗑️ Eliminar
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            <?php } ?>
+
+        <?php }else{ ?>
+
+            <div
+                class="sin-productos"
+                id="sinProductos">
+
+                🛒 Todavía no agregó productos al carrito.
+
+            </div>
+
+        <?php } ?>
+
+    </section>
+
+
+    <div class="total-final">
+
+        <div>Total del pedido</div>
+
+        <span id="totalFinal">
+            Bs. <?php echo $total; ?>
+        </span>
+
+    </div>
+
 
     <div class="botones-finales">
 
-        <a href="pedidos/pedidos.php">
-            <button class="btnNuevo"> Terminar pedido</button>
+        <a href="pedidos.php">
+
+            <button class="btn btn-final">
+                ✅ Terminar pedido
+            </button>
+
         </a>
 
-        <a href="pedidos/formpedido.php">
-            <button class="btnNuevo"> Nuevo pedido</button>
+        <a href="formpedido.php">
+
+            <button class="btn btn-final btn-nuevo">
+                ➕ Nuevo pedido
+            </button>
+
         </a>
 
     </div>
 
 </div>
 
+
 <?php include("paginaprincipal/piedepagina.php"); ?>
+
 
 <script>
 
-const idPedido = <?php echo (int)$idPedido; ?>;
+const idPedido = <?php echo $idPedido; ?>;
 
-document.addEventListener("DOMContentLoaded", function(){
-    cargarCarrito();
-    agregarEventosDisponibles();
+
+/* MENSAJE */
+
+function mostrarMensaje(texto, tipo="ok"){
+
+    const mensaje=document.getElementById("mensaje");
+
+    mensaje.textContent=texto;
+
+    mensaje.className="mensaje mostrar "+tipo;
+
+    setTimeout(function(){
+
+        mensaje.classList.remove("mostrar");
+
+    },2500);
+
+}
+
+
+/* ACTUALIZAR TOTAL */
+
+function actualizarTotal(){
+
+    fetch("obtenerCarrito.php?idPedido="+idPedido)
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        if(data.ok){
+
+            document.getElementById("totalFinal").textContent =
+                "Bs. "+data.total;
+
+            document.getElementById("totalEncabezado").textContent =
+                data.total;
+
+        }
+
+    })
+
+    .catch(error => {
+
+        console.log(error);
+
+    });
+
+}
+
+
+/* AGREGAR PRODUCTO */
+
+document.querySelectorAll(".form-agregar").forEach(function(form){
+
+    form.addEventListener("submit",function(e){
+
+        e.preventDefault();
+
+        const boton=form.querySelector("button");
+
+        boton.disabled=true;
+
+        boton.textContent="Agregando...";
+
+        const datos=new FormData(form);
+
+        fetch("agregarCarrito.php",{
+
+            method:"POST",
+            body:datos
+
+        })
+
+        .then(response => response.json())
+
+        .then(data => {
+
+            if(data.ok){
+
+                mostrarMensaje("🍦 Producto agregado correctamente");
+
+                actualizarCarritoVisual();
+
+            }else{
+
+                mostrarMensaje(data.mensaje || "No se pudo agregar el producto","error");
+
+            }
+
+        })
+
+        .catch(error => {
+
+            console.log(error);
+
+            mostrarMensaje("Ocurrió un error","error");
+
+        })
+
+        .finally(function(){
+
+            boton.disabled=false;
+
+            boton.textContent="🛒 Agregar";
+
+        });
+
+    });
+
 });
 
-//==============================
-// PRODUCTOS DISPONIBLES
-//==============================
 
-function agregarEventosDisponibles(){
+/* ACTUALIZAR */
 
-    document.querySelectorAll(".btnAgregar").forEach(function(boton){
+document.querySelectorAll(".form-actualizar").forEach(function(form){
 
-        boton.addEventListener("click", function(){
+    form.addEventListener("submit",function(e){
 
-            let idProducto = boton.dataset.id;
-            let cantidad = document.getElementById("cantidad_" + idProducto).value;
+        e.preventDefault();
 
-            agregarProducto(idProducto, cantidad);
+        const boton=form.querySelector("button");
 
-        });
+        boton.disabled=true;
 
-    });
+        boton.textContent="Actualizando...";
 
-}
+        const datos=new FormData(form);
 
-function agregarProducto(idProducto, cantidad){
+        fetch("actualizarCarrito.php",{
 
-    let datos = new URLSearchParams();
-    datos.append("idProducto", idProducto);
-    datos.append("idPedido", idPedido);
-    datos.append("cantidad", cantidad);
+            method:"POST",
+            body:datos
 
-    fetch("agregarCarrito.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: datos
-    })
-    .then(function(respuesta){ return respuesta.json(); })
-    .then(function(data){
+        })
 
-        if(data.ok){
-            cargarCarrito();
-        } else {
-            alert(data.mensaje);
-        }
+        .then(response => response.json())
 
-    })
-    .catch(function(error){
-        console.log(error);
-    });
+        .then(data => {
 
-}
+            if(data.ok){
 
-//==============================
-// CARRITO (PRODUCTOS AGREGADOS)
-//==============================
+                mostrarMensaje("✅ Cantidad actualizada");
 
-function cargarCarrito(){
+                actualizarCarritoVisual();
 
-    fetch("carrito/obtenerCarritoAjax.php?idPedido=" + idPedido)
-    .then(function(respuesta){ return respuesta.json(); })
-    .then(function(data){
+            }else{
 
-        if(data.ok){
-            pintarCarrito(data.items, data.total);
-        }
+                mostrarMensaje(data.mensaje || "No se pudo actualizar","error");
 
-    })
-    .catch(function(error){
-        console.log(error);
-    });
+            }
 
-}
+        })
 
-function pintarCarrito(items, total){
+        .catch(error => {
 
-    let cuerpo = document.getElementById("cuerpoCarrito");
+            console.log(error);
 
-    if(items.length == 0){
+            mostrarMensaje("Ocurrió un error","error");
 
-        cuerpo.innerHTML = `
-            <tr>
-                <td colspan="5">Todavía no agregó productos.</td>
-            </tr>
-        `;
+        })
 
-    } else {
+        .finally(function(){
 
-        let html = "";
+            boton.disabled=false;
 
-        items.forEach(function(item){
-
-            html += `
-                <tr>
-                    <td>${item.nombre}</td>
-                    <td>Bs. ${item.precio}</td>
-                    <td>
-                        <div class="acciones-carrito">
-                            <input
-                                type="number"
-                                class="inputCantidadEditar"
-                                data-id="${item.productos_id}"
-                                min="1"
-                                max="${item.stock}"
-                                value="${item.cantidad}"
-                            >
-                            <button type="button" class="btnActualizar" data-id="${item.productos_id}">Actualizar</button>
-                        </div>
-                    </td>
-                    <td>Bs. ${item.costototal}</td>
-                    <td>
-                        <button type="button" class="btnEliminar" data-id="${item.productos_id}"> Eliminar</button>
-                    </td>
-                </tr>
-            `;
-
-        });
-
-        cuerpo.innerHTML = html;
-
-    }
-
-    document.getElementById("totalCarrito").textContent = total;
-
-    agregarEventosCarrito();
-
-}
-
-function agregarEventosCarrito(){
-
-    document.querySelectorAll(".btnActualizar").forEach(function(boton){
-
-        boton.addEventListener("click", function(){
-
-            let idProducto = boton.dataset.id;
-            let input = document.querySelector('.inputCantidadEditar[data-id="' + idProducto + '"]');
-
-            actualizarCantidad(idProducto, input.value);
+            boton.textContent="🔄 Actualizar";
 
         });
 
     });
 
-    document.querySelectorAll(".btnEliminar").forEach(function(boton){
+});
 
-        boton.addEventListener("click", function(){
 
-            let idProducto = boton.dataset.id;
-
-            eliminarProducto(idProducto);
-
-        });
-
-    });
-
-}
-
-function actualizarCantidad(idProducto, cantidad){
-
-    let datos = new URLSearchParams();
-    datos.append("idPedido", idPedido);
-    datos.append("idProducto", idProducto);
-    datos.append("cantidad", cantidad);
-
-    fetch("carrito/actualizarCarrito.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: datos
-    })
-    .then(function(respuesta){ return respuesta.json(); })
-    .then(function(data){
-
-        if(data.ok){
-            cargarCarrito();
-        } else {
-            alert(data.mensaje);
-        }
-
-    })
-    .catch(function(error){
-        console.log(error);
-    });
-
-}
+/* ELIMINAR */
 
 function eliminarProducto(idProducto){
 
-    let datos = new URLSearchParams();
-    datos.append("idPedido", idPedido);
-    datos.append("idProducto", idProducto);
+    if(!confirm("¿Deseas eliminar este producto del carrito?")){
+        return;
+    }
 
-    fetch("eliminarCarrito.php", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: datos
+    const datos=new FormData();
+
+    datos.append("idPedido",idPedido);
+    datos.append("idProducto",idProducto);
+
+    fetch("eliminarCarrito.php",{
+
+        method:"POST",
+        body:datos
+
     })
-    .then(function(respuesta){ return respuesta.json(); })
-    .then(function(data){
+
+    .then(response => response.json())
+
+    .then(data => {
 
         if(data.ok){
-            cargarCarrito();
-        } else {
-            alert(data.mensaje);
+
+            const tarjeta=document.getElementById(
+                "carrito-"+idProducto
+            );
+
+            if(tarjeta){
+                tarjeta.remove();
+            }
+
+            mostrarMensaje("🗑️ Producto eliminado");
+
+            actualizarCarritoVisual();
+
+        }else{
+
+            mostrarMensaje(
+                data.mensaje || "No se pudo eliminar",
+                "error"
+            );
+
         }
 
     })
-    .catch(function(error){
+
+    .catch(error => {
+
         console.log(error);
+
+        mostrarMensaje("Ocurrió un error","error");
+
+    });
+
+}
+
+
+/* ACTUALIZAR CARRITO VISUAL */
+
+function actualizarCarritoVisual(){
+
+    fetch("obtenerCarrito.php?idPedido="+idPedido)
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        if(!data.ok){
+            return;
+        }
+
+        document.getElementById("totalFinal").textContent =
+            "Bs. "+data.total;
+
+        document.getElementById("totalEncabezado").textContent =
+            data.total;
+
+    })
+
+    .catch(error => {
+
+        console.log(error);
+
     });
 
 }
@@ -554,5 +983,4 @@ function eliminarProducto(idProducto){
 </script>
 
 </body>
-
 </html>
