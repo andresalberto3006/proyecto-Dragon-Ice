@@ -28,13 +28,6 @@ $datoPedido = $pedido->fetch_assoc();
 
 $productos = $conexion->query("SELECT * FROM productos ORDER BY nombre");
 
-$detalle = $conexion->query("
-    SELECT c.*,p.nombre,p.precio,p.stock
-    FROM carrito c
-    INNER JOIN productos p ON c.productos_id=p.id
-    WHERE c.pedidos_id='$idPedido'
-");
-
 $t = $conexion->query("
     SELECT IFNULL(SUM(costototal),0) AS total
     FROM carrito
@@ -162,6 +155,22 @@ button:hover{
     transform:scale(1.03);
 }
 
+.acciones-carrito{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.btnEliminar{
+    background:#dc3545;
+}
+
+.btnEliminar:hover{
+    background:#b52a37;
+}
+
 .botones-finales{
     display:flex;
     justify-content:center;
@@ -231,7 +240,7 @@ include("menu.php");
         </h2>
 
         <h2>
-            Total: Bs. <?php echo $total; ?>
+            Total: Bs. <span id="totalCarrito"><?php echo $total; ?></span>
         </h2>
 
     </div>
@@ -252,49 +261,36 @@ include("menu.php");
 
         <?php while($fila=$productos->fetch_assoc()){ ?>
 
-        <form action="agregarCarrito.php" method="POST">
+        <tr>
 
-            <tr>
+            <td><?php echo $fila['id']; ?></td>
 
-                <td><?php echo $fila['id']; ?></td>
+            <td><?php echo $fila['nombre']; ?></td>
 
-                <td><?php echo $fila['nombre']; ?></td>
+            <td><?php echo $fila['descripcion']; ?></td>
 
-                <td><?php echo $fila['descripcion']; ?></td>
+            <td>Bs. <?php echo $fila['precio']; ?></td>
 
-                <td>Bs. <?php echo $fila['precio']; ?></td>
+            <td><?php echo $fila['stock']; ?></td>
 
-                <td><?php echo $fila['stock']; ?></td>
-
+            <td>
                 <input
-                    type="hidden"
-                    name="idProducto"
-                    value="<?php echo $fila['id']; ?>"
+                    type="number"
+                    id="cantidad_<?php echo $fila['id']; ?>"
+                    min="1"
+                    value="1"
                 >
+            </td>
 
-                <input
-                    type="hidden"
-                    name="idPedido"
-                    value="<?php echo $idPedido; ?>"
-                >
+            <td>
+                <button
+                    type="button"
+                    class="btnAgregar"
+                    data-id="<?php echo $fila['id']; ?>"
+                > Agregar</button>
+            </td>
 
-                <td>
-                    <input
-                        type="number"
-                        name="cantidad"
-                        min="1"
-                        value="1"
-                        required
-                    >
-                </td>
-
-                <td>
-                    <button type="submit"> Agregar</button>
-                </td>
-
-            </tr>
-
-        </form>
+        </tr>
 
         <?php } ?>
 
@@ -304,91 +300,21 @@ include("menu.php");
 
     <table>
 
-        <tr>
-            <th>Producto</th>
-            <th>Precio</th>
-            <th>Cantidad</th>
-            <th>Subtotal</th>
-            <th>Acciones</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
 
-        <?php
-
-        if($detalle->num_rows > 0){
-
-            while($fila=$detalle->fetch_assoc()){
-
-        ?>
-
-        <tr>
-
-            <td><?php echo $fila['nombre']; ?></td>
-
-            <td>Bs. <?php echo $fila['precio']; ?></td>
-
-            <td>
-
-                <form action="carrito/actualizarCarrito.php" method="POST">
-
-                    <input
-                        type="hidden"
-                        name="idPedido"
-                        value="<?php echo $idPedido; ?>"
-                    >
-
-                    <input
-                        type="hidden"
-                        name="idProducto"
-                        value="<?php echo $fila['productos_id']; ?>"
-                    >
-
-                    <input
-                        type="number"
-                        name="cantidad"
-                        min="1"
-                        max="<?php echo $fila['stock']; ?>"
-                        value="<?php echo $fila['cantidad']; ?>"
-                    >
-
-                    <button type="submit">Actualizar</button>
-
-                </form>
-
-            </td>
-
-            <td>
-                Bs. <?php echo $fila['costototal']; ?>
-            </td>
-
-            <td>
-
-                <a href="eliminarCarrito.php?idPedido=<?php echo $idPedido; ?>&idProducto=<?php echo $fila['productos_id']; ?>">
-
-                    <button type="button">
-                         Eliminar
-                    </button>
-
-                </a>
-
-            </td>
-
-        </tr>
-
-        <?php
-
-            }
-
-        }else{
-
-        ?>
-
-        <tr>
-            <td colspan="5">
-                Todavía no agregó productos.
-            </td>
-        </tr>
-
-        <?php } ?>
+        <tbody id="cuerpoCarrito">
+            <tr>
+                <td colspan="5">Cargando...</td>
+            </tr>
+        </tbody>
 
     </table>
 
@@ -407,6 +333,225 @@ include("menu.php");
 </div>
 
 <?php include("paginaprincipal/piedepagina.php"); ?>
+
+<script>
+
+const idPedido = <?php echo (int)$idPedido; ?>;
+
+document.addEventListener("DOMContentLoaded", function(){
+    cargarCarrito();
+    agregarEventosDisponibles();
+});
+
+//==============================
+// PRODUCTOS DISPONIBLES
+//==============================
+
+function agregarEventosDisponibles(){
+
+    document.querySelectorAll(".btnAgregar").forEach(function(boton){
+
+        boton.addEventListener("click", function(){
+
+            let idProducto = boton.dataset.id;
+            let cantidad = document.getElementById("cantidad_" + idProducto).value;
+
+            agregarProducto(idProducto, cantidad);
+
+        });
+
+    });
+
+}
+
+function agregarProducto(idProducto, cantidad){
+
+    let datos = new URLSearchParams();
+    datos.append("idProducto", idProducto);
+    datos.append("idPedido", idPedido);
+    datos.append("cantidad", cantidad);
+
+    fetch("agregarCarrito.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: datos
+    })
+    .then(function(respuesta){ return respuesta.json(); })
+    .then(function(data){
+
+        if(data.ok){
+            cargarCarrito();
+        } else {
+            alert(data.mensaje);
+        }
+
+    })
+    .catch(function(error){
+        console.log(error);
+    });
+
+}
+
+//==============================
+// CARRITO (PRODUCTOS AGREGADOS)
+//==============================
+
+function cargarCarrito(){
+
+    fetch("carrito/obtenerCarritoAjax.php?idPedido=" + idPedido)
+    .then(function(respuesta){ return respuesta.json(); })
+    .then(function(data){
+
+        if(data.ok){
+            pintarCarrito(data.items, data.total);
+        }
+
+    })
+    .catch(function(error){
+        console.log(error);
+    });
+
+}
+
+function pintarCarrito(items, total){
+
+    let cuerpo = document.getElementById("cuerpoCarrito");
+
+    if(items.length == 0){
+
+        cuerpo.innerHTML = `
+            <tr>
+                <td colspan="5">Todavía no agregó productos.</td>
+            </tr>
+        `;
+
+    } else {
+
+        let html = "";
+
+        items.forEach(function(item){
+
+            html += `
+                <tr>
+                    <td>${item.nombre}</td>
+                    <td>Bs. ${item.precio}</td>
+                    <td>
+                        <div class="acciones-carrito">
+                            <input
+                                type="number"
+                                class="inputCantidadEditar"
+                                data-id="${item.productos_id}"
+                                min="1"
+                                max="${item.stock}"
+                                value="${item.cantidad}"
+                            >
+                            <button type="button" class="btnActualizar" data-id="${item.productos_id}">Actualizar</button>
+                        </div>
+                    </td>
+                    <td>Bs. ${item.costototal}</td>
+                    <td>
+                        <button type="button" class="btnEliminar" data-id="${item.productos_id}"> Eliminar</button>
+                    </td>
+                </tr>
+            `;
+
+        });
+
+        cuerpo.innerHTML = html;
+
+    }
+
+    document.getElementById("totalCarrito").textContent = total;
+
+    agregarEventosCarrito();
+
+}
+
+function agregarEventosCarrito(){
+
+    document.querySelectorAll(".btnActualizar").forEach(function(boton){
+
+        boton.addEventListener("click", function(){
+
+            let idProducto = boton.dataset.id;
+            let input = document.querySelector('.inputCantidadEditar[data-id="' + idProducto + '"]');
+
+            actualizarCantidad(idProducto, input.value);
+
+        });
+
+    });
+
+    document.querySelectorAll(".btnEliminar").forEach(function(boton){
+
+        boton.addEventListener("click", function(){
+
+            let idProducto = boton.dataset.id;
+
+            eliminarProducto(idProducto);
+
+        });
+
+    });
+
+}
+
+function actualizarCantidad(idProducto, cantidad){
+
+    let datos = new URLSearchParams();
+    datos.append("idPedido", idPedido);
+    datos.append("idProducto", idProducto);
+    datos.append("cantidad", cantidad);
+
+    fetch("carrito/actualizarCarrito.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: datos
+    })
+    .then(function(respuesta){ return respuesta.json(); })
+    .then(function(data){
+
+        if(data.ok){
+            cargarCarrito();
+        } else {
+            alert(data.mensaje);
+        }
+
+    })
+    .catch(function(error){
+        console.log(error);
+    });
+
+}
+
+function eliminarProducto(idProducto){
+
+    let datos = new URLSearchParams();
+    datos.append("idPedido", idPedido);
+    datos.append("idProducto", idProducto);
+
+    fetch("eliminarCarrito.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: datos
+    })
+    .then(function(respuesta){ return respuesta.json(); })
+    .then(function(data){
+
+        if(data.ok){
+            cargarCarrito();
+        } else {
+            alert(data.mensaje);
+        }
+
+    })
+    .catch(function(error){
+        console.log(error);
+    });
+
+}
+
+</script>
 
 </body>
 

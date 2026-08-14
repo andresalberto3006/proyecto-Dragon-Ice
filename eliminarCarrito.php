@@ -1,37 +1,33 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['rol'])) {
-    header("Location: iniciosesion.php");
-    exit();
-}
+header("Content-Type: application/json");
 
-if ($_SESSION['rol'] != 'Vendedor') {
-    header("Location: paginaprincipal/02.admin.php");
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] != 'Vendedor') {
+    echo json_encode(["ok" => false, "mensaje" => "Sesión inválida."]);
     exit();
 }
 
 include("conexion.php");
 
-$idPedido = isset($_GET['idPedido']) ? $_GET['idPedido'] : 0;
-$idProducto = isset($_GET['idProducto']) ? $_GET['idProducto'] : 0;
+$idPedido = isset($_POST['idPedido']) ? intval($_POST['idPedido']) : 0;
+$idProducto = isset($_POST['idProducto']) ? intval($_POST['idProducto']) : 0;
 $ci = $_SESSION['ci'];
 
-$sqlPedido = "SELECT * FROM pedidos
-              WHERE id='$idPedido'
-              AND vendedor_ci='$ci'
-              AND estado='Pendiente'";
+$stmtPedido = $conexion->prepare("SELECT * FROM pedidos WHERE id=? AND vendedor_ci=? AND estado='Pendiente'");
+$stmtPedido->bind_param("ii", $idPedido, $ci);
+$stmtPedido->execute();
+$resultadoPedido = $stmtPedido->get_result();
 
-$resultadoPedido = $conexion->query($sqlPedido);
-
-if ($resultadoPedido->num_rows > 0) {
-    $sql = "DELETE FROM carrito
-            WHERE pedidos_id='$idPedido'
-            AND productos_id='$idProducto'";
-
-    $conexion->query($sql);
+if ($resultadoPedido->num_rows == 0) {
+    echo json_encode(["ok" => false, "mensaje" => "El pedido no existe o ya no está pendiente."]);
+    exit();
 }
 
-header("Location: miCarrito.php?idPedido=$idPedido");
+$stmt = $conexion->prepare("DELETE FROM carrito WHERE pedidos_id=? AND productos_id=?");
+$stmt->bind_param("ii", $idPedido, $idProducto);
+$stmt->execute();
+
+echo json_encode(["ok" => true, "mensaje" => "Producto eliminado del carrito."]);
 exit();
 ?>

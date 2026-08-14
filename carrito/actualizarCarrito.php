@@ -8,10 +8,10 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] != 'Vendedor') {
     exit();
 }
 
-include("conexion.php");
+include("../conexion.php");
 
-$idProducto = isset($_POST['idProducto']) ? intval($_POST['idProducto']) : 0;
 $idPedido = isset($_POST['idPedido']) ? intval($_POST['idPedido']) : 0;
+$idProducto = isset($_POST['idProducto']) ? intval($_POST['idProducto']) : 0;
 $cantidad = isset($_POST['cantidad']) ? intval($_POST['cantidad']) : 0;
 $ci = $_SESSION['ci'];
 
@@ -42,41 +42,17 @@ if ($resultadoProducto->num_rows == 0) {
 
 $producto = $resultadoProducto->fetch_assoc();
 
-$stmtCarrito = $conexion->prepare("SELECT * FROM carrito WHERE productos_id=? AND pedidos_id=?");
-$stmtCarrito->bind_param("ii", $idProducto, $idPedido);
-$stmtCarrito->execute();
-$resultadoCarrito = $stmtCarrito->get_result();
-
-$nuevaCantidad = $cantidad;
-
-if ($resultadoCarrito->num_rows > 0) {
-    $productoCarrito = $resultadoCarrito->fetch_assoc();
-    $nuevaCantidad = $productoCarrito['cantidad'] + $cantidad;
-}
-
-if ($nuevaCantidad > $producto['stock']) {
+if ($cantidad > $producto['stock']) {
     echo json_encode(["ok" => false, "mensaje" => "No existe stock suficiente."]);
     exit();
 }
 
-if ($resultadoCarrito->num_rows > 0) {
+$total = $producto['precio'] * $cantidad;
 
-    $total = $producto['precio'] * $nuevaCantidad;
+$stmt = $conexion->prepare("UPDATE carrito SET cantidad=?, costototal=? WHERE productos_id=? AND pedidos_id=?");
+$stmt->bind_param("idii", $cantidad, $total, $idProducto, $idPedido);
+$stmt->execute();
 
-    $stmt = $conexion->prepare("UPDATE carrito SET cantidad=?, costototal=? WHERE productos_id=? AND pedidos_id=?");
-    $stmt->bind_param("idii", $nuevaCantidad, $total, $idProducto, $idPedido);
-    $stmt->execute();
-
-} else {
-
-    $total = $producto['precio'] * $cantidad;
-
-    $stmt = $conexion->prepare("INSERT INTO carrito (productos_id, pedidos_id, cantidad, costototal) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("iiid", $idProducto, $idPedido, $cantidad, $total);
-    $stmt->execute();
-
-}
-
-echo json_encode(["ok" => true, "mensaje" => "Producto agregado al carrito."]);
+echo json_encode(["ok" => true, "mensaje" => "Cantidad actualizada."]);
 exit();
 ?>
