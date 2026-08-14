@@ -31,6 +31,7 @@ CREATE TABLE pedidos (
   vendedor_ci INT NOT NULL,
   nombrevendedor VARCHAR(80) NOT NULL,
   metodo_pago VARCHAR(45) NOT NULL DEFAULT '',
+  ALTER TABLE pedidos
   PRIMARY KEY (id),
   FOREIGN KEY (vendedor_ci) REFERENCES usuario(ci)
 ) ENGINE=InnoDB;
