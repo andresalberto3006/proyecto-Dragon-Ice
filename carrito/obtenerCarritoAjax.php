@@ -42,7 +42,8 @@ $stmt = $conexion->prepare("
         c.costototal,
         p.nombre,
         p.precio,
-        p.stock
+        p.stock,
+        p.imagen
     FROM carrito c
     INNER JOIN productos p
         ON c.productos_id = p.id

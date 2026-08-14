@@ -327,34 +327,6 @@ body{
     font-size:17px;
 }
 
-.mensaje{
-    position:fixed;
-    top:90px;
-    right:25px;
-    padding:14px 22px;
-    border-radius:12px;
-    color:white;
-    font-weight:bold;
-    z-index:2000;
-    opacity:0;
-    transform:translateY(-15px);
-    transition:.3s;
-    pointer-events:none;
-}
-
-.mensaje.mostrar{
-    opacity:1;
-    transform:translateY(0);
-}
-
-.mensaje.ok{
-    background:#198754;
-}
-
-.mensaje.error{
-    background:#dc3545;
-}
-
 @media(max-width:1200px){
     .productos{
         grid-template-columns:repeat(4,1fr);
@@ -417,13 +389,11 @@ $rutaMenu="";
 include("menu.php");
 ?>
 
-<div id="mensaje" class="mensaje"></div>
-
 <div class="contenedor">
 
     <div class="encabezado-pedido">
 
-        <h1>🍦 Mi Carrito</h1>
+        <h1>Mi Carrito</h1>
 
         <div class="datos-pedido">
 
@@ -449,7 +419,7 @@ include("menu.php");
 
     <div class="titulo-seccion">
 
-        <h2>🍨 Productos disponibles</h2>
+        <h2>Productos disponibles</h2>
 
         <p>Elige los productos que deseas agregar al pedido</p>
 
@@ -494,12 +464,11 @@ include("menu.php");
                         </p>
 
                         <p class="stock">
-                            📦 Stock: <?php echo $fila['stock']; ?>
+                            Stock: <?php echo $fila['stock']; ?>
                         </p>
 
                         <form
-                            class="form-agregar"
-                            data-producto="<?php echo $fila['id']; ?>">
+                            class="form-agregar">
 
                             <input
                                 type="hidden"
@@ -529,7 +498,7 @@ include("menu.php");
                                 type="submit"
                                 class="btn">
 
-                                🛒 Agregar
+                                Agregar
 
                             </button>
 
@@ -554,7 +523,7 @@ include("menu.php");
 
     <div class="titulo-seccion">
 
-        <h2>🛒 Productos agregados</h2>
+        <h2>Productos agregados</h2>
 
         <p>Productos que forman parte de este pedido</p>
 
@@ -636,7 +605,7 @@ include("menu.php");
                                 type="submit"
                                 class="btn">
 
-                                🔄 Actualizar
+                                Actualizar
 
                             </button>
 
@@ -649,7 +618,7 @@ include("menu.php");
                             class="btn btn-eliminar"
                             onclick="eliminarProducto(<?php echo $fila['productos_id']; ?>)">
 
-                            🗑️ Eliminar
+                            Eliminar
 
                         </button>
 
@@ -665,7 +634,7 @@ include("menu.php");
                 class="sin-productos"
                 id="sinProductos">
 
-                🛒 Todavía no agregó productos al carrito.
+                Todavía no agregó productos al carrito.
 
             </div>
 
@@ -687,18 +656,18 @@ include("menu.php");
 
     <div class="botones-finales">
 
-        <a href="pedidos.php">
+        <a href="pedidos/pedidos.php">
 
             <button class="btn btn-final">
-                ✅ Terminar pedido
+                Terminar pedido
             </button>
 
         </a>
 
-        <a href="formpedido.php">
+        <a href="pedidos/formpedido.php">
 
             <button class="btn btn-final btn-nuevo">
-                ➕ Nuevo pedido
+                Nuevo pedido
             </button>
 
         </a>
@@ -714,270 +683,147 @@ include("menu.php");
 <script>
 
 const idPedido = <?php echo $idPedido; ?>;
+const imagenGenerica = "imagenesproyecto/logo.png";
 
-
-/* MENSAJE */
-
-function mostrarMensaje(texto, tipo="ok"){
-
-    const mensaje=document.getElementById("mensaje");
-
-    mensaje.textContent=texto;
-
-    mensaje.className="mensaje mostrar "+tipo;
-
-    setTimeout(function(){
-
-        mensaje.classList.remove("mostrar");
-
-    },2500);
-
+function escaparHtml(texto){
+    return String(texto).replace(/[&<>"']/g, function(c){
+        return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+    });
 }
 
-
-/* ACTUALIZAR TOTAL */
-
-function actualizarTotal(){
-
-    fetch("obtenerCarrito.php?idPedido="+idPedido)
-
-    .then(response => response.json())
-
-    .then(data => {
-
-        if(data.ok){
-
-            document.getElementById("totalFinal").textContent =
-                "Bs. "+data.total;
-
-            document.getElementById("totalEncabezado").textContent =
-                data.total;
-
-        }
-
-    })
-
-    .catch(error => {
-
-        console.log(error);
-
-    });
-
-}
-
-
-/* AGREGAR PRODUCTO */
-
-document.querySelectorAll(".form-agregar").forEach(function(form){
-
-    form.addEventListener("submit",function(e){
-
-        e.preventDefault();
-
-        const boton=form.querySelector("button");
-
-        boton.disabled=true;
-
-        boton.textContent="Agregando...";
-
-        const datos=new FormData(form);
-
-        fetch("agregarCarrito.php",{
-
-            method:"POST",
-            body:datos
-
-        })
-
-        .then(response => response.json())
-
-        .then(data => {
-
-            if(data.ok){
-
-                mostrarMensaje("🍦 Producto agregado correctamente");
-
-                actualizarCarritoVisual();
-
-            }else{
-
-                mostrarMensaje(data.mensaje || "No se pudo agregar el producto","error");
-
-            }
-
-        })
-
-        .catch(error => {
-
-            console.log(error);
-
-            mostrarMensaje("Ocurrió un error","error");
-
-        })
-
-        .finally(function(){
-
-            boton.disabled=false;
-
-            boton.textContent="🛒 Agregar";
-
-        });
-
-    });
-
-});
-
-
-/* ACTUALIZAR */
-
-document.querySelectorAll(".form-actualizar").forEach(function(form){
-
-    form.addEventListener("submit",function(e){
-
-        e.preventDefault();
-
-        const boton=form.querySelector("button");
-
-        boton.disabled=true;
-
-        boton.textContent="Actualizando...";
-
-        const datos=new FormData(form);
-
-        fetch("actualizarCarrito.php",{
-
-            method:"POST",
-            body:datos
-
-        })
-
-        .then(response => response.json())
-
-        .then(data => {
-
-            if(data.ok){
-
-                mostrarMensaje("✅ Cantidad actualizada");
-
-                actualizarCarritoVisual();
-
-            }else{
-
-                mostrarMensaje(data.mensaje || "No se pudo actualizar","error");
-
-            }
-
-        })
-
-        .catch(error => {
-
-            console.log(error);
-
-            mostrarMensaje("Ocurrió un error","error");
-
-        })
-
-        .finally(function(){
-
-            boton.disabled=false;
-
-            boton.textContent="🔄 Actualizar";
-
-        });
-
-    });
-
-});
-
-
-/* ELIMINAR */
-
-function eliminarProducto(idProducto){
-
-    if(!confirm("¿Deseas eliminar este producto del carrito?")){
+// Dibuja la sección "Productos agregados" a partir de los items del pedido
+function dibujarCarrito(items){
+    const seccion = document.getElementById("productosCarrito");
+
+    if(!items || items.length === 0){
+        seccion.innerHTML = '<div class="sin-productos" id="sinProductos">Todavía no agregó productos al carrito.</div>';
         return;
     }
 
-    const datos=new FormData();
+    let html = "";
 
-    datos.append("idPedido",idPedido);
-    datos.append("idProducto",idProducto);
+    items.forEach(function(item){
+        const imagen = (item.imagen && item.imagen.trim() !== "") ? item.imagen : imagenGenerica;
 
-    fetch("eliminarCarrito.php",{
-
-        method:"POST",
-        body:datos
-
-    })
-
-    .then(response => response.json())
-
-    .then(data => {
-
-        if(data.ok){
-
-            const tarjeta=document.getElementById(
-                "carrito-"+idProducto
-            );
-
-            if(tarjeta){
-                tarjeta.remove();
-            }
-
-            mostrarMensaje("🗑️ Producto eliminado");
-
-            actualizarCarritoVisual();
-
-        }else{
-
-            mostrarMensaje(
-                data.mensaje || "No se pudo eliminar",
-                "error"
-            );
-
-        }
-
-    })
-
-    .catch(error => {
-
-        console.log(error);
-
-        mostrarMensaje("Ocurrió un error","error");
-
+        html += `
+        <div class="card card-carrito" id="carrito-${item.productos_id}">
+            <div class="card-img" style="background-image:url('${escaparHtml(imagen)}')"></div>
+            <div class="card-info">
+                <p class="text-title">${escaparHtml(item.nombre)}</p>
+                <p class="text-price">Bs. ${item.precio} c/u</p>
+                <p class="subtotal">Subtotal: Bs. <span class="subtotal-valor">${item.costototal}</span></p>
+                <form class="form-actualizar">
+                    <input type="hidden" name="idPedido" value="${idPedido}">
+                    <input type="hidden" name="idProducto" value="${item.productos_id}">
+                    <div class="cantidad-actual">
+                        <strong>Cantidad:</strong>
+                        <input type="number" name="cantidad" min="1" max="${item.stock}" value="${item.cantidad}">
+                    </div>
+                    <button type="submit" class="btn">Actualizar</button>
+                </form>
+                <br>
+                <button type="button" class="btn btn-eliminar" onclick="eliminarProducto(${item.productos_id})">Eliminar</button>
+            </div>
+        </div>`;
     });
 
+    seccion.innerHTML = html;
 }
 
-
-/* ACTUALIZAR CARRITO VISUAL */
-
-function actualizarCarritoVisual(){
-
-    fetch("obtenerCarrito.php?idPedido="+idPedido)
-
+// Pide el carrito actualizado al servidor y redibuja lista + totales
+function refrescarCarrito(){
+    fetch("carrito/obtenerCarritoAjax.php?idPedido="+idPedido)
     .then(response => response.json())
-
     .then(data => {
-
-        if(!data.ok){
-            return;
-        }
-
-        document.getElementById("totalFinal").textContent =
-            "Bs. "+data.total;
-
-        document.getElementById("totalEncabezado").textContent =
-            data.total;
-
+        if(!data.ok){ return; }
+        dibujarCarrito(data.items);
+        document.getElementById("totalFinal").textContent = "Bs. "+data.total;
+        document.getElementById("totalEncabezado").textContent = data.total;
     })
+    .catch(error => console.log(error));
+}
 
-    .catch(error => {
+// AGREGAR PRODUCTO
+document.querySelectorAll(".form-agregar").forEach(function(form){
+    form.addEventListener("submit",function(e){
+        e.preventDefault();
 
-        console.log(error);
+        const boton = form.querySelector("button");
+        const textoOriginal = boton.textContent;
+        boton.disabled = true;
+        boton.textContent = "Agregando...";
 
+        fetch("agregarCarrito.php",{ method:"POST", body:new FormData(form) })
+        .then(response => response.json())
+        .then(data => {
+            if(data.ok){
+                refrescarCarrito();
+            }else{
+                alert(data.mensaje || "No se pudo agregar el producto");
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            alert("Ocurrió un error al agregar el producto");
+        })
+        .finally(function(){
+            boton.disabled = false;
+            boton.textContent = textoOriginal;
+        });
     });
+});
 
+// ACTUALIZAR (delegado, porque las tarjetas del carrito se redibujan)
+document.getElementById("productosCarrito").addEventListener("submit", function(e){
+    if(!e.target.classList.contains("form-actualizar")){ return; }
+    e.preventDefault();
+
+    const form = e.target;
+    const boton = form.querySelector("button");
+    const textoOriginal = boton.textContent;
+    boton.disabled = true;
+    boton.textContent = "Actualizando...";
+
+    fetch("carrito/actualizarCarrito.php",{ method:"POST", body:new FormData(form) })
+    .then(response => response.json())
+    .then(data => {
+        if(data.ok){
+            refrescarCarrito();
+        }else{
+            alert(data.mensaje || "No se pudo actualizar la cantidad");
+            boton.disabled = false;
+            boton.textContent = textoOriginal;
+        }
+    })
+    .catch(error => {
+        console.log(error);
+        alert("Ocurrió un error al actualizar");
+        boton.disabled = false;
+        boton.textContent = textoOriginal;
+    });
+});
+
+// ELIMINAR
+function eliminarProducto(idProducto){
+    if(!confirm("¿Deseas eliminar este producto del carrito?")){ return; }
+
+    const datos = new FormData();
+    datos.append("idPedido", idPedido);
+    datos.append("idProducto", idProducto);
+
+    fetch("eliminarCarrito.php",{ method:"POST", body:datos })
+    .then(response => response.json())
+    .then(data => {
+        if(data.ok){
+            refrescarCarrito();
+        }else{
+            alert(data.mensaje || "No se pudo eliminar el producto");
+        }
+    })
+    .catch(error => {
+        console.log(error);
+        alert("Ocurrió un error al eliminar");
+    });
 }
 
 </script>

@@ -231,7 +231,7 @@ if (!isset($rutaMenu)) {
             <?php } ?>
 
             <?php if (!isset($_SESSION['rol']) || $_SESSION['rol'] != 'Administrador') { ?>
-                <a href="<?php echo $rutaMenu; ?>carrito.php" class="icono-btn" aria-label="Carrito de compras">
+                <a href="<?php echo $rutaMenu; ?>pedidos/formpedido.php" class="icono-btn" aria-label="Carrito de compras">
                     <svg viewBox="0 0 24 24"><path d="M3 4h2l2.4 12.4a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.6L21 8H6"></path><circle cx="9" cy="21" r="1.4"></circle><circle cx="18" cy="21" r="1.4"></circle></svg>
                     <?php if (isset($_SESSION['carrito_cantidad']) && $_SESSION['carrito_cantidad'] > 0) { ?>
                         <span class="badge"><?php echo $_SESSION['carrito_cantidad']; ?></span>

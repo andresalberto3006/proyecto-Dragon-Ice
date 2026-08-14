@@ -89,14 +89,26 @@ $stmt->bind_param(
     $idPedido
 );
 
-if($stmt->execute()){
+if ($stmt->execute()) {
 
-    echo json_encode([
-        "ok" => true,
-        "mensaje" => "Cantidad actualizada."
-    ]);
+    // Si no se afectó ninguna fila, el producto ya no estaba en el carrito
+    // (por ejemplo, fue eliminado en otra pestaña) y no debemos reportar éxito.
+    if ($stmt->affected_rows === 0) {
 
-}else{
+        echo json_encode([
+            "ok" => false,
+            "mensaje" => "Ese producto ya no está en el carrito."
+        ]);
+
+    } else {
+
+        echo json_encode([
+            "ok" => true,
+            "mensaje" => "Cantidad actualizada."
+        ]);
+    }
+
+} else {
 
     echo json_encode([
         "ok" => false,
