@@ -188,7 +188,7 @@ tr:hover{
             <a href="formpedido.php" class="volver"> Nuevo Pedido</a>
             <a href="paginaprincipal/vendedor20.php" class="volver">Volver al panel</a>
         <?php }else{?>
-            <a href="paginaprincipal/02.admin.php" class="volver">Volver al panel</a>
+            <a href="../paginaprincipal/02.admin.php" class="volver">Volver al panel</a>
         <?php }?>
         </div>
      </main>
