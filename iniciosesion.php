@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dragon Ice - Iniciar Sesión</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
+
     <style>
         :root{
             --azul-oscuro:#0e2a4d;
@@ -73,6 +77,7 @@
             letter-spacing:3px;
             margin-bottom:8px;
             text-shadow:0 0 15px var(--celeste);
+            transition:300ms;
         }
 
         .form-box .subtitulo{
@@ -192,26 +197,7 @@
             .form-box h1{ font-size:26px; }
         }
     </style>
-<style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        .login-box h1 {
-            transition: 300ms;
-        }
-
-        .login-box input[type="text"],
-        .login-box input[type="password"] {
-            margin-bottom: 2px;
-        }
-    </style>
 </head>
-
-
 
 <body>
 
@@ -226,11 +212,15 @@
         <div class="form-box login-box">
             <h1>DRAGON ICE</h1>
             <p class="subtitulo">Iniciar Sesión</p>
-            <form action="BDvali.php" method="post">
+
+            <form id="formulario" action="BDvali.php" method="post">
+
                 <label for="usuario">Usuario</label>
-                <input type="text" name="usuario" placeholder="Ingrese su nombre" required>
+                <input id="usuario" type="text" name="usuario" placeholder="Ingrese su nombre" required>
+
                 <label for="clave">Contraseña</label>
-                <input type="text" name="clave" placeholder="Ingrese su numero de celular" required>
+                <input id="clave" type="text" name="clave" placeholder="Ingrese su numero de celular" required>
+
                 <input type="submit" value="Ingresar">
             </form>
 
@@ -241,31 +231,32 @@
             <a href="paginaprincipal/01.inicio.php" class="volver">Volver al inicio</a>
         </div>
     </main>
+</section>
 
-    </section>
-    <script>
-        $(document).ready(function(){
-        $("#formulario").validate({
-            role:{
-                usuario:{
-                    required: true,
-                    maxlength: 5
-                },
-                contraseña:{
-                    required: true,
-                    minlength: 4
-                }
+<script>
+$(document).ready(function(){
+    $("#formulario").validate({
+        rules:{
+            usuario:{
+                required:true
             },
-            messages:{
-                usuario:{
-                    required: "pon tu nombre de ususario",
-                    maxlength: "maximo "
-                }
+            clave:{
+                required:true
             }
-        })    
-        })
+        },
+        messages:{
+            usuario:{
+                required:"Ingrese su nombre de usuario"
+            },
+            clave:{
+                required:"Ingrese su contraseña"
+            }
+        }
+    });
+});
+</script>
 
-    </script>
 <?php include 'paginaprincipal/piedepagina.php'; ?>
+
 </body>
 </html>

@@ -44,7 +44,6 @@ if (!isset($rutaMenu)) {
     gap:20px;
 }
 
-/* ---------- Logo (sin caja, suelto) ---------- */
 .dragonice-nav .logo{
     display:flex;
     align-items:center;
@@ -68,7 +67,6 @@ if (!isset($rutaMenu)) {
     white-space:nowrap;
 }
 
-/* ---------- Links de navegación ---------- */
 .dragonice-nav .nav-links{
     display:flex;
     align-items:center;
@@ -90,7 +88,6 @@ if (!isset($rutaMenu)) {
     color:var(--celeste);
 }
 
-/* ---------- Iconos (derecha) ---------- */
 .dragonice-nav .iconos{
     display:flex;
     align-items:center;
@@ -157,7 +154,6 @@ if (!isset($rutaMenu)) {
     background:var(--menta);
 }
 
-/* ---------- Botón hamburguesa (mobile) ---------- */
 .dragonice-nav .btn-menu{
     display:none;
     background:none;
