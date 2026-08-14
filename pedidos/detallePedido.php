@@ -19,6 +19,9 @@ $rutaMenu = "../";
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Detalle del Pedido</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
 <style>
 
 *{
@@ -144,7 +147,6 @@ tr:hover{
 
 .info-item{
     background:#f4f8ff;
-    border-left:6px solid #4da6ff;
     border-radius:12px;
     padding:15px 18px;
 }
@@ -164,15 +166,8 @@ tr:hover{
     font-weight:bold;
 }
 
-.estado-Pendiente{ border-left-color:#ffb200; }
 .estado-Pendiente .valor{ color:#c98600; }
-
-.estado-En-proceso{ border-left-color:#0d6efd; }
-
-.estado-Entregado{ border-left-color:#28a745; }
 .estado-Entregado .valor{ color:#28a745; }
-
-.estado-Rechazado{ border-left-color:#dc3545; }
 .estado-Rechazado .valor{ color:#dc3545; }
 
 .subtitulo-seccion{
@@ -201,12 +196,67 @@ tr:hover{
     background:#2f5d9f;
 }
 
+.botones-accion{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-top:30px;
+}
+
+.boton-accion{
+    border:none;
+    cursor:pointer;
+    text-decoration:none;
+    color:white;
+    padding:15px 25px;
+    border-radius:10px;
+    font-weight:bold;
+    font-size:15px;
+    transition:.3s;
+}
+
+.boton-imprimir{
+    background:#4da6ff;
+}
+
+.boton-imprimir:hover{
+    background:#2f5d9f;
+}
+
+.boton-descargar{
+    background:#28a745;
+}
+
+.boton-descargar:hover{
+    background:#1e7e34;
+}
+
 @media(max-width:800px){
     .layout{
         flex-direction:column;
     }
     .info-pedido{
         grid-template-columns:1fr;
+    }
+}
+
+@media print{
+    .dragonice-nav,
+    .pie,
+    .no-imprimir{
+        display:none !important;
+    }
+    body{
+        background:white;
+    }
+    .fondo-panel{
+        background:white;
+        padding:0;
+    }
+    .contenedor{
+        box-shadow:none;
+        border-radius:0;
     }
 }
 
@@ -218,78 +268,104 @@ tr:hover{
 
 <main class="fondo-panel">
     <div class="contenedor">
-        <h1> Detalle del Pedido #<?php echo $p['id'];?></h1>
 
-        <div class="layout">
+        <div id="contenidoPDF">
 
-          
-            <div class="columna-izquierda">
+            <h1> Detalle del Pedido #<?php echo $p['id'];?></h1>
 
-                <h3 class="subtitulo-seccion"> Información general</h3>
+            <div class="layout">
 
-                <div class="info-pedido">
-                    <div class="info-item">
-                        <div class="etiqueta"> Cliente</div>
-                        <div class="valor"><?php echo $p['nombre'];?></div>
+
+                <div class="columna-izquierda">
+
+                    <h3 class="subtitulo-seccion"> Información general</h3>
+
+                    <div class="info-pedido">
+                        <div class="info-item">
+                            <div class="etiqueta"> Cliente</div>
+                            <div class="valor"><?php echo $p['nombre'];?></div>
+                        </div>
+                        <div class="info-item">
+                            <div class="etiqueta"> Fecha</div>
+                            <div class="valor"><?php echo $p['fecha'];?></div>
+                        </div>
+                        <div class="info-item estado-<?php echo str_replace(' ','-',$p['estado']);?>">
+                            <div class="etiqueta"> Estado</div>
+                            <div class="valor"><?php echo $p['estado'];?></div>
+                        </div>
+                        <div class="info-item">
+                            <div class="etiqueta"> Vendedor</div>
+                            <div class="valor"><?php echo $p['nombrevendedor'];?></div>
+                        </div>
+                        <div class="info-item" style="grid-column:1 / -1;">
+                            <div class="etiqueta"> Método de pago</div>
+                            <div class="valor"><?php echo $p['metodo_pago']!=''?$p['metodo_pago']:'Aún no registrado';?></div>
+                        </div>
                     </div>
-                    <div class="info-item">
-                        <div class="etiqueta"> Fecha</div>
-                        <div class="valor"><?php echo $p['fecha'];?></div>
-                    </div>
-                    <div class="info-item estado-<?php echo str_replace(' ','-',$p['estado']);?>">
-                        <div class="etiqueta"> Estado</div>
-                        <div class="valor"><?php echo $p['estado'];?></div>
-                    </div>
-                    <div class="info-item">
-                        <div class="etiqueta"> Vendedor</div>
-                        <div class="valor"><?php echo $p['nombrevendedor'];?></div>
-                    </div>
-                    <div class="info-item" style="grid-column:1 / -1;">
-                        <div class="etiqueta"> Método de pago</div>
-                        <div class="valor"><?php echo $p['metodo_pago']!=''?$p['metodo_pago']:'Aún no registrado';?></div>
+
+                    <h3 class="subtitulo-seccion"> Productos del pedido</h3>
+
+                    <table>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Subtotal</th>
+                        </tr>
+                        <?php $total=0; while($f=$detalle->fetch_assoc()) { $total=$total+$f['costototal']; ?>
+                        <tr>
+                            <td><?php echo $f['nombre'];?></td>
+                            <td>Bs. <?php echo $f['precio'];?></td>
+                            <td><?php echo $f['cantidad'];?></td>
+                            <td>Bs. <?php echo $f['costototal'];?></td>
+                        </tr>
+                        <?php } ?>
+                        <tr style="background:#18335c;">
+                            <th colspan="3" style="color:white;">TOTAL</th>
+                            <th style="color:#7be0c4; font-size:18px;">Bs. <?php echo $total;?></th>
+                        </tr>
+                    </table>
+                </div>
+
+
+                <div class="columna-derecha">
+                    <div class="tarjeta-qr">
+                        <h2> Código QR del pedido</h2>
+                        <img src="<?php echo $qrUrl; ?>" alt="QR Pedido #<?php echo $p['id']; ?>">
+                        <p>Escanea para verificar el pedido #<?php echo $p['id'];?></p>
                     </div>
                 </div>
 
-                <h3 class="subtitulo-seccion"> Productos del pedido</h3>
-
-                <table>
-                    <tr>
-                        <th>Producto</th>
-                        <th>Precio</th>
-                        <th>Cantidad</th>
-                        <th>Subtotal</th>
-                    </tr>
-                    <?php $total=0; while($f=$detalle->fetch_assoc()) { $total=$total+$f['costototal']; ?>
-                    <tr>
-                        <td><?php echo $f['nombre'];?></td>
-                        <td>Bs. <?php echo $f['precio'];?></td>
-                        <td><?php echo $f['cantidad'];?></td>
-                        <td>Bs. <?php echo $f['costototal'];?></td>
-                    </tr>
-                    <?php } ?>
-                    <tr style="background:#18335c;">
-                        <th colspan="3" style="color:white;">TOTAL</th>
-                        <th style="color:#7be0c4; font-size:18px;">Bs. <?php echo $total;?></th>
-                    </tr>
-                </table>
-            </div>
-
-            
-            <div class="columna-derecha">
-                <div class="tarjeta-qr">
-                    <h2> Código QR del pedido</h2>
-                    <img src="<?php echo $qrUrl; ?>" alt="QR Pedido #<?php echo $p['id']; ?>">
-                    <p>Escanea para verificar el pedido #<?php echo $p['id'];?></p>
-                </div>
             </div>
 
         </div>
 
-        <a href="../pedidos/pedidos.php" class="volver">Volver a pedidos</a>
+        <div class="botones-accion no-imprimir">
+            <button type="button" class="boton-accion boton-imprimir" onclick="window.print()"> Imprimir</button>
+            <button type="button" class="boton-accion boton-descargar" onclick="descargarPDF()"> Descargar PDF</button>
+        </div>
+
+        <a href="../pedidos/pedidos.php" class="volver no-imprimir">Volver a pedidos</a>
     </div>
 </main>
 
 <?php include("../paginaprincipal/piedepagina.php"); ?>
+
+<script>
+function descargarPDF(){
+    const elemento = document.getElementById("contenidoPDF");
+
+    const opciones = {
+        margin: 10,
+        filename: "Pedido_<?php echo $p['id']; ?>.pdf",
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
+    };
+
+    html2pdf().set(opciones).from(elemento).save();
+}
+</script>
 
 </body>
 </html>
