@@ -1,134 +1,88 @@
 <?php
 session_start();
-if (!isset($_SESSION['rol'])) { header("Location: ../iniciosesion.php"); exit(); }
-if ($_SESSION['rol'] != 'Administrador' && $_SESSION['rol'] != 'Vendedor') { header("Location: ../iniciosesion.php"); exit(); }
+
+header("Content-Type: application/json");
+
+if (!isset($_SESSION['rol']) || ($_SESSION['rol'] != 'Administrador' && $_SESSION['rol'] != 'Vendedor')) {
+    echo json_encode([
+        "ok" => false,
+        "mensaje" => "Sesión inválida."
+    ]);
+    exit();
+}
+
 include("../conexion.php");
-if($_SERVER["REQUEST_METHOD"]!="POST"){header("Location: formularioproducto.php");exit();}
-$id=$_POST['id'];$nombre=$_POST['nombre'];$descripcion=$_POST['descripcion'];$precio=$_POST['precio'];$costo=$_POST['costo'];$stock=$_POST['stock'];
-$imagen="imagenesproyecto/helado.jpg";
-if(isset($_FILES['imagen']) && $_FILES['imagen']['name']!=""){$nombreImagen=time()."_".$_FILES['imagen']['name'];$destino="../imagenesproyecto/".$nombreImagen;if(move_uploaded_file($_FILES['imagen']['tmp_name'],$destino)){$imagen="imagenesproyecto/".$nombreImagen;}}
-$sql="INSERT INTO productos(id,nombre,descripcion,precio,costo,stock,imagen) VALUES('$id','$nombre','$descripcion','$precio','$costo','$stock','$imagen')";
-if(!$conexion->query($sql)){echo "<script>alert('No se pudo registrar. Verifique que el código no esté repetido.');window.location='formularioproducto.php';</script>";exit();}
- 
-$rutaMenu = "../";
+
+if ($_SERVER["REQUEST_METHOD"] != "POST") {
+    echo json_encode([
+        "ok" => false,
+        "mensaje" => "Método no permitido."
+    ]);
+    exit();
+}
+
+$id = isset($_POST['id']) ? intval($_POST['id']) : 0;
+$nombre = isset($_POST['nombre']) ? trim($_POST['nombre']) : '';
+$descripcion = isset($_POST['descripcion']) ? trim($_POST['descripcion']) : '';
+$precio = isset($_POST['precio']) ? $_POST['precio'] : '';
+$costo = isset($_POST['costo']) ? $_POST['costo'] : '';
+$stock = isset($_POST['stock']) ? $_POST['stock'] : '';
+
+if ($id <= 0 || $nombre === '' || $descripcion === '' || $precio === '' || $costo === '' || $stock === '') {
+    echo json_encode([
+        "ok" => false,
+        "mensaje" => "Complete todos los campos obligatorios."
+    ]);
+    exit();
+}
+
+$imagen = "imagenesproyecto/helado.jpg";
+
+if (isset($_FILES['imagen']) && $_FILES['imagen']['name'] != "") {
+    $nombreImagen = time()."_".$_FILES['imagen']['name'];
+    $destino = "../imagenesproyecto/".$nombreImagen;
+    if (move_uploaded_file($_FILES['imagen']['tmp_name'], $destino)) {
+        $imagen = "imagenesproyecto/".$nombreImagen;
+    }
+}
+
+$stmt = $conexion->prepare("
+    INSERT INTO productos(id, nombre, descripcion, precio, costo, stock, imagen)
+    VALUES(?, ?, ?, ?, ?, ?, ?)
+");
+
+$stmt->bind_param(
+    "issddis",
+    $id,
+    $nombre,
+    $descripcion,
+    $precio,
+    $costo,
+    $stock,
+    $imagen
+);
+
+if ($stmt->execute()) {
+
+    echo json_encode([
+        "ok" => true,
+        "mensaje" => "Producto registrado correctamente.",
+        "id" => $id
+    ]);
+
+} else {
+
+    if ($conexion->errno == 1062) {
+        $mensajeError = "Ese código de producto ya está registrado.";
+    } else {
+        $mensajeError = "No se pudo registrar el producto.";
+    }
+
+    echo json_encode([
+        "ok" => false,
+        "mensaje" => $mensajeError
+    ]);
+}
+
+exit();
 ?>
-<!DOCTYPE html>
- 
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Registro Exitoso</title>
- 
-<style>
- 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
-}
- 
-html, body{
-    height:100%;
-}
- 
-body{
-    display:flex;
-    flex-direction:column;
-    min-height:100vh;
-}
- 
-.fondo-panel{
-    flex:1;
-    background:linear-gradient(135deg,#18335c,#2f5d9f,#7fc7ff);
-    padding:40px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
- 
-.tarjeta{
- 
-    width:550px;
- 
-    background-color: white;
- 
-    padding:45px;
- 
-    border-radius:25px;
- 
-    text-align:center;
- 
-    box-shadow:0 10px 35px rgba(0,0,0,0.25);
-}
- 
-.icono{
-    font-size:90px;
-    margin-bottom:20px;
-}
- 
-h1{
-    color:#18335c;
-    margin-bottom:15px;
-}
- 
-.mensaje{
-    font-size:20px;
-    color:#555;
-    line-height:1.8;
-}
- 
-.productos{
-    color:#2f5d9f;
-    font-weight:bold;
-}
- 
-.boton{
- 
-    display:inline-block;
- 
-    margin-top:30px;
- 
-    text-decoration:none;
- 
-    background:#4da6ff;
- 
-    color:white;
- 
-    padding:14px 35px;
- 
-    border-radius:12px;
- 
-    font-size:18px;
- 
-    font-weight:bold;
- 
-    transition:.3s;
-}
- 
-.boton:hover{
-    background:#2f5d9f;
-}
- 
-.botones{
-    display:flex;
-    justify-content:center;
-    gap:15px;
-    flex-wrap:wrap;
-}
- 
-</style>
-</head>
-<body>
- 
-<?php include("../menu.php"); ?>
- 
-<main class="fondo-panel">
-<div class="tarjeta"><div class="icono"></div><h1>¡Registro Exitoso!</h1><p class="mensaje">El producto <span class="productos"><?php echo htmlspecialchars($nombre); ?></span> fue registrado correctamente.</p><div class="botones"><a href="formularioproducto.php" class="boton">Registrar otro producto</a><a href="readproducto.php?id=<?php echo $id; ?>" class="boton">Ver producto</a><a href="read.all.producto.php" class="boton">Ver todos los productos</a></div></div>
-</main>
- 
-<?php include("../paginaprincipal/piedepagina.php"); ?>
- 
-</body>
-</html>

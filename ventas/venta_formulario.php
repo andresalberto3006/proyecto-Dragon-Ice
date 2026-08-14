@@ -227,7 +227,7 @@ $rutaMenu="../";
                     <input type="submit" value="Guardar venta">
                 </form>
 
-                <a href="../pedidos.php" class="volver">Volver a pedidos</a>
+                <a href="../pedidos/pedidos.php" class="volver">Volver a pedidos</a>
             </div>
         </main>
     </section>

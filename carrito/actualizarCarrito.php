@@ -91,8 +91,7 @@ $stmt->bind_param(
 
 if ($stmt->execute()) {
 
-    // Si no se afectó ninguna fila, el producto ya no estaba en el carrito
-    // (por ejemplo, fue eliminado en otra pestaña) y no debemos reportar éxito.
+
     if ($stmt->affected_rows === 0) {
 
         echo json_encode([

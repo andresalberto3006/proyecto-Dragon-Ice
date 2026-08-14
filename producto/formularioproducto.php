@@ -148,6 +148,11 @@ $rutaMenu = "../";
             transform:scale(1.02);
         }
 
+        .form-box input[type="submit"]:disabled{
+            opacity:.6;
+            cursor:not-allowed;
+        }
+
         .form-box .enlace-secundario{
             margin-top:18px;
             font-size:14px;
@@ -269,6 +274,37 @@ $rutaMenu = "../";
                     precio:{ required:"Ingrese el precio" },
                     costo:{ required:"Ingrese el costo" },
                     stock:{ required:"Ingrese el stock disponible" }
+                },
+                submitHandler: function(form){
+
+                    const boton = $(form).find("input[type=submit]");
+                    const textoOriginal = boton.val();
+
+                    boton.prop("disabled", true).val("Guardando...");
+
+                    const datos = new FormData(form);
+
+                    fetch("../producto/registroproducto.php", {
+                        method: "POST",
+                        body: datos
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+
+                        if(data.ok){
+                            window.location.href = "read.all.producto.php";
+                        }else{
+                            alert(data.mensaje || "No se pudo registrar el producto");
+                            boton.prop("disabled", false).val(textoOriginal);
+                        }
+
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        alert("Ocurrió un error al registrar el producto");
+                        boton.prop("disabled", false).val(textoOriginal);
+                    });
+
                 }
             });
         });

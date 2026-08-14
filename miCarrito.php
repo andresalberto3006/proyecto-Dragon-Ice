@@ -691,7 +691,6 @@ function escaparHtml(texto){
     });
 }
 
-// Dibuja la sección "Productos agregados" a partir de los items del pedido
 function dibujarCarrito(items){
     const seccion = document.getElementById("productosCarrito");
 
@@ -730,7 +729,6 @@ function dibujarCarrito(items){
     seccion.innerHTML = html;
 }
 
-// Pide el carrito actualizado al servidor y redibuja lista + totales
 function refrescarCarrito(){
     fetch("carrito/obtenerCarritoAjax.php?idPedido="+idPedido)
     .then(response => response.json())
@@ -743,7 +741,6 @@ function refrescarCarrito(){
     .catch(error => console.log(error));
 }
 
-// AGREGAR PRODUCTO
 document.querySelectorAll(".form-agregar").forEach(function(form){
     form.addEventListener("submit",function(e){
         e.preventDefault();
@@ -773,7 +770,6 @@ document.querySelectorAll(".form-agregar").forEach(function(form){
     });
 });
 
-// ACTUALIZAR (delegado, porque las tarjetas del carrito se redibujan)
 document.getElementById("productosCarrito").addEventListener("submit", function(e){
     if(!e.target.classList.contains("form-actualizar")){ return; }
     e.preventDefault();
