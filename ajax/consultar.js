@@ -1,100 +1,84 @@
 document
-.getElementById("consultar")
-.addEventListener("click",()=>{
+  .getElementById("consultar")
+  .addEventListener("click", () => {
 
+    let id = document.getElementById("numeroPedido").value;
 
-let id =
-document.getElementById("numeroPedido").value;
+    fetch("php/consultar_pedido.php", {
 
+      method: "POST",
 
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
 
-fetch("php/consultar_pedido.php",{
+      body: "id=" + id
 
+    })
 
-method:"POST",
+      .then(res => res.json())
 
+      .then(data => {
 
-headers:{
+        console.log(data);
 
-"Content-Type":
-"application/x-www-form-urlencoded"
+        if (data.ok) {
 
-},
+          let p = data.pedido;
 
+          document.getElementById("resultado")
+            .innerHTML = `
 
-body:
-"id="+id
+            <hr>
 
+            <h3>
+            Pedido Nº ${p.id}
+            </h3>
 
-})
+            <p>
+            Cliente:
+            ${p.nombre}
+            </p>
 
+            <p>
+            Teléfono:
+            ${p.telefono}
+            </p>
 
-.then(res=>res.json())
+            <p>
+            Dirección:
+            ${p.direccion}
+            </p>
 
+            <p>
+            Fecha:
+            ${p.fecha}
+            </p>
 
-.then(data=>{
+            <p>
+            Estado:
+            <b>${p.estado}</b>
+            </p>
 
+            <p>
+            Vendedor:
+            ${p.nombrevendedor ?? "Pendiente"}
+            </p>
 
-console.log(data);
+            <p>
+            Método de pago:
+            ${p.metodo_pago}
+            </p>
 
+            `;
 
+        } else {
 
-if(data.ok){
+          document.getElementById("resultado")
+            .innerHTML = "Pedido no encontrado";
 
+        }
 
-let p=data.pedido;
+      });
 
-
-
-document.getElementById("resultado")
-.innerHTML=`
-
-<hr>
-
-<h3>
-Pedido Nº ${p.id}
-</h3>
-
-
-<p>
-Cliente:
-${p.Nombre}
-</p>
-
-
-<p>
-Fecha:
-${p.Fecha}
-</p>
-
-
-<p>
-Estado:
-<b>${p.Estado}</b>
-</p>
-
-
-<p>
-Vendedor:
-${p.NombreVendedor ?? "Pendiente"}
-</p>
-
-`;
-
-
-
-}else{
-
-
-document.getElementById("resultado")
-.innerHTML=
-"Pedido no encontrado";
-
-
-}
-
-
-});
-
-
-});
+  });

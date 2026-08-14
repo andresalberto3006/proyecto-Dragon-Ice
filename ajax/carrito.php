@@ -5,10 +5,10 @@ require("conexion.php");
 
 header("Content-Type: application/json");
 
-if(!isset($_SESSION["pedido"])){
+if (!isset($_SESSION["pedido"])) {
     echo json_encode([
-        "ok"=>false,
-        "mensaje"=>"No existe pedido activo"
+        "ok" => false,
+        "mensaje" => "No existe pedido activo"
     ]);
     exit;
 }
@@ -17,124 +17,136 @@ $idPedido = $_SESSION["pedido"];
 
 $accion = $_POST["accion"] ?? "";
 
-switch($accion){
+switch ($accion) {
 
     case "agregar":
 
-        $codigo = $_POST["codigo"];
+        $idProducto = $_POST["id"] ?? null;
+
+        if (!$idProducto) {
+            echo json_encode([
+                "ok" => false,
+                "mensaje" => "Falta el id del producto"
+            ]);
+            exit;
+        }
 
         // Buscar producto
-        $sqlProducto = "SELECT * FROM Productos WHERE codigo='$codigo'";
-        $resultadoProducto = $conn->query($sqlProducto);
-        if($resultadoProducto->num_rows == 0){
+        $stmtProducto = $conn->prepare("SELECT * FROM productos WHERE id = ?");
+        $stmtProducto->bind_param("i", $idProducto);
+        $stmtProducto->execute();
+        $resultadoProducto = $stmtProducto->get_result();
 
-    echo json_encode([
-        "ok"=>false,
-        "mensaje"=>"Producto no encontrado"
-    ]);
+        if ($resultadoProducto->num_rows == 0) {
+            echo json_encode([
+                "ok" => false,
+                "mensaje" => "Producto no encontrado"
+            ]);
+            exit;
+        }
 
-    exit;
-
-}
         $producto = $resultadoProducto->fetch_assoc();
 
-        // Verificar si ya existe
-        $sqlExiste = "SELECT * FROM Carrito
-                       WHERE Pedido_id='$idPedido'
-                       AND Producto_codigo='$codigo'";
+        // Verificar si ya existe en el carrito
+        $stmtExiste = $conn->prepare("SELECT * FROM carrito WHERE pedidos_id = ? AND productos_id = ?");
+        $stmtExiste->bind_param("ii", $idPedido, $idProducto);
+        $stmtExiste->execute();
+        $resultadoExiste = $stmtExiste->get_result();
 
-        $resultadoExiste = $conn->query($sqlExiste);
+        $cantidadNueva = ($resultadoExiste->num_rows > 0)
+            ? $resultadoExiste->fetch_assoc()["cantidad"] + 1
+            : 1;
 
-        if($resultadoExiste->num_rows > 0){
+        if ($cantidadNueva > $producto["stock"]) {
+            echo json_encode([
+                "ok" => false,
+                "mensaje" => "No hay suficiente stock"
+            ]);
+            exit;
+        }
 
-            $fila = $resultadoExiste->fetch_assoc();
+        $subtotal = $cantidadNueva * $producto["precio"];
 
-            $cantidad = $fila["cantidad"] + 1;
+        if ($resultadoExiste->num_rows > 0) {
 
-            $subtotal = $cantidad * $producto["precio"];
+            $stmt = $conn->prepare("UPDATE carrito SET cantidad = ?, costototal = ? WHERE pedidos_id = ? AND productos_id = ?");
+            $stmt->bind_param("idii", $cantidadNueva, $subtotal, $idPedido, $idProducto);
 
-            $sql = "UPDATE Carrito
-                    SET cantidad='$cantidad',
-                        costototal='$subtotal'
-                    WHERE Pedido_id='$idPedido'
-                    AND Producto_codigo='$codigo'";
+        } else {
 
-        }else{
-
-            $subtotal = $producto["precio"];
-
-            $sql = "INSERT INTO Carrito
-                    (Pedido_id,Producto_codigo,cantidad,costototal)
-                    VALUES
-                    ('$idPedido','$codigo',1,'$subtotal')";
+            $stmt = $conn->prepare("INSERT INTO carrito (pedidos_id, productos_id, cantidad, costototal) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("iiid", $idPedido, $idProducto, $cantidadNueva, $subtotal);
 
         }
 
-        if($conn->query($sql)){
+        if ($stmt->execute()) {
+            echo json_encode([
+                "ok" => true,
+                "mensaje" => "Producto agregado correctamente"
+            ]);
+        } else {
+            echo json_encode([
+                "ok" => false,
+                "mensaje" => $stmt->error
+            ]);
+        }
 
-    echo json_encode([
-        "ok"=>true,
-        "mensaje"=>"Producto agregado correctamente"
-    ]);
+        break;
 
-}else{
-
-    echo json_encode([
-        "ok"=>false,
-        "mensaje"=>$conn->error
-    ]);
-
-}
-
-    break;
     case "mostrar":
 
-    $sql = "SELECT
-                c.Producto_codigo,
+        $stmt = $conn->prepare("
+            SELECT
+                c.productos_id,
                 c.cantidad,
                 c.costototal,
                 p.nombre,
                 p.precio,
                 p.imagen
-            FROM Carrito c
-            INNER JOIN Producto p
-            ON c.Producto_codigo = p.codigo
-            WHERE c.Pedido_id='$idPedido'";
+            FROM carrito c
+            INNER JOIN productos p ON c.productos_id = p.id
+            WHERE c.pedidos_id = ?
+        ");
+        $stmt->bind_param("i", $idPedido);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
 
-    $resultado = $conn->query($sql);
+        $carrito = [];
 
-    $carrito = [];
+        while ($fila = $resultado->fetch_assoc()) {
+            $carrito[] = $fila;
+        }
 
-    while($fila = $resultado->fetch_assoc()){
+        echo json_encode($carrito);
 
-        $carrito[] = $fila;
+        break;
 
-    }
+    case "vaciar":
 
-    echo json_encode($carrito);
+        $stmt = $conn->prepare("DELETE FROM carrito WHERE pedidos_id = ?");
+        $stmt->bind_param("i", $idPedido);
 
-break;
-case "vaciar":
+        if ($stmt->execute()) {
+            echo json_encode([
+                "ok" => true,
+                "mensaje" => "Carrito vaciado correctamente"
+            ]);
+        } else {
+            echo json_encode([
+                "ok" => false,
+                "mensaje" => $stmt->error
+            ]);
+        }
 
-    $sql = "DELETE FROM Carrito
-            WHERE Pedido_id='$idPedido'";
+        break;
 
-    if($conn->query($sql)){
+    default:
 
         echo json_encode([
-            "ok"=>true,
-            "mensaje"=>"Carrito vaciado correctamente"
+            "ok" => false,
+            "mensaje" => "Acción no reconocida"
         ]);
-
-    }else{
-
-        echo json_encode([
-            "ok"=>false,
-            "mensaje"=>$conn->error
-        ]);
-
-    }
-
-break;
 
 }
+
+$conn->close();
