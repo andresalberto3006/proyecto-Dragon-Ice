@@ -44,7 +44,6 @@ if (!isset($rutaMenu)) {
     gap:20px;
 }
 
-/* ---------- Logo (sin caja, suelto) ---------- */
 .dragonice-nav .logo{
     display:flex;
     align-items:center;
@@ -68,7 +67,6 @@ if (!isset($rutaMenu)) {
     white-space:nowrap;
 }
 
-/* ---------- Links de navegación ---------- */
 .dragonice-nav .nav-links{
     display:flex;
     align-items:center;
@@ -90,7 +88,6 @@ if (!isset($rutaMenu)) {
     color:var(--celeste);
 }
 
-/* ---------- Iconos (derecha) ---------- */
 .dragonice-nav .iconos{
     display:flex;
     align-items:center;
@@ -157,7 +154,6 @@ if (!isset($rutaMenu)) {
     background:var(--menta);
 }
 
-/* ---------- Botón hamburguesa (mobile) ---------- */
 .dragonice-nav .btn-menu{
     display:none;
     background:none;
@@ -167,18 +163,10 @@ if (!isset($rutaMenu)) {
     cursor:pointer;
 }
 
-<<<<<<< HEAD
-@media(max-width:700px){
-
-    .btn-menu{
-        display:inline-block;
-        
-=======
 @media(max-width:900px){
 
     .dragonice-nav .btn-menu{
         display:block;
->>>>>>> 38a9d61561d31fd892b063ad5593f2793a467338
     }
 
     .dragonice-nav .fila{
@@ -253,20 +241,6 @@ if (!isset($rutaMenu)) {
         </div>
 
     </div>
-<<<<<<< HEAD
-
-    <button class="btn-menu" id="btnMenu">
-        ☰
-    </button>
-
-    <ul class="nav-links" id="navLinks">
-        <li><a href="01.inicio.php">Inicio</a></li>
-        <li><a href="formularios/05.formulariousuario.php">Registrarte</a></li>
-        <li><a href="iniciosesion.php">Iniciar Sesión</a></li>
-    </ul>
-
-=======
->>>>>>> 38a9d61561d31fd892b063ad5593f2793a467338
 </nav>
 
 <script>

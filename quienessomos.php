@@ -26,7 +26,6 @@ h1,h2{
     font-family:'Baloo 2', Arial, sans-serif;
 }
 
-/* HERO */
 
 .hero{
     position:relative;
@@ -71,7 +70,6 @@ h1,h2{
     margin-inline:auto;
 }
 
-/* SECCIONES */
 
 .seccion{
     max-width:1100px;
@@ -116,7 +114,6 @@ h1,h2{
     box-shadow:0 15px 35px rgba(0,0,0,0.15);
 }
 
-/* CTA */
 
 .cta{
     text-align:center;
