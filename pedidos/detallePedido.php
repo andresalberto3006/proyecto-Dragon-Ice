@@ -115,6 +115,14 @@ tr:hover{
     padding:25px;
     text-align:center;
     width:100%;
+    page-break-inside:avoid;
+    break-inside:avoid;
+}
+
+.info-item,
+table tr{
+    page-break-inside:avoid;
+    break-inside:avoid;
 }
 
 .tarjeta-qr h2{
@@ -257,6 +265,18 @@ tr:hover{
     .contenedor{
         box-shadow:none;
         border-radius:0;
+        padding:10px;
+    }
+    .layout{
+        flex-wrap:nowrap !important;
+        gap:15px;
+    }
+    .columna-izquierda{
+        flex:1 1 100% !important;
+        min-width:0 !important;
+    }
+    #columnaQR{
+        display:none !important;
     }
 }
 
@@ -328,10 +348,10 @@ tr:hover{
                 </div>
 
 
-                <div class="columna-derecha">
+                <div class="columna-derecha" id="columnaQR">
                     <div class="tarjeta-qr">
                         <h2> Código QR del pedido</h2>
-                        <img src="<?php echo $qrUrl; ?>" alt="QR Pedido #<?php echo $p['id']; ?>">
+                        <img src="<?php echo $qrUrl; ?>" alt="QR Pedido #<?php echo $p['id']; ?>" crossorigin="anonymous">
                         <p>Escanea para verificar el pedido #<?php echo $p['id'];?></p>
                     </div>
                 </div>
@@ -341,8 +361,8 @@ tr:hover{
         </div>
 
         <div class="botones-accion no-imprimir">
-            <button type="button" class="boton-accion boton-imprimir" onclick="window.print()"> Imprimir</button>
-            <button type="button" class="boton-accion boton-descargar" onclick="descargarPDF()"> Descargar PDF</button>
+            <button type="button" class="boton-accion boton-imprimir" onclick="window.print()">Imprimir</button>
+            <button type="button" class="boton-accion boton-descargar" onclick="descargarPDF()">Descargar PDF</button>
         </div>
 
         <a href="../pedidos/pedidos.php" class="volver no-imprimir">Volver a pedidos</a>
@@ -353,17 +373,26 @@ tr:hover{
 
 <script>
 function descargarPDF(){
+    const columnaQR = document.getElementById("columnaQR");
     const elemento = document.getElementById("contenidoPDF");
+
+    columnaQR.style.display = "none";
 
     const opciones = {
         margin: 10,
         filename: "Pedido_<?php echo $p['id']; ?>.pdf",
         image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
+        html2canvas: {
+            scale: 2,
+            logging: false
+        },
+        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+        pagebreak: { mode: ["avoid-all", "css", "legacy"] }
     };
 
-    html2pdf().set(opciones).from(elemento).save();
+    html2pdf().set(opciones).from(elemento).save().then(function(){
+        columnaQR.style.display = "";
+    });
 }
 </script>
 
