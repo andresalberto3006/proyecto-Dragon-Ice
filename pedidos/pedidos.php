@@ -107,6 +107,7 @@ tr:hover{
     display:flex;
     justify-content:center;
     gap:8px;
+    flex-wrap:wrap;
 }
 
 .volver{
@@ -175,6 +176,9 @@ tr:hover{
                         <?php if($_SESSION['rol']=='Vendedor'&&$fila['estado']=='En proceso'){?>
                             <a class="boton editar" href="../ventas/venta_formulario.php?id=<?php echo $fila['id'];?>">Registrar venta</a>
                         <?php }?>
+                        <?php if($fila['estado']=='Rechazado'&&($_SESSION['rol']=='Vendedor'||$_SESSION['rol']=='Administrador')){?>
+                            <a class="boton eliminar" href="eliminarPedido.php?id=<?php echo $fila['id'];?>">Eliminar</a>
+                        <?php }?>
                     </div>
                 </td>
             </tr>
@@ -186,7 +190,7 @@ tr:hover{
         </table>
         <?php if($_SESSION['rol']=='Vendedor'){?>
             <a href="formpedido.php" class="volver"> Nuevo Pedido</a>
-            <a href="paginaprincipal/vendedor20.php" class="volver">Volver al panel</a>
+            <a href="../paginaprincipal/vendedor20.php" class="volver">Volver al panel</a>
         <?php }else{?>
             <a href="../paginaprincipal/02.admin.php" class="volver">Volver al panel</a>
         <?php }?>
