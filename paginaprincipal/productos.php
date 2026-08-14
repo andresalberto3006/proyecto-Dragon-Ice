@@ -75,7 +75,6 @@ body{
     color:#0e2a4d;
 }
 
-/* CONTENIDO */
 
 .contenedor{
     width:90%;

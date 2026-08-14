@@ -8,7 +8,6 @@ if($pedido->num_rows==0){header("Location: pedidos.php");exit();}
 $p=$pedido->fetch_assoc();
 $detalle=$conexion->query("SELECT c.*,pr.nombre,pr.precio FROM carrito c INNER JOIN productos pr ON c.productos_id=pr.id WHERE c.pedidos_id='$id'");
 
-// --- Generación del código QR (Opción 1: API externa) ---
 $datoQR = "Pedido #" . $p['id'] . " | Cliente: " . $p['nombre'] . " | Estado: " . $p['estado'];
 $qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=" . urlencode($datoQR);
 
@@ -63,7 +62,6 @@ h1{
     margin-bottom:30px;
 }
 
-/* --- Layout de dos columnas --- */
 .layout{
     display:flex;
     gap:30px;
@@ -107,7 +105,6 @@ tr:hover{
     background:#f4f8ff;
 }
 
-/* --- Tarjeta del QR --- */
 .tarjeta-qr{
     background:#f4f8ff;
     border:2px solid #4da6ff;
@@ -138,7 +135,6 @@ tr:hover{
     color:#555;
 }
 
-/* --- Tarjetas de información del pedido --- */
 .info-pedido{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -168,7 +164,6 @@ tr:hover{
     font-weight:bold;
 }
 
-/* Colores especiales según el estado */
 .estado-Pendiente{ border-left-color:#ffb200; }
 .estado-Pendiente .valor{ color:#c98600; }
 
