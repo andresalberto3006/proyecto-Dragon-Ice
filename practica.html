@@ -24,6 +24,9 @@
         grid-area: uno;
         background-color: aqua;
         margin: 4px;
+        animation: myAnimation;
+        animation-duration: 4s;
+        animation-iteration-count: infinite;
     }
     header h1{
         background-color: aquamarine;
@@ -31,6 +34,9 @@
         height: 300px;
         padding: 50px;
         margin: 40px;
+        animation: edson;
+        animation-duration: 4s;
+        animation-iteration-count: infinite;
     }
     nav{
         grid-area: dos;
@@ -81,6 +87,14 @@
         footer{
             width: auto;
         }
+    }
+    @keyframes myAnimation{
+         from {background-color: red;}
+  to {background-color: yellow;}
+    }
+    @keyframes edson{
+         from {transform: scale3d(-1.0,-1.0,-1.1);}
+  to {transform: scale3d(-1.4,-1.5,--1.0);}
     }
 </style>
 <body>

@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dragon Ice - Iniciar Sesión</title>
-
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
     <style>
         * {
             margin: 0;
@@ -118,6 +119,19 @@
             transform: scale(1.03);
             box-shadow: 0 0 20px #00bfff;
         }
+         label.error{
+            color:#ff8080;
+            font-size:12px;
+            margin-top:3px;
+            margin-bottom:5px;
+            display:block;
+        }
+
+input.error{
+    border:2px solid #ff5555;
+}
+
+
 
         @media(max-width:700px) {
             .login-box {
@@ -149,13 +163,13 @@
                 <h1>DRAGON ICE</h1>
                 <p>Iniciar Sesión</p>
 
-                <form action="BDvali.php" method="post">
+                <form id="formulario" action="BDvali.php" method="post">
 
                     <label for="usuario">Usuario</label>
-                    <input type="text" name="usuario" placeholder="Ingrese su nombre" required>
+                    <input id="usuario" type="text" name="usuario" placeholder="Ingrese su nombre" required>
 
                     <label for="clave">Contraseña</label>
-                    <input type="text" name="clave" placeholder="Ingrese su numero de celular" required>
+                    <input id="clave" type="text" name="clave" placeholder="Ingrese su numero de celular" required>
 
                     <input type="submit" value="Ingresar">
                 </form>
@@ -166,6 +180,34 @@
 
     </section>
 
+
+     <script>
+$(document).ready(function(){
+
+$("#formulario").validate({
+
+rules:{
+    usuario:{
+        required:true
+    },
+    clave:{
+        required:true
+    }
+},
+
+messages:{
+    usuario:{
+        required:"Ingrese su nombre de usuario"
+    },
+    clave:{
+        required:"Ingrese su contraseña"
+    }
+}
+
+});
+
+});
+</script>
 </body>
 
 </html>

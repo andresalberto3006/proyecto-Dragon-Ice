@@ -64,10 +64,11 @@
     cursor:pointer;
 }
 
-@media(max-width:768px){
+@media(max-width:700px){
 
     .btn-menu{
-        display:block;
+        display:inline-block;
+        
     }
 
     .nav-links{
@@ -102,8 +103,8 @@
 
     <ul class="nav-links" id="navLinks">
         <li><a href="01.inicio.php">Inicio</a></li>
-        <li><a href="05.formulariousuario.php">Registrarte</a></li>
-        <li><a href="login.php">Iniciar Sesión</a></li>
+        <li><a href="formularios/05.formulariousuario.php">Registrarte</a></li>
+        <li><a href="iniciosesion.php">Iniciar Sesión</a></li>
     </ul>
 
 </nav>
