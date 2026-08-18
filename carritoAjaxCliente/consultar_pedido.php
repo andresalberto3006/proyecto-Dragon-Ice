@@ -1,0 +1,2 @@
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>Consultar Pedido - Dragon Ice</title><link rel="stylesheet" href="css/dragonice.css">
+</head><body><h2>Consultar Pedido</h2><label>Número de pedido:</label><input type="number" id="numeroPedido" placeholder="Ejemplo: 1"><button id="consultar">Consultar Estado</button><div id="resultado"></div><script src="js/consultar.js"></script></body></html>

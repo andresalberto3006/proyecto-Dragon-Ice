@@ -1,0 +1,136 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: #7ec7ff;
+    padding: 35px 15px;
+}
+
+.carrito-contenedor,
+.recibo {
+    max-width: 850px;
+    margin: auto;
+    background: white;
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(0,0,0,.15);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.estado,
+.mensaje {
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.estado {
+    background: #eeeeee;
+}
+
+.estado.activo {
+    background: #d9f7df;
+}
+
+.estado.sin-pedido {
+    background: #fff0c2;
+}
+
+.mensaje.correcto {
+    background: #d9f7df;
+}
+
+.mensaje.error {
+    background: #ffdcdc;
+}
+
+.lista-productos {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.producto-carrito {
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+}
+
+.controles {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+button {
+    border: none;
+    border-radius: 8px;
+    padding: 10px 14px;
+    cursor: pointer;
+}
+
+.controles button {
+    background: #7ec7ff;
+}
+
+.controles .eliminar {
+    background: #e57373;
+    color: white;
+}
+
+.acciones {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+#btnNuevoPedido {
+    background: #7ec7ff;
+}
+
+#btnComprar {
+    background: #4caf50;
+    color: white;
+}
+
+button:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+.total {
+    text-align: right;
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.recibo {
+    max-width: 600px;
+}
+
+.linea-recibo {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.recibo .total {
+    margin-bottom: 20px;
+}

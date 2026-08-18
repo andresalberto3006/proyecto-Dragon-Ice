@@ -1,0 +1,1 @@
+<?php session_start();header('Content-Type: application/json; charset=utf-8');echo json_encode(isset($_SESSION['pedido'])?['pedidoActivo'=>true,'pedido'=>$_SESSION['pedido']]:['pedidoActivo'=>false]); ?>

@@ -1,0 +1,1 @@
+<?php require 'conexion.php';header('Content-Type: application/json; charset=utf-8');$r=$conn->query('SELECT id,nombre,descripcion,precio,costo,stock,imagen FROM productos WHERE stock>0 ORDER BY id');$a=[];while($f=$r->fetch_assoc())$a[]=$f;echo json_encode($a); ?>

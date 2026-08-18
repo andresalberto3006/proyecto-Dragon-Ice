@@ -1,0 +1,45 @@
+/* DRAGON ICE - PALETA HIELO */
+:root{
+ --azul-hielo:#7ec7ff; --azul:#2497e8; --azul-oscuro:#1269a8;
+ --celeste:#eaf8ff; --blanco:#fff; --texto:#16415c; --gris:#6b8291;
+ --borde:#c8e9fa; --sombra:0 8px 25px rgba(18,105,168,.14);
+}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:Arial,sans-serif;color:var(--texto);
+background:linear-gradient(135deg,#eaf8ff,#d8f1ff,#f7fcff)}
+h1{margin:0;padding:28px;text-align:center;color:white;
+background:linear-gradient(135deg,var(--azul-oscuro),var(--azul),var(--azul-hielo));
+box-shadow:var(--sombra)}
+h2{color:var(--azul-oscuro)}
+button{border:0;border-radius:12px;padding:11px 17px;cursor:pointer;font-weight:bold;
+color:white;background:var(--azul);transition:.2s}
+button:hover{background:var(--azul-oscuro);transform:translateY(-1px)}
+button:disabled{opacity:.45;cursor:not-allowed;transform:none}
+a{color:var(--azul-oscuro);font-weight:bold}
+body>h2,body>p,body>a,body>#productos,body>#carritoIcono{max-width:1100px;margin-left:auto;margin-right:auto}
+#productos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;padding:20px}
+.tarjeta{background:white;border:1px solid var(--borde);border-radius:16px;padding:18px;text-align:center;
+box-shadow:var(--sombra);transition:.25s}
+.tarjeta:hover{transform:translateY(-5px)}
+.tarjeta img{width:150px;height:150px;object-fit:cover;border-radius:14px;border:3px solid var(--celeste)}
+.tarjeta h3{color:var(--azul-oscuro)}
+.tarjeta p{color:var(--gris)}
+.tarjeta h2{color:var(--azul)}
+#fondo{display:none;position:fixed;inset:0;z-index:998;background:rgba(10,55,82,.42);backdrop-filter:blur(3px)}
+#fondo.activo{display:block}
+#sidebar{position:fixed;top:0;right:-430px;width:min(430px,94vw);height:100vh;z-index:999;padding:25px;
+overflow-y:auto;background:white;box-shadow:-10px 0 35px rgba(0,0,0,.18);transition:right .3s}
+#sidebar.activo{right:0}
+.productoCarrito{margin:14px 0;padding:15px;border-radius:14px;border:1px solid var(--borde);background:var(--celeste)}
+.productoCarrito img{width:80px;height:80px;object-fit:cover;float:left;margin-right:12px;border-radius:10px}
+.productoCarrito:after{content:"";display:block;clear:both}
+#totalCarrito{padding:15px;border-radius:12px;background:#e0f4ff;color:var(--azul-oscuro)}
+#cantidadCarrito{display:inline-flex;min-width:28px;height:28px;align-items:center;justify-content:center;border-radius:50%;color:white;background:var(--azul)}
+#modalCompra{position:fixed;inset:0;z-index:1000;align-items:center;justify-content:center;padding:20px;
+background:rgba(10,55,82,.48);backdrop-filter:blur(4px)}
+#formularioPedido,#resumenPedido{width:min(480px,95vw);margin:20px auto;padding:25px;border-radius:18px;background:white;box-shadow:var(--sombra)}
+#modalCompra input,#modalCompra select,#formularioPedido input{width:100%;padding:12px;margin:6px 0 12px;border:1px solid var(--borde);border-radius:10px}
+#resultado{margin-top:20px;padding:15px;border-radius:12px;background:var(--celeste)}
+hr{border:0;height:1px;background:var(--borde)}
+@media(max-width:600px){#productos{grid-template-columns:1fr;padding:12px}#sidebar{width:94vw}}
+@media print{button,a{display:none!important}body{background:white}h1{color:black;background:white;box-shadow:none}}
