@@ -1,9 +1,6 @@
 <?php
-
 session_start();
-
-$rutaMenu = "../";
-
+$rutaMenu="../";
 ?>
 
 <!DOCTYPE html>
@@ -12,732 +9,352 @@ $rutaMenu = "../";
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>Dragon Ice - Productos</title>
-
-<!-- ==========================================
-     MENU DE DRAGON ICE
-     ========================================== -->
-
-<?php include("../menu.php"); ?>
-
+<title>Dragon Ice</title>
 
 <style>
 
-/* =====================================================
-   DRAGON ICE - ESTILOS DEL CARRITO AJAX
-   ===================================================== */
-
-:root{
-
-    --azul:#0e2a4d;
-    --azul2:#123b63;
-    --celeste:#63d4f2;
-    --menta:#7be0c4;
-    --blanco:#ffffff;
-    --fondo:#eaf8ff;
-    --texto:#557080;
-
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
 }
-
-
-/* =========================
-   GENERAL
-========================= */
 
 body{
-
-    margin:0;
-
-    font-family:'Inter', Arial, sans-serif;
-
-    background:
-    linear-gradient(
-        135deg,
-        #eaf8ff,
-        #d8f3ff,
-        #ffffff
-    );
-
-    color:#16415c;
-
+    background:#fff;
+    color:#0e2a4d;
 }
-
-
-/* =========================
-   CONTENIDO
-========================= */
 
 .contenido{
-
     width:92%;
-
     max-width:1200px;
-
     margin:auto;
-
-    padding:40px 0 70px;
-
+    padding:40px 0 60px;
 }
-
-
-/* =========================
-   TITULO
-========================= */
 
 .titulo{
-
     text-align:center;
-
-    color:var(--azul);
-
-    font-family:'Baloo 2', cursive;
-
-    font-size:42px;
-
-    margin-bottom:5px;
-
+    font-size:32px;
+    margin-bottom:10px;
 }
-
 
 .subtitulo{
-
     text-align:center;
-
-    color:var(--texto);
-
-    margin-bottom:30px;
-
+    color:#5c7185;
+    margin-bottom:35px;
 }
 
+/* BOTONES */
 
-/* =========================
-   BOTON NUEVO PEDIDO
-========================= */
-
-.contenedorAcciones{
-
+.acciones{
     display:flex;
-
     justify-content:center;
-
-    align-items:center;
-
     gap:15px;
-
-    margin-bottom:30px;
-
-    flex-wrap:wrap;
-
+    margin-bottom:35px;
 }
 
-
-.btnPrincipal{
-
-    border:none;
-
-    padding:13px 25px;
-
-    border-radius:25px;
-
-    background:var(--azul);
-
+.btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:190px;
+    height:45px;
+    border:0;
+    border-radius:10px;
+    background:#0e2a4d;
     color:white;
-
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:15px;
     font-weight:bold;
-
-    cursor:pointer;
-
-    transition:.2s;
-
-}
-
-
-.btnPrincipal:hover{
-
-    background:var(--azul2);
-
-    transform:translateY(-2px);
-
-}
-
-
-.btnConsultar{
-
     text-decoration:none;
+    cursor:pointer;
+}
 
-    padding:13px 25px;
-
-    border-radius:25px;
-
-    background:var(--celeste);
-
-    color:#0b1f22;
-
-    font-weight:bold;
-
+.btn:hover{
+    background:#173e63;
 }
 
 
-.btnConsultar:hover{
-
-    background:var(--menta);
-
-}
-
-
-/* =========================
-   PRODUCTOS
-========================= */
+/* PRODUCTOS */
 
 #productos{
-
     display:grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(230px,1fr));
-
+    grid-template-columns:repeat(4,1fr);
     gap:25px;
-
+    align-items:stretch;
 }
-
-
-/* =========================
-   TARJETA
-========================= */
 
 .tarjeta{
-
     background:white;
-
-    border-radius:20px;
-
-    padding:18px;
-
-    text-align:center;
-
-    box-shadow:
-    0 8px 25px
-    rgba(14,42,77,.12);
-
-    border:1px solid #d4effb;
-
-    transition:.25s;
-
+    border:1px solid #dcecf3;
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(14,42,77,.12);
+    padding-bottom:15px;
+    display:flex;
+    flex-direction:column;
 }
-
-
-.tarjeta:hover{
-
-    transform:translateY(-6px);
-
-    box-shadow:
-    0 14px 30px
-    rgba(14,42,77,.20);
-
-}
-
-
-/* =========================
-   IMAGEN PRODUCTO
-========================= */
 
 .tarjeta img{
-
     width:100%;
-
     height:210px;
-
     object-fit:cover;
-
-    border-radius:15px;
-
-    display:block;
-
-    margin:auto;
-
 }
-
 
 .tarjeta h3{
-
-    color:var(--azul);
-
-    font-family:'Baloo 2', cursive;
-
-    font-size:23px;
-
-    margin:12px 0 5px;
-
+    margin:15px 15px 8px;
+    min-height:24px;
 }
-
 
 .tarjeta p{
-
-    color:var(--texto);
-
-    min-height:45px;
-
+    margin:8px 15px;
+    color:#5c7185;
+    min-height:42px;
 }
-
 
 .tarjeta h2{
-
-    color:#159bd2;
-
+    margin:10px 15px;
+    color:#159db9;
+    min-height:25px;
 }
-
-
-/* =========================
-   AGREGAR
-========================= */
 
 .btnAgregar{
-
-    width:100%;
-
-    border:none;
-
-    padding:12px;
-
-    border-radius:12px;
-
-    background:var(--azul);
-
+    width:calc(100% - 30px);
+    margin:10px 15px 0;
+    padding:11px;
+    border:0;
+    border-radius:9px;
+    background:#0e2a4d;
     color:white;
-
     font-weight:bold;
-
     cursor:pointer;
-
+    margin-top:auto;
 }
-
 
 .btnAgregar:hover{
-
-    background:var(--azul2);
-
+    background:#173e63;
 }
 
 
-.btnAgregar:disabled{
+/* CARRITO */
 
-    opacity:.45;
-
-    cursor:not-allowed;
-
-}
-
-
-/* =====================================================
-   BOTON CARRITO
-===================================================== */
-
-.botonCarrito{
-
+#carritoIcono{
     position:fixed;
-
     right:25px;
-
-    bottom:25px;
-
-    z-index:900;
-
-    width:60px;
-
-    height:60px;
-
-    border:none;
-
+    bottom:30px;
+    width:65px;
+    height:65px;
+    border:0;
     border-radius:50%;
-
-    background:var(--celeste);
-
-    color:#0b1f22;
-
-    font-size:25px;
-
+    background:#63d4f2;
+    color:#0e2a4d;
+    font-size:27px;
     cursor:pointer;
+    box-shadow:0 5px 15px rgba(14,42,77,.25);
+    z-index:1000;
+}
 
-    box-shadow:
-    0 7px 20px
-    rgba(0,0,0,.25);
+#carritoIcono:hover{
+    background:#7be0c4;
+}
 
+#cantidadCarrito{
+    position:absolute;
+    top:-5px;
+    right:-5px;
+    min-width:23px;
+    height:23px;
+    background:#0e2a4d;
+    color:white;
+    border-radius:50%;
+    padding:4px;
+    font-size:12px;
+    font-weight:bold;
 }
 
 
-.botonCarrito:hover{
-
-    background:var(--menta);
-
-    transform:scale(1.05);
-
-}
-
-
-/* =====================================================
-   FONDO CARRITO
-===================================================== */
+/* FONDO */
 
 #fondo{
-
     display:none;
-
     position:fixed;
-
     inset:0;
-
-    z-index:998;
-
-    background:
-    rgba(5,25,35,.55);
-
-    backdrop-filter:blur(3px);
-
+    background:#0008;
+    z-index:1100;
 }
-
 
 #fondo.activo{
-
     display:block;
-
 }
 
 
-/* =====================================================
-   SIDEBAR
-===================================================== */
+/* SIDEBAR */
 
 #sidebar{
-
     position:fixed;
-
     top:0;
-
-    right:-450px;
-
-    width:420px;
-
+    right:-420px;
+    width:400px;
     max-width:90%;
-
     height:100vh;
-
-    z-index:999;
-
     background:white;
-
     padding:25px;
-
     overflow-y:auto;
-
-    box-shadow:
-    -10px 0 30px
-    rgba(0,0,0,.25);
-
+    box-shadow:-5px 0 20px #0003;
     transition:.3s;
-
+    z-index:1200;
 }
-
 
 #sidebar.activo{
-
     right:0;
-
 }
-
-
-#sidebar h2{
-
-    color:var(--azul);
-
-    font-family:'Baloo 2', cursive;
-
-    font-size:30px;
-
-}
-
 
 #cerrarCarrito{
-
     float:right;
-
-    border:none;
-
-    width:35px;
-
-    height:35px;
-
+    border:0;
     border-radius:50%;
-
-    background:#eaf8ff;
-
-    color:var(--azul);
-
+    padding:8px;
+    background:#eaf8fc;
     cursor:pointer;
-
 }
 
-
-/* =========================
-   PRODUCTO CARRITO
-========================= */
+#contenidoCarrito{
+    margin-top:30px;
+}
 
 .productoCarrito{
-
-    margin:15px 0;
-
     padding:15px;
-
-    background:#eefaff;
-
-    border:1px solid #ccecf8;
-
-    border-radius:15px;
-
+    margin-bottom:15px;
+    border-radius:12px;
+    background:#f2fbfe;
+    border:1px solid #d6edf5;
 }
-
 
 .productoCarrito img{
-
     width:80px;
-
     height:80px;
-
     object-fit:cover;
-
-    border-radius:10px;
-
+    border-radius:8px;
     float:left;
-
     margin-right:12px;
-
 }
 
-
-.productoCarrito::after{
-
+.productoCarrito:after{
     content:"";
-
     display:block;
-
     clear:both;
-
 }
-
 
 #totalCarrito{
-
+    margin-top:20px;
     padding:15px;
-
-    border-radius:12px;
-
-    background:#dff8ef;
-
-    color:#0b1f22;
-
+    border-radius:10px;
+    background:#dff7ee;
 }
-
-
-/* =========================
-   BOTONES CARRITO
-========================= */
 
 #vaciarCarrito,
 #comprar{
-
     width:100%;
-
-    padding:12px;
-
     margin-top:10px;
-
-    border:none;
-
-    border-radius:12px;
-
+    padding:12px;
+    border:0;
+    border-radius:9px;
+    background:#0e2a4d;
     color:white;
-
     font-weight:bold;
-
     cursor:pointer;
-
 }
 
 
-#vaciarCarrito{
-
-    background:#1b4a52;
-
-}
-
-
-#comprar{
-
-    background:var(--azul);
-
-}
-
-
-/* =====================================================
-   MODAL PEDIDO
-===================================================== */
+/* MODAL */
 
 #modalCompra{
-
-    position:fixed;
-
-    inset:0;
-
-    z-index:1001;
-
     display:none;
-
+    position:fixed;
+    inset:0;
+    background:#0009;
     align-items:center;
-
     justify-content:center;
-
-    background:
-    rgba(5,25,35,.60);
-
-    backdrop-filter:blur(4px);
-
+    z-index:1300;
 }
-
 
 #formularioPedido{
-
     width:450px;
-
     max-width:90%;
-
     background:white;
-
+    border-radius:16px;
     padding:30px;
-
-    border-radius:20px;
-
-    box-shadow:
-    0 15px 45px
-    rgba(0,0,0,.25);
-
 }
-
 
 #formularioPedido h2{
-
     text-align:center;
-
-    color:var(--azul);
-
-    font-family:'Baloo 2', cursive;
-
+    margin-bottom:20px;
 }
-
-
-#formularioPedido label{
-
-    display:block;
-
-    margin-top:10px;
-
-    color:var(--azul);
-
-    font-weight:bold;
-
-}
-
 
 #formularioPedido input,
 #formularioPedido select{
-
     width:100%;
-
-    padding:12px;
-
-    margin-top:5px;
-
-    border:1px solid #c9eaf7;
-
-    border-radius:10px;
-
-    outline:none;
-
+    padding:11px;
+    margin:7px 0;
+    border:1px solid #c9e5ee;
+    border-radius:8px;
 }
-
-
-#formularioPedido input:focus,
-#formularioPedido select:focus{
-
-    border-color:var(--celeste);
-
-    box-shadow:
-    0 0 0 3px
-    rgba(99,212,242,.15);
-
-}
-
 
 #confirmarPedido,
 #cancelarCompra{
-
     width:100%;
-
-    border:none;
-
     padding:12px;
-
-    margin-top:15px;
-
-    border-radius:12px;
-
+    margin-top:10px;
+    border:0;
+    border-radius:9px;
     font-weight:bold;
-
     cursor:pointer;
-
 }
-
 
 #confirmarPedido{
-
-    background:var(--azul);
-
+    background:#0e2a4d;
     color:white;
-
 }
-
 
 #cancelarCompra{
-
-    background:#e7f6fb;
-
-    color:var(--azul);
-
+    background:#eaf7fb;
+    color:#0e2a4d;
 }
 
 
-/* =====================================================
-   RESPONSIVE
-===================================================== */
+/* RESPONSIVE */
 
-@media(max-width:600px){
-
-    .titulo{
-
-        font-size:32px;
-
-    }
+@media(max-width:1000px){
 
     #productos{
-
-        grid-template-columns:1fr;
-
+        grid-template-columns:repeat(3,1fr);
     }
 
-    #sidebar{
+}
 
-        width:90%;
+@media(max-width:750px){
 
+    #productos{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:500px){
+
+    #productos{
+        grid-template-columns:1fr;
+    }
+
+    .acciones{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .btn{
+        width:220px;
     }
 
 }
@@ -746,280 +363,161 @@ body{
 
 </head>
 
-
 <body>
 
+<?php include("../menu.php"); ?>
 
-<!-- =====================================================
-     CONTENIDO
-===================================================== -->
 
 <main class="contenido">
 
-
 <h1 class="titulo">
-
-Dragon Ice 🍦
-
+    Dragon Ice 🍦
 </h1>
 
-
 <p class="subtitulo">
-
-Elige tus sabores favoritos y disfruta de nuestros helados.
-
+    Elige tus productos favoritos y realiza tu pedido.
 </p>
 
 
-<div class="contenedorAcciones">
+<div class="acciones">
 
+    <button id="generarPedido" class="btn">
+        Generar nuevo pedido
+    </button>
 
-<button
-id="generarPedido"
-class="btnPrincipal">
-
-🛒 Generar nuevo pedido
-
-</button>
-
-
-<a
-href="consultar_pedido.php"
-class="btnConsultar">
-
-Consultar pedido
-
-</a>
-
+    <a href="consultar_pedido.php" class="btn">
+        Consultar pedido
+    </a>
 
 </div>
 
 
-<!-- PRODUCTOS -->
+<h2 class="titulo">
+    Nuestros productos
+</h2>
 
-<div id="productos">
 
-    <!-- productos.js los cargará aquí -->
-
-</div>
-
+<section id="productos"></section>
 
 </main>
 
 
+<!-- CARRITO -->
 
-<!-- =====================================================
-     BOTON CARRITO
-===================================================== -->
+<div id="carritoIcono">
 
-<button
-id="carritoIcono"
-class="botonCarrito"
-title="Abrir carrito">
+    🛒
 
-🛒
+    <span id="cantidadCarrito">
+        0
+    </span>
 
-<span id="cantidadCarrito">
+</div>
 
-0
-
-</span>
-
-</button>
-
-
-
-<!-- =====================================================
-     FONDO
-===================================================== -->
 
 <div id="fondo"></div>
 
 
+<!-- SIDEBAR -->
 
-<!-- =====================================================
-     CARRITO LATERAL
-===================================================== -->
+<aside id="sidebar">
 
-<div id="sidebar">
+    <div>
 
+        <h2>🛒 Mi carrito</h2>
 
-<button id="cerrarCarrito">
+        <button id="cerrarCarrito">
+            ✖
+        </button>
 
-✕
-
-</button>
-
-
-<h2>
-
-Mi carrito 🛒
-
-</h2>
+    </div>
 
 
-<div id="contenidoCarrito">
+    <div id="contenidoCarrito"></div>
+
+
+    <h3 id="totalCarrito">
+        Total: Bs 0
+    </h3>
+
+
+    <button id="vaciarCarrito">
+        Vaciar carrito
+    </button>
+
+
+    <button id="comprar">
+        Comprar
+    </button>
+
+</aside>
+
+
+<!-- MODAL -->
+
+<div id="modalCompra">
+
+    <div id="formularioPedido">
+
+        <h2>
+            🛍 Finalizar compra
+        </h2>
+
+
+        <input
+            type="text"
+            id="nombre"
+            placeholder="Nombre completo"
+        >
+
+
+        <input
+            type="text"
+            id="telefono"
+            placeholder="Teléfono"
+        >
+
+
+        <input
+            type="text"
+            id="direccion"
+            placeholder="Dirección"
+        >
+
+
+        <select id="metodoPago">
+
+            <option value="QR">
+                Pago mediante QR
+            </option>
+
+            <option value="Efectivo">
+                Pago en efectivo
+            </option>
+
+        </select>
+
+
+        <button id="confirmarPedido">
+            Confirmar compra
+        </button>
+
+
+        <button id="cancelarCompra">
+            Cancelar
+        </button>
+
+    </div>
 
 </div>
 
 
-<h3 id="totalCarrito">
+<?php include("../paginaprincipal/piedepagina.php"); ?>
 
-Total: Bs 0.00
-
-</h3>
-
-
-<button id="vaciarCarrito">
-
-Vaciar carrito
-
-</button>
-
-
-<button id="comprar">
-
-Comprar
-
-</button>
-
-
-</div>
-
-
-
-<!-- =====================================================
-     MODAL NUEVO PEDIDO
-===================================================== -->
-
-<div
-id="modalCompra">
-
-
-<div id="formularioPedido">
-
-
-<h2>
-
-Nuevo pedido
-
-</h2>
-
-
-<label>
-
-Nombre:
-
-</label>
-
-
-<input
-type="text"
-id="nombre"
-placeholder="Tu nombre">
-
-
-<label>
-
-Teléfono:
-
-</label>
-
-
-<input
-type="text"
-id="telefono"
-placeholder="Tu teléfono">
-
-
-<label>
-
-Dirección:
-
-</label>
-
-
-<input
-type="text"
-id="direccion"
-placeholder="Tu dirección">
-
-
-<label>
-
-Método de pago:
-
-</label>
-
-
-<select id="metodoPago">
-
-<option value="">
-
-Seleccionar método
-
-</option>
-
-<option value="Efectivo">
-
-Efectivo
-
-</option>
-
-<option value="QR">
-
-QR
-
-</option>
-
-</select>
-
-
-<button
-id="confirmarPedido">
-
-Confirmar pedido
-
-</button>
-
-
-<button
-id="cancelarCompra">
-
-Cancelar
-
-</button>
-
-
-</div>
-
-
-</div>
-
-
-
-<!-- =====================================================
-     PIE DE PAGINA
-===================================================== -->
-
-<?php
-
-include("../paginaprincipal/piedepagina.php");
-
-?>
-
-
-
-<!-- =====================================================
-     JAVASCRIPT
-===================================================== -->
 
 <script src="js/productos.js"></script>
-
-<script src="js/carrito.js"></script>
-
 <script src="js/pedido.js"></script>
-
+<script src="js/carrito.js"></script>
 
 </body>
 
