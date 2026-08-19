@@ -1,4 +1,4 @@
-// Verificar estado del pedido al cargar
+
 document.addEventListener(
     "DOMContentLoaded",
     function() {
@@ -9,7 +9,6 @@ document.addEventListener(
 );
 
 
-// Abrir formulario para generar pedido
 document
     .getElementById("generarPedido")
     .addEventListener("click", function() {
@@ -21,7 +20,6 @@ document
     });
 
 
-// Cancelar pedido
 document
     .getElementById("cancelarCompra")
     .addEventListener("click", function() {
@@ -33,7 +31,6 @@ document
     });
 
 
-// Confirmar pedido
 document
     .getElementById("confirmarPedido")
     .addEventListener("click", function() {
@@ -106,7 +103,6 @@ document
     });
 
 
-// Verificar estado del pedido
 function verificarEstadoPedido() {
 
     fetch("php/estado_pedido.php")

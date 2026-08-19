@@ -1,4 +1,4 @@
-// Abrir carrito
+
 document
     .getElementById("carritoIcono")
     .addEventListener("click", function() {
@@ -16,19 +16,16 @@ document
     });
 
 
-// Cerrar carrito
 document
     .getElementById("cerrarCarrito")
     .addEventListener("click", cerrarSidebar);
 
 
-// Cerrar al hacer clic en el fondo
 document
     .getElementById("fondo")
     .addEventListener("click", cerrarSidebar);
 
 
-// Función para cerrar el carrito
 function cerrarSidebar() {
 
     document
@@ -41,7 +38,6 @@ function cerrarSidebar() {
 }
 
 
-// Actualizar carrito
 function actualizarCarrito() {
 
     fetch("php/carrito.php", {
@@ -150,7 +146,6 @@ function actualizarCarrito() {
 }
 
 
-// Vaciar carrito
 document
     .getElementById("vaciarCarrito")
     .addEventListener("click", vaciarCarrito);
@@ -200,7 +195,6 @@ function vaciarCarrito() {
 }
 
 
-// Finalizar pedido
 document.addEventListener("click", function(event) {
 
     if(event.target.id === "comprar") {

@@ -30,6 +30,8 @@ CREATE TABLE pedidos (
     vendedor_ci INT NULL,
     nombrevendedor VARCHAR(80) NULL,
     metodo_pago VARCHAR(45) NOT NULL DEFAULT '',
+    telefono VARCHAR(20) NULL,
+    direccion VARCHAR(100) NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (vendedor_ci) REFERENCES usuario(ci)
 ) ENGINE=InnoDB;

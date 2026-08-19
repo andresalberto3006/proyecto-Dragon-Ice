@@ -2,13 +2,11 @@ let listaProductos = [];
 let pedidoActivo = false;
 
 
-// Cuando carga la página
 document.addEventListener("DOMContentLoaded", function() {
     verificarPedido();
 });
 
 
-// Verificar si existe un pedido activo
 function verificarPedido() {
 
     fetch("php/verificar_pedido.php")
@@ -31,7 +29,6 @@ function verificarPedido() {
 }
 
 
-// Obtener productos de la base de datos
 function cargarProductos() {
 
     fetch("php/obtener_productos.php")
@@ -54,7 +51,6 @@ function cargarProductos() {
 }
 
 
-// Mostrar productos en la página
 function mostrarProductos(productos) {
 
     let contenedor = document.getElementById("productos");
@@ -108,7 +104,6 @@ function mostrarProductos(productos) {
 }
 
 
-// Agregar eventos a los botones
 function agregarEventos() {
 
     document
@@ -127,7 +122,6 @@ function agregarEventos() {
 }
 
 
-// Agregar producto al carrito
 function agregarProducto(codigo) {
 
     fetch("php/carrito.php", {
@@ -169,7 +163,6 @@ function agregarProducto(codigo) {
 }
 
 
-// Habilitar botones de compra
 function habilitarCompra() {
 
     pedidoActivo = true;
