@@ -1,0 +1,25 @@
+ASUNTO:
+andre
+COMENTARIO:
+soy guapo
+
+ASUNTO:
+PEDIDO
+COMENTARIO:
+Me llego tarde el pedido.
+ASUNTO:
+PEDIDO
+COMENTARIO:
+Me llego tarde el pedido.
+ASUNTO:
+Pedido
+COMENTARIO:
+Me llego sin nada el pedido.
+ASUNTO:
+a
+COMENTARIO:
+caca
+ASUNTO:
+a
+COMENTARIO:
+caca
