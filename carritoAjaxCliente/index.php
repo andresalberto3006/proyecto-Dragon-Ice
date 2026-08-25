@@ -46,7 +46,7 @@ body{
     margin-bottom:35px;
 }
 
-/* BOTONES */
+
 
 .acciones{
     display:flex;
@@ -77,7 +77,7 @@ body{
 }
 
 
-/* PRODUCTOS */
+
 
 #productos{
     display:grid;
@@ -138,7 +138,6 @@ body{
 }
 
 
-/* CARRITO */
 
 #carritoIcono{
     position:fixed;
@@ -175,7 +174,6 @@ body{
 }
 
 
-/* FONDO */
 
 #fondo{
     display:none;
@@ -190,7 +188,6 @@ body{
 }
 
 
-/* SIDEBAR */
 
 #sidebar{
     position:fixed;
@@ -268,7 +265,6 @@ body{
 }
 
 
-/* MODAL */
 
 #modalCompra{
     display:none;
@@ -324,7 +320,6 @@ body{
 }
 
 
-/* RESPONSIVE */
 
 @media(max-width:1000px){
 
@@ -371,7 +366,7 @@ body{
 <main class="contenido">
 
 <h1 class="titulo">
-    Dragon Ice 🍦
+    Dragon Ice 
 </h1>
 
 <p class="subtitulo">
@@ -402,7 +397,7 @@ body{
 </main>
 
 
-<!-- CARRITO -->
+
 
 <div id="carritoIcono">
 
@@ -418,13 +413,13 @@ body{
 <div id="fondo"></div>
 
 
-<!-- SIDEBAR -->
+
 
 <aside id="sidebar">
 
     <div>
 
-        <h2>🛒 Mi carrito</h2>
+        <h2> Mi carrito</h2>
 
         <button id="cerrarCarrito">
             ✖
@@ -453,14 +448,14 @@ body{
 </aside>
 
 
-<!-- MODAL -->
+
 
 <div id="modalCompra">
 
     <div id="formularioPedido">
 
         <h2>
-            🛍 Finalizar compra
+             Finalizar compra
         </h2>
 
 

@@ -16,6 +16,13 @@ $rutaMenu = "../";
 
 <style>
 
+:root{
+    --azul-oscuro:#0e2a4d;
+    --celeste:#63d4f2;
+    --menta:#7be0c4;
+    --texto-suave:#d9f6ff;
+}
+
 *{
     margin:0;
     padding:0;
@@ -25,10 +32,9 @@ $rutaMenu = "../";
 
 body{
     background:#ffffff;
-    color:#0e2a4d;
+    color:var(--azul-oscuro);
 }
 
-/* CONTENEDOR */
 
 .contenido{
     width:92%;
@@ -37,7 +43,6 @@ body{
     padding:60px 0;
 }
 
-/* TARJETA */
 
 .tarjeta{
     background:white;
@@ -47,11 +52,10 @@ body{
     box-shadow:0 8px 25px rgba(14,42,77,.15);
 }
 
-/* TITULO */
 
 .titulo{
     text-align:center;
-    color:#0e2a4d;
+    color:var(--azul-oscuro);
     font-size:30px;
     margin-bottom:10px;
 }
@@ -62,12 +66,11 @@ body{
     margin-bottom:30px;
 }
 
-/* FORMULARIO */
 
 label{
     display:block;
     margin-bottom:7px;
-    color:#0e2a4d;
+    color:var(--azul-oscuro);
     font-weight:bold;
 }
 
@@ -81,27 +84,28 @@ input{
 }
 
 input:focus{
-    border-color:#63d4f2;
+    border-color:var(--celeste);
+    box-shadow:0 0 0 2px rgba(99,212,242,0.25);
 }
 
-/* BOTON */
 
 #consultar{
     width:100%;
     padding:12px;
     border:none;
     border-radius:9px;
-    background:#0e2a4d;
+    background:var(--azul-oscuro);
     color:white;
     font-weight:bold;
     cursor:pointer;
+    transition:.3s;
 }
 
 #consultar:hover{
-    background:#173e63;
+    background:var(--celeste);
+    color:var(--azul-oscuro);
 }
 
-/* RESULTADO */
 
 #resultado{
     margin-top:25px;
@@ -115,7 +119,7 @@ input:focus{
 }
 
 .resultado h3{
-    color:#0e2a4d;
+    color:var(--azul-oscuro);
     margin-bottom:15px;
 }
 
@@ -133,11 +137,14 @@ input:focus{
 }
 
 .estado{
-    color:#159db9;
+    color:var(--azul-oscuro);
+    background:var(--menta);
+    padding:2px 10px;
+    border-radius:20px;
     font-weight:bold;
+    font-size:14px;
 }
 
-/* BOTON VOLVER */
 
 .volver{
     display:block;
@@ -147,16 +154,16 @@ input:focus{
     text-align:center;
     text-decoration:none;
     border-radius:9px;
-    background:#63d4f2;
-    color:#0e2a4d;
+    background:var(--celeste);
+    color:var(--azul-oscuro);
     font-weight:bold;
+    transition:.3s;
 }
 
 .volver:hover{
-    background:#7be0c4;
+    background:var(--menta);
 }
 
-/* RESPONSIVE */
 
 @media(max-width:500px){
 
@@ -188,7 +195,7 @@ input:focus{
     <div class="tarjeta">
 
         <h1 class="titulo">
-            Consultar Pedido 🧾
+            Consultar Pedido
         </h1>
 
         <p class="subtitulo">
