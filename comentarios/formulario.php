@@ -192,6 +192,7 @@ $rutaMenu = "../";
                 <textarea id="come" name="come" placeholder="Escribe aquí tu mensaje..." required></textarea>
 
                 <input type="submit" value="Enviar Mensaje">
+                
 
             </form>
 
