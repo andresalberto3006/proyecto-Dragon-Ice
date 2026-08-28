@@ -64,29 +64,29 @@ function mostrarProductos(productos) {
             <div class="tarjeta">
 
                 <img
-                    src="${producto.imagen}"
+                    src="${productos.imagen}"
                     width="150"
                 >
 
                 <h3>
-                    ${producto.nombre}
+                    ${productos.nombre}
                 </h3>
 
                 <p>
-                    ${producto.descripcion}
+                    ${productos.descripcion}
                 </p>
 
                 <h2>
-                    Bs ${producto.precio}
+                    Bs ${productos.precio}
                 </h2>
 
                 <p>
-                    Stock: ${producto.stock}
+                    Stock: ${productos.stock}
                 </p>
 
                 <button
                     class="btnAgregar"
-                    data-codigo="${producto.id}"
+                    data-codigo="${productos.id}"
                     ${pedidoActivo ? "" : "disabled"}
                 >
                     Agregar al carrito
