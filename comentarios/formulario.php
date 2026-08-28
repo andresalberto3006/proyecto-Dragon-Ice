@@ -7,7 +7,6 @@ $rutaMenu = "../";
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <title>Dragon Ice | Buzón de Mensajes</title>
     <style>
         :root{
@@ -193,7 +192,6 @@ $rutaMenu = "../";
                 <textarea id="come" name="come" placeholder="Escribe aquí tu mensaje..." required></textarea>
 
                 <input type="submit" value="Enviar Mensaje">
-                
 
             </form>
 
