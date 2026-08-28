@@ -21,6 +21,12 @@ COMENTARIO:
 dfgdfsgdf
 >>>>>>> e051acaa7cf092f4cac5c0e88cfb7e31eb239a89
 ASUNTO:
+<<<<<<< HEAD
 El andre es muy feo
 COMENTARIO:
 wet49b6xcvhnslaeyrbyteiwybtimkmkòkiol
+=======
+Error
+COMENTARIO:
+dvd
+>>>>>>> ee7d7b38a71fba995ff5bb1621077c67ee8b45c0
