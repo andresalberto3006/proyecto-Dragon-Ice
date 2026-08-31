@@ -31,6 +31,12 @@ COMENTARIO:
 dvd
 >>>>>>> ee7d7b38a71fba995ff5bb1621077c67ee8b45c0
 ASUNTO:
+<<<<<<< HEAD
 coca
 COMENTARIO:
 3434
+=======
+chocolate
+COMENTARIO:
+esta muy rico
+>>>>>>> 605ff0ef2502b65491bcf2d42cfc1ce4ece3d22a
