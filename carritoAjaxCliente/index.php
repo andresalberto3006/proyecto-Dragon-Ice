@@ -514,6 +514,7 @@ body{
 <script src="js/pedido.js"></script>
 <script src="js/carrito.js"></script>
 
+
 </body>
 
 </html>
