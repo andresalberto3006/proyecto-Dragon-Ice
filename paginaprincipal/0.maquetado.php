@@ -1,7 +1,4 @@
-<?php
-header("Location: 01.inicio.php");
-exit();
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
