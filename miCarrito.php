@@ -60,6 +60,7 @@ $imagenGenerica = "imagenesproyecto/logo.png";
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Mi Carrito | Dragon Ice</title>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <style>
 
@@ -654,25 +655,19 @@ include("menu.php");
     </div>
 
 
-    <div class="botones-finales">
+<div class="botones-finales">
 
-        <a href="pedidos/pedidos.php">
+    <button type="button" class="btn btn-final" onclick="mostrarMensaje()">
+        Mostrar mensaje
+    </button>
 
-            <button class="btn btn-final">
-                Terminar pedido
-            </button>
+    <a href="pedidos/pedidos.php">
+        <button class="btn btn-final">Terminar pedido</button>
+    </a>
 
-        </a>
-
-        <a href="pedidos/formpedido.php">
-
-            <button class="btn btn-final btn-nuevo">
-                Nuevo pedido
-            </button>
-
-        </a>
-
-    </div>
+    <a href="pedidos/formpedido.php">
+        <button class="btn btn-final btn-nuevo">Nuevo pedido</button>
+    </a>
 
 </div>
 
@@ -821,6 +816,31 @@ function eliminarProducto(idProducto){
         alert("Ocurrió un error al eliminar");
     });
 }
+function mostrarMensaje(){
+    Swal.fire({
+        title: '¿Deseas terminar el pedido?',
+        text: 'Una vez terminado, podrás continuar con el proceso.',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, terminar',
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#0e2a4d',
+        cancelButtonColor: '#dc3545'
+    }).then((resultado) => {
+        if(resultado.isConfirmed){
+            Swal.fire({
+                title: '¡Listo!',
+                text: 'El pedido ha sido terminado.',
+                icon: 'success',
+                confirmButtonColor: '#0e2a4d'
+
+            });
+        }
+    });
+}
+<button type="button" class="btn btn-final" onclick="mostrarMensaje()">
+    Mostrar mensaje
+</button>
 
 </script>
 
