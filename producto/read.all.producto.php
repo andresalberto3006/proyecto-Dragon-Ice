@@ -4,7 +4,14 @@ if (!isset($_SESSION['rol'])) { header("Location: ../iniciosesion.php"); exit();
 if ($_SESSION['rol'] != 'Administrador' && $_SESSION['rol'] != 'Vendedor') { header("Location: ../iniciosesion.php"); exit(); }
 include("../conexion.php");
 $resultado=$conexion->query("SELECT * FROM productos ORDER BY id DESC");
+$resultado = $conexion->query("SELECT * FROM productos ORDER BY id DESC");
+$productos = $resultado->fetch_all(MYSQLI_ASSOC);
 
+$STOCK_MINIMO = 5; // ajusta el umbral que consideres "bajo"
+
+$productosBajoStock = array_filter($productos, function($p) use ($STOCK_MINIMO) {
+    return $p['stock'] <= $STOCK_MINIMO;
+});
 $rutaMenu = "../";
 ?>
 
@@ -120,7 +127,35 @@ background:#dc3545;
 .volver:hover{
     background:#2f5d9f;
 }
+.stock-bajo{
+    color:#dc3545;
+    font-weight:bold;
+}
 
+.stock-critico{
+    color:#ffffff;
+    background:#dc3545;
+    padding:3px 10px;
+    border-radius:6px;
+    font-weight:bold;
+}
+
+.alerta-stock{
+    background:#fff3cd;
+    border:1px solid #ffc107;
+    color:#856404;
+    padding:15px 20px;
+    border-radius:12px;
+    margin-bottom:20px;
+}
+
+.alerta-stock h3{
+    margin-bottom:8px;
+}
+
+.alerta-stock ul{
+    margin-left:20px;
+}
 </style>
 </head>
 <body>
@@ -129,6 +164,17 @@ background:#dc3545;
     <main class="fondo-panel">
      <div class="contenedor">
         <h1> Lista de Productos Registrados</h1>
+        <?php if (count($productosBajoStock) > 0) { ?>
+    <div class="alerta-stock">
+        <h3>⚠️ Aviso de stock bajo</h3>
+        <p>Los siguientes productos tienen poco stock, considera reponerlos pronto:</p>
+        <ul>
+            <?php foreach ($productosBajoStock as $p) { ?>
+                <li><?php echo htmlspecialchars($p['nombre']); ?> — quedan <?php echo $p['stock']; ?> unidades</li>
+            <?php } ?>
+        </ul>
+    </div>
+<?php } ?>
         <table>
             <tr>
                 <th>ID</th>
@@ -140,28 +186,35 @@ background:#dc3545;
                 <th>Imagen</th>
                 <th>Acciones</th>
             </tr>
-            <?php if($resultado->num_rows>0){ while($fila=$resultado->fetch_assoc()){ ?>
-            <tr>
-                <td><?php echo $fila['id'];?></td>
-                <td><?php echo $fila['nombre'];?></td>
-                <td><?php echo $fila['descripcion'];?></td>
-                <td><?php echo $fila['precio'];?></td>
-                <td><?php echo $fila['costo'];?></td>
-                <td><?php echo $fila['stock'];?></td>
-                <td><img src="../<?php echo $fila['imagen'];?>" width="60"></td>
-                <td>
-                    <div class="acciones">
-                        <a class="boton mostrar" href="readproducto.php?id=<?php echo $fila['id'];?>">Mostrar</a>
-                        <a class="boton editar" href="updateproducto.php?id=<?php echo $fila['id'];?>">Editar</a>
-                        <a class="boton eliminar" href="delete_producto.php?id=<?php echo $fila['id'];?>">Eliminar</a>
-                    </div>
-                </td>
-            </tr>
-            <?php }}else{ ?>
-            <tr>
-                <td colspan="8">No existen productos registrados.</td>
-            </tr>
-            <?php } ?>
+            <?php if(count($productos)>0){ foreach($productos as $fila){
+    $claseStock = '';
+    if ($fila['stock'] <= 0) {
+        $claseStock = 'stock-critico';   // sin stock
+    } elseif ($fila['stock'] <= $STOCK_MINIMO) {
+        $claseStock = 'stock-bajo';      // stock bajo
+    }
+?>
+<tr>
+    <td><?php echo $fila['id'];?></td>
+    <td><?php echo $fila['nombre'];?></td>
+    <td><?php echo $fila['descripcion'];?></td>
+    <td><?php echo $fila['precio'];?></td>
+    <td><?php echo $fila['costo'];?></td>
+    <td class="<?php echo $claseStock; ?>"><?php echo $fila['stock'];?></td>
+    <td><img src="../<?php echo $fila['imagen'];?>" width="60"></td>
+    <td>
+        <div class="acciones">
+            <a class="boton mostrar" href="readproducto.php?id=<?php echo $fila['id'];?>">Mostrar</a>
+            <a class="boton editar" href="updateproducto.php?id=<?php echo $fila['id'];?>">Editar</a>
+            <a class="boton eliminar" href="delete_producto.php?id=<?php echo $fila['id'];?>">Eliminar</a>
+        </div>
+    </td>
+</tr>
+<?php }}else{ ?>
+<tr>
+    <td colspan="8">No existen productos registrados.</td>
+</tr>
+<?php } ?>
         </table>
         <a href="formularioproducto.php" class="volver"> Registrar Nuevo Producto</a>
         <?php if($_SESSION['rol']=='Administrador'){ ?>

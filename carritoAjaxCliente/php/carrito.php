@@ -9,7 +9,7 @@ if (!isset($_SESSION['pedido'])) {
 }
 
 $idPedido = (int)$_SESSION['pedido'];
-$accion = $_POST['accion'] ?? '';
+$accion = isset($_POST['accion']) ? $_POST['accion'] : '';
 
 $s = $conn->prepare("SELECT estado FROM pedidos WHERE id=? LIMIT 1");
 $s->bind_param('i', $idPedido);
@@ -24,7 +24,7 @@ if (!$pedido || $pedido['estado'] !== 'Abierto') {
 
 if ($accion === 'agregar') {
 
-    $codigo = (int)($_POST['codigo'] ?? 0);
+    $codigo = isset($_POST['codigo']) ? (int)$_POST['codigo'] : 0;
 
     if ($codigo <= 0) {
         echo json_encode(['ok' => false, 'mensaje' => 'Producto no válido.']);

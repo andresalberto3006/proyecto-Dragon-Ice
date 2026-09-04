@@ -60,6 +60,7 @@ $imagenGenerica = "imagenesproyecto/logo.png";
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Mi Carrito | Dragon Ice</title>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <style>
 
@@ -654,25 +655,19 @@ include("menu.php");
     </div>
 
 
-    <div class="botones-finales">
+<div class="botones-finales">
 
-        <a href="pedidos/pedidos.php">
+    <button type="button" class="btn btn-final" onclick="mostrarMensaje()">
+        Mostrar mensaje
+    </button>
 
-            <button class="btn btn-final">
-                Terminar pedido
-            </button>
+    <a href="pedidos/pedidos.php">
+        <button onclick="pedidoterminado()" class="btn btn-final">Terminar pedido</button>
+    </a>
 
-        </a>
-
-        <a href="pedidos/formpedido.php">
-
-            <button class="btn btn-final btn-nuevo">
-                Nuevo pedido
-            </button>
-
-        </a>
-
-    </div>
+    <a href="pedidos/formpedido.php">
+        <button class="btn btn-final btn-nuevo">Nuevo pedido</button>
+    </a>
 
 </div>
 
@@ -822,6 +817,24 @@ function eliminarProducto(idProducto){
     });
 }
 
+function pedidoterminado(){
+    alert("Tu pedido se registro!");
+}
+Swal.fire({
+  title: "Are you sure?",
+  text: "You won't be able to revert this!",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#6491bb",
+  cancelButtonColor: "rgba(3, 2, 75, 0.62)",
+  confirmButtonText: "Yes, delete it!"
+}).then((result) => {
+  if (result.isConfirmed) Swal.fire({
+    title: "Deleted!",
+    text: "Your file has been deleted.",
+    icon: "success"
+  });
+});
 </script>
 
 </body>

@@ -1,19 +1,117 @@
 <?php
 
+session_start();
+
 // ==========================================================
-// REPORTE DE INGRESOS - EDSON
+// CONEXIÓN A LA BASE DE DATOS
+// ==========================================================
+
+$servidor = "localhost";
+$usuario = "root";
+$contrasena = "";
+$bd = "dragonice";
+
+$conn = new mysqli(
+    $servidor,
+    $usuario,
+    $contrasena,
+    $bd
+);
+
+if ($conn->connect_error) {
+
+    die(
+        "Error de conexión: " .
+        $conn->connect_error
+    );
+}
+
+$conn->set_charset("utf8mb4");
+
+
+// ==========================================================
+// SESIÓN
+// ==========================================================
+
+$ci = isset($_SESSION["ci"])
+    ? $_SESSION["ci"]
+    : "";
+
+
+// ==========================================================
+// TOP 3 PRODUCTOS MÁS VENDIDOS
+// ==========================================================
+
+$sqlProductos = "
+    SELECT
+        productos.nombre,
+        SUM(carrito.cantidad) AS cantidad
+
+    FROM carrito
+
+    INNER JOIN productos
+        ON carrito.productos_id = productos.id
+
+    INNER JOIN ventas
+        ON carrito.pedidos_id = ventas.pedidos_id
+
+    GROUP BY
+        productos.id,
+        productos.nombre
+
+    ORDER BY cantidad DESC
+
+    LIMIT 3
+";
+
+
+$resultadoProductos =
+    $conn->query($sqlProductos);
+
+
+$productosGrafico = array();
+$cantidadesGrafico = array();
+
+
+if ($resultadoProductos !== false) {
+
+    while (
+        $fila =
+        $resultadoProductos->fetch_assoc()
+    ) {
+
+        $productosGrafico[] =
+            $fila["nombre"];
+
+        $cantidadesGrafico[] =
+            intval($fila["cantidad"]);
+
+    }
+
+}
+
+
+// ==========================================================
+// REPORTE DE INGRESOS
 // Archivo: ingre-total.php
-// Compatible con PHP 5.4+
 // ==========================================================
 
+
 // ==========================================================
-// CONFIGURACIÓN
+// CONFIGURACIÓN DEL ARCHIVO JSON
 // ==========================================================
 
-$archivo = __DIR__ . DIRECTORY_SEPARATOR . "ingresos.json";
+$archivo =
+    __DIR__ .
+    DIRECTORY_SEPARATOR .
+    "ingresos.json";
+
 
 // Nombre del archivo actual
-$paginaActual = basename(__FILE__);
+
+$paginaActual =
+    basename(__FILE__);
+
 
 // ==========================================================
 // CARGAR INGRESOS
@@ -21,424 +119,808 @@ $paginaActual = basename(__FILE__);
 
 $ingresos = array();
 
+
 if (file_exists($archivo)) {
 
-    $contenido = file_get_contents($archivo);
+    $contenido =
+        file_get_contents($archivo);
 
-    if ($contenido !== false && trim($contenido) !== "") {
 
-        $datos = json_decode($contenido, true);
+    if (
+        $contenido !== false &&
+        trim($contenido) !== ""
+    ) {
+
+        $datos =
+            json_decode(
+                $contenido,
+                true
+            );
+
 
         if (is_array($datos)) {
+
             $ingresos = $datos;
+
         }
     }
 }
+
 
 // ==========================================================
 // FUNCIÓN PARA GUARDAR JSON
 // ==========================================================
 
-function guardarIngresos($archivo, $ingresos)
-{
+function guardarIngresos(
+    $archivo,
+    $ingresos
+) {
+
     $json = json_encode(
         $ingresos,
-        JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
+        JSON_PRETTY_PRINT |
+        JSON_UNESCAPED_UNICODE
     );
 
-    file_put_contents($archivo, $json);
+
+    file_put_contents(
+        $archivo,
+        $json
+    );
+
 }
 
+
 // ==========================================================
-// FUNCIÓN PARA REDIRECCIONAR
+// FUNCIÓN PARA VOLVER A LA PÁGINA
 // ==========================================================
 
-function volverPagina($paginaActual)
-{
-    header("Location: " . $paginaActual);
+function volverPagina(
+    $paginaActual
+) {
+
+    header(
+        "Location: " .
+        $paginaActual
+    );
+
     exit;
+
 }
+
 
 // ==========================================================
 // PROCESAR FORMULARIOS
 // ==========================================================
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if (
+    $_SERVER["REQUEST_METHOD"] ==
+    "POST"
+) {
+
 
     // ======================================================
     // GUARDAR NUEVO INGRESO
     // ======================================================
 
-    if (isset($_POST["guardar"])) {
+    if (
+        isset($_POST["guardar"])
+    ) {
 
-        $fecha = isset($_POST["fecha"])
+        $fecha =
+            isset($_POST["fecha"])
             ? trim($_POST["fecha"])
             : "";
 
-        $descripcion = isset($_POST["descripcion"])
+
+        $descripcion =
+            isset($_POST["descripcion"])
             ? trim($_POST["descripcion"])
             : "";
 
-        $monto = isset($_POST["monto"])
+
+        $monto =
+            isset($_POST["monto"])
             ? floatval($_POST["monto"])
             : 0;
 
+
         if (
+
             $fecha != "" &&
             $descripcion != "" &&
             $monto > 0
+
         ) {
 
+
             // Buscar el ID más alto
+
             $mayorId = 0;
 
-            foreach ($ingresos as $ingreso) {
 
-                if (isset($ingreso["id"])) {
+            foreach (
+                $ingresos as $ingreso
+            ) {
 
-                    $id = intval($ingreso["id"]);
+                if (
+                    isset(
+                        $ingreso["id"]
+                    )
+                ) {
 
-                    if ($id > $mayorId) {
-                        $mayorId = $id;
+                    $id =
+                        intval(
+                            $ingreso["id"]
+                        );
+
+
+                    if (
+                        $id > $mayorId
+                    ) {
+
+                        $mayorId =
+                            $id;
+
                     }
                 }
             }
 
-            $nuevoId = $mayorId + 1;
 
-            // Crear ingreso
-            $nuevoIngreso = array(
-                "id" => $nuevoId,
-                "fecha" => $fecha,
-                "descripcion" => $descripcion,
-                "monto" => $monto
+            // Nuevo ID
+
+            $nuevoId =
+                $mayorId + 1;
+
+
+            // Crear nuevo ingreso
+
+            $nuevoIngreso =
+                array(
+
+                    "id" =>
+                        $nuevoId,
+
+                    "fecha" =>
+                        $fecha,
+
+                    "descripcion" =>
+                        $descripcion,
+
+                    "monto" =>
+                        $monto
+
+                );
+
+
+            $ingresos[] =
+                $nuevoIngreso;
+
+
+            guardarIngresos(
+                $archivo,
+                $ingresos
             );
 
-            $ingresos[] = $nuevoIngreso;
 
-            guardarIngresos($archivo, $ingresos);
+            volverPagina(
+                $paginaActual
+            );
 
-            volverPagina($paginaActual);
         }
+
     }
+
+
 
     // ======================================================
     // EDITAR INGRESO
     // ======================================================
 
-    if (isset($_POST["editar"])) {
+    if (
+        isset($_POST["editar"])
+    ) {
 
-        $idEditar = isset($_POST["id"])
+        $idEditar =
+            isset($_POST["id"])
             ? intval($_POST["id"])
             : 0;
 
-        $fecha = isset($_POST["fecha"])
+
+        $fecha =
+            isset($_POST["fecha"])
             ? trim($_POST["fecha"])
             : "";
 
-        $descripcion = isset($_POST["descripcion"])
+
+        $descripcion =
+            isset($_POST["descripcion"])
             ? trim($_POST["descripcion"])
             : "";
 
-        $monto = isset($_POST["monto"])
+
+        $monto =
+            isset($_POST["monto"])
             ? floatval($_POST["monto"])
             : 0;
 
+
         if (
+
             $idEditar > 0 &&
             $fecha != "" &&
             $descripcion != "" &&
             $monto > 0
+
         ) {
 
-            foreach ($ingresos as $indice => $ingreso) {
+
+            foreach (
+                $ingresos as
+                $indice =>
+                $ingreso
+            ) {
 
                 if (
-                    isset($ingreso["id"]) &&
-                    intval($ingreso["id"]) == $idEditar
+
+                    isset(
+                        $ingreso["id"]
+                    ) &&
+
+                    intval(
+                        $ingreso["id"]
+                    ) == $idEditar
+
                 ) {
 
-                    $ingresos[$indice]["fecha"] = $fecha;
-                    $ingresos[$indice]["descripcion"] = $descripcion;
-                    $ingresos[$indice]["monto"] = $monto;
+
+                    $ingresos[$indice]["fecha"] =
+                        $fecha;
+
+
+                    $ingresos[$indice]["descripcion"] =
+                        $descripcion;
+
+
+                    $ingresos[$indice]["monto"] =
+                        $monto;
+
 
                     break;
+
                 }
             }
 
-            guardarIngresos($archivo, $ingresos);
 
-            volverPagina($paginaActual);
+            guardarIngresos(
+                $archivo,
+                $ingresos
+            );
+
+
+            volverPagina(
+                $paginaActual
+            );
+
         }
+
     }
+
+
 
     // ======================================================
     // ELIMINAR INGRESO
     // ======================================================
 
-    if (isset($_POST["eliminar"])) {
+    if (
+        isset($_POST["eliminar"])
+    ) {
 
-        $idEliminar = isset($_POST["id"])
+        $idEliminar =
+            isset($_POST["id"])
             ? intval($_POST["id"])
             : 0;
 
-        $nuevosIngresos = array();
 
-        foreach ($ingresos as $ingreso) {
+        $nuevosIngresos =
+            array();
+
+
+        foreach (
+            $ingresos as $ingreso
+        ) {
 
             if (
-                !isset($ingreso["id"]) ||
-                intval($ingreso["id"]) != $idEliminar
+
+                !isset(
+                    $ingreso["id"]
+                ) ||
+
+                intval(
+                    $ingreso["id"]
+                ) != $idEliminar
+
             ) {
 
-                $nuevosIngresos[] = $ingreso;
+                $nuevosIngresos[] =
+                    $ingreso;
+
             }
         }
 
-        $ingresos = $nuevosIngresos;
 
-        guardarIngresos($archivo, $ingresos);
+        $ingresos =
+            $nuevosIngresos;
 
-        volverPagina($paginaActual);
+
+        guardarIngresos(
+            $archivo,
+            $ingresos
+        );
+
+
+        volverPagina(
+            $paginaActual
+        );
+
     }
+
 }
+
 
 // ==========================================================
 // FILTROS
 // ==========================================================
 
-$tipo = isset($_GET["tipo"])
+$tipo =
+    isset($_GET["tipo"])
     ? $_GET["tipo"]
     : "todos";
 
-$fechaSeleccionada = isset($_GET["fecha"])
+
+$fechaSeleccionada =
+    isset($_GET["fecha"])
     ? $_GET["fecha"]
     : date("Y-m-d");
 
-$busqueda = isset($_GET["buscar"])
+
+$busqueda =
+    isset($_GET["buscar"])
     ? trim($_GET["buscar"])
     : "";
 
-$resultados = $ingresos;
+
+// Resultados iniciales
+
+$resultados =
+    $ingresos;
+
 
 // ==========================================================
 // FILTRO POR DÍA
 // ==========================================================
 
-if ($tipo == "dia") {
+if (
+    $tipo == "dia"
+) {
 
-    $resultados = array_filter(
-        $resultados,
-        function ($ingreso) use ($fechaSeleccionada) {
+    $resultados =
+        array_filter(
 
-            if (!isset($ingreso["fecha"])) {
-                return false;
+            $resultados,
+
+            function (
+                $ingreso
+            ) use (
+                $fechaSeleccionada
+            ) {
+
+                if (
+                    !isset(
+                        $ingreso["fecha"]
+                    )
+                ) {
+
+                    return false;
+
+                }
+
+
+                return
+                    $ingreso["fecha"]
+                    ==
+                    $fechaSeleccionada;
+
             }
 
-            return $ingreso["fecha"] == $fechaSeleccionada;
-        }
-    );
+        );
+
 }
+
 
 // ==========================================================
 // FILTRO POR SEMANA
 // ==========================================================
 
-if ($tipo == "semana") {
+if (
+    $tipo == "semana"
+) {
 
     try {
 
-        $fecha = new DateTime($fechaSeleccionada);
+        $fecha =
+            new DateTime(
+                $fechaSeleccionada
+            );
 
-        // 1 = lunes
-        // 7 = domingo
-        $diaSemana = intval($fecha->format("N"));
 
-        $inicioSemana = clone $fecha;
+        $diaSemana =
+            intval(
+                $fecha->format("N")
+            );
+
+
+        $inicioSemana =
+            clone $fecha;
+
 
         $inicioSemana->modify(
-            "-" . ($diaSemana - 1) . " days"
+
+            "-" .
+            ($diaSemana - 1) .
+            " days"
+
         );
 
-        $finSemana = clone $inicioSemana;
 
-        $finSemana->modify("+6 days");
+        $finSemana =
+            clone $inicioSemana;
 
-        $inicioTexto = $inicioSemana->format("Y-m-d");
-        $finTexto = $finSemana->format("Y-m-d");
 
-        $resultados = array_filter(
-            $resultados,
-            function ($ingreso) use (
-                $inicioTexto,
-                $finTexto
-            ) {
+        $finSemana->modify(
+            "+6 days"
+        );
 
-                if (!isset($ingreso["fecha"])) {
-                    return false;
+
+        $inicioTexto =
+            $inicioSemana->format(
+                "Y-m-d"
+            );
+
+
+        $finTexto =
+            $finSemana->format(
+                "Y-m-d"
+            );
+
+
+        $resultados =
+            array_filter(
+
+                $resultados,
+
+                function (
+                    $ingreso
+                ) use (
+
+                    $inicioTexto,
+                    $finTexto
+
+                ) {
+
+                    if (
+                        !isset(
+                            $ingreso["fecha"]
+                        )
+                    ) {
+
+                        return false;
+
+                    }
+
+
+                    return
+
+                        $ingreso["fecha"]
+                        >=
+                        $inicioTexto
+
+                        &&
+
+                        $ingreso["fecha"]
+                        <=
+                        $finTexto;
+
                 }
 
-                return
-                    $ingreso["fecha"] >= $inicioTexto &&
-                    $ingreso["fecha"] <= $finTexto;
-            }
-        );
+            );
 
-    } catch (Exception $e) {
-
-        $resultados = array();
     }
+    catch (
+        Exception $e
+    ) {
+
+        $resultados =
+            array();
+
+    }
+
 }
+
 
 // ==========================================================
 // FILTRO POR MES
 // ==========================================================
 
-if ($tipo == "mes") {
+if (
+    $tipo == "mes"
+) {
 
     try {
 
-        $fecha = new DateTime($fechaSeleccionada);
+        $fecha =
+            new DateTime(
+                $fechaSeleccionada
+            );
 
-        $mes = $fecha->format("m");
-        $año = $fecha->format("Y");
 
-        $resultados = array_filter(
-            $resultados,
-            function ($ingreso) use ($mes, $año) {
+        $mes =
+            $fecha->format("m");
 
-                if (!isset($ingreso["fecha"])) {
-                    return false;
+
+        $anio =
+            $fecha->format("Y");
+
+
+        $resultados =
+            array_filter(
+
+                $resultados,
+
+                function (
+                    $ingreso
+                ) use (
+
+                    $mes,
+                    $anio
+
+                ) {
+
+                    if (
+                        !isset(
+                            $ingreso["fecha"]
+                        )
+                    ) {
+
+                        return false;
+
+                    }
+
+
+                    try {
+
+                        $fechaIngreso =
+                            new DateTime(
+                                $ingreso["fecha"]
+                            );
+
+
+                        return
+
+                            $fechaIngreso->format("m")
+                            ==
+                            $mes
+
+                            &&
+
+                            $fechaIngreso->format("Y")
+                            ==
+                            $anio;
+
+                    }
+                    catch (
+                        Exception $e
+                    ) {
+
+                        return false;
+
+                    }
+
                 }
 
-                try {
+            );
 
-                    $fechaIngreso =
-                        new DateTime($ingreso["fecha"]);
-
-                    return
-                        $fechaIngreso->format("m") == $mes &&
-                        $fechaIngreso->format("Y") == $año;
-
-                } catch (Exception $e) {
-
-                    return false;
-                }
-            }
-        );
-
-    } catch (Exception $e) {
-
-        $resultados = array();
     }
+    catch (
+        Exception $e
+    ) {
+
+        $resultados =
+            array();
+
+    }
+
 }
+
 
 // ==========================================================
 // FILTRO POR AÑO
 // ==========================================================
 
-if ($tipo == "año") {
+if (
+    $tipo == "año"
+) {
 
     try {
 
-        $fecha = new DateTime($fechaSeleccionada);
+        $fecha =
+            new DateTime(
+                $fechaSeleccionada
+            );
 
-        $año = $fecha->format("Y");
 
-        $resultados = array_filter(
-            $resultados,
-            function ($ingreso) use ($año) {
+        $anio =
+            $fecha->format("Y");
 
-                if (!isset($ingreso["fecha"])) {
-                    return false;
+
+        $resultados =
+            array_filter(
+
+                $resultados,
+
+                function (
+                    $ingreso
+                ) use (
+                    $anio
+                ) {
+
+                    if (
+                        !isset(
+                            $ingreso["fecha"]
+                        )
+                    ) {
+
+                        return false;
+
+                    }
+
+
+                    try {
+
+                        $fechaIngreso =
+                            new DateTime(
+                                $ingreso["fecha"]
+                            );
+
+
+                        return
+
+                            $fechaIngreso->format("Y")
+                            ==
+                            $anio;
+
+                    }
+                    catch (
+                        Exception $e
+                    ) {
+
+                        return false;
+
+                    }
+
                 }
 
-                try {
+            );
 
-                    $fechaIngreso =
-                        new DateTime($ingreso["fecha"]);
-
-                    return
-                        $fechaIngreso->format("Y") == $año;
-
-                } catch (Exception $e) {
-
-                    return false;
-                }
-            }
-        );
-
-    } catch (Exception $e) {
-
-        $resultados = array();
     }
+    catch (
+        Exception $e
+    ) {
+
+        $resultados =
+            array();
+
+    }
+
 }
+
 
 // ==========================================================
 // FILTRO DE BÚSQUEDA
 // ==========================================================
 
-if ($busqueda != "") {
+if (
+    $busqueda != ""
+) {
 
-    $resultados = array_filter(
-        $resultados,
-        function ($ingreso) use ($busqueda) {
+    $resultados =
+        array_filter(
 
-            if (!isset($ingreso["descripcion"])) {
-                return false;
+            $resultados,
+
+            function (
+                $ingreso
+            ) use (
+                $busqueda
+            ) {
+
+                if (
+                    !isset(
+                        $ingreso["descripcion"]
+                    )
+                ) {
+
+                    return false;
+
+                }
+
+
+                return
+
+                    stripos(
+
+                        $ingreso["descripcion"],
+
+                        $busqueda
+
+                    )
+
+                    !==
+
+                    false;
+
             }
 
-            return
-                stripos(
-                    $ingreso["descripcion"],
-                    $busqueda
-                ) !== false;
-        }
-    );
+        );
+
 }
+
 
 // ==========================================================
 // REINDEXAR RESULTADOS
 // ==========================================================
 
-$resultados = array_values($resultados);
+$resultados =
+    array_values(
+        $resultados
+    );
+
 
 // ==========================================================
-// ORDENAR DEL MÁS RECIENTE AL MÁS ANTIGUO
+// ORDENAR TABLA DEL MÁS RECIENTE
 // ==========================================================
 
 usort(
-    $resultados,
-    function ($a, $b) {
 
-        $fechaA = isset($a["fecha"])
+    $resultados,
+
+    function (
+        $a,
+        $b
+    ) {
+
+        $fechaA =
+            isset($a["fecha"])
             ? $a["fecha"]
             : "";
 
-        $fechaB = isset($b["fecha"])
+
+        $fechaB =
+            isset($b["fecha"])
             ? $b["fecha"]
             : "";
 
-        if ($fechaA == $fechaB) {
 
-            $idA = isset($a["id"])
-                ? intval($a["id"])
-                : 0;
+        return
+            strcmp(
+                $fechaB,
+                $fechaA
+            );
 
-            $idB = isset($b["id"])
-                ? intval($b["id"])
-                : 0;
-
-            if ($idA == $idB) {
-                return 0;
-            }
-
-            return ($idA < $idB) ? 1 : -1;
-        }
-
-        return ($fechaA < $fechaB) ? 1 : -1;
     }
+
 );
+
 
 // ==========================================================
 // CALCULAR TOTAL
@@ -446,34 +928,151 @@ usort(
 
 $total = 0;
 
-foreach ($resultados as $ingreso) {
 
-    if (isset($ingreso["monto"])) {
+foreach (
+    $resultados as $ingreso
+) {
 
-        $total += floatval($ingreso["monto"]);
+    if (
+        isset(
+            $ingreso["monto"]
+        )
+    ) {
+
+        $total +=
+            floatval(
+                $ingreso["monto"]
+            );
+
     }
 }
 
+
 // ==========================================================
-// DATOS PARA MOSTRAR EL TÍTULO DEL FILTRO
+// DATOS PARA GRÁFICO DE INGRESOS
 // ==========================================================
 
-$textoFiltro = "Todos los ingresos";
+// Agrupar ingresos por fecha
 
-if ($tipo == "dia") {
-    $textoFiltro = "Ingresos del día";
+$ingresosPorFecha =
+    array();
+
+
+foreach (
+    $resultados as $ingreso
+) {
+
+    if (
+
+        isset(
+            $ingreso["fecha"]
+        )
+
+        &&
+
+        isset(
+            $ingreso["monto"]
+        )
+
+    ) {
+
+
+        $fecha =
+            $ingreso["fecha"];
+
+
+        $monto =
+            floatval(
+                $ingreso["monto"]
+            );
+
+
+        if (
+            !isset(
+                $ingresosPorFecha[$fecha]
+            )
+        ) {
+
+            $ingresosPorFecha[$fecha] =
+                0;
+
+        }
+
+
+        $ingresosPorFecha[$fecha] +=
+            $monto;
+
+    }
+
 }
 
-if ($tipo == "semana") {
-    $textoFiltro = "Ingresos de la semana";
+
+// Ordenar fechas
+
+ksort(
+    $ingresosPorFecha
+);
+
+
+// Arrays para Chart.js
+
+$fechasGrafico =
+    array_keys(
+        $ingresosPorFecha
+    );
+
+
+$montosGrafico =
+    array_values(
+        $ingresosPorFecha
+    );
+
+
+// ==========================================================
+// TEXTO DEL FILTRO
+// ==========================================================
+
+$textoFiltro =
+    "Todos los ingresos";
+
+
+if (
+    $tipo == "dia"
+) {
+
+    $textoFiltro =
+        "Ingresos del día";
+
 }
 
-if ($tipo == "mes") {
-    $textoFiltro = "Ingresos del mes";
+
+if (
+    $tipo == "semana"
+) {
+
+    $textoFiltro =
+        "Ingresos de la semana";
+
 }
 
-if ($tipo == "año") {
-    $textoFiltro = "Ingresos del año";
+
+if (
+    $tipo == "mes"
+) {
+
+    $textoFiltro =
+        "Ingresos del mes";
+
+}
+
+
+if (
+    $tipo == "año"
+) {
+
+    $textoFiltro =
+        "Ingresos del año";
+
 }
 
 ?>
@@ -486,408 +1085,718 @@ if ($tipo == "año") {
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <title>Reporte de Ingresos</title>
+
+    <title>
+        Reporte de Ingresos
+    </title>
+
+
+    <!-- CHART.JS -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/chart.js">
+    </script>
+
 
     <style>
 
         * {
-            box-sizing: border-box;
+            box-sizing:
+                border-box;
         }
+
 
         body {
+
             margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #eef2f7;
-            color: #1e293b;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                #eef2f7;
+
+            color:
+                #1e293b;
+
         }
+
 
         .contenedor {
-            width: 95%;
-            max-width: 1150px;
-            margin: 25px auto;
+
+            width:
+                95%;
+
+            max-width:
+                1150px;
+
+            margin:
+                25px auto;
+
         }
 
-        /* ================================
+
+        /* =================================================
            CABECERA
-        ================================= */
+        ================================================= */
 
         .titulo {
-            background: linear-gradient(
-                135deg,
-                #1d4ed8,
-                #2563eb
-            );
 
-            color: white;
-            padding: 30px 20px;
-            border-radius: 15px;
-            text-align: center;
-            margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+            background:
+                linear-gradient(
+                    135deg,
+                    #1d4ed8,
+                    #2563eb
+                );
+
+            color:
+                white;
+
+            padding:
+                30px 20px;
+
+            border-radius:
+                15px;
+
+            text-align:
+                center;
+
+            margin-bottom:
+                20px;
+
+            box-shadow:
+                0 5px 15px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.12
+                );
+
         }
+
 
         .titulo h1 {
-            margin: 0;
-            font-size: 30px;
+
+            margin:
+                0;
+
+            font-size:
+                30px;
+
         }
+
 
         .titulo p {
-            margin: 8px 0 0;
-            font-size: 18px;
-            opacity: 0.9;
+
+            margin:
+                8px 0 0;
+
+            font-size:
+                18px;
+
         }
 
-        /* ================================
-           TARJETAS
-        ================================= */
+
+        /* =================================================
+           CONTENEDORES
+        ================================================= */
 
         .formulario,
         .filtros,
-        .tabla-contenedor {
-            background: white;
-            padding: 20px;
-            border-radius: 14px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.07);
-            margin-bottom: 20px;
+        .tabla-contenedor,
+        .grafico-contenedor {
+
+            background:
+                white;
+
+            padding:
+                20px;
+
+            border-radius:
+                14px;
+
+            box-shadow:
+                0 3px 12px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.07
+                );
+
+            margin-bottom:
+                20px;
+
         }
 
-        .formulario h2 {
-            margin-top: 0;
-        }
 
-        /* ================================
+        /* =================================================
            CAMPOS
-        ================================= */
+        ================================================= */
 
         .campos {
-            display: grid;
-            grid-template-columns:
-                1fr 2fr 1fr auto;
 
-            gap: 10px;
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr
+                2fr
+                1fr
+                auto;
+
+            gap:
+                10px;
+
         }
+
 
         input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            font-size: 15px;
-            background: white;
+
+            width:
+                100%;
+
+            padding:
+                12px;
+
+            border:
+                1px solid
+                #cbd5e1;
+
+            border-radius:
+                8px;
+
+            font-size:
+                15px;
+
         }
 
-        input:focus {
-            outline: none;
-            border-color: #2563eb;
-            box-shadow:
-                0 0 0 2px rgba(37,99,235,0.12);
-        }
 
-        /* ================================
+        /* =================================================
            BOTONES
-        ================================= */
+        ================================================= */
 
         button {
-            border: none;
-            padding: 12px 18px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 14px;
+
+            border:
+                none;
+
+            padding:
+                12px 18px;
+
+            border-radius:
+                8px;
+
+            cursor:
+                pointer;
+
+            font-weight:
+                bold;
+
         }
+
 
         .btn-guardar {
-            background: #16a34a;
-            color: white;
+
+            background:
+                #16a34a;
+
+            color:
+                white;
+
         }
 
-        .btn-guardar:hover {
-            background: #15803d;
-        }
 
         .btn-editar {
-            background: #2563eb;
-            color: white;
-            padding: 8px 12px;
+
+            background:
+                #2563eb;
+
+            color:
+                white;
+
+            padding:
+                8px 12px;
+
         }
 
-        .btn-editar:hover {
-            background: #1d4ed8;
-        }
 
         .btn-eliminar {
-            background: #dc2626;
-            color: white;
-            padding: 8px 12px;
+
+            background:
+                #dc2626;
+
+            color:
+                white;
+
+            padding:
+                8px 12px;
+
         }
 
-        .btn-eliminar:hover {
-            background: #b91c1c;
+
+        .btn-cancelar {
+
+            background:
+                #64748b;
+
+            color:
+                white;
+
         }
 
-        /* ================================
+
+        /* =================================================
            FILTROS
-        ================================= */
+        ================================================= */
 
         .filtros {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
+
+            display:
+                flex;
+
+            flex-wrap:
+                wrap;
+
+            gap:
+                10px;
+
         }
 
+
         .filtros a {
-            text-decoration: none;
-            color: white;
-            padding: 12px 18px;
-            border-radius: 8px;
-            font-weight: bold;
-            text-align: center;
+
+            text-decoration:
+                none;
+
+            color:
+                white;
+
+            padding:
+                12px 18px;
+
+            border-radius:
+                8px;
+
+            font-weight:
+                bold;
+
         }
+
 
         .dia {
             background: #2563eb;
         }
 
+
         .semana {
             background: #7c3aed;
         }
+
 
         .mes {
             background: #ea580c;
         }
 
+
         .año {
             background: #0891b2;
         }
+
 
         .todos {
             background: #475569;
         }
 
-        .filtros a:hover {
-            opacity: 0.85;
-        }
 
-        /* ================================
+        /* =================================================
            BUSCADOR
-        ================================= */
+        ================================================= */
 
         .buscador {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 10px;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr auto;
+
+            gap:
+                10px;
+
         }
 
-        /* ================================
+
+        /* =================================================
            TOTAL
-        ================================= */
+        ================================================= */
 
         .total {
-            background: linear-gradient(
-                135deg,
-                #dcfce7,
-                #bbf7d0
-            );
 
-            border: 2px solid #16a34a;
-            padding: 25px;
-            border-radius: 14px;
-            text-align: center;
-            margin-bottom: 20px;
+            background:
+                linear-gradient(
+                    135deg,
+                    #dcfce7,
+                    #bbf7d0
+                );
+
+            border:
+                2px solid
+                #16a34a;
+
+            padding:
+                25px;
+
+            border-radius:
+                14px;
+
+            text-align:
+                center;
+
+            margin-bottom:
+                20px;
+
         }
+
 
         .total h2 {
-            margin: 0;
-            color: #166534;
-            font-size: 27px;
+
+            margin:
+                0;
+
+            color:
+                #166534;
+
+            font-size:
+                27px;
+
         }
+
 
         .subtitulo-total {
-            margin-top: 8px;
-            color: #15803d;
-            font-size: 14px;
+
+            margin-top:
+                8px;
+
+            color:
+                #15803d;
+
         }
 
-        /* ================================
+
+        /* =================================================
+           GRÁFICOS
+        ================================================= */
+
+        .grafico-contenedor h2 {
+
+            margin-top:
+                0;
+
+        }
+
+
+        .grafico-contenedor canvas {
+
+            width:
+                100% !important;
+
+            max-height:
+                400px;
+
+        }
+
+
+        /* =================================================
            TABLA
-        ================================= */
+        ================================================= */
 
         .tabla-contenedor {
-            overflow-x: auto;
+
+            overflow-x:
+                auto;
+
         }
+
 
         .tabla-titulo {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            gap: 10px;
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            margin-bottom:
+                15px;
+
         }
 
-        .tabla-titulo h2 {
-            margin: 0;
-        }
 
         table {
-            width: 100%;
-            border-collapse: collapse;
+
+            width:
+                100%;
+
+            border-collapse:
+                collapse;
+
         }
+
 
         th {
-            background: #1e293b;
-            color: white;
-            padding: 14px;
-            text-align: left;
+
+            background:
+                #1e293b;
+
+            color:
+                white;
+
+            padding:
+                14px;
+
+            text-align:
+                left;
+
         }
+
 
         td {
-            padding: 12px;
-            border-bottom: 1px solid #e2e8f0;
-            vertical-align: middle;
+
+            padding:
+                12px;
+
+            border-bottom:
+                1px solid
+                #e2e8f0;
+
         }
 
-        tr:hover {
-            background: #f8fafc;
-        }
 
         .monto {
-            font-weight: bold;
-            color: #15803d;
+
+            font-weight:
+                bold;
+
+            color:
+                #15803d;
+
         }
+
 
         .acciones {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
+
+            display:
+                flex;
+
+            gap:
+                6px;
+
         }
 
-        /* ================================
+
+        /* =================================================
            SIN DATOS
-        ================================= */
+        ================================================= */
 
         .sin-datos {
-            text-align: center;
-            padding: 40px 20px;
-            color: #64748b;
+
+            text-align:
+                center;
+
+            padding:
+                40px;
+
+            color:
+                #64748b;
+
         }
 
-        .sin-datos strong {
-            display: block;
-            font-size: 18px;
-            margin-bottom: 8px;
-            color: #475569;
-        }
 
-        /* ================================
-           MODAL EDITAR
-        ================================= */
+        /* =================================================
+           MODAL
+        ================================================= */
 
         .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(15,23,42,0.65);
-            padding: 20px;
+
+            display:
+                none;
+
+            position:
+                fixed;
+
+            z-index:
+                1000;
+
+            left:
+                0;
+
+            top:
+                0;
+
+            width:
+                100%;
+
+            height:
+                100%;
+
+            background:
+                rgba(
+                    15,
+                    23,
+                    42,
+                    0.65
+                );
+
+            padding:
+                20px;
+
         }
+
 
         .modal-contenido {
-            background: white;
-            max-width: 500px;
-            margin: 70px auto;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+
+            background:
+                white;
+
+            max-width:
+                500px;
+
+            margin:
+                70px auto;
+
+            padding:
+                25px;
+
+            border-radius:
+                15px;
+
         }
 
-        .modal-contenido h2 {
-            margin-top: 0;
-        }
 
         .campo-modal {
-            margin-bottom: 15px;
+
+            margin-bottom:
+                15px;
+
         }
+
 
         .campo-modal label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 6px;
+
+            display:
+                block;
+
+            font-weight:
+                bold;
+
+            margin-bottom:
+                6px;
+
         }
+
 
         .botones-modal {
-            display: flex;
-            gap: 10px;
-            justify-content: flex-end;
-            margin-top: 20px;
+
+            display:
+                flex;
+
+            gap:
+                10px;
+
+            justify-content:
+                flex-end;
+
+            margin-top:
+                20px;
+
         }
 
-        .btn-cancelar {
-            background: #64748b;
-            color: white;
-        }
 
-        /* ================================
+        /* =================================================
            RESPONSIVE
-        ================================= */
+        ================================================= */
 
-        @media (max-width: 800px) {
+        @media (
+            max-width: 800px
+        ) {
 
             .campos {
-                grid-template-columns: 1fr;
+
+                grid-template-columns:
+                    1fr;
+
             }
+
 
             .filtros {
-                flex-direction: column;
+
+                flex-direction:
+                    column;
+
             }
+
 
             .filtros a {
-                width: 100%;
+
+                width:
+                    100%;
+
+                text-align:
+                    center;
+
             }
+
 
             .buscador {
-                grid-template-columns: 1fr;
+
+                grid-template-columns:
+                    1fr;
+
             }
+
 
             .tabla-titulo {
-                flex-direction: column;
-                align-items: flex-start;
+
+                flex-direction:
+                    column;
+
+                align-items:
+                    flex-start;
+
             }
+
 
             .acciones {
-                flex-direction: column;
+
+                flex-direction:
+                    column;
+
             }
 
-            .acciones button {
-                width: 100%;
-            }
-
-            th,
-            td {
-                white-space: nowrap;
-            }
-
-            .titulo h1 {
-                font-size: 24px;
-            }
-
-            .total h2 {
-                font-size: 22px;
-            }
         }
 
     </style>
 
 </head>
 
+
 <body>
 
+
 <div class="contenedor">
+
 
     <!-- ==================================================
          TÍTULO
@@ -895,11 +1804,16 @@ if ($tipo == "año") {
 
     <div class="titulo">
 
-        <h1>REPORTE DE INGRESOS</h1>
+        <h1>
+            REPORTE DE INGRESOS
+        </h1>
 
-        <p>EDSON</p>
+        <p>
+            DRAGON ICE
+        </p>
 
     </div>
+
 
 
     <!-- ==================================================
@@ -908,11 +1822,15 @@ if ($tipo == "año") {
 
     <div class="formulario">
 
-        <h2>➕ Registrar nuevo ingreso</h2>
+        <h2>
+            ➕ Registrar nuevo ingreso
+        </h2>
+
 
         <form method="POST">
 
             <div class="campos">
+
 
                 <input
                     type="date"
@@ -921,6 +1839,7 @@ if ($tipo == "año") {
                     required
                 >
 
+
                 <input
                     type="text"
                     name="descripcion"
@@ -928,6 +1847,7 @@ if ($tipo == "año") {
                     maxlength="150"
                     required
                 >
+
 
                 <input
                     type="number"
@@ -938,20 +1858,24 @@ if ($tipo == "año") {
                     required
                 >
 
+
                 <button
                     type="submit"
                     name="guardar"
-                    class="btn-guardar">
+                    class="btn-guardar"
+                >
 
                     GUARDAR
 
                 </button>
+
 
             </div>
 
         </form>
 
     </div>
+
 
 
     <!-- ==================================================
@@ -960,47 +1884,49 @@ if ($tipo == "año") {
 
     <div class="filtros">
 
+
         <a
             class="todos"
-            href="<?php echo $paginaActual; ?>">
-
+            href="<?php echo $paginaActual; ?>"
+        >
             TODOS
-
         </a>
+
 
         <a
             class="dia"
-            href="<?php echo $paginaActual; ?>?tipo=dia&amp;fecha=<?php echo urlencode($fechaSeleccionada); ?>">
-
+            href="<?php echo $paginaActual; ?>?tipo=dia&fecha=<?php echo urlencode($fechaSeleccionada); ?>"
+        >
             📅 POR DÍA
-
         </a>
+
 
         <a
             class="semana"
-            href="<?php echo $paginaActual; ?>?tipo=semana&amp;fecha=<?php echo urlencode($fechaSeleccionada); ?>">
-
+            href="<?php echo $paginaActual; ?>?tipo=semana&fecha=<?php echo urlencode($fechaSeleccionada); ?>"
+        >
             📆 POR SEMANA
-
         </a>
+
 
         <a
             class="mes"
-            href="<?php echo $paginaActual; ?>?tipo=mes&amp;fecha=<?php echo urlencode($fechaSeleccionada); ?>">
-
+            href="<?php echo $paginaActual; ?>?tipo=mes&fecha=<?php echo urlencode($fechaSeleccionada); ?>"
+        >
             🗓️ POR MES
-
         </a>
+
 
         <a
             class="año"
-            href="<?php echo $paginaActual; ?>?tipo=año&amp;fecha=<?php echo urlencode($fechaSeleccionada); ?>">
-
+            href="<?php echo $paginaActual; ?>?tipo=año&fecha=<?php echo urlencode($fechaSeleccionada); ?>"
+        >
             📊 POR AÑO
-
         </a>
 
+
     </div>
+
 
 
     <!-- ==================================================
@@ -1009,15 +1935,18 @@ if ($tipo == "año") {
 
     <div class="formulario">
 
+
         <form method="GET">
 
-            <label>
 
-                <strong>Seleccionar fecha para el reporte:</strong>
+            <strong>
+                Seleccionar fecha:
+            </strong>
 
-            </label>
 
-            <br><br>
+            <br>
+            <br>
+
 
             <input
                 type="date"
@@ -1026,40 +1955,52 @@ if ($tipo == "año") {
                 required
             >
 
+
             <input
                 type="hidden"
                 name="tipo"
                 value="<?php echo htmlspecialchars($tipo); ?>"
             >
 
+
+            <br>
+            <br>
+
+
             <button
                 type="submit"
-                class="btn-guardar">
-
+                class="btn-guardar"
+            >
                 🔎 CONSULTAR
-
             </button>
+
 
         </form>
 
     </div>
 
 
+
     <!-- ==================================================
-         BUSCAR
+         BUSCADOR
     =================================================== -->
 
     <div class="formulario">
 
-        <h2>🔍 Buscar ingreso</h2>
+        <h2>
+            🔍 Buscar ingreso
+        </h2>
+
 
         <form method="GET">
+
 
             <input
                 type="hidden"
                 name="tipo"
                 value="<?php echo htmlspecialchars($tipo); ?>"
             >
+
 
             <input
                 type="hidden"
@@ -1067,7 +2008,9 @@ if ($tipo == "año") {
                 value="<?php echo htmlspecialchars($fechaSeleccionada); ?>"
             >
 
+
             <div class="buscador">
+
 
                 <input
                     type="text"
@@ -1076,19 +2019,22 @@ if ($tipo == "año") {
                     value="<?php echo htmlspecialchars($busqueda); ?>"
                 >
 
+
                 <button
                     type="submit"
-                    class="btn-guardar">
-
+                    class="btn-guardar"
+                >
                     BUSCAR
-
                 </button>
 
+
             </div>
+
 
         </form>
 
     </div>
+
 
 
     <!-- ==================================================
@@ -1102,24 +2048,82 @@ if ($tipo == "año") {
             TOTAL:
 
             Bs.
-            <?php echo number_format($total, 2); ?>
+            <?php
+                echo number_format(
+                    $total,
+                    2
+                );
+            ?>
 
         </h2>
 
+
         <div class="subtitulo-total">
 
-            <?php echo htmlspecialchars($textoFiltro); ?>
+            <?php
+                echo htmlspecialchars(
+                    $textoFiltro
+                );
+            ?>
+
 
             <?php if ($busqueda != ""): ?>
 
-                — búsqueda:
-                "<?php echo htmlspecialchars($busqueda); ?>"
+                —
+                búsqueda:
+                "<?php
+                    echo htmlspecialchars(
+                        $busqueda
+                    );
+                ?>"
 
             <?php endif; ?>
+
 
         </div>
 
     </div>
+
+
+
+    <!-- ==================================================
+         GRÁFICO DE INGRESOS
+    =================================================== -->
+
+    <div class="grafico-contenedor">
+
+        <h2>
+            📈 Evolución de ingresos
+        </h2>
+
+
+        <canvas
+            id="graficoIngresos"
+        >
+        </canvas>
+
+    </div>
+
+
+
+    <!-- ==================================================
+         TOP PRODUCTOS
+    =================================================== -->
+
+    <div class="grafico-contenedor">
+
+        <h2>
+            🏆 Top 3 productos más vendidos
+        </h2>
+
+
+        <canvas
+            id="graficoProductos"
+        >
+        </canvas>
+
+    </div>
+
 
 
     <!-- ==================================================
@@ -1128,23 +2132,37 @@ if ($tipo == "año") {
 
     <div class="tabla-contenedor">
 
+
         <div class="tabla-titulo">
 
-            <h2>Detalle de ingresos</h2>
+
+            <h2>
+                Detalle de ingresos
+            </h2>
+
 
             <strong>
 
                 Registros:
-                <?php echo count($resultados); ?>
+
+                <?php
+                    echo count(
+                        $resultados
+                    );
+                ?>
 
             </strong>
+
 
         </div>
 
 
+
         <?php if (count($resultados) > 0): ?>
 
+
             <table>
+
 
                 <thead>
 
@@ -1164,54 +2182,84 @@ if ($tipo == "año") {
 
                 </thead>
 
+
                 <tbody>
 
-                <?php foreach ($resultados as $ingreso): ?>
+
+                <?php
+                foreach (
+                    $resultados as
+                    $ingreso
+                ):
+                ?>
+
 
                     <?php
 
-                    $idIngreso = isset($ingreso["id"])
-                        ? intval($ingreso["id"])
+                    $idIngreso =
+                        isset(
+                            $ingreso["id"]
+                        )
+                        ? intval(
+                            $ingreso["id"]
+                        )
                         : 0;
 
-                    $fechaIngreso = isset($ingreso["fecha"])
+
+                    $fechaIngreso =
+                        isset(
+                            $ingreso["fecha"]
+                        )
                         ? $ingreso["fecha"]
                         : "";
 
+
                     $descripcionIngreso =
-                        isset($ingreso["descripcion"])
+                        isset(
+                            $ingreso["descripcion"]
+                        )
                         ? $ingreso["descripcion"]
                         : "";
 
+
                     $montoIngreso =
-                        isset($ingreso["monto"])
-                        ? floatval($ingreso["monto"])
+                        isset(
+                            $ingreso["monto"]
+                        )
+                        ? floatval(
+                            $ingreso["monto"]
+                        )
                         : 0;
 
                     ?>
 
+
                     <tr>
 
-                        <!-- ID -->
 
                         <td>
 
-                            <?php echo $idIngreso; ?>
+                            <?php
+                                echo $idIngreso;
+                            ?>
 
                         </td>
 
 
-                        <!-- FECHA -->
 
                         <td>
 
                             <?php
 
-                            if ($fechaIngreso != "") {
+                            if (
+                                $fechaIngreso != ""
+                            ) {
 
                                 echo date(
                                     "d/m/Y",
-                                    strtotime($fechaIngreso)
+                                    strtotime(
+                                        $fechaIngreso
+                                    )
                                 );
 
                             }
@@ -1221,7 +2269,6 @@ if ($tipo == "año") {
                         </td>
 
 
-                        <!-- DESCRIPCIÓN -->
 
                         <td>
 
@@ -1236,11 +2283,11 @@ if ($tipo == "año") {
                         </td>
 
 
-                        <!-- MONTO -->
 
                         <td class="monto">
 
                             Bs.
+
                             <?php
 
                             echo number_format(
@@ -1253,34 +2300,34 @@ if ($tipo == "año") {
                         </td>
 
 
-                        <!-- ACCIONES -->
 
                         <td>
 
+
                             <div class="acciones">
 
-                                <!-- EDITAR -->
 
                                 <button
                                     type="button"
                                     class="btn-editar"
-                                    onclick="abrirEditar(
-                                        <?php echo $idIngreso; ?>,
-                                        '<?php echo htmlspecialchars($fechaIngreso, ENT_QUOTES); ?>',
-                                        '<?php echo htmlspecialchars($descripcionIngreso, ENT_QUOTES); ?>',
-                                        '<?php echo $montoIngreso; ?>'
-                                    );">
+                                    onclick='abrirEditar(
+                                        <?php echo json_encode($idIngreso); ?>,
+                                        <?php echo json_encode($fechaIngreso); ?>,
+                                        <?php echo json_encode($descripcionIngreso); ?>,
+                                        <?php echo json_encode($montoIngreso); ?>
+                                    );'
+                                >
 
                                     ✏️ EDITAR
 
                                 </button>
 
 
-                                <!-- ELIMINAR -->
 
                                 <form
                                     method="POST"
-                                    style="display:inline;">
+                                >
+
 
                                     <input
                                         type="hidden"
@@ -1288,62 +2335,88 @@ if ($tipo == "año") {
                                         value="<?php echo $idIngreso; ?>"
                                     >
 
+
                                     <button
                                         type="submit"
                                         name="eliminar"
                                         class="btn-eliminar"
-                                        onclick="return confirm(
-                                            '¿Está seguro de eliminar este ingreso?'
-                                        );">
+                                        onclick="return confirm('¿Está seguro de eliminar este ingreso?');"
+                                    >
 
                                         🗑️ ELIMINAR
 
                                     </button>
 
+
                                 </form>
+
 
                             </div>
 
+
                         </td>
+
 
                     </tr>
 
+
                 <?php endforeach; ?>
+
 
                 </tbody>
 
+
             </table>
+
 
         <?php else: ?>
 
+
             <div class="sin-datos">
 
-                <strong>📭 No existen ingresos</strong>
+                <strong>
+                    📭 No existen ingresos
+                </strong>
 
-                No hay ingresos registrados para este período o búsqueda.
+                <br>
+
+                No hay ingresos registrados
+                para este período.
+
 
             </div>
 
+
         <?php endif; ?>
 
+
     </div>
+
 
 </div>
 
 
+
 <!-- ======================================================
-     MODAL PARA EDITAR
+     MODAL EDITAR
 ======================================================= -->
 
 <div
     id="modalEditar"
-    class="modal">
+    class="modal"
+>
+
 
     <div class="modal-contenido">
 
-        <h2>✏️ Editar ingreso</h2>
+
+        <h2>
+            ✏️ Editar ingreso
+        </h2>
+
 
         <form method="POST">
+
 
             <input
                 type="hidden"
@@ -1352,9 +2425,14 @@ if ($tipo == "año") {
             >
 
 
+
             <div class="campo-modal">
 
-                <label>Fecha</label>
+
+                <label>
+                    Fecha
+                </label>
+
 
                 <input
                     type="date"
@@ -1363,12 +2441,18 @@ if ($tipo == "año") {
                     required
                 >
 
+
             </div>
+
 
 
             <div class="campo-modal">
 
-                <label>Descripción</label>
+
+                <label>
+                    Descripción
+                </label>
+
 
                 <input
                     type="text"
@@ -1378,12 +2462,18 @@ if ($tipo == "año") {
                     required
                 >
 
+
             </div>
+
 
 
             <div class="campo-modal">
 
-                <label>Monto en Bs.</label>
+
+                <label>
+                    Monto en Bs.
+                </label>
+
 
                 <input
                     type="number"
@@ -1394,43 +2484,56 @@ if ($tipo == "año") {
                     required
                 >
 
+
             </div>
+
 
 
             <div class="botones-modal">
 
+
                 <button
                     type="button"
                     class="btn-cancelar"
-                    onclick="cerrarEditar();">
+                    onclick="cerrarEditar();"
+                >
 
                     CANCELAR
 
                 </button>
 
+
+
                 <button
                     type="submit"
                     name="editar"
-                    class="btn-guardar">
+                    class="btn-guardar"
+                >
 
                     💾 GUARDAR CAMBIOS
 
                 </button>
 
+
             </div>
+
 
         </form>
 
+
     </div>
+
 
 </div>
 
 
+
 <!-- ======================================================
-     JAVASCRIPT
+     JAVASCRIPT MODAL
 ======================================================= -->
 
 <script>
+
 
 function abrirEditar(
     id,
@@ -1439,44 +2542,373 @@ function abrirEditar(
     monto
 ) {
 
-    document.getElementById("editarId").value = id;
+    document
+        .getElementById(
+            "editarId"
+        )
+        .value =
+        id;
 
-    document.getElementById("editarFecha").value = fecha;
 
-    document.getElementById(
-        "editarDescripcion"
-    ).value = descripcion;
+    document
+        .getElementById(
+            "editarFecha"
+        )
+        .value =
+        fecha;
 
-    document.getElementById(
-        "editarMonto"
-    ).value = monto;
 
-    document.getElementById(
-        "modalEditar"
-    ).style.display = "block";
+    document
+        .getElementById(
+            "editarDescripcion"
+        )
+        .value =
+        descripcion;
+
+
+    document
+        .getElementById(
+            "editarMonto"
+        )
+        .value =
+        monto;
+
+
+    document
+        .getElementById(
+            "modalEditar"
+        )
+        .style.display =
+        "block";
+
 }
+
 
 
 function cerrarEditar()
 {
-    document.getElementById(
-        "modalEditar"
-    ).style.display = "none";
+
+    document
+        .getElementById(
+            "modalEditar"
+        )
+        .style.display =
+        "none";
+
 }
 
 
-window.onclick = function(event)
-{
-    var modal =
-        document.getElementById("modalEditar");
 
-    if (event.target == modal) {
+window.onclick =
+    function(event)
+    {
 
-        cerrarEditar();
-    }
-};
+        var modal =
+            document.getElementById(
+                "modalEditar"
+            );
+
+
+        if (
+            event.target ==
+            modal
+        ) {
+
+            cerrarEditar();
+
+        }
+
+    };
+
 
 </script>
+
+
+
+<!-- ======================================================
+     GRÁFICO DE INGRESOS
+======================================================= -->
+
+<script>
+
+
+const fechasGrafico =
+    <?php
+        echo json_encode(
+            $fechasGrafico
+        );
+    ?>;
+
+
+const montosGrafico =
+    <?php
+        echo json_encode(
+            $montosGrafico
+        );
+    ?>;
+
+
+const ctxGrafico =
+    document.getElementById(
+        "graficoIngresos"
+    );
+
+
+new Chart(
+
+    ctxGrafico,
+
+    {
+
+        type:
+            "line",
+
+
+        data: {
+
+            labels:
+                fechasGrafico,
+
+
+            datasets: [
+
+                {
+
+                    label:
+                        "Ingresos en Bs.",
+
+                    data:
+                        montosGrafico,
+
+                    borderWidth:
+                        3,
+
+                    tension:
+                        0.3,
+
+                    fill:
+                        true
+
+                }
+
+            ]
+
+        },
+
+
+        options: {
+
+            responsive:
+                true,
+
+
+            plugins: {
+
+                legend: {
+
+                    display:
+                        true,
+
+                    position:
+                        "top"
+
+                },
+
+
+                title: {
+
+                    display:
+                        true,
+
+                    text:
+                        "Evolución de ingresos"
+
+                }
+
+            },
+
+
+            scales: {
+
+                y: {
+
+                    beginAtZero:
+                        true,
+
+                    title: {
+
+                        display:
+                            true,
+
+                        text:
+                            "Monto en Bs."
+
+                    }
+
+                },
+
+
+                x: {
+
+                    title: {
+
+                        display:
+                            true,
+
+                        text:
+                            "Fecha"
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+);
+
+
+</script>
+
+
+
+<!-- ======================================================
+     GRÁFICO TOP 3 PRODUCTOS
+======================================================= -->
+
+<script>
+
+
+const productosGrafico =
+    <?php
+        echo json_encode(
+            $productosGrafico
+        );
+    ?>;
+
+
+const cantidadesGrafico =
+    <?php
+        echo json_encode(
+            $cantidadesGrafico
+        );
+    ?>;
+
+
+const ctxProductos =
+    document.getElementById(
+        "graficoProductos"
+    );
+
+
+new Chart(
+
+    ctxProductos,
+
+    {
+
+        type:
+            "bar",
+
+
+        data: {
+
+            labels:
+                productosGrafico,
+
+
+            datasets: [
+
+                {
+
+                    label:
+                        "Cantidad vendida",
+
+                    data:
+                        cantidadesGrafico,
+
+                    borderWidth:
+                        1
+
+                }
+
+            ]
+
+        },
+
+
+        options: {
+
+            responsive:
+                true,
+
+
+            plugins: {
+
+                legend: {
+
+                    display:
+                        true,
+
+                    position:
+                        "top"
+
+                },
+
+
+                title: {
+
+                    display:
+                        true,
+
+                    text:
+                        "Top 3 productos más vendidos"
+
+                }
+
+            },
+
+
+            scales: {
+
+                y: {
+
+                    beginAtZero:
+                        true,
+
+                    ticks: {
+
+                        precision:
+                            0
+
+                    },
+
+                    title: {
+
+                        display:
+                            true,
+
+                        text:
+                            "Cantidad vendida"
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+);
+
+
+</script>
+
 
 </body>
 
