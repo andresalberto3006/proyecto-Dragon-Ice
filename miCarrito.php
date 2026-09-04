@@ -662,7 +662,7 @@ include("menu.php");
     </button>
 
     <a href="pedidos/pedidos.php">
-        <button class="btn btn-final">Terminar pedido</button>
+        <button onclick="pedidoterminado()" class="btn btn-final">Terminar pedido</button>
     </a>
 
     <a href="pedidos/formpedido.php">
@@ -816,32 +816,10 @@ function eliminarProducto(idProducto){
         alert("Ocurrió un error al eliminar");
     });
 }
-function mostrarMensaje(){
-    Swal.fire({
-        title: '¿Deseas terminar el pedido?',
-        text: 'Una vez terminado, podrás continuar con el proceso.',
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonText: 'Sí, terminar',
-        cancelButtonText: 'Cancelar',
-        confirmButtonColor: '#0e2a4d',
-        cancelButtonColor: '#dc3545'
-    }).then((resultado) => {
-        if(resultado.isConfirmed){
-            Swal.fire({
-                title: '¡Listo!',
-                text: 'El pedido ha sido terminado.',
-                icon: 'success',
-                confirmButtonColor: '#0e2a4d'
 
-            });
-        }
-    });
+function pedidoterminad(){
+    alert("Tu pedido se registro!");
 }
-<button type="button" class="btn btn-final" onclick="mostrarMensaje()">
-    Mostrar mensaje
-</button>
-
 </script>
 
 </body>
