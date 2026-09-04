@@ -156,7 +156,7 @@ $rutaMenu = "../";
             <div class="cuerpo">
                 <h2>Ventas generales</h2>
                 <p>Muestra todas las ventas registradas en el sistema. El administrador puede revisar, editar o eliminar ventas.</p>
-                <a href="../ventas/ventas.php" class="boton">Ver ventas</a>
+                <a href="../reportes/ingre-total.php" class="boton">Ver ventas</a>
             </div>
         </article>
 
