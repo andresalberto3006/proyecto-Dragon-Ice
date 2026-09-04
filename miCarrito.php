@@ -817,7 +817,7 @@ function eliminarProducto(idProducto){
     });
 }
 
-function pedidoterminad(){
+function pedidoterminado(){
     alert("Tu pedido se registro!");
 }
 </script>
