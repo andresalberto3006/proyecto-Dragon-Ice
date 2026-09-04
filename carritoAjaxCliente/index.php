@@ -11,6 +11,9 @@ $rutaMenu="../";
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
+
 <title>Dragon Ice</title>
 
 <style>
@@ -446,10 +449,6 @@ body{
     </button>
 
 </aside>
-
-
-
-
 <div id="modalCompra">
 
     <div id="formularioPedido">
@@ -506,14 +505,61 @@ body{
 
 </div>
 
-
 <?php include("../paginaprincipal/piedepagina.php"); ?>
-
 
 <script src="js/productos.js"></script>
 <script src="js/pedido.js"></script>
 <script src="js/carrito.js"></script>
 
+<script>
+$(document).ready(function(){
+$("#formularioPedido").validate({
+
+    rules:{
+        nombre:{
+            required:true,
+            minlength:3
+        },
+        telefono:{
+            required:true,
+            digits:true,
+            minlength:8,
+            maxlength:8
+        },
+        direccion:{
+            required:true,
+            minlength:5
+        },
+        metodoPago:{
+            required:true
+        }
+    },
+
+    messages:{
+        nombre:{
+            required:"Ingrese su nombre",
+            minlength:"El nombre debe tener al menos 3 caracteres"
+        },
+        telefono:{
+            required:"Ingrese su teléfono",
+            digits:"Ingrese solo números",
+            minlength:"El teléfono debe tener 8 dígitos",
+            maxlength:"El teléfono debe tener 8 dígitos"
+        },
+        direccion:{
+            required:"Ingrese su dirección",
+            minlength:"Ingrese una dirección más completa"
+        },
+        metodoPago:{
+            required:"Seleccione un método de pago"
+        }
+    }
+    
+});
+
+});
+</script>
 </body>
 
+</script>
 </html>
