@@ -51,18 +51,20 @@ body{
 .acciones{
     display:flex;
     justify-content:center;
-    gap:15px;
+    gap:20px;
     margin-bottom:35px;
+    flex-wrap:wrap;
 }
 
-.btn{
+.btn-dragonice{
     display:flex;
     align-items:center;
     justify-content:center;
-    width:190px;
-    height:45px;
+    gap:8px;
+    width:220px;
+    height:55px;
     border:0;
-    border-radius:10px;
+    border-radius:14px;
     background:#0e2a4d;
     color:white;
     font-family:Arial,Helvetica,sans-serif;
@@ -70,10 +72,28 @@ body{
     font-weight:bold;
     text-decoration:none;
     cursor:pointer;
+    box-shadow:0 6px 16px rgba(14,42,77,.25);
+    transition:.25s;
 }
 
-.btn:hover{
-    background:#173e63;
+.btn-dragonice:hover{
+    background:#63d4f2;
+    color:#0e2a4d;
+    box-shadow:0 8px 20px rgba(99,212,242,.35);
+    transform:translateY(-2px);
+}
+
+.btn-dragonice.secundario{
+    background:white;
+    color:#0e2a4d;
+    border:2px solid #63d4f2;
+    box-shadow:0 6px 16px rgba(14,42,77,.1);
+}
+
+.btn-dragonice.secundario:hover{
+    background:#7be0c4;
+    border-color:#7be0c4;
+    color:#0e2a4d;
 }
 
 
@@ -348,7 +368,7 @@ body{
         align-items:center;
     }
 
-    .btn{
+    .btn-dragonice{
         width:220px;
     }
 
@@ -376,12 +396,12 @@ body{
 
 <div class="acciones">
 
-    <button id="generarPedido" class="btn">
-        Generar nuevo pedido
+    <button id="generarPedido" class="btn-dragonice">
+         Generar nuevo pedido
     </button>
 
-    <a href="consultar_pedido.php" class="btn">
-        Consultar pedido
+    <a href="consultar_pedido.php" class="btn-dragonice secundario">
+         Consultar pedido
     </a>
 
 </div>
