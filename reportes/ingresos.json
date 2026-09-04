@@ -28,5 +28,11 @@
         "fecha": "2026-09-01",
         "descripcion": "Rafael",
         "monto": 40
+    },
+    {
+        "id": 6,
+        "fecha": "2026-09-02",
+        "descripcion": "ramiro",
+        "monto": 10
     }
 ]
