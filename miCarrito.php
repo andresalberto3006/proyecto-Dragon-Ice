@@ -835,6 +835,7 @@ function eliminarProducto(idProducto){
     });
 }
 
+<script>
 function pedidoterminado(){
     Swal.fire({
         icon: 'success',
@@ -847,6 +848,23 @@ function pedidoterminado(){
     });
 }
 </script>
+
+Swal.fire({
+  title: "Are you sure?",
+  text: "You won't be able to revert this!",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#6491bb",
+  cancelButtonColor: "rgba(3, 2, 75, 0.62)",
+  confirmButtonText: "Yes, delete it!"
+}).then((result) => {
+  if (result.isConfirmed) Swal.fire({
+    title: "Deleted!",
+    text: "Your file has been deleted.",
+    icon: "success"
+  });
+});
+</script></script>
 
 </body>
 </html>
