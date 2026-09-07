@@ -661,9 +661,9 @@ include("menu.php");
         Mostrar mensaje
     </button>
 
-    <a href="pedidos/pedidos.php">
-        <button onclick="pedidoterminado()" class="btn btn-final">Terminar pedido</button>
-    </a>
+ <button type="button" class="btn btn-final" onclick="pedidoterminado()">
+    Terminar pedido
+</button>
 
     <a href="pedidos/formpedido.php">
         <button class="btn btn-final btn-nuevo">Nuevo pedido</button>
@@ -794,47 +794,58 @@ document.getElementById("productosCarrito").addEventListener("submit", function(
     });
 });
 
-// ELIMINAR
 function eliminarProducto(idProducto){
-    if(!confirm("¿Deseas eliminar este producto del carrito?")){ return; }
 
-    const datos = new FormData();
-    datos.append("idPedido", idPedido);
-    datos.append("idProducto", idProducto);
+    Swal.fire({
+        title: '¿Eliminar producto?',
+        text: "Se quitará del carrito",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#dc3545',
+        cancelButtonColor: '#0e2a4d',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then(function(result){
 
-    fetch("eliminarCarrito.php",{ method:"POST", body:datos })
-    .then(response => response.json())
-    .then(data => {
-        if(data.ok){
-            refrescarCarrito();
-        }else{
-            alert(data.mensaje || "No se pudo eliminar el producto");
-        }
-    })
-    .catch(error => {
-        console.log(error);
-        alert("Ocurrió un error al eliminar");
+        if(!result.isConfirmed) return;
+
+        const datos = new FormData();
+        datos.append("idPedido", idPedido);
+        datos.append("idProducto", idProducto);
+
+        fetch("eliminarCarrito.php",{ method:"POST", body:datos })
+        .then(response => response.json())
+        .then(data => {
+            if(data.ok){
+                refrescarCarrito();
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Eliminado',
+                    timer: 1200,
+                    showConfirmButton: false
+                });
+            }else{
+                Swal.fire('Error', data.mensaje || "No se pudo eliminar el producto", 'error');
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            Swal.fire('Error', 'Ocurrió un error al eliminar', 'error');
+        });
     });
 }
 
 function pedidoterminado(){
-    alert("Tu pedido se registro!");
+    Swal.fire({
+        icon: 'success',
+        title: '¡Pedido registrado!',
+        text: 'Tu pedido se registró correctamente',
+        confirmButtonText: 'Continuar',
+        confirmButtonColor: '#0e2a4d'
+    }).then(function(){
+        window.location.href = "pedidos/pedidos.php";
+    });
 }
-Swal.fire({
-  title: "Are you sure?",
-  text: "You won't be able to revert this!",
-  icon: "warning",
-  showCancelButton: true,
-  confirmButtonColor: "#6491bb",
-  cancelButtonColor: "rgba(3, 2, 75, 0.62)",
-  confirmButtonText: "Yes, delete it!"
-}).then((result) => {
-  if (result.isConfirmed) Swal.fire({
-    title: "Deleted!",
-    text: "Your file has been deleted.",
-    icon: "success"
-  });
-});
 </script>
 
 </body>

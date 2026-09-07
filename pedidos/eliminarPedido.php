@@ -32,10 +32,26 @@ if ($resultadoPedido->num_rows == 0) {
 $pedido = $resultadoPedido->fetch_assoc();
 
 if ($pedido['estado'] != 'Rechazado') {
-    echo "<script>
-            alert('Solo se pueden eliminar pedidos rechazados. Si el cliente canceló, primero rechaza el pedido.');
-            window.location='pedidos.php';
-          </script>";
+    echo '<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+<script>
+    Swal.fire({
+        icon: "warning",
+        title: "No se puede eliminar",
+        text: "Solo se pueden eliminar pedidos rechazados. Si el cliente canceló, primero rechaza el pedido.",
+        confirmButtonText: "Entendido",
+        confirmButtonColor: "#0e2a4d"
+    }).then(function(){
+        window.location = "pedidos.php";
+    });
+</script>
+</body>
+</html>';
     exit();
 }
 
