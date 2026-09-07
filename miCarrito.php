@@ -817,6 +817,7 @@ function eliminarProducto(idProducto){
     });
 }
 
+<script>
 function pedidoterminado(){
     alert("Tu pedido se registro!");
 }
@@ -835,7 +836,7 @@ Swal.fire({
     icon: "success"
   });
 });
-</script>
+</script></script>
 
 </body>
 </html>
