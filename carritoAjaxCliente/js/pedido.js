@@ -126,7 +126,9 @@ document
             confirmButtonText: "Sí, continuar",
             cancelButtonText: "Cancelar",
             confirmButtonColor: "#28a745",
-            cancelButtonColor: "#d33"
+            cancelButtonColor: "#d33",
+            position: "top-end"
+            
         })
 
 
