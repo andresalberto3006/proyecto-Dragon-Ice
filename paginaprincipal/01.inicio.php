@@ -75,45 +75,88 @@
     }
 
 
-    .confianza{
-        background:white;
-        padding:80px 20px;
-    }
+   .confianza{
+    padding: 70px 20px;
+    background: #b6cee4;
+}
 
-    .confianza-grid{
-        max-width:1150px;
-        margin:0 auto;
-        display:grid;
-        grid-template-columns:repeat(3,1fr);
-        gap:40px;
-    }
+.confianza-header{
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 50px;
+}
 
-    .confianza-grid .item{
-        text-align:center;
-        padding:0 15px;
-    }
+.confianza-eyebrow{
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #12175a;
+    margin-bottom: 10px;
+}
 
-    .confianza-grid .icono{
-        font-size:50px;
-        margin-bottom:18px;
-    }
+.confianza-header h2{
+    font-size: 32px;
+    color: #2b1a12;
+    font-weight: 700;
+}
 
-    .confianza-grid h3{
-        font-size:19px;
-        letter-spacing:1px;
-        color:var(--azul-oscuro);
-        margin-bottom:12px;
-    }
+.confianza-grid{
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
 
-    .confianza-grid p{
-        font-size:15px;
-        color:var(--gris-texto);
-        line-height:1.6;
-    }
+.item{
+    background: #ffffff;
+    padding: 40px 28px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(14, 42, 77, .08);
+    border: 1px solid #e2edf5;
+    transition: transform .3s ease, box-shadow .3s ease;
+}
 
-    @media(max-width:700px){
-        .confianza-grid{ grid-template-columns:1fr; gap:45px; }
+.item:hover{
+    transform: translateY(-6px);
+    box-shadow: 0 14px 30px rgba(14, 42, 77, .16);
+}
+
+.icono{
+    width: 62px;
+    height: 62px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #eaf8fc;
+    color: #159db9;
+}
+
+.item h3{
+    font-size: 17px;
+    letter-spacing: .3px;
+    color: #0e2a4d;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.item p{
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: #5b7590;
+}
+
+@media(max-width: 800px){
+    .porque-grid{
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
+}
 
 
     .seccion{
@@ -185,51 +228,40 @@
     }
 
 
-    .porque{
-        background:#f4f8ff;
-        padding:100px 20px;
-        text-align:center;
-    }
+  .porque{
+    padding: 70px 20px;
+    background: #f4fbfd;
+}
 
-    .porque-titulo{
-        font-size:34px;
-        color:var(--azul-oscuro);
-        margin-bottom:60px;
-    }
+.porque-header{
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 50px;
+}
 
-    .porque-grid{
-        max-width:1150px;
-        margin:0 auto;
-        display:grid;
-        grid-template-columns:repeat(3,1fr);
-        gap:50px;
-    }
+.porque-eyebrow{
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #159db9;
+    margin-bottom: 10px;
+}
 
-    .porque-grid .item{
-        padding:0 15px;
-    }
+.porque-titulo{
+    font-size: 32px;
+    color: #0e2a4d;
+    font-weight: 700;
+}
 
-    .porque-grid .icono{
-        font-size:46px;
-        margin-bottom:16px;
-    }
-
-    .porque-grid h3{
-        font-size:17px;
-        letter-spacing:1px;
-        color:var(--azul-oscuro);
-        margin-bottom:12px;
-    }
-
-    .porque-grid p{
-        font-size:15px;
-        color:var(--gris-texto);
-        line-height:1.7;
-    }
-
-    @media(max-width:700px){
-        .porque-grid{ grid-template-columns:1fr; gap:45px; }
-    }
+.porque-grid{
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
 
     .lobueno{
         position:relative;
@@ -345,23 +377,43 @@
 
 <section class="confianza">
 
+    <div class="confianza-header">
+        <span class="confianza-eyebrow">Por qué elegirnos</span>
+        <h2>El sabor de lo hecho a mano</h2>
+    </div>
+
     <div class="confianza-grid">
 
         <div class="item">
-            <div class="icono">🍦</div>
-            <h3>100% ARTESANAL</h3>
+            <div class="icono">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2c-3.5 0-6 2.7-6 6 0 1.2.3 2.3.9 3.3L5 21h14l-1.9-9.7c.6-1 .9-2.1.9-3.3 0-3.3-2.5-6-6-6z"/>
+                    <path d="M9 12h6"/>
+                </svg>
+            </div>
+            <h3>100% Artesanal</h3>
             <p>Cada tanda se hace a mano, sin atajos ni procesos industriales.</p>
         </div>
 
         <div class="item">
-            <div class="icono">🍓</div>
-            <h3>INGREDIENTES FRESCOS</h3>
+            <div class="icono">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="13" r="8"/>
+                    <path d="M12 5V3M9 3h6"/>
+                </svg>
+            </div>
+            <h3>Ingredientes Frescos</h3>
             <p>Fruta real, leche fresca y sabores que se notan desde la primera cucharada.</p>
         </div>
 
         <div class="item">
-            <div class="icono">📝</div>
-            <h3>RECETAS PROPIAS</h3>
+            <div class="icono">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                </svg>
+            </div>
+            <h3>Recetas Propias</h3>
             <p>Combinaciones creadas por nosotros, pensadas para sorprenderte.</p>
         </div>
 
@@ -395,32 +447,52 @@
 
 <section class="porque">
 
-    <h2 class="porque-titulo">¿Por qué elegir Dragon Ice?</h2>
+    <div class="porque-header">
+        <span class="porque-eyebrow">Dragon Ice</span>
+        <h2 class="porque-titulo">¿Por qué elegir Dragon Ice?</h2>
+    </div>
 
     <div class="porque-grid">
 
         <div class="item">
-            <div class="icono">🍨</div>
-            <h3>SABORES ÚNICOS</h3>
+            <div class="icono">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2c-3.5 0-6 2.6-6 5.8 0 1.1.3 2.2.9 3.1L5 21h14l-1.9-10.1c.6-.9.9-2 .9-3.1C18 4.6 15.5 2 12 2z"/>
+                    <path d="M9 11.5h6"/>
+                </svg>
+            </div>
+            <h3>Sabores Únicos</h3>
             <p>Combinaciones que no vas a encontrar en cualquier heladería, creadas con recetas propias de la casa.</p>
         </div>
 
         <div class="item">
-            <div class="icono">📦</div>
-            <h3>CUIDADO EN CADA DETALLE</h3>
+            <div class="icono">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 8L12 3 3 8l9 5 9-5z"/>
+                    <path d="M3 8v8l9 5 9-5V8"/>
+                    <path d="M12 13v8"/>
+                </svg>
+            </div>
+            <h3>Cuidado en Cada Detalle</h3>
             <p>Preparamos y empacamos cada pedido con cuidado para que llegue en su punto perfecto.</p>
         </div>
 
         <div class="item">
-            <div class="icono">🚴</div>
-            <h3>ENTREGA RÁPIDA</h3>
+            <div class="icono">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="6" cy="19" r="2.5"/>
+                    <circle cx="18" cy="19" r="2.5"/>
+                    <path d="M8.2 19h7.6M18 19l-2.5-8h-4L9 15H5.5"/>
+                    <path d="M11.5 11L14 6h3"/>
+                </svg>
+            </div>
+            <h3>Entrega Rápida</h3>
             <p>Pide tu helado y te lo llevamos fresco, directo a tu puerta o listo para recoger en tienda.</p>
         </div>
 
     </div>
 
 </section>
-
 <section class="lobueno">
     <img src="../imagenesproyecto/ensalada.jpg" alt="Todo lo bueno Dragon Ice">
     <div class="lobueno-texto">
