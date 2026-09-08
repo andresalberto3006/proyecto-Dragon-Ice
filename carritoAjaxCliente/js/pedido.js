@@ -13,11 +13,29 @@ document
     .getElementById("generarPedido")
     .addEventListener("click", function() {
 
-        document
-            .getElementById("modalCompra")
-            .style.display = "flex";
+        Swal.fire({
+            title: "¿Deseas realizar el pedido?",
+            text: "Se abrirá el formulario para completar tus datos.",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "Sí, continuar",
+            cancelButtonText: "Cancelar",
+            confirmButtonColor: "#28a745",
+            cancelButtonColor: "#d33"
+        }).then(function(resultado) {
+
+            if (resultado.isConfirmed) {
+
+                document
+                    .getElementById("modalCompra")
+                    .style.display = "flex";
+
+            }
+
+        });
 
     });
+
 
 
 document
@@ -99,6 +117,18 @@ document
         .catch(function(error) {
             console.log(error);
         });
+
+          Swal.fire({
+            title: "¿Deseas realizar el pedido?",
+            text: "Se abrirá el formulario para completar tus datos.",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "Sí, continuar",
+            cancelButtonText: "Cancelar",
+            confirmButtonColor: "#28a745",
+            cancelButtonColor: "#d33"
+        })
+
 
     });
 
