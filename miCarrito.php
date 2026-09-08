@@ -1,9 +1,8 @@
-<?php
+<?php 
 session_start();
-
-if(!isset($_SESSION['rol'])){
-    header("Location: iniciosesion.php");
-    exit();
+ if(!isset($_SESSION['rol'])){
+     header("Location: iniciosesion.php"); 
+     exit();
 }
 
 if($_SESSION['rol'] != 'Vendedor'){
@@ -16,9 +15,15 @@ include("conexion.php");
 $idPedido = isset($_GET['idPedido']) ? intval($_GET['idPedido']) : 0;
 $ci = $_SESSION['ci'];
 
+if($idPedido <=0){
+    header("Location: pedidos.php");
+    exit();
+}
+
 $pedido = $conexion->query("
     SELECT * FROM pedidos
-    WHERE id='$idPedido' AND vendedor_ci='$ci'
+    WHERE id='$idPedido'
+     AND vendedor_ci='$ci'
 ");
 
 if($pedido->num_rows == 0){
