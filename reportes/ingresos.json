@@ -28,5 +28,11 @@
         "fecha": "2026-09-02",
         "descripcion": "ramiro",
         "monto": 10
+    },
+    {
+        "id": 7,
+        "fecha": "2026-09-08",
+        "descripcion": "rico y cremoso",
+        "monto": 143
     }
 ]
