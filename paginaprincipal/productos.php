@@ -164,8 +164,8 @@ body{
 
 
 .card{
-    width: 300px;
-    height: 380px;
+    width: 220px;
+    height: 500px;
     border-radius: 1.2em;
     padding: 2rem;
     position: relative;
@@ -206,8 +206,7 @@ body{
     transform: translateY(20%);
     transition: 0.4s;
     width: 100%;
-    background: rgba(0,0,0,0.45);
-    border: 1px solid rgba(255,255,255,0.35);
+    background: rgba(3, 182, 253, 0.69);
     border-radius: 12px;
     padding: 14px 16px;
     backdrop-filter: blur(3px);
@@ -219,19 +218,11 @@ body{
     text-shadow: 0 1px 4px rgba(0,0,0,0.6);
 }
 
-.card-info .text-price{
-    color:#7be0c4;
-    font-weight:700;
-    font-size: 1.05rem;
-    margin-top:4px;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.6);
-}
-
 .card-info .text-body{
     font-size: 1rem;
     margin: 10px 0 2px 0;
     line-height:1.4;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+    color: #ffffff;
 }
 
 .card:hover{
@@ -285,7 +276,6 @@ body{
                     <div class="card-img" style="background-image:url('<?php echo $imagenProducto; ?>')"></div>
                     <div class="card-info">
                         <p class="text-title"><?php echo $fila['nombre']; ?></p>
-                        <p class="text-price">Bs. <?php echo $fila['precio']; ?></p>
                         <p class="text-body"><?php echo $fila['descripcion']; ?></p>
                     </div>
                 </div>
