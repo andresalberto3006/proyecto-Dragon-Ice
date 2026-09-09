@@ -1,12 +1,74 @@
 <?php
 session_start();
-if(!isset($_SESSION['rol'])){header("Location: ../iniciosesion.php");exit();}
-if($_SESSION['rol']!='Administrador'){header("Location: ../paginaprincipal/vendedor20.php");exit();}
+
+if(!isset($_SESSION['rol'])){
+    header("Location: ../iniciosesion.php");
+    exit();
+}
+
+if($_SESSION['rol'] !== 'Administrador'){
+    header("Location: ../paginaprincipal/vendedor20.php");
+    exit();
+}
+
 include("../conexion.php");
-$id=isset($_GET['id'])?$_GET['id']:0;
-$r=$conexion->query("SELECT * FROM ventas WHERE id='$id'");
-if($r->num_rows==0){header("Location: ventas.php");exit();}
-$v=$r->fetch_assoc();
+
+$id = (int)($_GET['id'] ?? 0);
+
+if($id <= 0){
+    header("Location: ventas.php");
+    exit();
+}
+
+$mensaje = '';
+
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+
+    $cliente = trim($_POST['cliente'] ?? '');
+    $fecha = trim($_POST['fecha'] ?? '');
+    $vendedorCi = (int)($_POST['vendedor_ci'] ?? 0);
+    $total = (float)($_POST['total'] ?? 0);
+    $metodoPago = trim($_POST['metodo_pago'] ?? '');
+
+    if($cliente === '' || $fecha === '' || $vendedorCi <= 0 || $metodoPago === ''){
+        $mensaje = 'Completa todos los campos.';
+    } else {
+
+        $sv = $conexion->prepare("SELECT nombre FROM usuario WHERE ci=? LIMIT 1");
+        $sv->bind_param('i', $vendedorCi);
+        $sv->execute();
+        $vendedor = $sv->get_result()->fetch_assoc();
+
+        if(!$vendedor){
+            $mensaje = 'Vendedor no válido.';
+        } else {
+
+            $nombreVendedor = $vendedor['nombre'];
+
+            $s = $conexion->prepare("UPDATE ventas SET cliente=?, fecha=?, vendedor_ci=?, nombrevendedor=?, total=?, metodo_pago=? WHERE id=?");
+            $s->bind_param('ssisdsi', $cliente, $fecha, $vendedorCi, $nombreVendedor, $total, $metodoPago, $id);
+
+            if($s->execute()){
+                header("Location: ventas.php");
+                exit();
+            } else {
+                $mensaje = 'Error al actualizar la venta: ' . $s->error;
+            }
+        }
+    }
+}
+
+$s = $conexion->prepare("SELECT * FROM ventas WHERE id=? LIMIT 1");
+$s->bind_param('i', $id);
+$s->execute();
+$venta = $s->get_result()->fetch_assoc();
+
+if(!$venta){
+    header("Location: ventas.php");
+    exit();
+}
+
+$vendedores = $conexion->query("SELECT ci, nombre FROM usuario WHERE rol='Vendedor' ORDER BY nombre");
 
 $rutaMenu = "../";
 ?>
@@ -15,225 +77,163 @@ $rutaMenu = "../";
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Actualizar Venta</title>
-    <style>
-        :root{
-            --azul-oscuro:#0e2a4d;
-            --celeste:#63d4f2;
-            --menta:#7be0c4;
-            --texto-suave:#d9f6ff;
-        }
+<title>Editar Venta</title>
+<style>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
 
-        .auth-section{
-            position:relative;
-            width:100%;
-            min-height:100vh;
-            overflow:hidden;
-        }
+html, body{
+    height:100%;
+}
 
-        .auth-section video{
-            position:absolute;
-            top:50%;
-            left:50%;
-            transform:translate(-50%,-50%);
-            width:100%;
-            height:100%;
-            object-fit:cover;
-            z-index:0;
-        }
+body{
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+}
 
-        .auth-section .overlay{
-            position:absolute;
-            inset:0;
-            background:rgba(14,42,77,0.55);
-            z-index:1;
-        }
+.fondo-panel{
+    flex:1;
+    background:linear-gradient(135deg,#18335c,#2f5d9f,#7fc7ff);
+    padding:40px;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+}
 
-        .auth-section main{
-            position:relative;
-            z-index:2;
-            min-height:100vh;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            padding:40px 20px;
-        }
+.contenedor{
+    width:100%;
+    max-width:600px;
+    background:white;
+    padding:30px;
+    border-radius:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.25);
+}
 
-        .form-box{
-            width:100%;
-            max-width:430px;
-            padding:40px;
-            background:rgba(0,0,0,0.55);
-            backdrop-filter:blur(12px);
-            border-radius:20px;
-            border:1px solid rgba(255,255,255,0.2);
-            box-shadow:0 0 30px rgba(99,212,242,0.35);
-            text-align:center;
-        }
+h1{
+    text-align:center;
+    color:#18335c;
+    margin-bottom:30px;
+}
 
-        .form-box h1{
-            color:white;
-            font-size:34px;
-            letter-spacing:3px;
-            margin-bottom:8px;
-            text-shadow:0 0 15px var(--celeste);
-        }
+label{
+    display:block;
+    margin-bottom:6px;
+    color:#18335c;
+    font-weight:bold;
+}
 
-        .form-box .subtitulo{
-            color:var(--texto-suave);
-            margin-bottom:25px;
-            font-size:15px;
-        }
+input, select{
+    width:100%;
+    padding:12px;
+    margin-bottom:18px;
+    border:1px solid #c9e5ee;
+    border-radius:9px;
+    outline:none;
+}
 
-        .form-box form{
-            text-align:left;
-        }
+input:focus, select:focus{
+    border-color:#4da6ff;
+}
 
-        .form-box label{
-            display:block;
-            text-align:left;
-            color:white;
-            margin-bottom:5px;
-            margin-top:15px;
-            font-weight:bold;
-            font-size:14px;
-        }
+.mensaje{
+    background:#fdecea;
+    color:#a12622;
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:18px;
+    text-align:center;
+}
 
-        .form-box input,
-        .form-box select{
-            width:100%;
-            padding:12px;
-            border:none;
-            border-radius:10px;
-            outline:none;
-            background:rgba(255,255,255,0.15);
-            color:white;
-            font-size:15px;
-        }
+.botones{
+    display:flex;
+    gap:10px;
+}
 
-        .form-box input::placeholder{
-            color:rgba(255,255,255,0.65);
-        }
+button, .cancelar{
+    flex:1;
+    padding:13px;
+    border:0;
+    border-radius:9px;
+    font-weight:bold;
+    cursor:pointer;
+    text-align:center;
+    text-decoration:none;
+}
 
-        .form-box input:focus,
-        .form-box select:focus{
-            background:rgba(255,255,255,0.25);
-            box-shadow:0 0 0 2px var(--celeste);
-        }
+button{
+    background:#18335c;
+    color:white;
+}
 
-        .form-box input[type="submit"],
-        .form-box button[type="submit"]{
-            width:100%;
-            margin-top:22px;
-            padding:13px;
-            border:none;
-            border-radius:10px;
-            background:var(--celeste);
-            color:var(--azul-oscuro);
-            font-size:16px;
-            font-weight:bold;
-            cursor:pointer;
-            transition:0.3s;
-        }
+button:hover{
+    background:#2f5d9f;
+}
 
-        .form-box input[type="submit"]:hover,
-        .form-box button[type="submit"]:hover{
-            background:var(--menta);
-            transform:scale(1.02);
-        }
+.cancelar{
+    background:#eaf7fb;
+    color:#18335c;
+}
 
-        .form-box .enlace-secundario{
-            margin-top:18px;
-            font-size:14px;
-            color:var(--texto-suave);
-            text-align:center;
-        }
+.cancelar:hover{
+    background:#d6edf5;
+}
 
-        .form-box .enlace-secundario a{
-            color:var(--celeste);
-            font-weight:bold;
-            text-decoration:none;
-        }
-
-        .form-box .enlace-secundario a:hover{
-            text-decoration:underline;
-            color:var(--menta);
-        }
-
-        .form-box .volver{
-            display:block;
-            margin-top:10px;
-            color:white;
-            font-size:13px;
-            opacity:0.8;
-            text-decoration:none;
-            text-align:center;
-        }
-
-        .form-box .volver:hover{
-            opacity:1;
-            color:var(--celeste);
-        }
-
-        .form-box label.error{
-            color:#ff9b9b;
-            font-size:12px;
-            margin-top:4px;
-            margin-bottom:0;
-            font-weight:bold;
-        }
-
-        .form-box input.error{
-            box-shadow:0 0 0 2px #ff4d4d;
-        }
-
-        .form-box input.valid{
-            box-shadow:0 0 0 2px var(--menta);
-        }
-
-        @media(max-width:700px){
-            .form-box{ padding:28px; }
-            .form-box h1{ font-size:26px; }
-        }
-    </style>
+</style>
 </head>
 <body>
+    <?php include("../menu.php"); ?>
 
-<?php include("../menu.php"); ?>
+    <main class="fondo-panel">
+        <div class="contenedor">
 
-<section class="auth-section">
-    <video autoplay muted loop>
-        <source src="../helado1.mp4" type="video/mp4">
-    </video>
-    <div class="overlay"></div>
-    <main>
-        <div class="form-box">
-            <h1>DRAGON ICE</h1>
-            <p class="subtitulo">Actualizar Venta</p>
-            <form action="actualizarVenta.php" method="POST">
-                <input type="hidden" name="id" value="<?php echo $v['id'];?>">
+            <h1>Editar Venta #<?php echo $venta['id']; ?></h1>
+
+            <?php if($mensaje !== ''){ ?>
+                <div class="mensaje"><?php echo htmlspecialchars($mensaje); ?></div>
+            <?php } ?>
+
+            <form method="POST">
+
                 <label>Cliente</label>
-                <input type="text" name="cliente" value="<?php echo $v['cliente'];?>">
+                <input type="text" name="cliente" value="<?php echo htmlspecialchars($venta['cliente']); ?>" required>
+
                 <label>Fecha</label>
-                <input type="date" name="fecha" value="<?php echo $v['fecha'];?>">
+                <input type="date" name="fecha" value="<?php echo htmlspecialchars($venta['fecha']); ?>" required>
+
+                <label>Vendedor</label>
+                <select name="vendedor_ci" required>
+                    <?php while($v = $vendedores->fetch_assoc()){ ?>
+                        <option value="<?php echo $v['ci']; ?>" <?php echo ($v['ci'] == $venta['vendedor_ci']) ? 'selected' : ''; ?>>
+                            <?php echo htmlspecialchars($v['nombre']); ?>
+                        </option>
+                    <?php } ?>
+                </select>
+
+                <label>Total (Bs.)</label>
+                <input type="number" step="0.01" name="total" value="<?php echo $venta['total']; ?>" required>
+
                 <label>Método de pago</label>
-                <input type="text" name="metodo_pago" value="<?php echo $v['metodo_pago'];?>">
-                <input type="submit" value="Guardar Cambios">
+                <select name="metodo_pago" required>
+                    <option value="QR" <?php echo ($venta['metodo_pago']=='QR') ? 'selected' : ''; ?>>Pago mediante QR</option>
+                    <option value="Efectivo" <?php echo ($venta['metodo_pago']=='Efectivo') ? 'selected' : ''; ?>>Pago en efectivo</option>
+                </select>
+
+                <div class="botones">
+                    <button type="submit">Guardar cambios</button>
+                    <a href="ventas.php" class="cancelar">Cancelar</a>
+                </div>
+
             </form>
 
-            <a href="ventas.php" class="volver">Volver a ventas</a>
         </div>
     </main>
-</section>
 
-<?php include("../paginaprincipal/piedepagina.php"); ?>
-
+    <?php include("../paginaprincipal/piedepagina.php"); ?>
 </body>
 </html>
