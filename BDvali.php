@@ -12,16 +12,17 @@ $clave = $_POST['clave'];
 
 $sql = "SELECT * FROM usuario WHERE nombre='$usuario' AND celular='$clave' LIMIT 1";
 $resultado = $conexion->query($sql);
-
 if ($resultado->num_rows > 0) {
     $fila = $resultado->fetch_assoc();
-
+//*si esta bloqueado
     if ($fila['estado'] == 'Bloqueado') {
+        //*redirige al iniciar sesion
         echo "<script>alert('Este usuario está bloqueado.'); window.location='iniciosesion.php';</script>";
         exit();
     }
-
+//*se comprueba si el usuario es uno de estos dos roles
     if ($fila['rol'] != 'Administrador' && $fila['rol'] != 'Vendedor') {
+        //*redirige al iniciar sesion
         echo "<script>alert('El rol del usuario no es válido.'); window.location='iniciosesion.php';</script>";
         exit();
     }
@@ -30,7 +31,7 @@ if ($resultado->num_rows > 0) {
     $_SESSION['usuario'] = $fila['nombre'];
     $_SESSION['rol'] = $fila['rol'];
     $_SESSION['estado'] = $fila['estado'];
-
+//*si es uno de los 2 roles redirige al que corresponde
     if ($fila['rol'] == 'Administrador') {
         header("Location: paginaprincipal/02.admin.php");
     } else {
