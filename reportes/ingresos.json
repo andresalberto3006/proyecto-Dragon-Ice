@@ -28,5 +28,12 @@
         "fecha": "2026-09-10",
         "descripcion": "rico y cremoso chocolatoso",
         "monto": 200
+    },
+    {
+        "id": 7,
+        "fecha": "2026-09-10",
+        "descripcion": "rico y cremoso chocolatoso",
+        "monto": 200
     }
-]
+] 
+    
