@@ -342,6 +342,20 @@ body{
     color:#0e2a4d;
 }
 
+label.error{
+    display:block;
+    color:#e74c3c;
+    font-size:13px;
+    margin-top:3px;
+    margin-bottom:5px;
+}
+
+input.error,
+select.error{
+    border:1px solid #e74c3c !important;
+    background:#fff5f5;
+}
+
 
 
 @media(max-width:1000px){
@@ -471,57 +485,56 @@ body{
 </aside>
 <div id="modalCompra">
 
-    <div id="formularioPedido">
+    <form id="formularioPedido">
 
-        <h2>
-             Finalizar compra
-        </h2>
-
+        <h2>Realizar pedido</h2>
 
         <input
             type="text"
             id="nombre"
+            name="nombre"
             placeholder="Nombre completo"
         >
-
 
         <input
             type="text"
             id="telefono"
+            name="telefono"
             placeholder="Teléfono"
         >
-
 
         <input
             type="text"
             id="direccion"
+            name="direccion"
             placeholder="Dirección"
         >
 
-
-        <select id="metodoPago">
-
-            <option value="QR">
-                Pago mediante QR
-            </option>
-
-            <option value="Efectivo">
-                Pago en efectivo
-            </option>
-
+        <select
+            id="metodoPago"
+            name="metodoPago"
+        >
+            <option value="">Seleccione un método de pago</option>
+            <option value="efectivo">Efectivo</option>
+            <option value="qr">QR</option>
+            <option value="tarjeta">Tarjeta</option>
         </select>
 
-
-        <button id="confirmarPedido">
-            Confirmar compra
+        <button
+            type="submit"
+            id="confirmarPedido"
+        >
+            Confirmar pedido
         </button>
 
-
-        <button id="cancelarCompra">
+        <button
+            type="button"
+            id="cancelarCompra"
+        >
             Cancelar
         </button>
 
-    </div>
+    </form>
 
 </div>
 
@@ -533,52 +546,142 @@ body{
 
 <script>
 $(document).ready(function(){
-$("#formularioPedido").validate({
 
-    rules:{
-        nombre:{
-            required:true,
-            minlength:3
-        },
-        telefono:{
-            required:true,
-            digits:true,
-            minlength:8,
-            maxlength:8
-        },
-        direccion:{
-            required:true,
-            minlength:5
-        },
-        metodoPago:{
-            required:true
-        }
-    },
+    $("#formularioPedido").validate({
 
-    messages:{
-        nombre:{
-            required:"Ingrese su nombre",
-            minlength:"El nombre debe tener al menos 3 caracteres"
+        rules: {
+
+            nombre: {
+                required: true,
+                minlength: 3
+            },
+
+            telefono: {
+                required: true,
+                digits: true,
+                minlength: 8,
+                maxlength: 8
+            },
+
+            direccion: {
+                required: true,
+                minlength: 5
+            },
+
+            metodoPago: {
+                required: true
+            }
+
         },
-        telefono:{
-            required:"Ingrese su teléfono",
-            digits:"Ingrese solo números",
-            minlength:"El teléfono debe tener 8 dígitos",
-            maxlength:"El teléfono debe tener 8 dígitos"
+
+        messages: {
+
+            nombre: {
+                required: "Ingrese su nombre",
+                minlength: "El nombre debe tener al menos 3 caracteres"
+            },
+
+            telefono: {
+                required: "Ingrese su teléfono",
+                digits: "Ingrese solo números",
+                minlength: "El teléfono debe tener 8 dígitos",
+                maxlength: "El teléfono debe tener 8 dígitos"
+            },
+
+            direccion: {
+                required: "Ingrese su dirección",
+                minlength: "Ingrese una dirección más completa"
+            },
+
+            metodoPago: {
+                required: "Seleccione un método de pago"
+            }
+
         },
-        direccion:{
-            required:"Ingrese su dirección",
-            minlength:"Ingrese una dirección más completa"
-        },
-        metodoPago:{
-            required:"Seleccione un método de pago"
+
+        submitHandler: function(form) {
+
+            // AQUÍ SOLO ENTRA SI LA VALIDACIÓN ES CORRECTA
+
+            let datos = {
+
+                nombre: $("#nombre").val(),
+                telefono: $("#telefono").val(),
+                direccion: $("#direccion").val(),
+                metodo: $("#metodoPago").val()
+
+            };
+
+            fetch("php/crear_pedido.php", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(datos)
+
+            })
+
+            .then(function(respuesta) {
+                return respuesta.json();
+            })
+
+            .then(function(datos) {
+
+                if(datos.ok) {
+
+                    Swal.fire({
+                        title: "Pedido confirmado",
+                        text: "Número de pedido: " + datos.pedido,
+                        icon: "success",
+                        confirmButtonColor: "#0e2a4d"
+                    })
+                    .then(function() {
+
+                        document
+                            .getElementById("modalCompra")
+                            .style.display = "none";
+
+                        habilitarCompra();
+
+                        location.reload();
+
+                    });
+
+                } else {
+
+                    Swal.fire({
+                        title: "Error",
+                        text: datos.mensaje,
+                        icon: "error"
+                    });
+
+                }
+
+            })
+
+            .catch(function(error) {
+
+                console.error(error);
+
+                Swal.fire({
+                    title: "Error",
+                    text: "No se pudo procesar el pedido.",
+                    icon: "error"
+                });
+
+            });
+
         }
-    }
-    
-});
+
+    });
 
 });
 </script>
+
+
 
 </body>
 
