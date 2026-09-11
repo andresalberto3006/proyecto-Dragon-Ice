@@ -270,11 +270,11 @@ body{
         <h1>Nuestros Sabores</h1>
         <p>Descubre la cremosidad artesanal en cada cucharada</p>
         <div class="acciones-portada">
+</div>
+    </header>
     <a href="../carritoAjaxCliente/consultar_pedido.php" class="btn-consultar">
         📦 Ver estado de mi pedido
     </a>
-</div>
-    </header>
     <div class="filtros">
         <button class="activo" data-filtro="todos">Todos</button>
         <button data-filtro="paletas">Paletas</button>
