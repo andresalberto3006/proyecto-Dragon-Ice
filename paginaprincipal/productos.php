@@ -119,6 +119,24 @@ body{
     background:#63d4f2;
     color:#0e2a4d;
 }
+.btn-consultar{
+    display:inline-block;
+    background:#0e2a4d;
+    color:#ffffff;
+    text-decoration:none;
+    font-weight:700;
+    font-size:14px;
+    padding:12px 28px;
+    border-radius:30px;
+    transition:.25s;
+}
+
+.btn-consultar:hover{
+    background:#63d4f2;
+    color:#0e2a4d;
+}
+
+
 .filtros{
     display:flex;
     flex-wrap:wrap;
@@ -251,14 +269,12 @@ body{
     <header class="titulo">
         <h1>Nuestros Sabores</h1>
         <p>Descubre la cremosidad artesanal en cada cucharada</p>
-        <div class="acciones-portada">
-</div>
     </header>
-   <div class="acciones-portada">
+    <div class="acciones-portada">
     <a href="../carritoAjaxCliente/consultar_pedido.php" class="btn-consultar">
         📦 Ver estado de mi pedido
     </a>
-</div>
+    </div>
     <div class="filtros">
         <button class="activo" data-filtro="todos">Todos</button>
         <button data-filtro="paletas">Paletas</button>
