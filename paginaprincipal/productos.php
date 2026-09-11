@@ -272,9 +272,11 @@ body{
         <div class="acciones-portada">
 </div>
     </header>
+   <div class="acciones-portada">
     <a href="../carritoAjaxCliente/consultar_pedido.php" class="btn-consultar">
         📦 Ver estado de mi pedido
     </a>
+</div>
     <div class="filtros">
         <button class="activo" data-filtro="todos">Todos</button>
         <button data-filtro="paletas">Paletas</button>
