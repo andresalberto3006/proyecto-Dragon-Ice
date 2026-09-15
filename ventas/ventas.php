@@ -8,6 +8,8 @@ if($_SESSION['rol']=='Administrador'){
     $ci=$_SESSION['ci'];
     $resultado=$conexion->query("SELECT * FROM ventas WHERE vendedor_ci='$ci' ORDER BY id DESC");
 }
+
+$rutaMenu = "../";
 ?>
 <!DOCTYPE html>
 <html lang="es">
