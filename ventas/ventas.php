@@ -16,6 +16,7 @@ $rutaMenu = "../";
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
 <title>Ventas</title>
 <style>
 
@@ -155,6 +156,10 @@ tr:hover{
                     <td>Bs. <?php echo $fila['total'];?></td>
                     <td><?php echo $fila['metodo_pago'];?></td>
                     <td>
+                        <div class="tarjeta">
+                        <h2 style="margin-bottom:15px;">📈 Ventas por día</h2>
+                        <canvas id="graficoVentas"></canvas>
+                        </div>
                         <div class="acciones">
                             <a class="boton mostrar" href="../pedidos/detallePedido.php?id=<?php echo $fila['pedidos_id'];?>">Detalle</a>
                             <?php if($_SESSION['rol']=='Administrador'){?>
@@ -179,5 +184,20 @@ tr:hover{
     </main>
 
     <?php include("../paginaprincipal/piedepagina.php"); ?>
+    <script>
+fetch("datosGraficoVentas.php")
+  .then(r => r.json())
+  .then(data => {
+    new Chart(document.getElementById("graficoVentas"), {
+      type: "line",
+      data: {
+        labels: data.labels,
+        datasets: [{ label: "Ventas por día", data: data.totales, borderColor: "#159db9" }]
+      }
+    });
+  })
+  .catch(error => console.log(error));
+</script>
+
 </body>
 </html>
