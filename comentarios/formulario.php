@@ -8,8 +8,6 @@ $rutaMenu = "../";
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dragon Ice | Buzón de Mensajes</title>
-<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
     <style>
         :root{
             --azul-oscuro:#0e2a4d;
@@ -163,20 +161,6 @@ $rutaMenu = "../";
             color:var(--celeste);
         }
 
-        label.error{
-            display:block;
-            color:#e74c3c;
-            font-size:13px;
-            margin-top:3px;
-            margin-bottom:5px;
-        }
-
-        input.error,
-        select.error{
-        border:1px solid #e74c3c !important;
-        background:#fff5f5;
-        }
-
         @media(max-width:700px){
             .form-box{ padding:28px; }
             .form-box h1{ font-size:26px; }
@@ -199,7 +183,7 @@ $rutaMenu = "../";
             <h1>DRAGON ICE</h1>
             <p class="subtitulo">Buzón de Mensajes</p>
 
-            <form id="formulario1" action="mensaje.php" method="POST">
+            <form action="mensaje.php" method="POST">
 
                 <label for="asunto">Asunto</label>
                 <input type="text" id="asunto" name="asunto" placeholder="Ej: Pedido, Sugerencia, Consulta" required>
@@ -207,43 +191,16 @@ $rutaMenu = "../";
                 <label for="come">Comentario</label>
                 <textarea id="come" name="come" placeholder="Escribe aquí tu mensaje..." required></textarea>
 
-                <input type="submit" value="Enviar Mensaje">
+                <input type="submit" value="Enviar Mensaje">           
 
             </form>
 
-            <a href="ver.php" class="volver">Ver todos los mensajes</a>
+            <a href="ver.php" class="volver">Ver todos los mensajes</a>        
         </div>
     </main>
 </section>
-    <script>
-$(document).ready(function(){
 
-$("#formulario1").validate({
-
-rules:{
-    asunto:{
-        required:true
-    },
-    come:{
-        required:true
-    }
-},
-
-messages:{
-    asunto:{
-        required:"Ingrese el asunto"
-    },
-    come:{
-        required:"Ingrese su comentario"
-    }
-}
-
-});
-
-});
-</script>
-
-<?php include("../paginaprincipal/piedepagina.php"); ?>
+<?php include("../paginaprincipal/piedepagina.php"); ?>          
 
 </body>
 </html>
