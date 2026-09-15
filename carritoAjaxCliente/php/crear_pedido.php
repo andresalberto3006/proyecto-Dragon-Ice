@@ -25,14 +25,26 @@ if(isset($_SESSION['pedido'])){
     exit;
 }
 
-$s = $conn->prepare("INSERT INTO pedidos(nombre,fecha,estado,vendedor_ci,nombrevendedor,metodo_pago,telefono,direccion) VALUES(?,CURDATE(),'Abierto',NULL,NULL,?,?,?)");
+// Buscar al vendedor ya registrado en la base de datos
+$rVendedor = $conn->query("SELECT ci, nombre FROM usuario WHERE rol='Vendedor' LIMIT 1");
+
+if(!$rVendedor || $rVendedor->num_rows == 0){
+    echo json_encode(['ok'=>false,'mensaje'=>'No hay ningún vendedor registrado.']);
+    exit;
+}
+
+$vendedor = $rVendedor->fetch_assoc();
+$vendedorCi = $vendedor['ci'];
+$nombreVendedor = $vendedor['nombre'];
+
+$s = $conn->prepare("INSERT INTO pedidos(nombre,fecha,estado,vendedor_ci,nombrevendedor,metodo_pago,telefono,direccion) VALUES(?,CURDATE(),'Pendiente',?,?,?,?,?)");
 
 if(!$s){
     echo json_encode(['ok'=>false,'mensaje'=>'Error al preparar el pedido: '.$conn->error]);
     exit;
 }
 
-$s->bind_param('ssss', $nombre, $metodo, $telefono, $direccion);
+$s->bind_param('sisss', $nombre, $vendedorCi, $nombreVendedor, $metodo, $telefono, $direccion);
 
 if($s->execute()){
     $_SESSION['pedido'] = $conn->insert_id;
