@@ -191,16 +191,16 @@ $rutaMenu = "../";
                 <label for="come">Comentario</label>
                 <textarea id="come" name="come" placeholder="Escribe aquí tu mensaje..." required></textarea>
 
-                <input type="submit" value="Enviar Mensaje">
+                <input type="submit" value="Enviar Mensaje">           
 
             </form>
 
-            <a href="ver.php" class="volver">Ver todos los mensajes</a>
+            <a href="ver.php" class="volver">Ver todos los mensajes</a>        
         </div>
     </main>
 </section>
 
-<?php include("../paginaprincipal/piedepagina.php"); ?>
+<?php include("../paginaprincipal/piedepagina.php"); ?>          
 
 </body>
 </html>
