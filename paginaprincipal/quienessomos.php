@@ -152,7 +152,7 @@ h1,h2{
 </head>
 <body>
 
-<?php $rutaMenu=""; include("menu.php"); ?>
+<?php $rutaMenu="../"; include("menu.php"); ?>
 
 <section class="hero">
     <img src="https://images.unsplash.com/photo-1580915411954-282cb1b0d780?auto=format&fit=crop&w=1800&q=80" alt="Helados Dragon Ice">
@@ -198,10 +198,10 @@ h1,h2{
 <section class="cta">
     <h2>¿Listo para probarlo?</h2>
     <p>Descubre todo nuestro catálogo de helados artesanales.</p>
-    <a href="paginaprincipal/productos.php">Ver productos</a>
+    <a href="productos.php">Ver productos</a>
 </section>
 
-<?php include("paginaprincipal/piedepagina.php"); ?>
+<?php include("piedepagina.php"); ?>
 
 </body>
 </html>

@@ -201,7 +201,8 @@
 
 <body>
 
-<?php include 'menu.php'; ?>
+    <?php $rutaMenu = "./"; include("./paginaprincipal/menu.php"); ?>
+
 
 <section class="auth-section">
     <video autoplay muted loop>
@@ -256,7 +257,7 @@ $(document).ready(function(){
 });
 </script>
 
-<?php include 'paginaprincipal/piedepagina.php'; ?>
+<?php include "paginaprincipal/piedepagina.php"; ?>
 
 </body>
 </html>

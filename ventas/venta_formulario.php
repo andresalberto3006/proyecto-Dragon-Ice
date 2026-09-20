@@ -204,7 +204,7 @@ $rutaMenu="../";
     </style>
 </head>
 <body>
-    <?php include("../menu.php"); ?>
+    <?php include("../paginaprincipal/menu.php"); ?>
 
     <section class="auth-section">
         <video autoplay muted loop>

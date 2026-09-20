@@ -130,7 +130,7 @@ tr:hover{
 </style>
 </head>
 <body>
-    <?php include("../menu.php"); ?>
+    <?php include("../paginaprincipal/menu.php"); ?>
 
     <main class="fondo-panel">
       <div class="contenedor">
@@ -190,7 +190,7 @@ tr:hover{
         </table>
         <?php if($_SESSION['rol']=='Vendedor'){?>
             <a href="formpedido.php" class="volver"> Nuevo Pedido</a>
-            <a href="../paginaprincipal/vendedor20.php" class="volver">Volver al panel</a>
+            <a href="../paginaprincipal/03.vendedor.php" class="volver">Volver al panel</a>
         <?php }else{?>
             <a href="../paginaprincipal/02.admin.php" class="volver">Volver al panel</a>
         <?php }?>

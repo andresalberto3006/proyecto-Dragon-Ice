@@ -383,7 +383,8 @@ body{
 
 <body>
 
-<?php include("../menu.php"); ?>
+ <?php $rutaMenu = "../"; include("../paginaprincipal/menu.php"); ?>
+
 
 
 <main class="contenido">

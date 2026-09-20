@@ -1795,7 +1795,7 @@ if (
 <body>
 
 <header class="menu-principal">
-    <?php $rutaMenu = "../"; include("../menu.php"); ?>
+    <?php $rutaMenu = "../"; include("../paginaprincipal/menu.php"); ?>
 </header>
 <div class="contenedor">
 
