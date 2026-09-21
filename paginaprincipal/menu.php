@@ -246,11 +246,11 @@ if (!isset($rutaMenu)) {
                     </a>
                 <?php } ?>
 
-                <a href="<?php echo $rutaMenu; ?>cerrar1.php" class="sesion-texto">Cerrar sesión</a>
+                <a href="<?php echo $rutaMenu; ?>iniciarsesion/cerrar1.php" class="sesion-texto">Cerrar sesión</a>
 
             <?php } else { ?>
 
-                <a href="<?php echo $rutaMenu; ?>iniciosesion.php" class="icono-btn" aria-label="Iniciar sesión">
+                <a href="<?php echo $rutaMenu; ?>iniciarsesion/iniciosesion.php" class="icono-btn" aria-label="Iniciar sesión">
                     <svg viewBox="0 0 24 24"><path d="M20 21v-1a7 7 0 0 0-14 0v1"></path><circle cx="13" cy="7" r="4"></circle></svg>
                 </a>
 

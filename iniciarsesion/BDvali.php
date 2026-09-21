@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("conexion.php");
+include("../conexion.php");
 
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
     header("Location: iniciosesion.php");
@@ -32,12 +32,12 @@ if ($resultado->num_rows > 0) {
     $_SESSION['estado'] = $fila['estado'];
 
     if ($fila['rol'] == 'Administrador') {
-        header("Location: paginaprincipal/02.admin.php");
+        header("Location: ../paginaprincipal/02.admin.php");
     } else {
-        header("Location: paginaprincipal/03.vendedor.php");
+        header("Location: ../paginaprincipal/03.vendedor.php");
     }
     exit();
 }
 
-echo "<script>alert('Nombre o número de celular incorrectos.'); window.location='iniciosesion.php';</script>";
+echo "<script>alert('Nombre o número de celular incorrectos.'); window.location='iniciarsesion/iniciosesion.php';</script>";
 ?>

@@ -201,12 +201,12 @@
 
 <body>
 
-    <?php $rutaMenu = "./"; include("./paginaprincipal/menu.php"); ?>
+    <?php $rutaMenu = "../"; include("../paginaprincipal/menu.php"); ?>
 
 
 <section class="auth-section">
     <video autoplay muted loop>
-        <source src="helado1.mp4" type="video/mp4">
+        <source src="../helado1.mp4" type="video/mp4">
     </video>
     <div class="overlay"></div>
     <main>
@@ -257,7 +257,7 @@ $(document).ready(function(){
 });
 </script>
 
-<?php include "paginaprincipal/piedepagina.php"; ?>
+<?php include "../paginaprincipal/piedepagina.php"; ?>
 
 </body>
 </html>
