@@ -247,7 +247,7 @@ $rutaMenu = "../";
 
 <?php include("../paginaprincipal/piedepagina.php"); ?>
 
-    <script>
+<script>
 $(document).ready(function(){
 
 $("#formulario").validate({
