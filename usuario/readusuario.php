@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['rol'])) { header("Location: ../iniciosesion.php"); exit(); }
-if ($_SESSION['rol'] != 'Administrador') { header("Location: ../paginaprincipal/vendedor20.php"); exit(); }
+if ($_SESSION['rol'] != 'Administrador') { header("Location: ../paginaprincipal/03.vendedor.php"); exit(); }
 include("../conexion.php");
 
 $ci = isset($_GET['ci']) ? $_GET['ci'] : 0;
@@ -116,7 +116,7 @@ strong{
 
 <body>
 
-<?php include("../menu.php"); ?>
+<?php include("../paginaprincipal/menu.php"); ?>
 
 <main class="fondo-panel">
 <div class="tarjeta">

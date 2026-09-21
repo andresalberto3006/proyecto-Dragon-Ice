@@ -209,7 +209,7 @@ if (!isset($rutaMenu)) {
         <ul class="nav-links" id="navLinks">
             <li><a href="<?php echo $rutaMenu; ?>paginaprincipal/01.inicio.php">Inicio</a></li>
             <li><a href="<?php echo $rutaMenu; ?>paginaprincipal/productos.php">Productos</a></li>
-            <li><a href="<?php echo $rutaMenu; ?>quienessomos.php">Quiénes somos</a></li>
+            <li><a href="<?php echo $rutaMenu; ?>paginaprincipal/quienessomos.php">Quiénes somos</a></li>
 
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -241,7 +241,7 @@ if (!isset($rutaMenu)) {
                         <svg viewBox="0 0 24 24"><path d="M20 21v-1a7 7 0 0 0-14 0v1"></path><circle cx="13" cy="7" r="4"></circle></svg>
                     </a>
                 <?php } else { ?>
-                    <a href="<?php echo $rutaMenu; ?>paginaprincipal/vendedor20.php" class="icono-btn" aria-label="Mi panel">
+                    <a href="<?php echo $rutaMenu; ?>paginaprincipal/03.vendedor.php" class="icono-btn" aria-label="Mi panel">
                         <svg viewBox="0 0 24 24"><path d="M20 21v-1a7 7 0 0 0-14 0v1"></path><circle cx="13" cy="7" r="4"></circle></svg>
                     </a>
                 <?php } ?>

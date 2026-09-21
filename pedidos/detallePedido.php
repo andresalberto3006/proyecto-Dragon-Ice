@@ -284,7 +284,7 @@ table tr{
 </head>
 <body>
 
-<?php include("../menu.php"); ?>
+<?php include("../paginapricipal/menu.php"); ?>
 
 <main class="fondo-panel">
     <div class="contenedor">

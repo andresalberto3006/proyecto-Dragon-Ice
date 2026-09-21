@@ -7,7 +7,7 @@ if (!isset($_SESSION['rol'])) {
 }
 
 if ($_SESSION['rol'] != 'Administrador') {
-    header("Location: ../paginaprincipal/vendedor20.php");
+    header("Location: ../paginaprincipal/03.vendedor.php");
     exit();
 }
 
@@ -143,7 +143,7 @@ tr:hover{
 </head>
 <body>
 
-<?php include("../menu.php"); ?>
+<?php include("../paginaprincipal/menu.php"); ?>
 
 <main class="fondo-panel">
     <div class="contenedor">

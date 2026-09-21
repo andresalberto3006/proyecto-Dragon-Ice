@@ -362,7 +362,7 @@
 <body>
 
 <header class="menu-principal">
-    <?php $rutaMenu = "../"; include("../menu.php"); ?>
+    <?php $rutaMenu = "../"; include("menu.php"); ?>
 </header>
 
 <section class="hero">
@@ -498,7 +498,7 @@
     <div class="lobueno-texto">
         <h2>TODO LO BUENO</h2>
         <p>Creemos en usar ingredientes reales, apoyar a proveedores locales y hacer las cosas con calma y calidad. Así preparamos cada helado, desde la primera hasta la última cucharada.</p>
-        <a href="../quienessomos.php">Conoce más</a>
+        <a href="quienessomos.php">Conoce más</a>
     </div>
 </section>
 

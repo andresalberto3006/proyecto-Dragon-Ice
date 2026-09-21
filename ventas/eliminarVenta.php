@@ -7,7 +7,7 @@ if (!isset($_SESSION['rol'])) {
 }
 
 if ($_SESSION['rol'] != 'Administrador') {
-    header("Location: paginaprincipal/vendedor20.php");
+    header("Location: paginaprincipal/03.vendedor.php");
     exit();
 }
 
