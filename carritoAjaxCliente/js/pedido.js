@@ -1,4 +1,3 @@
-
 document.addEventListener(
     "DOMContentLoaded",
     function() {
@@ -90,21 +89,22 @@ document
 
             if(datos.ok) {
 
-                alert(
-                    "Pedido confirmado Nº " +
-                    datos.pedido
-                );
-
-
                 document
                     .getElementById("modalCompra")
                     .style.display = "none";
 
+                Swal.fire({
+                    title: "¡Pedido realizado con éxito!",
+                    text: "Tu pedido Nº " + datos.pedido + " fue registrado y quedará pendiente de aprobación.",
+                    icon: "success",
+                    confirmButtonText: "Continuar",
+                    confirmButtonColor: "#28a745"
+                }).then(function() {
 
-                habilitarCompra();
+                    habilitarCompra();
+                    location.reload();
 
-
-                location.reload();
+                });
 
             } else {
 
@@ -117,20 +117,6 @@ document
         .catch(function(error) {
             console.log(error);
         });
-
-          Swal.fire({
-            title: "¿Deseas realizar el pedido?",
-            text: "Se abrirá el formulario para completar tus datos.",
-            icon: "question",
-            showCancelButton: true,
-            confirmButtonText: "Sí, continuar",
-            cancelButtonText: "Cancelar",
-            confirmButtonColor: "#28a745",
-            cancelButtonColor: "#d33",
-            position: "top-end"
-            
-        })
-
 
     });
 
