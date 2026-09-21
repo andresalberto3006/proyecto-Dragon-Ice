@@ -240,7 +240,7 @@ $rutaMenu = "../";
                 <input type="submit" value="Crear Cuenta">
             </form>
 
-            <a href="../iniciosesion.php" class="volver">Ya tengo cuenta, iniciar sesión</a>
+            <a href="../iniciarsesion/iniciosesion.php" class="volver">Ya tengo cuenta, iniciar sesión</a>
         </div>
     </main>
 </section>

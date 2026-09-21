@@ -146,7 +146,7 @@ h1{
                 <?php echo htmlspecialchars($nombre); ?>
             </span> fue registrado correctamente.</p>
             <div class="botones">
-                <a href="../iniciosesion.php" class="boton">Iniciar sesión</a>
+                <a href="../iniciarsesion/iniciosesion.php" class="boton">Iniciar sesión</a>
             </div>
         </div>
 </main>

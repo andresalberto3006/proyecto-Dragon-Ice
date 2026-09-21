@@ -226,10 +226,10 @@
             </form>
 
             <p class="enlace-secundario">
-                ¿No tienes una cuenta? <a href="usuario/formulariousuario.php">Regístrate aquí</a>
+                ¿No tienes una cuenta? <a href="../usuario/formulariousuario.php">Regístrate aquí</a>
             </p>
 
-            <a href="paginaprincipal/01.inicio.php" class="volver">Volver al inicio</a>
+            <a href="../paginaprincipal/01.inicio.php" class="volver">Volver al inicio</a>
         </div>
     </main>
 </section>
