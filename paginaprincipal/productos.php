@@ -25,6 +25,16 @@ $imagenesSabores = [
     17 => '../imagenesproyecto/rollocanela.jpg',
     18 => '../imagenesproyecto/snoopye.jpg',
     19 => '../imagenesproyecto/tacos.jpg',
+    20 => '../imagenesproyecto/Chocolate.jpg',
+    21 => '../imagenesproyecto/Coco.jpg',
+    22 => '../imagenesproyecto/Canela1.jpg',
+    23 => '../imagenesproyecto/Durazno1.jpg',
+    24 => '../imagenesproyecto/Frutilla1.jpg',
+    25 => '../imagenesproyecto/Limon.jpg',
+    26 => '../imagenesproyecto/Mango.jpg',
+    27 => '../imagenesproyecto/Menta.jpg',
+    28 => '../imagenesproyecto/Piña.jpg',
+    29 => '../imagenesproyecto/Vainilla.jpg',
 ];
 
 $imagenGenerica = '../imagenesproyecto/logo.png';
