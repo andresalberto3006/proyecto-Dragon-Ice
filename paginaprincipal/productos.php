@@ -60,6 +60,16 @@ $categoriasSabores = [
     17 => 'especiales', 
     18 => 'especiales',    
     19 => 'tacos',      
+    20 => 'paletas',
+    21 => 'paletas',
+    22 => 'paletas',
+    23 => 'paletas',
+    24 => 'paletas',
+    25 => 'paletas',
+    26 => 'paletas',
+    27 => 'paletas',
+    28 => 'paletas',
+    29 => 'paletas',
 ];
 
 $categoriasDisponibles = ['paletas','bolos','tacos','granizado','especiales'];
