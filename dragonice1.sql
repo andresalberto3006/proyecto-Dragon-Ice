@@ -85,3 +85,23 @@ INSERT INTO productos (id,nombre,descripcion,precio,costo,stock,imagen) VALUES
 (17,'Rollo de Canela','Rollo de helado sabor canela',15,9,15,'imagenesproyecto/rollocanela.jpg'),
 (18,'Helado Snoopy','Helado decorado estilo Snoopy',16,9,10,'imagenesproyecto/snoopye.jpg'),
 (19,'Taco Helado Clásico','Taco de helado tradicional',12,6,20,'imagenesproyecto/tacos.jpg');
+(20, 'Paleta de Frutilla', 'Dulce y refrescante, preparado con el delicioso sabor de la frutilla.', 7, 3, 25, 'imagenesproyecto/Frutilla1.jpg'),
+(21, 'Paleta de Mango', 'Tropical y jugosa, con el sabor dulce y fresco del mango.', 7, 3, 25, 'imagenesproyecto/Mango.jpg'),
+(22, 'Paleta de Limón', 'Refrescante y ligeramente ácida, perfecta para disfrutar en días calurosos.', 7, 3, 25, 'imagenesproyecto/Limon.jpg'),
+(23, 'Paleta de Piña', 'Tropical y refrescante, con el dulce y jugoso sabor de la piña.', 7, 3, 25, 'imagenesproyecto/Piña.jpg'),
+(24, 'Paleta de Chocolate', 'Cremosa y deliciosa, con un intenso sabor a chocolate.', 8, 4, 20, 'imagenesproyecto/Chocolate.jpg'),
+(25, 'Paleta de Vainilla', 'Suave y cremosa, con el clásico y delicado sabor de la vainilla.', 8, 4, 20, 'imagenesproyecto/Vainilla.jpg'),
+(26, 'Paleta de Coco', 'Cremosa y tropical, con el suave sabor del coco y un toque refrescante.', 8, 4, 20, 'imagenesproyecto/Coco.jpg'),
+(27, 'Paleta de Durazno', 'Suave, dulce y refrescante, con el delicioso sabor del durazno maduro.', 7, 3, 25, 'imagenesproyecto/Durazno1.jpg'),
+(28, 'Paleta de Menta', 'Refrescante y suave, con un delicioso sabor a menta que deja una sensación fresca.', 7, 3, 25, 'imagenesproyecto/Menta.jpg'),
+(29, 'Paleta de Canela', 'Dulce y aromática, con el cálido y agradable sabor de la canela.', 8, 4, 20, 'imagenesproyecto/Canela1.jpg');
+(30, 'Bolo de Frutilla', 'Bolo helado artesanal de frutilla', 6, 3, 25, 'imagenesproyecto/bolo_frutilla.png'),
+(31, 'Bolo de Chocolate', 'Bolo helado cremoso de chocolate', 6, 3, 25, 'imagenesproyecto/bolo_chocolate.png'),
+(32, 'Bolo de Vainilla', 'Bolo helado artesanal de vainilla', 6, 3, 25, 'imagenesproyecto/bolo_vainilla.png'),
+(33, 'Bolo de Maracuyá', 'Bolo helado refrescante de maracuyá', 6, 3, 25, 'imagenesproyecto/bolo_maracuya.png'),
+(34, 'Bolo de Mango', 'Bolo helado artesanal de mango', 6, 3, 25, 'imagenesproyecto/bolo_mango.png'),
+(35, 'Bolo de Leche', 'Bolo cremoso elaborado a base de leche', 6, 3, 25, 'imagenesproyecto/bolo_leche.png'),
+(36, 'Bolo de Coco', 'Bolo helado cremoso con sabor a coco', 6, 3, 25, 'imagenesproyecto/bolo_coco.png'),
+(37, 'Bolo de Café', 'Bolo helado artesanal con sabor a café', 7, 3, 20, 'imagenesproyecto/bolo_cafe.png'),
+(38, 'Bolo de Chicle', 'Bolo dulce con sabor a chicle', 6, 3, 25, 'imagenesproyecto/bolo_chicle.png'),
+(39, 'Bolo de Oreo', 'Bolo cremoso con trozos de galleta Oreo', 7, 4, 20, 'imagenesproyecto/bolo_oreo.png');
