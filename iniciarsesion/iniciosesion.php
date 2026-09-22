@@ -206,7 +206,7 @@
 
 <section class="auth-section">
     <video autoplay muted loop>
-        <source src="../helado1.mp4" type="video/mp4">
+        <source src="../imagenesproyecto/helado1.mp4" type="video/mp4">
     </video>
     <div class="overlay"></div>
     <main>

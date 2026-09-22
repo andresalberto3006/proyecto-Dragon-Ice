@@ -367,7 +367,7 @@
 
 <section class="hero">
     <video autoplay muted loop>
-        <source src="../helado1.mp4" type="video/mp4">
+        <source src="../imagenesproyecto/helado1.mp4" type="video/mp4">
     </video>
 
     <main>
