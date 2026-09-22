@@ -3,7 +3,7 @@ session_start();
 if(!isset($_SESSION['rol'])){header("Location: ../iniciosesion.php");exit();}
 include("../conexion.php");
 $id=isset($_GET['id'])?$_GET['id']:0;
-if($_SESSION['rol']=='Administrador'){$pedido=$conexion->query("SELECT * FROM pedidos WHERE id='$id'");}else{$ci=$_SESSION['ci'];$pedido=$conexion->query("SELECT * FROM pedidos WHERE id='$id' AND vendedor_ci='$ci'");}
+if($_SESSION['rol']=='Administrador'){$pedido=$conexion->query("SELECT * FROM pedidos WHERE id='$id'");}else{$ci=$_SESSION['ci'];$pedido=$conexion->query("SELECT * FROM pedidos WHERE id='$id' AND (vendedor_ci='$ci' OR (vendedor_ci IS NULL AND estado='Pendiente'))");}
 if($pedido->num_rows==0){header("Location: pedidos.php");exit();}
 $p=$pedido->fetch_assoc();
 $detalle=$conexion->query("SELECT c.*,pr.nombre,pr.precio FROM carrito c INNER JOIN productos pr ON c.productos_id=pr.id WHERE c.pedidos_id='$id'");

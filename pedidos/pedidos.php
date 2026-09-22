@@ -1,6 +1,6 @@
 <?php
 session_start();if(!isset($_SESSION['rol'])){header("Location: ../iniciosesion.php");exit();}include("../conexion.php");
-if($_SESSION['rol']=='Administrador'){$resultado=$conexion->query("SELECT p.*,IFNULL(SUM(c.costototal),0) AS total FROM pedidos p LEFT JOIN carrito c ON p.id=c.pedidos_id GROUP BY p.id,p.nombre,p.fecha,p.estado,p.vendedor_ci,p.nombrevendedor,p.metodo_pago ORDER BY p.id DESC");}else{$ci=$_SESSION['ci'];$resultado=$conexion->query("SELECT p.*,IFNULL(SUM(c.costototal),0) AS total FROM pedidos p LEFT JOIN carrito c ON p.id=c.pedidos_id WHERE p.vendedor_ci='$ci' GROUP BY p.id,p.nombre,p.fecha,p.estado,p.vendedor_ci,p.nombrevendedor,p.metodo_pago ORDER BY p.id DESC");}
+if($_SESSION['rol']=='Administrador'){$resultado=$conexion->query("SELECT p.*,IFNULL(SUM(c.costototal),0) AS total FROM pedidos p LEFT JOIN carrito c ON p.id=c.pedidos_id GROUP BY p.id,p.nombre,p.fecha,p.estado,p.vendedor_ci,p.nombrevendedor,p.metodo_pago ORDER BY p.id DESC");}else{$ci=$_SESSION['ci'];$resultado=$conexion->query("SELECT p.*,IFNULL(SUM(c.costototal),0) AS total FROM pedidos p LEFT JOIN carrito c ON p.id=c.pedidos_id WHERE p.vendedor_ci='$ci' OR (p.vendedor_ci IS NULL AND p.estado='Pendiente') GROUP BY p.id,p.nombre,p.fecha,p.estado,p.vendedor_ci,p.nombrevendedor,p.metodo_pago ORDER BY p.id DESC");}
 $rutaMenu = "../";
 ?>
 <!DOCTYPE html>
@@ -169,7 +169,6 @@ tr:hover{
                     <div class="acciones">
                         <a class="boton mostrar" href="detallePedido.php?id=<?php echo $fila['id'];?>">Detalle</a>
                         <?php if($_SESSION['rol']=='Vendedor'&&$fila['estado']=='Pendiente'){?>
-                            <a class="boton editar" href="../miCarrito.php?idPedido=<?php echo $fila['id'];?>">Carrito</a>
                             <a class="boton editar" href="../pedidos/cambiarEstadoPedido.php?id=<?php echo $fila['id'];?>&estado=En proceso">Aceptar</a>
                             <a class="boton eliminar" href="cambiarEstadoPedido.php?id=<?php echo $fila['id'];?>&estado=Rechazado">Rechazar</a>
                         <?php }?>
@@ -189,7 +188,6 @@ tr:hover{
             <?php }?>
         </table>
         <?php if($_SESSION['rol']=='Vendedor'){?>
-            <a href="formpedido.php" class="volver"> Nuevo Pedido</a>
             <a href="../paginaprincipal/03.vendedor.php" class="volver">Volver al panel</a>
         <?php }else{?>
             <a href="../paginaprincipal/02.admin.php" class="volver">Volver al panel</a>

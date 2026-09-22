@@ -16,6 +16,7 @@ include("../conexion.php");
 $id = isset($_GET['id']) ? $_GET['id'] : 0;
 $estado = isset($_GET['estado']) ? $_GET['estado'] : '';
 $ci = $_SESSION['ci'];
+$nombreVendedor = $_SESSION['usuario'];
 
 if ($estado == 'En proceso' || $estado == 'Rechazado') {
 
@@ -36,9 +37,9 @@ if ($estado == 'En proceso' || $estado == 'Rechazado') {
     }
 
     $sql = "UPDATE pedidos
-            SET estado='$estado'
+            SET estado='$estado', vendedor_ci='$ci', nombrevendedor='$nombreVendedor'
             WHERE id='$id'
-            AND vendedor_ci='$ci'
+            AND (vendedor_ci='$ci' OR vendedor_ci IS NULL)
             AND estado='Pendiente'";
 
     $conexion->query($sql);
