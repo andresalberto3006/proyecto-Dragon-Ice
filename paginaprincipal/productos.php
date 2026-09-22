@@ -25,16 +25,27 @@ $imagenesSabores = [
     17 => '../imagenesproyecto/rollocanela.jpg',
     18 => '../imagenesproyecto/snoopye.jpg',
     19 => '../imagenesproyecto/tacos.jpg',
-    20 => '../imagenesproyecto/Chocolate.jpg',
-    21 => '../imagenesproyecto/Coco.jpg',
+    20 => '../imagenesproyecto/Chocolate1.jpg',
+    21 => '../imagenesproyecto/Coco1.jpg',
     22 => '../imagenesproyecto/Canela1.jpg',
     23 => '../imagenesproyecto/Durazno1.jpg',
     24 => '../imagenesproyecto/Frutilla1.jpg',
-    25 => '../imagenesproyecto/Limon.jpg',
-    26 => '../imagenesproyecto/Mango.jpg',
-    27 => '../imagenesproyecto/Menta.jpg',
-    28 => '../imagenesproyecto/Piña.jpg',
-    29 => '../imagenesproyecto/Vainilla.jpg',
+    25 => '../imagenesproyecto/Limon1.jpg',
+    26 => '../imagenesproyecto/Mango1.jpg',
+    27 => '../imagenesproyecto/Menta1.jpg',
+    28 => '../imagenesproyecto/Piña1.jpg',
+    29 => '../imagenesproyecto/Vainilla1.jpg',
+    30 => '../imagenesproyecto/Frutilla2.jpg',
+    31 => '../imagenesproyecto/Leche2.jpg',
+    32 => '../imagenesproyecto/Maracuya2.jpg',
+    33 => '../imagenesproyecto/Vainilla2.jpg',
+    34 => '../imagenesproyecto/Chocolate2.jpg',
+    35 => '../imagenesproyecto/Oreo2.jpg',
+    36 => '../imagenesproyecto/Chicle2.jpg',
+    37 => '../imagenesproyecto/Cafe2.jpg',
+    38 => '../imagenesproyecto/Coco2.jpg',
+    39 => '../imagenesproyecto/Mango2.jpg',
+    
 ];
 
 $imagenGenerica = '../imagenesproyecto/logo.png';
@@ -70,6 +81,17 @@ $categoriasSabores = [
     27 => 'paletas',
     28 => 'paletas',
     29 => 'paletas',
+    30 => 'bolos',
+    31 => 'bolos',
+    32 => 'bolos',
+    33 => 'bolos',
+    34 => 'bolos',
+    35 => 'bolos',
+    36 => 'bolos',
+    37 => 'bolos',
+    38 => 'bolos',
+    39 => 'bolos',
+
 ];
 
 $categoriasDisponibles = ['paletas','bolos','tacos','granizado','especiales'];
