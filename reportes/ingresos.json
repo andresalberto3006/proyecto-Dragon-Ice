@@ -34,5 +34,11 @@
         "fecha": "2026-09-08",
         "descripcion": "rico y cremoso",
         "monto": 143
+    },
+    {
+        "id": 8,
+        "fecha": "2026-09-22",
+        "descripcion": "helados",
+        "monto": 34
     }
 ]
