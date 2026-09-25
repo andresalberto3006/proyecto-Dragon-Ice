@@ -227,9 +227,7 @@ if (!isset($rutaMenu)) {
         </ul>
 
         <div class="iconos">
-            <a href="<?php echo $rutaMenu; ?>buscar.php" class="icono-btn" aria-label="Buscar">
-                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            </a>
+           
 
             <a href="<?php echo $rutaMenu; ?>ubicacion.php" class="icono-btn" aria-label="Ubicación">
                 <svg viewBox="0 0 24 24"><path d="M12 21s-7-6.4-7-11a7 7 0 0 1 14 0c0 4.6-7 11-7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
