@@ -6,6 +6,7 @@ include("../conexion.php");
 $resultado = $conexion->query("SELECT * FROM productos ORDER BY id DESC");
 
 $imagenesSabores = [
+   
     1  => '../imagenesproyecto/banana.jpg',
     2  => '../imagenesproyecto/blue.jpg',
     3  => '../imagenesproyecto/bolos.jpg',
@@ -51,22 +52,25 @@ $imagenGenerica = '../imagenesproyecto/logo.png';
 
 
 $categoriasSabores = [
-    1  => 'especiales', 
-    2  => 'especiales',    
-    3  => 'bolos',    
-    4  => 'especiales', 
-    5  => 'especiales',      
-    6  => 'especiales', 
-    7  => 'granizado',  
-    8  => 'especiales', 
-    9  => 'granizado',    
-    10 => 'especiales',   
-    12 => 'especiales',    
-    14 => 'granizado',    
-    16 => 'especiales', 
-    17 => 'especiales', 
-    18 => 'especiales',    
-    19 => 'tacos',      
+    1  => 'especiales',
+    2  => 'especiales',
+    3  => 'especiales',
+    4  => 'especiales',
+    5  => 'especiales',
+    6  => 'especiales',
+    7  => 'especiales',
+    8  => 'especiales',
+    9  => 'especiales',
+    10 => 'especiales',
+    11 => 'especiales',
+    12 => 'especiales',
+    13 => 'especiales',
+    14 => 'especiales',
+    15 => 'especiales',
+    16 => 'especiales',
+    17 => 'especiales',
+    18 => 'especiales',
+    19 => 'especiales',
     20 => 'paletas',
     21 => 'paletas',
     22 => 'paletas',
@@ -90,7 +94,7 @@ $categoriasSabores = [
 
 ];
 
-$categoriasDisponibles = ['paletas','bolos','tacos','granizado','especiales'];
+$categoriasDisponibles = ['paletas','bolos','especiales'];
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -135,22 +139,6 @@ body{
     margin-top:10px;
     font-size:16px;
     color:#5b7590;
-}
-.btn-consultar{
-    display:inline-block;
-    background:#0e2a4d;
-    color:#ffffff;
-    text-decoration:none;
-    font-weight:700;
-    font-size:14px;
-    padding:12px 28px;
-    border-radius:30px;
-    transition:.25s;
-}
-
-.btn-consultar:hover{
-    background:#63d4f2;
-    color:#0e2a4d;
 }
 
 
@@ -291,8 +279,6 @@ body{
         <button class="activo" data-filtro="todos">Todos</button>
         <button data-filtro="paletas">Paletas</button>
         <button data-filtro="bolos">Bolos</button>
-        <button data-filtro="tacos">Tacos</button>
-        <button data-filtro="granizado">Granizado</button>
         <button data-filtro="especiales">Especiales</button>
     </div>
 
