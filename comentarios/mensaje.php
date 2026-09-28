@@ -92,7 +92,7 @@ p{
 </head>
 <body>
 
-<?php include("../menu.php"); ?>
+<?php include("../paginaprincipal/menu.php"); ?>
 
 <main class="fondo-panel">
     <div class="tarjeta">
