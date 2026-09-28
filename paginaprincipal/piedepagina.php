@@ -158,7 +158,7 @@ if (!isset($rutaMenu)) { $rutaMenu = "../"; }
             <ul>
                 <li><a href="<?php echo $rutaMenu; ?>paginaprincipal/01.inicio.php">Inicio</a></li>
                 <li><a href="<?php echo $rutaMenu; ?>paginaprincipal/productos.php">Productos</a></li>
-                <li><a href="<?php echo $rutaMenu; ?>quienessomos.php">Sobre nosotros</a></li>
+                <li><a href="<?php echo $rutaMenu; ?>paginaprincipal/quienessomos.php">Sobre nosotros</a></li>
             </ul>
         </div>
 
