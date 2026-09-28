@@ -10,7 +10,6 @@ if (!isset($rutaMenu)) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-<!-- Bootstrap -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
@@ -222,6 +221,11 @@ if (!isset($rutaMenu)) {
                             Comentarios
                         </a>
                     </li>
+                    <li>
+                        <a class="dropdown-item" href="<?php echo $rutaMenu; ?>paginaprincipal/fichaambiental.php">
+                           Ficha ambiental
+                        </a>
+                    </li>
                 </ul>
             </li>
         </ul>
@@ -271,7 +275,6 @@ if (!isset($rutaMenu)) {
     </div>
 </nav>
 
-<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
