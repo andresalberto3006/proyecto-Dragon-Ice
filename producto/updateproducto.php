@@ -107,6 +107,7 @@ $rutaMenu = "../";
             font-size:14px;
         }
 
+<<<<<<< Updated upstream
         .form-box input,
         .form-box select{
             width:100%;
@@ -122,6 +123,20 @@ $rutaMenu = "../";
         .form-box input::placeholder{
             color:rgba(255,255,255,0.65);
         }
+=======
+h2{z
+text-align:center;
+margin-bottom:20px;
+color:#18335c;
+}
+
+label{
+display:block;
+margin-top:12px;
+margin-bottom:5px;
+font-weight:bold; 
+}
+>>>>>>> Stashed changes
 
         .form-box input:focus,
         .form-box select:focus{
