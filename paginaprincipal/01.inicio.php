@@ -438,7 +438,7 @@
         <div class="chip">Nuestra esencia</div>
         <h2>Artesanal desde el primer scoop</h2>
         <p>Nada de químicos raros ni atajos industriales. Dragon Ice nació de una idea simple: ingredientes de verdad, recetas propias y el cariño de hacer las cosas bien, cucharada tras cucharada.</p>
-        <a href="../quienessomos.php">Conócenos más</a>
+        <a href="../paginaprincipal/quienessomos.php">Conócenos más</a>
     </div>
     <div class="imagen">
         <img src="../imagenesproyecto/brownie.jpg" alt="Helado artesanal Dragon Ice">
