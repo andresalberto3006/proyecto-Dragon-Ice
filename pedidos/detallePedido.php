@@ -11,6 +11,9 @@ $detalle=$conexion->query("SELECT c.*,pr.nombre,pr.precio FROM carrito c INNER J
 $datoQR = "Pedido #" . $p['id'] . " | Cliente: " . $p['nombre'] . " | Estado: " . $p['estado'];
 $qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=" . urlencode($datoQR);
 
+$qrPago = "../imagenesproyecto/qr_pago.jpeg";
+$puedePagar = ($p['estado'] != 'Entregado' && $p['estado'] != 'Rechazado');
+
 $rutaMenu = "../";
 ?>
 <!DOCTYPE html>
@@ -240,6 +243,81 @@ table tr{
     background:#1e7e34;
 }
 
+.boton-pagar{
+    background:#0e2a4d;
+}
+
+.boton-pagar:hover{
+    background:#63d4f2;
+    color:#0e2a4d;
+}
+
+#modalPago{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.6);
+    align-items:center;
+    justify-content:center;
+    z-index:2000;
+    padding:20px;
+}
+
+#modalPago.activo{
+    display:flex;
+}
+
+.modal-pago-caja{
+    background:white;
+    border-radius:20px;
+    padding:30px;
+    max-width:420px;
+    width:100%;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,0.35);
+}
+
+.modal-pago-caja h2{
+    color:#18335c;
+    margin-bottom:8px;
+}
+
+.modal-pago-caja .monto{
+    font-size:22px;
+    font-weight:bold;
+    color:#159db9;
+    margin-bottom:15px;
+}
+
+.modal-pago-caja img{
+    width:100%;
+    max-width:320px;
+    height:auto;
+    border-radius:12px;
+    border:2px solid #4da6ff;
+}
+
+.modal-pago-caja p{
+    margin-top:12px;
+    font-size:14px;
+    color:#555;
+}
+
+.modal-pago-caja button{
+    margin-top:18px;
+    border:none;
+    cursor:pointer;
+    background:#18335c;
+    color:white;
+    padding:12px 30px;
+    border-radius:10px;
+    font-weight:bold;
+}
+
+.modal-pago-caja button:hover{
+    background:#2f5d9f;
+}
+
 @media(max-width:800px){
     .layout{
         flex-direction:column;
@@ -252,7 +330,8 @@ table tr{
 @media print{
     .dragonice-nav,
     .pie,
-    .no-imprimir{
+    .no-imprimir,
+    #modalPago{
         display:none !important;
     }
     body{
@@ -363,15 +442,45 @@ table tr{
         <div class="botones-accion no-imprimir">
             <button type="button" class="boton-accion boton-imprimir" onclick="window.print()">Imprimir</button>
             <button type="button" class="boton-accion boton-descargar" onclick="descargarPDF()">Descargar PDF</button>
+            <?php if($puedePagar){ ?>
+                <button type="button" class="boton-accion boton-pagar" onclick="abrirPago()">Pagar con QR</button>
+            <?php } ?>
         </div>
 
         <a href="../pedidos/pedidos.php" class="volver no-imprimir">Volver a pedidos</a>
     </div>
 </main>
 
+<?php if($puedePagar){ ?>
+<div id="modalPago" class="no-imprimir">
+    <div class="modal-pago-caja">
+        <h2>Pagar pedido #<?php echo $p['id'];?></h2>
+        <div class="monto">Bs. <?php echo $total;?></div>
+        <img src="<?php echo $qrPago; ?>" alt="QR de pago">
+        <p>Escanea este código con tu app de pagos para pagar el pedido.</p>
+        <button type="button" onclick="cerrarPago()">Cerrar</button>
+    </div>
+</div>
+<?php } ?>
+
 <?php include("../paginaprincipal/piedepagina.php"); ?>
 
 <script>
+function abrirPago(){
+    document.getElementById("modalPago").classList.add("activo");
+}
+
+function cerrarPago(){
+    document.getElementById("modalPago").classList.remove("activo");
+}
+
+var modalPago = document.getElementById("modalPago");
+if(modalPago){
+    modalPago.addEventListener("click", function(e){
+        if(e.target === modalPago){ cerrarPago(); }
+    });
+}
+
 function descargarPDF(){
     const columnaQR = document.getElementById("columnaQR");
     const elemento = document.getElementById("contenidoPDF");

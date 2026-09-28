@@ -8,6 +8,8 @@ $rutaMenu = "../";
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dragon Ice | Buzón de Mensajes</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <style>
         :root{
             --azul-oscuro:#0e2a4d;
@@ -183,7 +185,7 @@ $rutaMenu = "../";
             <h1>DRAGON ICE</h1>
             <p class="subtitulo">Buzón de Mensajes</p>
 
-            <form action="mensaje.php" method="POST">
+            <form id ="formulario" action="mensaje.php" method="POST">
 
                 <label for="asunto">Asunto</label>
                 <input type="text" id="asunto" name="asunto" placeholder="Ej: Pedido, Sugerencia, Consulta" required>
@@ -199,6 +201,28 @@ $rutaMenu = "../";
         </div>
     </main>
 </section>
+<script>
+$(document).ready(function(){
+    $("#formulario").validate({
+        rules:{
+            asunto:{
+                required:true
+            },
+            come:{
+                required:true
+            }
+        },
+        messages:{
+            asunto:{
+                required:"Ingrese el asunto porfavor"
+            },
+            come:{
+                required:"Ingrese el comentario"
+            }
+        }
+    });
+});
+</script>
 
 <?php include("../paginaprincipal/piedepagina.php"); ?>          
 
