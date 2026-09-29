@@ -342,7 +342,17 @@ body{
     color:#0e2a4d;
 }
 
+ .form-box label.error{
+            color:#ff9b9b;
+            font-size:12px;
+            margin-top:4px;
+            margin-bottom:0;
+            font-weight:bold;
+        }
 
+       .form-box input.error{
+            box-shadow:0 0 0 2px #ff4d4d;
+        }
 
 @media(max-width:1000px){
 
@@ -471,8 +481,8 @@ body{
 
 </aside>
 <div id="modalCompra">
-
-    <div id="formularioPedido">
+<form id="formularioPedido" action="">
+    <div>
 
         <h2>
              Finalizar compra
@@ -482,6 +492,7 @@ body{
         <input
             type="text"
             id="nombre"
+            name="nombre"
             placeholder="Nombre completo"
         >
 
@@ -489,6 +500,7 @@ body{
         <input
             type="text"
             id="telefono"
+            name="telefono"
             placeholder="Teléfono"
         >
 
@@ -496,6 +508,7 @@ body{
         <input
             type="text"
             id="direccion"
+            name="direccion"
             placeholder="Dirección"
         >
 
@@ -523,7 +536,7 @@ body{
         </button>
 
     </div>
-
+</form>
 </div>
 
 <?php include("../paginaprincipal/piedepagina.php"); ?>
@@ -582,6 +595,4 @@ $("#formularioPedido").validate({
 </script>
 
 </body>
-
-</script>
 </html>
