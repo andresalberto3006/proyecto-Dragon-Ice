@@ -1,10 +1,19 @@
 <?php
 session_start();
-if(!isset($_SESSION['rol'])){header("Location: ../iniciosesion.php");exit();}
 include("../conexion.php");
-$id=isset($_GET['id'])?$_GET['id']:0;
-if($_SESSION['rol']=='Administrador'){$pedido=$conexion->query("SELECT * FROM pedidos WHERE id='$id'");}else{$ci=$_SESSION['ci'];$pedido=$conexion->query("SELECT * FROM pedidos WHERE id='$id' AND (vendedor_ci='$ci' OR (vendedor_ci IS NULL AND estado='Pendiente'))");}
-if($pedido->num_rows==0){header("Location: pedidos.php");exit();}
+$id=isset($_GET['id'])?intval($_GET['id']):0;
+
+$esCliente = !isset($_SESSION['rol']) && isset($_SESSION['pedido']) && (int)$_SESSION['pedido']===$id;
+
+if(!isset($_SESSION['rol']) && !$esCliente){header("Location: ../iniciarsesion/iniciosesion.php");exit();}
+
+if($esCliente || $_SESSION['rol']=='Administrador'){
+    $pedido=$conexion->query("SELECT * FROM pedidos WHERE id='$id'");
+}else{
+    $ci=$_SESSION['ci'];
+    $pedido=$conexion->query("SELECT * FROM pedidos WHERE id='$id' AND (vendedor_ci='$ci' OR (vendedor_ci IS NULL AND estado='Pendiente'))");
+}
+if($pedido->num_rows==0){header("Location: ".($esCliente?"../carritoAjaxCliente/index.php":"pedidos.php"));exit();}
 $p=$pedido->fetch_assoc();
 $detalle=$conexion->query("SELECT c.*,pr.nombre,pr.precio FROM carrito c INNER JOIN productos pr ON c.productos_id=pr.id WHERE c.pedidos_id='$id'");
 
@@ -447,7 +456,11 @@ table tr{
             <?php } ?>
         </div>
 
-        <a href="../pedidos/pedidos.php" class="volver no-imprimir">Volver a pedidos</a>
+        <?php if($esCliente){ ?>
+                <a href="#" id="volverProductos" class="volver no-imprimir">Volver a productos</a>
+        <?php }else{ ?>
+                <a href="../pedidos/pedidos.php" class="volver no-imprimir">Volver a pedidos</a>
+        <?php } ?>
     </div>
 </main>
 
@@ -501,6 +514,18 @@ function descargarPDF(){
 
     html2pdf().set(opciones).from(elemento).save().then(function(){
         columnaQR.style.display = "";
+    });
+}
+
+var volverProductos = document.getElementById("volverProductos");
+if(volverProductos){
+    volverProductos.addEventListener("click", function(e){
+        e.preventDefault();
+        fetch("../carritoAjaxCliente/php/nueva_compra.php")
+        .then(function(r){ return r.json(); })
+        .then(function(d){
+            if(d.ok){ location.href = "../carritoAjaxCliente/index.php"; }
+        });
     });
 }
 </script>
