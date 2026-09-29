@@ -209,7 +209,7 @@ document.addEventListener("click", function(event) {
 
                 if(datos.ok) {
 
-                    location.href = "recibo.php";
+                    location.href = "../pedidos/detallePedido.php?id=" + datos.pedido;
 
                 } else {
 
@@ -225,3 +225,4 @@ document.addEventListener("click", function(event) {
     }
 
 });
+actualizarCarrito();

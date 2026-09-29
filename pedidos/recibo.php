@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'php/conexion.php';
+require __DIR__ . '/../conexion.php';
 
 if(!isset($_SESSION['pedido'])) exit('No existe pedido activo');
 
@@ -153,7 +153,7 @@ Esperando aprobación del vendedor.
 </div>
 
 <script>
-document.getElementById('volverProductos').addEventListener('click',()=>fetch('php/nueva_compra.php').then(r=>r.json()).then(d=>{if(d.ok)location.href='index.php'}));
+document.getElementById('volverProductos').addEventListener('click',()=>fetch('../carritoAjaxCliente/php/nueva_compra.php').then(r=>r.json()).then(d=>{if(d.ok)location.href='../carritoAjaxCliente/index.php'}));
 </script>
 
 </body>

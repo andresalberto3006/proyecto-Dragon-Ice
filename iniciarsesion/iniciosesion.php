@@ -8,6 +8,7 @@
 
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
         :root{
@@ -143,6 +144,11 @@
             transform:scale(1.02);
         }
 
+        .form-box input[type="submit"]:disabled{
+            opacity:.6;
+            cursor:not-allowed;
+        }
+
         .form-box .enlace-secundario{
             margin-top:18px;
             font-size:14px;
@@ -190,6 +196,10 @@
 
         .form-box input.valid{
             box-shadow:0 0 0 2px var(--menta);
+        }
+
+        .swal2-container{
+            z-index:2000 !important;
         }
 
         @media(max-width:700px){
@@ -252,6 +262,52 @@ $(document).ready(function(){
             clave:{
                 required:"Ingrese su contraseña"
             }
+        },
+        submitHandler:function(form){
+
+            var boton = $(form).find("input[type=submit]");
+            var textoOriginal = boton.val();
+
+            boton.prop("disabled", true).val("Ingresando...");
+
+            fetch("BDvali.php", {
+                method: "POST",
+                body: new FormData(form)
+            })
+            .then(function(respuesta){
+                return respuesta.json();
+            })
+            .then(function(datos){
+
+                if(datos.ok){
+                    window.location.href = datos.destino;
+                    return;
+                }
+
+                boton.prop("disabled", false).val(textoOriginal);
+
+                Swal.fire({
+                    icon: datos.icono,
+                    title: datos.titulo,
+                    text: datos.texto,
+                    confirmButtonText: "Entendido",
+                    confirmButtonColor: "#0e2a4d"
+                });
+
+            })
+            .catch(function(error){
+                console.log(error);
+                boton.prop("disabled", false).val(textoOriginal);
+
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "No se pudo iniciar sesión. Intenta de nuevo.",
+                    confirmButtonText: "Entendido",
+                    confirmButtonColor: "#0e2a4d"
+                });
+            });
+
         }
     });
 });

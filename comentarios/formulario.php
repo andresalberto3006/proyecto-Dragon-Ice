@@ -169,6 +169,24 @@ $rutaMenu = "../";
             box-shadow:0 0 0 2px #ff4d4d;
         }
 
+        .form-box label.error{
+            color:#ff9b9b;
+            font-size:12px;
+            margin-top:4px;
+            margin-bottom:0;
+            font-weight:bold;
+        }
+
+        .form-box input.error,
+        .form-box textarea.error{
+            box-shadow:0 0 0 2px #ff4d4d;
+        }
+
+        .form-box input.valid,
+        .form-box textarea.valid{
+            box-shadow:0 0 0 2px var(--menta);
+        }
+
         @media(max-width:700px){
             .form-box{ padding:28px; }
             .form-box h1{ font-size:26px; }
@@ -193,44 +211,54 @@ $rutaMenu = "../";
 
             <form id ="formulario1" action="mensaje.php" method="POST">
 
+
                 <label for="asunto">Asunto</label>
-                <input type="text" id="asunto" name="asunto" placeholder="Ej: Pedido, Sugerencia, Consulta" required>
+                <input type="text" id="asunto" name="asunto" placeholder="Ej: Pedido, Sugerencia, Consulta">
 
                 <label for="come">Comentario</label>
-                <textarea id="come" name="come" placeholder="Escribe aquí tu mensaje..." required></textarea>
+                <textarea id="come" name="come" placeholder="Escribe aquí tu mensaje..."></textarea>
 
-                <input type="submit" value="Enviar Mensaje">           
+                <input type="submit" value="Enviar Mensaje">
 
             </form>
 
-            <a href="ver.php" class="volver">Ver todos los mensajes</a>        
+            <a href="ver.php" class="volver">Ver todos los mensajes</a>
         </div>
     </main>
 </section>
+
+<?php include("../paginaprincipal/piedepagina.php"); ?>
+
 <script>
 $(document).ready(function(){
     $("#formulario1").validate({
         rules:{
             asunto:{
-                required:true
+                required:true,
+                minlength:3,
+                maxlength:60
             },
             come:{
-                required:true
+                required:true,
+                minlength:10,
+                maxlength:500
             }
         },
         messages:{
             asunto:{
-                required:"Ingrese el asunto porfavor"
+                required:"Ingrese el asunto por favor",
+                minlength:"El asunto debe tener al menos 3 caracteres",
+                maxlength:"El asunto no puede pasar de 60 caracteres"
             },
             come:{
-                required:"Ingrese el comentario"
+                required:"Ingrese el comentario",
+                minlength:"El comentario debe tener al menos 10 caracteres",
+                maxlength:"El comentario no puede pasar de 500 caracteres"
             }
         }
     });
 });
 </script>
-
-<?php include("../paginaprincipal/piedepagina.php"); ?>          
 
 </body>
 </html>

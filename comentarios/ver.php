@@ -109,6 +109,18 @@ tr:hover{
     background:#2f5d9f;
 }
 
+.volver.secundario{
+    margin-top:12px;
+    background:white;
+    color:#18335c;
+    border:2px solid #4da6ff;
+}
+
+.volver.secundario:hover{
+    background:#4da6ff;
+    color:white;
+}
+
 </style>
 </head>
 <body>
@@ -145,7 +157,8 @@ tr:hover{
 
         </table>
 
-        <a href="formulario.php" class="volver">Escribir un Mensaje</a>
+        <a href="formulario.php" class="volver">Volver al buzón de mensajes</a>
+        <a href="../paginaprincipal/01.inicio.php" class="volver secundario">Volver al inicio</a>
 
     </div>
 </main>

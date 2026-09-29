@@ -187,10 +187,12 @@ body{
 
 .miembro{
     width:320px;
-    border:1px solid #e2edf5;
+    background:#e8f3fb;
+    border:1px solid #117ac0;
     border-radius:16px;
     padding:28px 22px;
     text-align:center;
+    box-shadow:0 6px 18px rgba(14,42,77,.12);
 }
 
 .miembro img{
@@ -200,6 +202,7 @@ body{
     object-fit:cover;
     object-position:center top;
     margin-bottom:14px;
+    border:4px solid white;
 }
 
 .miembro img.andre{
