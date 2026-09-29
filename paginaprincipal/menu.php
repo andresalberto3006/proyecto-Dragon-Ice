@@ -209,6 +209,7 @@ if (!isset($rutaMenu)) {
             <li><a href="<?php echo $rutaMenu; ?>paginaprincipal/01.inicio.php">Inicio</a></li>
             <li><a href="<?php echo $rutaMenu; ?>paginaprincipal/productos.php">Productos</a></li>
             <li><a href="<?php echo $rutaMenu; ?>paginaprincipal/quienessomos.php">Quiénes somos</a></li>
+            <li><a href="<?php echo $rutaMenu; ?>paginaprincipal/contactanos.php">Contactos</a></li>
 
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -232,7 +233,7 @@ if (!isset($rutaMenu)) {
 
         <div class="iconos">
         
-            <a href="<?php echo $rutaMenu; ?>ubicacion.php" class="icono-btn" aria-label="Ubicación">
+            <a href="https://www.google.com/maps?q=-17.39173143466908,-66.15389959642064" target="_blank" rel="noopener noreferrer" class="icono-btn" aria-label="Ubicación">
                 <svg viewBox="0 0 24 24"><path d="M12 21s-7-6.4-7-11a7 7 0 0 1 14 0c0 4.6-7 11-7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
             </a>
 

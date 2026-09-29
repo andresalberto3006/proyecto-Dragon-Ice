@@ -38,7 +38,8 @@ body{
 
 .hero{
     position:relative;
-    height:380px;
+    width:100%;
+    height:100vh;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -59,7 +60,7 @@ body{
     content:"";
     position:absolute;
     inset:0;
-    background:rgba(14,42,77,0.6);
+    background:rgba(14,42,77,0.5);
 }
 
 .hero-texto{
@@ -71,14 +72,14 @@ body{
 }
 
 .hero-texto h1{
-    font-size:60px;
-    letter-spacing:6px;
+    font-size:90px;
+    letter-spacing:10px;
     text-shadow:0 0 15px rgba(0,0,0,0.6);
 }
 
 .hero-texto p{
-    margin-top:12px;
-    font-size:18px;
+    margin-top:14px;
+    font-size:20px;
     color:#e6f3ff;
 }
 
@@ -173,78 +174,65 @@ body{
 }
 
 
-.ubicacion{
-    display:grid;
-    grid-template-columns:1fr 1.2fr;
-    gap:40px;
-    align-items:stretch;
-    margin-top:70px;
+.equipo{
+    margin-top:80px;
 }
 
-.ubicacion .imagen img{
-    width:100%;
-    height:100%;
-    min-height:340px;
-    object-fit:cover;
-    border-radius:22px;
-    box-shadow:0 20px 45px rgba(0,0,0,0.2);
+.equipo-grid{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:24px;
 }
 
-.ubicacion .mapa iframe{
-    width:100%;
-    height:100%;
-    min-height:340px;
-    border:0;
-    border-radius:22px;
-    box-shadow:0 20px 45px rgba(0,0,0,0.2);
-}
-
-
-.redes-bloque{
+.miembro{
+    width:320px;
+    border:1px solid #e2edf5;
+    border-radius:16px;
+    padding:28px 22px;
     text-align:center;
-    margin-top:70px;
 }
 
-.redes-bloque h2{
-    font-size:30px;
-    margin-bottom:8px;
-}
-
-.redes-bloque p{
-    color:var(--gris-texto);
-    margin-bottom:24px;
-}
-
-.redes{
-    display:flex;
-    justify-content:center;
-    gap:16px;
-}
-
-.redes a{
-    width:52px;
-    height:52px;
+.miembro img{
+    width:150px;
+    height:150px;
     border-radius:50%;
-    background:var(--azul-oscuro);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    transition:.25s;
+    object-fit:cover;
+    object-position:center top;
+    margin-bottom:14px;
 }
 
-.redes a:hover{
-    background:var(--celeste-claro);
-    transform:translateY(-3px);
+.miembro img.andre{
+    object-position:center 65%;
 }
 
-.redes svg{
-    width:22px;
-    height:22px;
-    fill:white;
+.miembro h3{
+    font-size:22px;
+    margin-bottom:4px;
 }
 
-.redes a:hover svg{
-    fill:var(--azul-oscuro);
+.miembro .oficio{
+    color:#159db9;
+    font-weight:700;
+    font-size:14px;
+    margin-bottom:12px;
+}
+
+.miembro .descripcion{
+    font-size:14.5px;
+    line-height:1.6;
+    color:var(--gris-texto);
+    margin-bottom:12px;
+}
+
+.miembro .telefono{
+    font-size:15px;
+    font-weight:700;
+}
+
+.miembro .telefono a{
+    color:var(--azul-oscuro);
+    text-decoration:none;
 }
 
 
@@ -288,13 +276,13 @@ body{
 }
 
 @media(max-width:800px){
-    .ubicacion{ grid-template-columns:1fr; }
-    .hero-texto h1{ font-size:38px; letter-spacing:3px; }
+    .hero-texto h1{ font-size:44px; letter-spacing:4px; }
     .encabezado h2{ font-size:28px; }
 }
 
 @media(max-width:520px){
     .datos{ grid-template-columns:1fr; }
+    .miembro{ width:100%; }
 }
 
 </style>
@@ -356,34 +344,58 @@ body{
 
     </div>
 
-    <div class="ubicacion">
-        <div class="imagen">
-            <img src="../imagenesproyecto/combo.jpg" alt="Combo Dragon Ice">
-        </div>
-        <div class="mapa">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d615.3590111624675!2d-66.15389959642064!3d-17.39173143466908!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1ses!2sbo!4v1777933507710!5m2!1ses!2sbo"
-                loading="lazy"
-                title="Ubicación de Dragon Ice">
-            </iframe>
-        </div>
-    </div>
 
-    <div class="redes-bloque">
-        <h2>Síguenos en redes</h2>
-        <p>Entérate de nuestros nuevos sabores y promociones.</p>
+    <div class="equipo">
 
-        <div class="redes">
-            <a href="#" aria-label="Facebook">
-                <svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z"/></svg>
-            </a>
-            <a href="#" aria-label="Instagram">
-                <svg viewBox="0 0 24 24"><path d="M12 2c2.7 0 3.1 0 4.1.1 1.1 0 1.8.2 2.5.5.7.3 1.2.6 1.8 1.2.6.6.9 1.1 1.2 1.8.3.7.5 1.4.5 2.5.1 1 .1 1.4.1 4.1s0 3.1-.1 4.1c0 1.1-.2 1.8-.5 2.5-.3.7-.6 1.2-1.2 1.8-.6.6-1.1.9-1.8 1.2-.7.3-1.4.5-2.5.5-1 .1-1.4.1-4.1.1s-3.1 0-4.1-.1c-1.1 0-1.8-.2-2.5-.5-.7-.3-1.2-.6-1.8-1.2-.6-.6-.9-1.1-1.2-1.8-.3-.7-.5-1.4-.5-2.5C2 15.1 2 14.7 2 12s0-3.1.1-4.1c0-1.1.2-1.8.5-2.5.3-.7.6-1.2 1.2-1.8.6-.6 1.1-.9 1.8-1.2.7-.3 1.4-.5 2.5-.5C8.9 2 9.3 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4zm5.2-8.4a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4z"/></svg>
-            </a>
-            <a href="#" aria-label="TikTok">
-                <svg viewBox="0 0 24 24"><path d="M14 3c.4 2.2 1.9 3.7 4.1 4v3c-1.4 0-2.7-.4-4.1-1.3v6.2A5.9 5.9 0 1 1 8.3 9v3.2a2.7 2.7 0 1 0 2.7 2.7V3H14z"/></svg>
-            </a>
+        <div class="encabezado">
+            <span class="chip">Frost S.A.</span>
+            <h2>Nuestro equipo</h2>
         </div>
+
+        <div class="equipo-grid">
+
+            <div class="miembro">
+                <img src="../imagenesproyecto/camila.jpg" alt="Camila Vargas">
+                <h3>Camila Vargas</h3>
+                <p class="oficio">Representante legal</p>
+                <p class="descripcion">Representa a la empresa ante clientes y entidades, y vela por que Dragon Ice cumpla con sus compromisos y normativas.</p>
+                <p class="telefono">📞 <a href="tel:+59162622743">62622743</a></p>
+            </div>
+
+            <div class="miembro">
+                <img src="../imagenesproyecto/agustin.jpg" alt="Agustin Veizaga">
+                <h3>Agustin Veizaga</h3>
+                <p class="oficio">Jefe de desarrollo</p>
+                <p class="descripcion">Lidera la construcción del sistema web de Dragon Ice y coordina al equipo técnico para mantenerlo funcionando.</p>
+                <p class="telefono">📞 <a href="tel:+59169436981">69436981</a></p>
+            </div>
+
+            <div class="miembro">
+                <img src="../imagenesproyecto/edson.jpg" alt="Edson Torrico">
+                <h3>Edson Torrico</h3>
+                <p class="oficio">Jefe de investigaciones</p>
+                <p class="descripcion">Investiga nuevas ideas, sabores y tendencias para que Dragon Ice siga innovando en cada producto.</p>
+                <p class="telefono">📞 <a href="tel:+59176884361">76884361</a></p>
+            </div>
+
+            <div class="miembro">
+                <img src="../imagenesproyecto/andre.jpg" alt="Andre Aramayo" class="andre">
+                <h3>Andre Aramayo</h3>
+                <p class="oficio">Jefe de control de calidad</p>
+                <p class="descripcion">Revisa que cada producto y cada función del sistema cumplan con el nivel de calidad que esperan nuestros clientes.</p>
+                <p class="telefono">📞 <a href="tel:+59164740198">64740198</a></p>
+            </div>
+
+            <div class="miembro">
+                <img src="../imagenesproyecto/andres.jpg" alt="Andres Alberto">
+                <h3>Andres Alberto</h3>
+                <p class="oficio">Administración de la base de datos</p>
+                <p class="descripcion">Administra y protege la información del negocio: productos, pedidos, ventas y usuarios.</p>
+                <p class="telefono">📞 <a href="tel:+59172791232">72791232</a></p>
+            </div>
+
+        </div>
+
     </div>
 
 </section>
