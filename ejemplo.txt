@@ -1,8 +1,0 @@
-ASUNTO:
-coca cola
-COMENTARIO:
-com oestas
-ASUNTO:
-hola
-COMENTARIO:
-hola bien y tu ?
