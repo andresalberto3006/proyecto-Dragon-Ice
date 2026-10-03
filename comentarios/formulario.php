@@ -8,8 +8,8 @@ $rutaMenu = "../";
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dragon Ice | Buzón de Mensajes</title>
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
+ <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
     <style>
         :root{
             --azul-oscuro:#0e2a4d;
@@ -162,6 +162,12 @@ $rutaMenu = "../";
             opacity:1;
             color:var(--celeste);
         }
+         .form-box input.error{
+            box-shadow:0 0 0 2px #ff4d4d;
+        }
+         .form-box textarea.error{
+            box-shadow:0 0 0 2px #ff4d4d;
+        }
 
         .form-box label.error{
             color:#ff9b9b;
@@ -203,7 +209,8 @@ $rutaMenu = "../";
             <h1>DRAGON ICE</h1>
             <p class="subtitulo">Buzón de Mensajes</p>
 
-            <form id="formulario" action="mensaje.php" method="POST">
+            <form id ="formulario1" action="mensaje.php" method="POST">
+
 
                 <label for="asunto">Asunto</label>
                 <input type="text" id="asunto" name="asunto" placeholder="Ej: Pedido, Sugerencia, Consulta">
@@ -224,7 +231,7 @@ $rutaMenu = "../";
 
 <script>
 $(document).ready(function(){
-    $("#formulario").validate({
+    $("#formulario1").validate({
         rules:{
             asunto:{
                 required:true,

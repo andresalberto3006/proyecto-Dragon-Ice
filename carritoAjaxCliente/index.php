@@ -346,9 +346,22 @@ body{
     color:#0e2a4d;
 }
 
+ .form-box label.error{
+            color:#ff9b9b;
+            font-size:12px;
+            margin-top:4px;
+            margin-bottom:0;
+            font-weight:bold;
+        }
+
+       .form-box input.error{
+            box-shadow:0 0 0 2px #ff4d4d;
+        }
+
 .swal2-container{
     z-index:2000 !important;
 }
+
 
 @media(max-width:1000px){
     #productos{
@@ -434,16 +447,37 @@ body{
 </aside>
 
 <div id="modalCompra">
+<form id="formularioPedido" action="">
+    <div>
 
     <form id="formularioPedido">
 
         <h2>Finalizar compra</h2>
 
-        <input type="text" id="nombre" name="nombre" placeholder="Nombre completo">
 
-        <input type="text" id="telefono" name="telefono" placeholder="Teléfono (8 dígitos)">
+        <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            placeholder="Nombre completo"
+        >
 
-        <input type="text" id="direccion" name="direccion" placeholder="Dirección">
+
+        <input
+            type="text"
+            id="telefono"
+            name="telefono"
+            placeholder="Teléfono"
+        >
+
+
+        <input
+            type="text"
+            id="direccion"
+            name="direccion"
+            placeholder="Dirección"
+        >
+
 
         <select id="metodoPago" name="metodoPago">
             <option value="QR">Pago mediante QR</option>
@@ -454,7 +488,8 @@ body{
 
         <button type="button" id="cancelarCompra">Cancelar</button>
 
-    </form>
+    </div>
+</form>
 
 </div>
 
@@ -528,4 +563,5 @@ $(document).ready(function(){
 </script>
 
 </body>
+</html>
 </html>
