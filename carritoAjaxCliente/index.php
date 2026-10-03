@@ -400,7 +400,7 @@ body{
 
 <main class="contenido">
 
-    <h1 class="titulo">Dragon Ice</h1>
+    <h1 class="titulo">CARRITO</h1>
 
     <p class="subtitulo">Elige tus productos favoritos y realiza tu pedido.</p>
 
