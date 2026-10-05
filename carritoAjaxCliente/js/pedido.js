@@ -1,16 +1,23 @@
-document.addEventListener(
-    "DOMContentLoaded",
-    function() {
+var modal = document.getElementById("modalCompra");
 
-        verificarEstadoPedido();
-
-    }
-);
+modal.style.display = "none";
 
 
 document
     .getElementById("generarPedido")
     .addEventListener("click", function() {
+
+        if (pedidoActivo) {
+
+            Swal.fire({
+                title: "Ya tienes un pedido abierto",
+                text: "Puedes seguir agregando productos al carrito.",
+                icon: "info",
+                confirmButtonColor: "#0e2a4d"
+            });
+
+            return;
+        }
 
         Swal.fire({
             title: "¿Deseas realizar el pedido?",
@@ -24,11 +31,7 @@ document
         }).then(function(resultado) {
 
             if (resultado.isConfirmed) {
-
-                document
-                    .getElementById("modalCompra")
-                    .style.display = "flex";
-
+                modal.style.display = "flex";
             }
 
         });
@@ -36,14 +39,11 @@ document
     });
 
 
-
 document
     .getElementById("cancelarCompra")
     .addEventListener("click", function() {
 
-        document
-            .getElementById("modalCompra")
-            .style.display = "none";
+        modal.style.display = "none";
 
     });
 
@@ -52,63 +52,68 @@ document
     .getElementById("confirmarPedido")
     .addEventListener("click", function() {
 
+        if (!$("#formularioPedido").valid()) {
+            return;
+        }
+
+        var boton = this;
+        boton.disabled = true;
+
         let datos = {
-
-            nombre:
-                document.getElementById("nombre").value,
-
-            telefono:
-                document.getElementById("telefono").value,
-
-            direccion:
-                document.getElementById("direccion").value,
-
-            metodo:
-                document.getElementById("metodoPago").value
-
+            nombre: document.getElementById("nombre").value,
+            telefono: document.getElementById("telefono").value,
+            direccion: document.getElementById("direccion").value,
+            metodo: document.getElementById("metodoPago").value
         };
 
-
         fetch("php/crear_pedido.php", {
-
             method: "POST",
-
             headers: {
                 "Content-Type": "application/json"
             },
-
             body: JSON.stringify(datos)
-
         })
 
         .then(function(respuesta) {
-            return respuesta.json();
+            return respuesta.text();
         })
 
-        .then(function(datos) {
+        .then(function(texto) {
 
-            if(datos.ok) {
+            var respuesta;
 
-                document
-                    .getElementById("modalCompra")
-                    .style.display = "none";
+            try {
+                respuesta = JSON.parse(texto);
+            } catch (e) {
+                console.log(texto);
+                modal.style.display = "none";
+                boton.disabled = false;
+                alert("El servidor respondió con un error. Abre la consola (F12) para verlo.");
+                return;
+            }
+
+            boton.disabled = false;
+
+            if (respuesta.ok) {
+
+                modal.style.display = "none";
 
                 Swal.fire({
                     title: "¡Pedido realizado con éxito!",
-                    text: "Tu pedido Nº " + datos.pedido + " fue registrado y quedará pendiente de aprobación.",
+                    text: "Tu pedido Nº " + respuesta.pedido + " fue registrado. Ya puedes agregar productos al carrito.",
                     icon: "success",
                     confirmButtonText: "Continuar",
-                    confirmButtonColor: "#28a745"
+                    confirmButtonColor: "#28a745",
+                    allowOutsideClick: false
                 }).then(function() {
 
-                    habilitarCompra();
                     location.reload();
 
                 });
 
             } else {
 
-                alert(datos.mensaje);
+                alert(respuesta.mensaje);
 
             }
 
@@ -116,96 +121,8 @@ document
 
         .catch(function(error) {
             console.log(error);
+            boton.disabled = false;
+            modal.style.display = "none";
         });
 
     });
-
-
-function verificarEstadoPedido() {
-
-    fetch("php/estado_pedido.php")
-
-        .then(function(respuesta) {
-            return respuesta.json();
-        })
-
-        .then(function(datos) {
-
-            if(
-                datos.ok &&
-                datos.pedido.Estado === "Pendiente"
-            ) {
-
-                let formulario =
-                    document.getElementById(
-                        "formularioPedido"
-                    );
-
-                let resumen =
-                    document.getElementById(
-                        "resumenPedido"
-                    );
-
-
-                if(formulario) {
-                    formulario.style.display = "none";
-                }
-
-
-                if(resumen) {
-                    resumen.style.display = "block";
-                }
-
-
-                let datosPedido =
-                    document.getElementById(
-                        "datosPedido"
-                    );
-
-
-                if(datosPedido) {
-
-                    datosPedido.innerHTML = `
-
-                        <p>
-                            Número pedido:
-                            ${datos.pedido.id}
-                        </p>
-
-                        <p>
-                            Cliente:
-                            ${datos.pedido.Nombre}
-                        </p>
-
-                        <p>
-                            Teléfono:
-                            ${datos.pedido.telefono}
-                        </p>
-
-                        <p>
-                            Dirección:
-                            ${datos.pedido.direccion}
-                        </p>
-
-                        <p>
-                            Método pago:
-                            ${datos.pedido.metodoPago}
-                        </p>
-
-                        <p>
-                            Estado:
-                            Pendiente de aprobación
-                        </p>
-
-                    `;
-
-                }
-
-            }
-
-        })
-
-        .catch(function(error) {
-            console.log(error);
-        });
-}

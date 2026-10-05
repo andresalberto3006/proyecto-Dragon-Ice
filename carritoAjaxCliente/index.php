@@ -49,8 +49,6 @@ body{
     margin-bottom:35px;
 }
 
-
-
 .acciones{
     display:flex;
     justify-content:center;
@@ -98,9 +96,6 @@ body{
     border-color:#7be0c4;
     color:#0e2a4d;
 }
-
-
-
 
 #productos{
     display:grid;
@@ -160,7 +155,10 @@ body{
     background:#173e63;
 }
 
-
+.btnAgregar:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+}
 
 #carritoIcono{
     position:fixed;
@@ -196,8 +194,6 @@ body{
     font-weight:bold;
 }
 
-
-
 #fondo{
     display:none;
     position:fixed;
@@ -209,8 +205,6 @@ body{
 #fondo.activo{
     display:block;
 }
-
-
 
 #sidebar{
     position:fixed;
@@ -287,8 +281,6 @@ body{
     cursor:pointer;
 }
 
-
-
 #modalCompra{
     display:none;
     position:fixed;
@@ -321,6 +313,18 @@ body{
     border-radius:8px;
 }
 
+#formularioPedido input.error{
+    border-color:#dc3545;
+}
+
+#formularioPedido label.error{
+    display:block;
+    color:#dc3545;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:4px;
+}
+
 #confirmarPedido,
 #cancelarCompra{
     width:100%;
@@ -342,26 +346,36 @@ body{
     color:#0e2a4d;
 }
 
+ .form-box label.error{
+            color:#ff9b9b;
+            font-size:12px;
+            margin-top:4px;
+            margin-bottom:0;
+            font-weight:bold;
+        }
+
+       .form-box input.error{
+            box-shadow:0 0 0 2px #ff4d4d;
+        }
+
+.swal2-container{
+    z-index:2000 !important;
+}
 
 
 @media(max-width:1000px){
-
     #productos{
         grid-template-columns:repeat(3,1fr);
     }
-
 }
 
 @media(max-width:750px){
-
     #productos{
         grid-template-columns:repeat(2,1fr);
     }
-
 }
 
 @media(max-width:500px){
-
     #productos{
         grid-template-columns:1fr;
     }
@@ -374,7 +388,6 @@ body{
     .btn-dragonice{
         width:220px;
     }
-
 }
 
 </style>
@@ -383,105 +396,69 @@ body{
 
 <body>
 
- <?php $rutaMenu = "../"; include("../paginaprincipal/menu.php"); ?>
-
-
+<?php $rutaMenu = "../"; include("../paginaprincipal/menu.php"); ?>
 
 <main class="contenido">
 
-<h1 class="titulo">
-    Dragon Ice 
-</h1>
+    <h1 class="titulo">CARRITO</h1>
 
-<p class="subtitulo">
-    Elige tus productos favoritos y realiza tu pedido.
-</p>
+    <p class="subtitulo">Elige tus productos favoritos y realiza tu pedido.</p>
 
+    <div class="acciones">
 
-<div class="acciones">
+        <button id="generarPedido" class="btn-dragonice">
+            Generar nuevo pedido
+        </button>
 
-    <button id="generarPedido" class="btn-dragonice">
-         Generar nuevo pedido
-    </button>
+        <a href="consultar_pedido.php" class="btn-dragonice secundario">
+            Consultar pedido
+        </a>
 
-    <a href="consultar_pedido.php" class="btn-dragonice secundario">
-         Consultar pedido
-    </a>
+    </div>
 
-</div>
+    <h2 class="titulo">Nuestros productos</h2>
 
-
-<h2 class="titulo">
-    Nuestros productos
-</h2>
-
-
-<section id="productos"></section>
+    <section id="productos"></section>
 
 </main>
 
-
-
-
 <div id="carritoIcono">
-
     🛒
-
-    <span id="cantidadCarrito">
-        0
-    </span>
-
+    <span id="cantidadCarrito">0</span>
 </div>
 
-
 <div id="fondo"></div>
-
-
-
 
 <aside id="sidebar">
 
     <div>
-
-        <h2> Mi carrito</h2>
-
-        <button id="cerrarCarrito">
-            ✖
-        </button>
-
+        <h2>Mi carrito</h2>
+        <button id="cerrarCarrito">✖</button>
     </div>
-
 
     <div id="contenidoCarrito"></div>
 
+    <h3 id="totalCarrito">Total: Bs 0</h3>
 
-    <h3 id="totalCarrito">
-        Total: Bs 0
-    </h3>
+    <button id="vaciarCarrito">Vaciar carrito</button>
 
-
-    <button id="vaciarCarrito">
-        Vaciar carrito
-    </button>
-
-
-    <button id="comprar">
-        Comprar
-    </button>
+    <button id="comprar">Comprar</button>
 
 </aside>
+
 <div id="modalCompra">
+<form id="formularioPedido" action="">
+    <div>
 
-    <div id="formularioPedido">
+    <form id="formularioPedido">
 
-        <h2>
-             Finalizar compra
-        </h2>
+        <h2>Finalizar compra</h2>
 
 
         <input
             type="text"
             id="nombre"
+            name="nombre"
             placeholder="Nombre completo"
         >
 
@@ -489,6 +466,7 @@ body{
         <input
             type="text"
             id="telefono"
+            name="telefono"
             placeholder="Teléfono"
         >
 
@@ -496,33 +474,22 @@ body{
         <input
             type="text"
             id="direccion"
+            name="direccion"
             placeholder="Dirección"
         >
 
 
-        <select id="metodoPago">
-
-            <option value="QR">
-                Pago mediante QR
-            </option>
-
-            <option value="Efectivo">
-                Pago en efectivo
-            </option>
-
+        <select id="metodoPago" name="metodoPago">
+            <option value="QR">Pago mediante QR</option>
+            <option value="Efectivo">Pago en efectivo</option>
         </select>
 
+        <button type="button" id="confirmarPedido">Confirmar compra</button>
 
-        <button id="confirmarPedido">
-            Confirmar compra
-        </button>
-
-
-        <button id="cancelarCompra">
-            Cancelar
-        </button>
+        <button type="button" id="cancelarCompra">Cancelar</button>
 
     </div>
+</form>
 
 </div>
 
@@ -534,54 +501,67 @@ body{
 
 <script>
 $(document).ready(function(){
-$("#formularioPedido").validate({
 
-    rules:{
-        nombre:{
-            required:true,
-            minlength:3
-        },
-        telefono:{
-            required:true,
-            digits:true,
-            minlength:8,
-            maxlength:8
-        },
-        direccion:{
-            required:true,
-            minlength:5
-        },
-        metodoPago:{
-            required:true
-        }
-    },
+    $.validator.addMethod("soloLetras", function(value, element){
+        return this.optional(element) || /^[A-Za-zÁÉÍÓÚáéíóúÑñÜü\s]+$/.test(value);
+    }, "Ingrese solo letras");
 
-    messages:{
-        nombre:{
-            required:"Ingrese su nombre",
-            minlength:"El nombre debe tener al menos 3 caracteres"
+    $("#formularioPedido").validate({
+
+        rules:{
+            nombre:{
+                required:true,
+                minlength:3,
+                maxlength:80,
+                soloLetras:true
+            },
+            telefono:{
+                required:true,
+                digits:true,
+                minlength:8,
+                maxlength:8
+            },
+            direccion:{
+                required:true,
+                minlength:5,
+                maxlength:100
+            },
+            metodoPago:{
+                required:true
+            }
         },
-        telefono:{
-            required:"Ingrese su teléfono",
-            digits:"Ingrese solo números",
-            minlength:"El teléfono debe tener 8 dígitos",
-            maxlength:"El teléfono debe tener 8 dígitos"
+
+        messages:{
+            nombre:{
+                required:"Ingrese su nombre",
+                minlength:"El nombre debe tener al menos 3 caracteres",
+                maxlength:"El nombre no puede pasar de 80 caracteres"
+            },
+            telefono:{
+                required:"Ingrese su teléfono",
+                digits:"Ingrese solo números",
+                minlength:"El teléfono debe tener 8 dígitos",
+                maxlength:"El teléfono debe tener 8 dígitos"
+            },
+            direccion:{
+                required:"Ingrese su dirección",
+                minlength:"Ingrese una dirección más completa",
+                maxlength:"La dirección no puede pasar de 100 caracteres"
+            },
+            metodoPago:{
+                required:"Seleccione un método de pago"
+            }
         },
-        direccion:{
-            required:"Ingrese su dirección",
-            minlength:"Ingrese una dirección más completa"
-        },
-        metodoPago:{
-            required:"Seleccione un método de pago"
+
+        submitHandler:function(){
+            $("#confirmarPedido").click();
         }
-    }
-    
-});
+
+    });
 
 });
 </script>
 
 </body>
-
-</script>
+</html>
 </html>

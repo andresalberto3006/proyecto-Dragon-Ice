@@ -154,11 +154,14 @@ if (!isset($rutaMenu)) { $rutaMenu = "../"; }
         </div>
 
         <div class="pie-col">
-            <h3>Dragon Ice</h3>
+            <h3>Navegación</h3>
             <ul>
                 <li><a href="<?php echo $rutaMenu; ?>paginaprincipal/01.inicio.php">Inicio</a></li>
                 <li><a href="<?php echo $rutaMenu; ?>paginaprincipal/productos.php">Productos</a></li>
-                <li><a href="<?php echo $rutaMenu; ?>quienessomos.php">Sobre nosotros</a></li>
+                <li><a href="<?php echo $rutaMenu; ?>paginaprincipal/quienessomos.php">Quiénes somos</a></li>
+                <li><a href="<?php echo $rutaMenu; ?>paginaprincipal/contactanos.php">Contactos</a></li>
+                <li><a href="<?php echo $rutaMenu; ?>comentarios/formulario.php">Comentarios</a></li>
+                <li><a href="<?php echo $rutaMenu; ?>paginaprincipal/fichaambiental.php">Ficha ambiental</a></li>
             </ul>
         </div>
 
