@@ -4,9 +4,9 @@ $rutaMenu = "../";
 
 $mensajes = [];
 
-if(file_exists("../ejemplo.txt")){
+if(file_exists("./ejemplo.txt")){
 
-    $lineas = file("../ejemplo.txt", FILE_IGNORE_NEW_LINES);
+    $lineas = file("./ejemplo.txt", FILE_IGNORE_NEW_LINES);
 
     for($i=0; $i<count($lineas); $i++){
         if($lineas[$i] == "ASUNTO:"){

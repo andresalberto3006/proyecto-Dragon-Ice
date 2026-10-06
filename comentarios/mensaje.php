@@ -10,7 +10,7 @@ if($_SERVER["REQUEST_METHOD"] != "POST"){
 $asu = trim(str_replace(array("\r", "\n"), " ", $_POST["asunto"]));
 $come = trim(str_replace(array("\r", "\n"), " ", $_POST["come"]));
 
-$archivo = fopen("ejemplo.txt","a");
+$archivo = fopen("./ejemplo.txt","w");
 fwrite($archivo, "ASUNTO:".PHP_EOL);
 fwrite($archivo, $asu.PHP_EOL);
 fwrite($archivo, "COMENTARIO:".PHP_EOL);
