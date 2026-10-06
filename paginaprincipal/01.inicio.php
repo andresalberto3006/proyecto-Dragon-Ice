@@ -65,14 +65,6 @@
             0 0 30px rgba(0,0,0,0.7);
     }
 
-    @media(max-width:700px){
-        .hero main h1{
-            font-size:55px;
-            letter-spacing:6px;
-            text-align:center;
-        }
-    }
-
 
     .confianza{
         padding:70px 20px;
@@ -126,14 +118,6 @@
         font-size:14.5px;
         line-height:1.65;
         color:var(--gris-texto);
-    }
-
-    @media(max-width:800px){
-        .confianza-grid,
-        .porque-grid{
-            grid-template-columns:1fr;
-            gap:20px;
-        }
     }
 
 
@@ -198,13 +182,6 @@
         box-shadow:0 20px 45px rgba(0,0,0,0.2);
     }
 
-    @media(max-width:900px){
-        .seccion{ grid-template-columns:1fr; margin:60px auto; }
-        .seccion.invertida .imagen{ order:0; }
-        .seccion h2{ font-size:34px; }
-        .seccion img{ height:320px; }
-    }
-
 
     .porque{
         padding:70px 20px;
@@ -267,6 +244,24 @@
         font-weight:700;
         padding:14px 36px;
         border-radius:30px;
+    }
+
+
+  
+    @media(max-width:900px){
+        .hero main h1{ font-size:55px; letter-spacing:6px; text-align:center; }
+
+        .confianza-grid,
+        .porque-grid{ grid-template-columns:1fr; gap:20px; }
+
+        .seccion{ grid-template-columns:1fr; margin:50px auto; padding:0 18px; gap:25px; }
+        .seccion.invertida .imagen{ order:0; }
+        .seccion h2{ font-size:30px; }
+        .seccion p{ font-size:16px; }
+        .seccion img{ height:280px; }
+
+        .confianza{ padding:45px 16px; }
+        .cta{ padding:55px 20px; }
     }
 
     </style>
