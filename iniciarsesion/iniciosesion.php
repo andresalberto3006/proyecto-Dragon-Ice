@@ -221,8 +221,8 @@
     <div class="overlay"></div>
     <main>
         <div class="form-box login-box">
-            <h1>DRAGON ICE</h1>
-            <p class="subtitulo">Iniciar Sesión</p>
+            <h1>INICIAR SESIÓN</h1>
+            <p class="subtitulo">Dragon Ice</p>
 
             <form id="formulario" action="BDvali.php" method="post">
 

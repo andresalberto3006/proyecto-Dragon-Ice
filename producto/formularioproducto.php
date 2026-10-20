@@ -220,13 +220,13 @@ $rutaMenu = "../";
     <div class="overlay"></div>
     <main>
         <div class="form-box">
-            <h1>DRAGON ICE</h1>
-            <p class="subtitulo">Registrar Producto</p>
+            <h1>REGISTRAR PRODUCTO</h1>
+            <p class="subtitulo">Dragon Ice</p>
 
             <form id="formulario" action="../producto/registroproducto.php" method="POST" enctype="multipart/form-data">
 
                 <label for="id">ID</label>
-                <input type="number" id="id" name="id" placeholder="Ingrese el código">
+                <input type="number" id="id" name="id" placeholder="Ingrese el ID">
 
                 <label for="nombre">Nombre</label>
                 <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre">
@@ -268,7 +268,7 @@ $rutaMenu = "../";
                     stock:{ required:true, number:true }
                 },
                 messages:{
-                    id:{ required:"Ingrese el codigo del producto" },
+                    id:{ required:"Ingrese el id del producto" },
                     nombre:{ required:"Ingrese el nombre del producto" },
                     descripcion:{ required:"Ingrese la descripción" },
                     precio:{ required:"Ingrese el precio" },

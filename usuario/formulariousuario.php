@@ -214,8 +214,8 @@ $rutaMenu = "../";
     <div class="overlay"></div>
     <main>
         <div class="form-box">
-            <h1>DRAGON ICE</h1>
-            <p class="subtitulo">Registrar Usuario</p>
+            <h1>REGISTRAR USUARIO</h1>
+            <p class="subtitulo">Dragon Ice</p>
 
             <form id="formulario" action="../usuario/registrousuario.php" method="POST">
 

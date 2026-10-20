@@ -206,8 +206,8 @@ $rutaMenu = "../";
     <main>
         <div class="form-box">
 
-            <h1>DRAGON ICE</h1>
-            <p class="subtitulo">Buzón de Mensajes</p>
+            <h1>COMENTARIOS</h1>
+            <p class="subtitulo">Dragon Ice</p>
 
             <form id ="formulario1" action="mensaje.php" method="POST">
 
