@@ -230,7 +230,7 @@
                 <input id="usuario" type="text" name="usuario" placeholder="Ingrese su nombre" required>
 
                 <label for="clave">Contraseña</label>
-                <input id="clave" type="text" name="clave" placeholder="Ingrese su numero de celular" required>
+                <input id="clave" type="text" name="clave" placeholder="Ingrese su contraseña" required>
 
                 <input type="submit" value="Ingresar">
             </form>
