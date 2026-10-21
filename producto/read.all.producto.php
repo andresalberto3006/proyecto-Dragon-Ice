@@ -19,6 +19,7 @@ $rutaMenu = "../";
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Productos</title>
 
 <style>
@@ -49,6 +50,7 @@ body{
 }
 
 .contenedor{
+width:100%;
 max-width:1200px;
 margin:auto;
 background:white;
@@ -156,6 +158,165 @@ background:#dc3545;
 .alerta-stock ul{
     margin-left:20px;
 }
+
+@media(max-width:1024px){
+
+    .fondo-panel{
+        padding:30px 20px;
+    }
+
+    .contenedor{
+        padding:25px 20px;
+    }
+
+    th, td{
+        padding:10px 8px;
+        font-size:14px;
+    }
+
+    .boton{
+        padding:7px 10px;
+        font-size:13px;
+    }
+
+    .acciones{
+        flex-wrap:wrap;
+    }
+}
+
+@media(max-width:768px){
+
+    .fondo-panel{
+        padding:20px 12px;
+    }
+
+    .contenedor{
+        padding:20px 15px;
+        border-radius:18px;
+    }
+
+    h1{
+        font-size:22px;
+        margin-bottom:20px;
+    }
+
+    .alerta-stock{
+        padding:12px 15px;
+        font-size:14px;
+    }
+
+    table, tbody, tr, td{
+        display:block;
+        width:100%;
+    }
+
+    thead{
+        display:none;
+    }
+
+    tr{
+        border:1px solid #dbe6f5;
+        border-radius:14px;
+        margin-bottom:15px;
+        padding:6px 14px;
+        background:white;
+        box-shadow:0 3px 10px rgba(0,0,0,0.08);
+    }
+
+    td{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        gap:15px;
+        text-align:right;
+        padding:10px 0;
+        border-bottom:1px solid #eef2f8;
+    }
+
+    td:last-child{
+        border-bottom:none;
+    }
+
+    td::before{
+        content:attr(data-label);
+        font-weight:bold;
+        color:#18335c;
+        text-align:left;
+        flex-shrink:0;
+    }
+
+    td.celda-acciones{
+        flex-direction:column;
+        align-items:stretch;
+        text-align:center;
+    }
+
+    td.celda-acciones::before{
+        text-align:left;
+        margin-bottom:8px;
+    }
+
+    .acciones{
+        justify-content:stretch;
+    }
+
+    .acciones .boton{
+        flex:1 1 auto;
+        text-align:center;
+        padding:10px;
+    }
+
+    td.vacio{
+        display:block;
+        text-align:center;
+    }
+
+    td.vacio::before{
+        display:none;
+    }
+
+    .volver{
+        width:100%;
+    }
+}
+
+@media(max-width:480px){
+
+    .fondo-panel{
+        padding:15px 8px;
+    }
+
+    .contenedor{
+        padding:15px 10px;
+    }
+
+    h1{
+        font-size:19px;
+    }
+
+    tr{
+        padding:4px 10px;
+    }
+
+    td{
+        font-size:13px;
+    }
+
+    .acciones{
+        flex-direction:column;
+    }
+
+    .acciones .boton{
+        flex:none;
+        width:100%;
+    }
+
+    .volver{
+        padding:13px;
+        font-size:14px;
+    }
+}
+
 </style>
 </head>
 <body>
@@ -176,6 +337,7 @@ background:#dc3545;
     </div>
 <?php } ?>
         <table>
+            <thead>
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
@@ -186,6 +348,8 @@ background:#dc3545;
                 <th>Imagen</th>
                 <th>Acciones</th>
             </tr>
+            </thead>
+            <tbody>
             <?php if(count($productos)>0){ foreach($productos as $fila){
     $claseStock = '';
     if ($fila['stock'] <= 0) {
@@ -195,14 +359,14 @@ background:#dc3545;
     }
 ?>
 <tr>
-    <td><?php echo $fila['id'];?></td>
-    <td><?php echo $fila['nombre'];?></td>
-    <td><?php echo $fila['descripcion'];?></td>
-    <td><?php echo $fila['precio'];?></td>
-    <td><?php echo $fila['costo'];?></td>
-    <td class="<?php echo $claseStock; ?>"><?php echo $fila['stock'];?></td>
-    <td><img src="../<?php echo $fila['imagen'];?>" width="60"></td>
-    <td>
+    <td data-label="ID"><?php echo $fila['id'];?></td>
+    <td data-label="Nombre"><?php echo $fila['nombre'];?></td>
+    <td data-label="Descripción"><?php echo $fila['descripcion'];?></td>
+    <td data-label="Precio"><?php echo $fila['precio'];?></td>
+    <td data-label="Costo"><?php echo $fila['costo'];?></td>
+    <td data-label="Stock"><span class="<?php echo $claseStock; ?>"><?php echo $fila['stock'];?></span></td>
+    <td data-label="Imagen"><img src="../<?php echo $fila['imagen'];?>" width="60"></td>
+    <td class="celda-acciones" data-label="Acciones">
         <div class="acciones">
             <a class="boton mostrar" href="readproducto.php?id=<?php echo $fila['id'];?>">Mostrar</a>
             <a class="boton editar" href="updateproducto.php?id=<?php echo $fila['id'];?>">Editar</a>
@@ -212,9 +376,10 @@ background:#dc3545;
 </tr>
 <?php }}else{ ?>
 <tr>
-    <td colspan="8">No existen productos registrados.</td>
+    <td class="vacio" colspan="8">No existen productos registrados.</td>
 </tr>
 <?php } ?>
+            </tbody>
         </table>
         <a href="formularioproducto.php" class="volver"> Registrar Nuevo Producto</a>
         <?php if($_SESSION['rol']=='Administrador'){ ?>
