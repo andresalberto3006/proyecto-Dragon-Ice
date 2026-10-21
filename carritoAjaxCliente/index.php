@@ -446,14 +446,11 @@ body{
 
 </aside>
 
-<div id="modalCompra">
-<form id="formularioPedido" action="">
-    <div>
 
+<div id="modalCompra">
     <form id="formularioPedido">
 
         <h2>Finalizar compra</h2>
-
 
         <input
             type="text"
@@ -462,14 +459,12 @@ body{
             placeholder="Nombre completo"
         >
 
-
         <input
             type="text"
             id="telefono"
             name="telefono"
             placeholder="Teléfono"
         >
-
 
         <input
             type="text"
@@ -478,17 +473,22 @@ body{
             placeholder="Dirección"
         >
 
-
         <select id="metodoPago" name="metodoPago">
             <option value="QR">Pago mediante QR</option>
             <option value="Efectivo">Pago en efectivo</option>
         </select>
 
-        <button type="button" id="confirmarPedido">Confirmar compra</button>
+        <button type="button" id="confirmarPedido">
+            Confirmar compra
+        </button>
 
-        <button type="button" id="cancelarCompra">Cancelar</button>
+        <button type="button" id="cancelarCompra">
+            Cancelar
+        </button>
 
-    </div>
+    </form>
+</div>
+
 </form>
 
 </div>
