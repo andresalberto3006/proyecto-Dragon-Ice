@@ -67,10 +67,15 @@ h1{
     margin-bottom:30px;
 }
 
+.tabla-scroll{
+    width:100%;
+    overflow-x:auto;
+}
+
 table{
     width:100%;
+    min-width:900px;
     border-collapse:collapse;
-    overflow:hidden;
 }
 
 th{
@@ -138,6 +143,50 @@ tr:hover{
     background:#2f5d9f;
 }
 
+@media(max-width:900px){
+
+    .fondo-panel{
+        padding:20px;
+    }
+
+    .contenedor{
+        padding:20px;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .fondo-panel{
+        padding:10px;
+    }
+
+    .contenedor{
+        padding:15px;
+        border-radius:15px;
+    }
+
+    h1{
+        font-size:22px;
+        margin-bottom:20px;
+    }
+
+    th, td{
+        padding:8px;
+        font-size:13px;
+    }
+
+    .boton{
+        padding:6px 10px;
+        font-size:12px;
+    }
+
+    .volver{
+        width:100%;
+    }
+
+}
+
 </style>
 
 </head>
@@ -150,6 +199,7 @@ tr:hover{
 
         <h1>Lista de Usuarios Registrados</h1>
 
+        <div class="tabla-scroll">
         <table>
             <tr>
                 <th>CI</th>
@@ -217,6 +267,7 @@ tr:hover{
                 </tr>
             <?php } ?>
         </table>
+        </div>
 
         <a href="formulariousuario.php" class="volver">Registrar Nuevo Usuario</a>
         <a href="../paginaprincipal/02.admin.php" class="volver">Volver al panel</a>
