@@ -107,7 +107,7 @@
     }
 
     .item h3{
-        font-size:19px;
+        font-size:25px;
         letter-spacing:.3px;
         color:var(--azul-oscuro);
         margin-bottom:10px;
@@ -115,7 +115,7 @@
     }
 
     .item p{
-        font-size:14.5px;
+        font-size:20px;
         line-height:1.65;
         color:var(--gris-texto);
     }
@@ -136,7 +136,7 @@
     }
 
     .seccion .chip{
-        font-size:14px;
+        font-size:35px;
         font-weight:700;
         letter-spacing:2px;
         text-transform:uppercase;
@@ -152,7 +152,7 @@
     }
 
     .seccion p{
-        font-size:18px;
+        font-size:20px;
         line-height:1.8;
         color:var(--gris-texto);
         margin-bottom:28px;
@@ -185,7 +185,7 @@
 
     .porque{
         padding:70px 20px;
-        background:#f4fbfd;
+        background:#b6cee4;
     }
 
     .porque-header{
@@ -227,12 +227,13 @@
 
     .cta h2{
         color:white;
-        font-size:32px;
+        font-size:40px;
         margin-bottom:14px;
     }
 
     .cta p{
         color:#e6f3ff;
+         font-size:20px;
         margin-bottom:25px;
     }
 
@@ -313,7 +314,6 @@
 <section class="seccion">
     <div>
         <div class="chip">Nuestro catálogo</div>
-        <h2>Un sabor para cada antojo</h2>
         <p>Paletas, bolos, tacos, granizados y combos especiales de la casa. Cada receta está pensada para que encuentres ese sabor que se te queda grabado desde la primera cucharada.</p>
         <a href="productos.php">Ver catálogo completo</a>
     </div>
@@ -325,7 +325,6 @@
 <section class="seccion invertida">
     <div>
         <div class="chip">Nuestra esencia</div>
-        <h2>Artesanal desde el primer scoop</h2>
         <p>Nada de químicos raros ni atajos industriales. Dragon Ice nació de una idea simple: ingredientes de verdad, recetas propias y el cariño de hacer las cosas bien, cucharada tras cucharada.</p>
         <a href="quienessomos.php">Conócenos más</a>
     </div>
@@ -337,7 +336,6 @@
 <section class="porque">
 
     <div class="porque-header">
-        <span class="porque-eyebrow">Dragon Ice</span>
         <h2 class="porque-titulo">¿Por qué elegir Dragon Ice?</h2>
     </div>
 

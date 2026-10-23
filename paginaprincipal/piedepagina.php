@@ -35,36 +35,42 @@ if (!isset($rutaMenu)) { $rutaMenu = "../"; }
 
 .pie-marca img{
     border-radius:100px;
-    width:80px;
-    height:80px;
+    width:115px;
+    height:115px;
     object-fit:contain;
 }
 
 .pie-marca h2{
     font-family:'Baloo 2', Arial, sans-serif;
-    font-size:20px;
+    font-size:25px;
     font-weight:800;
     color:white;
     margin-bottom:6px;
 }
 
 .pie-marca p{
-    font-size:13px;
+    font-size:15px;
     letter-spacing:1px;
     color:var(--gris-texto);
     text-transform:uppercase;
 }
 
+.pie-col {
+    text-align: center;
+}
+
 .pie-col h3{
-    font-size:15px;
+    font-size:17px;
     font-weight:700;
     color:white;
-    margin-bottom:16px;
+    margin-bottom:20px;
     text-align:center;
 }
 
 .pie-col ul{
     list-style:none;
+    padding: 0;  
+    margin: 0;
 }
 
 .pie-col li{
@@ -75,7 +81,7 @@ if (!isset($rutaMenu)) { $rutaMenu = "../"; }
 .pie-col a{
     text-decoration:none;
     color:var(--gris-texto);
-    font-size:14px;
+    font-size:16px;
 }
 
 .pie-col a:hover{
@@ -84,7 +90,7 @@ if (!isset($rutaMenu)) { $rutaMenu = "../"; }
 
 .pie-contacto p{
     color:var(--gris-texto);
-    font-size:14px;
+    font-size:16px;
     text-align:center;
     margin-bottom:10px;
     line-height:1.5;

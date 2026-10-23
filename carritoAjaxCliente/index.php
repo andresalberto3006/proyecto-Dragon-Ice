@@ -34,12 +34,12 @@ body{
     width:92%;
     max-width:1200px;
     margin:auto;
-    padding:40px 0 60px;
+    padding:40px 0 90px;
 }
 
 .titulo{
     text-align:center;
-    font-size:32px;
+    font-size:40px;
     margin-bottom:10px;
 }
 
@@ -97,6 +97,8 @@ body{
     color:#0e2a4d;
 }
 
+/* ---------- PRODUCTOS ---------- */
+
 #productos{
     display:grid;
     grid-template-columns:repeat(4,1fr);
@@ -117,30 +119,48 @@ body{
 
 .tarjeta img{
     width:100%;
-    height:210px;
+    height:260px;
     object-fit:cover;
+    display:block;
+}
+
+.tarjeta .info{
+    flex:1;
 }
 
 .tarjeta h3{
-    margin:15px 15px 8px;
-    min-height:24px;
+    margin:12px 15px 4px;
+    font-size:18px;
 }
 
 .tarjeta p{
-    margin:8px 15px;
+    margin:0 15px 6px;
+    font-size:14px;
+    line-height:1.3;
     color:#5c7185;
-    min-height:42px;
 }
 
 .tarjeta h2{
-    margin:10px 15px;
+    margin:6px 15px 2px;
+    font-size:28px;
     color:#159db9;
-    min-height:25px;
+}
+
+.tarjeta .stock{
+    display:block;
+    margin:0 15px;
+    font-size:13px;
+    color:#5c7185;
+}
+
+/* ---------- AGREGAR / AUMENTAR / DISMINUIR ---------- */
+
+.zonaCompra{
+    margin:12px 15px 0;
 }
 
 .btnAgregar{
-    width:calc(100% - 30px);
-    margin:10px 15px 0;
+    width:100%;
     padding:11px;
     border:0;
     border-radius:9px;
@@ -148,7 +168,6 @@ body{
     color:white;
     font-weight:bold;
     cursor:pointer;
-    margin-top:auto;
 }
 
 .btnAgregar:hover{
@@ -160,39 +179,106 @@ body{
     cursor:not-allowed;
 }
 
+.selector{
+    display:none;
+    align-items:center;
+    justify-content:space-between;
+    background:#eaf8fc;
+    border:1px solid #d6edf5;
+    border-radius:9px;
+    padding:4px;
+}
+
+.selector button{
+    width:40px;
+    height:36px;
+    border:0;
+    border-radius:7px;
+    background:#0e2a4d;
+    color:white;
+    font-size:20px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.selector button:hover{
+    background:#173e63;
+}
+
+.selector button:disabled{
+    opacity:.4;
+    cursor:not-allowed;
+}
+
+.selector .cantidadProducto{
+    font-size:18px;
+    font-weight:bold;
+    color:#0e2a4d;
+}
+
+.zonaCompra.conCantidad .btnAgregar{
+    display:none;
+}
+
+.zonaCompra.conCantidad .selector{
+    display:flex;
+}
+
+/* ---------- ICONO DEL CARRITO ---------- */
+
 #carritoIcono{
     position:fixed;
     right:25px;
-    bottom:30px;
-    width:65px;
-    height:65px;
+    bottom:25px;
+    width:62px;
+    height:62px;
     border:0;
     border-radius:50%;
     background:#63d4f2;
     color:#0e2a4d;
-    font-size:27px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
     cursor:pointer;
-    box-shadow:0 5px 15px rgba(14,42,77,.25);
+    box-shadow:0 5px 15px rgba(14,42,77,.3);
+    transition:.25s;
     z-index:1000;
+}
+
+#carritoIcono svg{
+    width:28px;
+    height:28px;
+    stroke:currentColor;
+    fill:none;
+    stroke-width:1.8;
+    stroke-linecap:round;
+    stroke-linejoin:round;
 }
 
 #carritoIcono:hover{
     background:#7be0c4;
+    transform:scale(1.07);
 }
 
 #cantidadCarrito{
     position:absolute;
-    top:-5px;
-    right:-5px;
-    min-width:23px;
-    height:23px;
+    top:-4px;
+    right:-4px;
+    min-width:24px;
+    height:24px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
     background:#0e2a4d;
     color:white;
+    border:2px solid white;
     border-radius:50%;
-    padding:4px;
+    padding:0 4px;
     font-size:12px;
     font-weight:bold;
 }
+
+/* ---------- SIDEBAR DEL CARRITO ---------- */
 
 #fondo{
     display:none;
@@ -281,6 +367,8 @@ body{
     cursor:pointer;
 }
 
+/* ---------- MODAL DE COMPRA ---------- */
+
 #modalCompra{
     display:none;
     position:fixed;
@@ -346,22 +434,9 @@ body{
     color:#0e2a4d;
 }
 
- .form-box label.error{
-            color:#ff9b9b;
-            font-size:12px;
-            margin-top:4px;
-            margin-bottom:0;
-            font-weight:bold;
-        }
-
-       .form-box input.error{
-            box-shadow:0 0 0 2px #ff4d4d;
-        }
-
 .swal2-container{
     z-index:2000 !important;
 }
-
 
 @media(max-width:1000px){
     #productos{
@@ -373,11 +448,19 @@ body{
     #productos{
         grid-template-columns:repeat(2,1fr);
     }
+
+    .tarjeta img{
+        height:200px;
+    }
 }
 
 @media(max-width:500px){
     #productos{
         grid-template-columns:1fr;
+    }
+
+    .tarjeta img{
+        height:260px;
     }
 
     .acciones{
@@ -422,10 +505,10 @@ body{
 
 </main>
 
-<div id="carritoIcono">
-    🛒
+<button id="carritoIcono" type="button" aria-label="Abrir carrito">
+    <svg viewBox="0 0 24 24"><path d="M3 4h2l2.4 12.4a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.6L21 8H6"></path><circle cx="9" cy="21" r="1.4"></circle><circle cx="18" cy="21" r="1.4"></circle></svg>
     <span id="cantidadCarrito">0</span>
-</div>
+</button>
 
 <div id="fondo"></div>
 
@@ -446,50 +529,28 @@ body{
 
 </aside>
 
-
 <div id="modalCompra">
+
     <form id="formularioPedido">
 
         <h2>Finalizar compra</h2>
 
-        <input
-            type="text"
-            id="nombre"
-            name="nombre"
-            placeholder="Nombre completo"
-        >
+        <input type="text" id="nombre" name="nombre" placeholder="Nombre completo">
 
-        <input
-            type="text"
-            id="telefono"
-            name="telefono"
-            placeholder="Teléfono"
-        >
+        <input type="text" id="telefono" name="telefono" placeholder="Teléfono (8 dígitos)">
 
-        <input
-            type="text"
-            id="direccion"
-            name="direccion"
-            placeholder="Dirección"
-        >
+        <input type="text" id="direccion" name="direccion" placeholder="Dirección">
 
         <select id="metodoPago" name="metodoPago">
             <option value="QR">Pago mediante QR</option>
             <option value="Efectivo">Pago en efectivo</option>
         </select>
 
-        <button type="button" id="confirmarPedido">
-            Confirmar compra
-        </button>
+        <button type="button" id="confirmarPedido">Confirmar compra</button>
 
-        <button type="button" id="cancelarCompra">
-            Cancelar
-        </button>
+        <button type="button" id="cancelarCompra">Cancelar</button>
 
     </form>
-</div>
-
-</form>
 
 </div>
 
@@ -563,5 +624,4 @@ $(document).ready(function(){
 </script>
 
 </body>
-</html>
 </html>

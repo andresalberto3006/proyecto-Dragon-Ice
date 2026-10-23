@@ -32,9 +32,10 @@ h1,h2{
     height:100vh;
     display:flex;
     align-items:center;
+    overflow: hidden; 
 }
 
-.hero img{
+.hero video{
     position:absolute;
     inset:0;
     width:100%;
@@ -59,18 +60,9 @@ h1,h2{
 }
 
 .hero-texto h1{
-    font-size:58px;
+    font-size:90px;
     letter-spacing:4px;
 }
-
-.hero-texto p{
-    margin-top:14px;
-    font-size:18px;
-    max-width:600px;
-    margin-inline:auto;
-}
-
-
 .seccion{
     max-width:1100px;
     margin:90px auto;
@@ -81,12 +73,14 @@ h1,h2{
     align-items:center;
 }
 
-.seccion.invertida .imagen{
+/* CORREGIDO: Se añadió la coma faltante en la regla */
+.seccion.invertida .imagen,
+.seccion.invertida video {
     order:-1;
 }
 
 .seccion .chip{
-    font-size:13px;
+    font-size:35px;
     font-weight:700;
     letter-spacing:2px;
     text-transform:uppercase;
@@ -101,7 +95,7 @@ h1,h2{
 }
 
 .seccion p{
-    font-size:16px;
+    font-size:20px;
     line-height:1.8;
     color:#4b5563;
 }
@@ -155,17 +149,17 @@ h1,h2{
 <?php $rutaMenu="../"; include("menu.php"); ?>
 
 <section class="hero">
-    <img src="https://images.unsplash.com/photo-1580915411954-282cb1b0d780?auto=format&fit=crop&w=1800&q=80" alt="Helados Dragon Ice">
+    <video autoplay muted loop playsinline>
+        <source src="../imagenesproyecto/helado1.mp4" type="video/mp4">
+    </video>
     <div class="hero-texto">
-        <h1>DRAGON ICE</h1>
-        <p>Helados artesanales hechos con ingredientes reales, mucho cariño y ganas de alegrar tu día.</p>
+        <h1>QUIÉNES SOMOS</h1>
     </div>
 </section>
 
 <section class="seccion">
     <div>
         <div class="chip">Nuestra historia</div>
-        <h2>Helado hecho como debe ser</h2>
         <p>Dragon Ice es una empresa dedicada a la elaboración y comercialización de helados artesanales de excelente calidad. Nació con una idea simple: usar ingredientes de verdad y recetas propias para ofrecer un helado distinto en cada cucharada.</p>
     </div>
     <div class="imagen">
@@ -176,7 +170,6 @@ h1,h2{
 <section class="seccion invertida">
     <div>
         <div class="chip">Misión</div>
-        <h2>Calidad en cada sabor</h2>
         <p>Elaborar y comercializar helados artesanales de alta calidad, brindando productos frescos, deliciosos e innovadores, junto a una atención eficiente y un compromiso constante con la satisfacción de nuestros clientes.</p>
     </div>
     <div class="imagen">
@@ -187,7 +180,6 @@ h1,h2{
 <section class="seccion">
     <div>
         <div class="chip">Visión</div>
-        <h2>Un referente artesanal</h2>
         <p>Ser una empresa líder y reconocida en el mercado de helados artesanales, destacándonos por la calidad de nuestros productos, la innovación permanente y la preferencia de nuestros clientes.</p>
     </div>
     <div class="imagen">

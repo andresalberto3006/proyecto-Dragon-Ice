@@ -1,4 +1,4 @@
 ASUNTO:
 Pedido
 COMENTARIO:
-Nunca me llego
+El pedido nunca me llego

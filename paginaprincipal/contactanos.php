@@ -307,7 +307,6 @@ body{
 <section class="contenedor">
 
     <div class="encabezado">
-        <span class="chip">Dragon Ice</span>
         <h2>Encuentra la forma más fácil de llegar a nosotros</h2>
     </div>
 

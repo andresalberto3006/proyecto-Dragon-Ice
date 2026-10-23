@@ -130,17 +130,10 @@ body{
 }
 
 .titulo h1{
-    font-size:42px;
+    font-size:47px;
     font-weight:700;
     color:#0e2a4d;
 }
-
-.titulo p{
-    margin-top:10px;
-    font-size:16px;
-    color:#5b7590;
-}
-
 
 .filtros{
     display:flex;
@@ -272,8 +265,7 @@ body{
 </header>
 <div class="contenedor">
     <header class="titulo">
-        <h1>Nuestros Sabores</h1>
-        <p>Descubre la cremosidad artesanal en cada cucharada</p>
+        <h1>Nuestros Productos</h1>
     </header>
     <div class="filtros">
         <button class="activo" data-filtro="todos">Todos</button>

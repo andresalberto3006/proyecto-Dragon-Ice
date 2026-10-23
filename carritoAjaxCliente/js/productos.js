@@ -1,241 +1,273 @@
-
 let listaProductos = [];
 let pedidoActivo = false;
+let cantidades = {};
+let procesando = false;
+
 
 document.addEventListener("DOMContentLoaded", function() {
+
+    document
+        .getElementById("productos")
+        .addEventListener("click", clickProductos);
+
     verificarPedido();
 });
 
+
 function verificarPedido() {
+
     fetch("php/verificar_pedido.php")
+
         .then(function(respuesta) {
             return respuesta.json();
         })
+
         .then(function(datos) {
+
             pedidoActivo = !!datos.pedidoActivo;
+
             cargarProductos();
+
         })
+
         .catch(function() {
             cargarProductos();
         });
 }
 
+
 function cargarProductos() {
+
     fetch("php/obtener_productos.php")
+
         .then(function(respuesta) {
             return respuesta.json();
         })
+
         .then(function(productos) {
+
             listaProductos = productos;
+
             mostrarProductos(productos);
+
         })
+
         .catch(function(error) {
-            console.log("Error al cargar productos:", error);
+            console.log(error);
         });
 }
 
-function mostrarProductos(productos) {
-    const contenedor = document.getElementById("productos");
 
-    if (!contenedor) return;
+function mostrarProductos(productos) {
+
+    let contenedor = document.getElementById("productos");
 
     let html = "";
 
+
     productos.forEach(function(producto) {
-        const stock = Math.max(0, Number(producto.stock) || 0);
-        const precio = Number(producto.precio) || 0;
 
         html += `
             <div class="tarjeta">
 
                 <img
-                    class="imagenProducto"
                     src="${producto.imagen}"
                     alt="${producto.nombre}"
-                    loading="lazy"
                 >
 
-                <h3>${producto.nombre}</h3>
+                <div class="info">
 
-                <p class="descripcionProducto">
-                    ${producto.descripcion || ""}
-                </p>
+                    <h3>
+                        ${producto.nombre}
+                    </h3>
 
-                <h2 class="precioProducto">
-                    Bs ${precio.toFixed(2)}
-                </h2>
+                    <p>
+                        ${producto.descripcion}
+                    </p>
 
-                <p class="stockProducto">
-                    Stock: ${stock}
-                </p>
+                    <h2>
+                        Bs ${producto.precio}
+                    </h2>
 
-                <div class="cantidadProducto">
-                    <button
-                        type="button"
-                        class="btnCantidad"
-                        data-accion="menos"
-                        data-codigo="${producto.id}"
-                        aria-label="Disminuir cantidad"
-                        ${!pedidoActivo || stock < 1 ? "disabled" : ""}
-                    >−</button>
+                    <span class="stock">
+                        Stock: ${producto.stock}
+                    </span>
 
-                    <input
-                        type="number"
-                        class="numeroCantidad"
-                        data-codigo="${producto.id}"
-                        value="${stock > 0 ? 1 : 0}"
-                        min="${stock > 0 ? 1 : 0}"
-                        max="${stock}"
-                        ${!pedidoActivo || stock < 1 ? "disabled" : ""}
-                        aria-label="Cantidad de ${producto.nombre}"
-                    >
-
-                    <button
-                        type="button"
-                        class="btnCantidad"
-                        data-accion="mas"
-                        data-codigo="${producto.id}"
-                        aria-label="Aumentar cantidad"
-                        ${!pedidoActivo || stock < 1 ? "disabled" : ""}
-                    >+</button>
                 </div>
 
-                <button
-                    type="button"
-                    class="btnAgregar"
-                    data-codigo="${producto.id}"
-                    ${!pedidoActivo || stock < 1 ? "disabled" : ""}
-                >
-                    Agregar al carrito
-                </button>
+                <div class="zonaCompra" id="zona-${producto.id}">
+
+                    <button
+                        class="btnAgregar"
+                        data-codigo="${producto.id}"
+                        ${pedidoActivo ? "" : "disabled"}
+                    >
+                        Agregar al carrito
+                    </button>
+
+                    <div class="selector">
+
+                        <button
+                            class="btnMenos"
+                            data-codigo="${producto.id}"
+                        >
+                            −
+                        </button>
+
+                        <span class="cantidadProducto">0</span>
+
+                        <button
+                            class="btnMas"
+                            data-codigo="${producto.id}"
+                        >
+                            +
+                        </button>
+
+                    </div>
+
+                </div>
 
             </div>
         `;
+
     });
+
 
     contenedor.innerHTML = html;
 
-    agregarEventos();
-}
-
-function agregarEventos() {
-    document.querySelectorAll(".btnCantidad").forEach(function(boton) {
-        boton.addEventListener("click", function() {
-            const codigo = boton.dataset.codigo;
-            const accion = boton.dataset.accion;
-
-            const producto = listaProductos.find(function(item) {
-                return String(item.id) === String(codigo);
-            });
-
-            const input = document.querySelector(
-                '.numeroCantidad[data-codigo="' + codigo + '"]'
-            );
-
-            if (!producto || !input) return;
-
-            const stock = Number(producto.stock) || 0;
-            let cantidad = Number(input.value) || 1;
-
-            if (accion === "mas" && cantidad < stock) {
-                cantidad++;
-            }
-
-            if (accion === "menos" && cantidad > 1) {
-                cantidad--;
-            }
-
-            input.value = cantidad;
-        });
-    });
-
-    document.querySelectorAll(".numeroCantidad").forEach(function(input) {
-        input.addEventListener("change", function() {
-            const producto = listaProductos.find(function(item) {
-                return String(item.id) === String(input.dataset.codigo);
-            });
-
-            if (!producto) return;
-
-            const stock = Number(producto.stock) || 0;
-            let cantidad = parseInt(input.value, 10);
-
-            if (isNaN(cantidad)) cantidad = 1;
-
-            cantidad = Math.max(1, Math.min(cantidad, stock));
-            input.value = stock > 0 ? cantidad : 0;
-        });
-    });
-
-    document.querySelectorAll(".btnAgregar").forEach(function(boton) {
-        boton.addEventListener("click", function() {
-            const codigo = boton.dataset.codigo;
-
-            const input = document.querySelector(
-                '.numeroCantidad[data-codigo="' + codigo + '"]'
-            );
-
-            if (!input) return;
-
-            const cantidad = parseInt(input.value, 10);
-
-            if (!cantidad || cantidad < 1) {
-                alert("Selecciona una cantidad válida.");
-                return;
-            }
-
-            agregarProducto(codigo, cantidad);
-        });
+    productos.forEach(function(producto) {
+        pintarCantidad(producto.id);
     });
 }
 
-function agregarProducto(codigo, cantidad) {
-    const boton = document.querySelector(
-        '.btnAgregar[data-codigo="' + codigo + '"]'
-    );
 
-    if (boton) boton.disabled = true;
+function clickProductos(evento) {
 
-    const datos = new URLSearchParams();
-    datos.append("accion", "agregar");
-    datos.append("codigo", codigo);
-    datos.append("cantidad", cantidad);
+    let boton = evento.target.closest("button");
+
+    if(!boton) {
+        return;
+    }
+
+    let codigo = boton.dataset.codigo;
+
+    if(boton.classList.contains("btnAgregar") || boton.classList.contains("btnMas")) {
+        cambiarCantidad(codigo, "agregar");
+    }
+
+    if(boton.classList.contains("btnMenos")) {
+        cambiarCantidad(codigo, "restar");
+    }
+}
+
+
+function cambiarCantidad(codigo, accion) {
+
+    if(procesando) {
+        return;
+    }
+
+    procesando = true;
 
     fetch("php/carrito.php", {
+
         method: "POST",
+
         headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type":
+                "application/x-www-form-urlencoded"
         },
-        body: datos.toString()
+
+        body:
+            "accion=" + accion +
+            "&codigo=" + encodeURIComponent(codigo)
+
     })
+
     .then(function(respuesta) {
         return respuesta.json();
     })
+
     .then(function(datos) {
-        if (datos.ok) {
-            if (typeof actualizarCarrito === "function") {
-                actualizarCarrito();
-            }
 
-            const input = document.querySelector(
-                '.numeroCantidad[data-codigo="' + codigo + '"]'
-            );
+        procesando = false;
 
-            if (input) input.value = 1;
+        if(datos.ok) {
+
+            actualizarCarrito();
+
         } else {
-            alert(datos.mensaje || "No se pudo agregar el producto.");
+
+            Swal.fire({
+                icon: "warning",
+                title: datos.mensaje,
+                confirmButtonColor: "#0e2a4d"
+            });
+
         }
+
     })
+
     .catch(function(error) {
-        console.log("Error al agregar producto:", error);
-        alert("Ocurrió un error al agregar el producto.");
-    })
-    .finally(function() {
-        if (boton) boton.disabled = false;
+        procesando = false;
+        console.log(error);
     });
 }
 
+
+function pintarCantidad(codigo) {
+
+    let zona = document.getElementById("zona-" + codigo);
+
+    if(!zona) {
+        return;
+    }
+
+    let cantidad = cantidades[codigo] ? cantidades[codigo] : 0;
+
+    let stock = 0;
+
+    listaProductos.forEach(function(producto) {
+        if(String(producto.id) === String(codigo)) {
+            stock = Number(producto.stock);
+        }
+    });
+
+    zona.querySelector(".cantidadProducto").innerHTML = cantidad;
+
+    zona.querySelector(".btnMas").disabled = cantidad >= stock;
+
+    if(cantidad > 0) {
+        zona.classList.add("conCantidad");
+    } else {
+        zona.classList.remove("conCantidad");
+    }
+}
+
+
+function sincronizarCantidades(items) {
+
+    cantidades = {};
+
+    items.forEach(function(item) {
+        cantidades[item.productos_id] = Number(item.cantidad);
+    });
+
+    listaProductos.forEach(function(producto) {
+        pintarCantidad(producto.id);
+    });
+}
+
+
 function habilitarCompra() {
+
     pedidoActivo = true;
-    mostrarProductos(listaProductos);
+
+    document
+        .querySelectorAll(".btnAgregar")
+        .forEach(function(boton) {
+
+            boton.disabled = false;
+
+        });
 }
