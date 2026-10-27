@@ -49,7 +49,7 @@ if ($resultado->num_rows > 0) {
         $destino = "../paginaprincipal/03.vendedor.php";
     }
 
-    echo json_encode(array(
+    echo json_encode(array( 
         "ok"      => true,
         "destino" => $destino
     ));
